@@ -1,5 +1,4 @@
 import Nav from "@/components/Nav";
-import ScrollInnovmarkFrames from "@/components/ScrollInnovmarkFrames";
 import BrandMarquee from "@/components/BrandMarquee";
 import StatsBand from "@/components/StatsBand";
 import { SaadBelkaadiTeaser } from "@/components/SaadBelkaadi";
@@ -43,7 +42,6 @@ export default async function LocalizedHome({ params }: Props) {
         </div>
 
         <BrandMarquee locale={locale} />
-        <ScrollInnovmarkFrames totalFrames={180} locale={locale} />
         <StatsBand locale={locale} />
         <SaadBelkaadiTeaser locale={locale} />
         <CapabilitiesPreview locale={locale} />
