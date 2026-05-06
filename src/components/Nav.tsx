@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { type Locale, localizedHref } from "@/lib/i18n";
 
 type NavLabels = {
+  home: string;
   services: string;
   why: string;
   process: string;
@@ -15,6 +16,7 @@ type NavLabels = {
 };
 
 const defaultLabels: NavLabels = {
+  home: "Accueil",
   services: "Services",
   why: "Pourquoi nous",
   process: "Processus",
@@ -42,13 +44,24 @@ export default function Nav({
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  const homeHref = locale ? `/${locale}` : "/";
+
   const links = [
+    { href: homeHref, label: labels.home },
     { href: localizedHref("/services", locale), label: labels.services },
     { href: localizedHref("/pourquoi-nous", locale), label: labels.why },
     { href: localizedHref("/processus", locale), label: labels.process },
     { href: localizedHref("/contact", locale), label: labels.contact },
   ];
   const displayedLinks = locale === "ar" ? [...links].reverse() : links;
+
+  /** Returns true when this nav item's route matches the current pathname. */
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    // Home: exact match only (avoid matching every route starting with "/fr")
+    if (href === homeHref) return pathname === homeHref || pathname === homeHref + "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -93,7 +106,11 @@ export default function Nav({
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="text-white/62 hover:text-white text-[11px] tracking-[0.22em] uppercase transition-colors duration-200"
+                className={`text-[11px] tracking-[0.22em] uppercase transition-colors duration-200 ${
+                  isActive(l.href)
+                    ? "text-white"
+                    : "text-white/62 hover:text-white"
+                }`}
               >
                 {l.label}
               </Link>
@@ -165,7 +182,12 @@ export default function Nav({
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="block text-white/78 text-sm tracking-[0.18em] uppercase py-2.5 border-b border-white/[0.06] hover:text-white transition-colors"
+                onClick={() => setOpen(false)}
+                className={`block text-sm tracking-[0.18em] uppercase py-2.5 border-b border-white/[0.06] transition-colors ${
+                  isActive(l.href)
+                    ? "text-white"
+                    : "text-white/78 hover:text-white"
+                }`}
               >
                 {l.label}
               </Link>

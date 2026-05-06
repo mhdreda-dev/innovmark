@@ -23,6 +23,7 @@ export function localizedHref(path: string, locale?: Locale) {
 export const dictionaries = {
   fr: {
     nav: {
+      home: "Accueil",
       services: "Services",
       why: "Pourquoi nous",
       process: "Processus",
@@ -140,6 +141,7 @@ export const dictionaries = {
   },
   en: {
     nav: {
+      home: "Home",
       services: "Services",
       why: "Why us",
       process: "Process",
@@ -248,6 +250,7 @@ export const dictionaries = {
   },
   ar: {
     nav: {
+      home: "الرئيسية",
       services: "الخدمات",
       why: "لماذا نحن",
       process: "المنهجية",
