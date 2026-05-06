@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import CreativeFormats from "@/components/CreativeFormats";
 import BrandMarquee from "@/components/BrandMarquee";
 import StatsBand from "@/components/StatsBand";
 import { SaadBelkaadiTeaser } from "@/components/SaadBelkaadi";
@@ -41,6 +42,7 @@ export default async function LocalizedHome({ params }: Props) {
           />
         </div>
 
+        <CreativeFormats locale={locale} />
         <BrandMarquee locale={locale} />
         <StatsBand locale={locale} />
         <SaadBelkaadiTeaser locale={locale} />
