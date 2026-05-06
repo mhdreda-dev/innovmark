@@ -59,8 +59,9 @@ export default async function LocalizedContactPage({ params }: Props) {
             />
           </div>
 
-          <div className="relative mx-auto max-w-4xl text-center">
-            {/* Kicker */}
+          {/* stagger-reveal drives kicker→title→subtitle→badge entrance */}
+          <div className="stagger-reveal relative mx-auto max-w-4xl text-center">
+            {/* Kicker — child 1 */}
             <div className="reveal-on-scroll mb-6 flex items-center justify-center gap-3">
               <span className="h-px w-10 bg-gradient-to-r from-transparent via-cyan-300/70 to-violet-300/70" />
               <span className="cinematic-text text-[10px] uppercase tracking-[0.46em] text-white/60">
@@ -69,17 +70,17 @@ export default async function LocalizedContactPage({ params }: Props) {
               <span className="h-px w-10 bg-gradient-to-r from-violet-300/70 via-emerald-300/70 to-transparent" />
             </div>
 
-            {/* Title */}
+            {/* Title — child 2 */}
             <h1 className="reveal-on-scroll cinematic-text text-4xl font-light leading-[1.04] tracking-tight text-white md:text-6xl lg:text-7xl">
               {page.title}
             </h1>
 
-            {/* Hero subtitle */}
+            {/* Hero subtitle — child 3 */}
             <p className="reveal-on-scroll cinematic-text mx-auto mt-6 max-w-2xl text-base leading-7 text-white/65 md:text-xl">
               {page.heroSubtitle}
             </p>
 
-            {/* Response badge */}
+            {/* Response badge — child 4 */}
             <div className="reveal-on-scroll mt-8">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs text-white/58">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 pulse-glow" />
@@ -94,14 +95,14 @@ export default async function LocalizedContactPage({ params }: Props) {
           <div className="mx-auto max-w-6xl">
             <div className="grid items-start gap-8 lg:grid-cols-[1fr_400px] lg:gap-12">
               {/* Form card */}
-              <div className="reveal-on-scroll">
+              <div className="reveal-on-scroll" style={{ transitionDelay: "80ms" }}>
                 <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.40)] backdrop-blur-sm md:p-8">
                   <ContactForm labels={dict.contactForm} />
                 </div>
               </div>
 
-              {/* Visual section */}
-              <div className="reveal-on-scroll lg:sticky lg:top-32">
+              {/* Visual section — Framer Motion handles its own entrance */}
+              <div className="lg:sticky lg:top-32">
                 <ContactVisualSection
                   serviceCards={page.serviceCards}
                   trustItems={page.trustItems}
