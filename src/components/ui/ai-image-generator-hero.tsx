@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, PointerEvent as ReactPointerEvent } from "react"
 import Image from "next/image"
 
 // ─── WhatsApp CTA ────────────────────────────────────────────────────────────
@@ -33,6 +33,22 @@ interface Props {
   images: CarouselImage[]
   features?: CarouselFeature[]
 }
+
+// ─── Particles (static positions — no hydration mismatch) ────────────────────
+const PARTICLES = [
+  { l: "7%",  t: "80%", d: "11s", e: "0s"   },
+  { l: "14%", t: "58%", d: "14s", e: "2.4s" },
+  { l: "23%", t: "88%", d: "9s",  e: "5.1s" },
+  { l: "35%", t: "42%", d: "13s", e: "1.2s" },
+  { l: "44%", t: "72%", d: "10s", e: "7.0s" },
+  { l: "52%", t: "55%", d: "12s", e: "3.3s" },
+  { l: "62%", t: "84%", d: "8s",  e: "0.8s" },
+  { l: "71%", t: "38%", d: "15s", e: "4.6s" },
+  { l: "80%", t: "68%", d: "11s", e: "6.2s" },
+  { l: "88%", t: "48%", d: "13s", e: "2.0s" },
+  { l: "93%", t: "82%", d: "9s",  e: "8.5s" },
+  { l: "28%", t: "30%", d: "16s", e: "3.9s" },
+] as const
 
 // ─── Card geometry per fan slot (-2 … +2) ────────────────────────────────────
 const GEO_DESKTOP = [
@@ -113,6 +129,16 @@ export function ImageCarouselHero({
   const handleMouseEnter = () => { pausedRef.current = true }
   const handleMouseLeave = () => { pausedRef.current = false }
 
+  // Mouse-reactive glow — updates CSS custom properties directly (no re-render)
+  const handlePointerMove = useCallback((e: ReactPointerEvent<HTMLElement>) => {
+    const el = e.currentTarget
+    const rect = el.getBoundingClientRect()
+    const x = (((e.clientX - rect.left) / rect.width) * 100).toFixed(1)
+    const y = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1)
+    el.style.setProperty("--mx", `${x}%`)
+    el.style.setProperty("--my", `${y}%`)
+  }, [])
+
   // Mobile touch — pause immediately, resume 1.5 s after finger lifts
   const handleTouchStart = () => {
     pausedRef.current = true
@@ -143,15 +169,39 @@ export function ImageCarouselHero({
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onPointerMove={handlePointerMove}
       >
         {/* ── Background layers ── */}
         <div className="ihc-bg" aria-hidden>
+          {/* Deep base gradient */}
+          <div className="ihc-base" />
+          {/* Aurora conic layer */}
+          <div className="ihc-aurora" />
+          {/* Ambient orbs */}
           <div className="ihc-orb ihc-orb-1" />
           <div className="ihc-orb ihc-orb-2" />
           <div className="ihc-orb ihc-orb-3" />
+          <div className="ihc-orb ihc-orb-4" />
+          <div className="ihc-orb ihc-orb-5" />
+          {/* Perspective grid */}
           <div className="ihc-grid" />
+          {/* Horizon glow line */}
           <div className="ihc-horizon" />
+          {/* Light streaks */}
+          <div className="ihc-streak ihc-streak-1" />
+          <div className="ihc-streak ihc-streak-2" />
+          <div className="ihc-streak ihc-streak-3" />
+          {/* Floating particles */}
+          <div className="ihc-particles">
+            {PARTICLES.map((p, i) => (
+              <span key={i} className="ihc-p" style={{ left: p.l, top: p.t, "--dur": p.d, "--delay": p.e } as React.CSSProperties} />
+            ))}
+          </div>
+          {/* Mouse-reactive glow */}
+          <div className="ihc-mouse-glow" />
+          {/* Edge vignette */}
           <div className="ihc-vignette" />
+          {/* Film grain */}
           <div className="ihc-noise" />
         </div>
 
@@ -298,7 +348,7 @@ const css = `
 .ihc-section {
   position: relative;
   min-height: 100svh;
-  background: #06070a;
+  background: #040610;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -315,40 +365,107 @@ const css = `
   overflow: hidden;
 }
 
+/* ── Deep base gradient ── */
+.ihc-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(60,100,255,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 85% 90%, rgba(120,60,255,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 5% 60%, rgba(0,200,255,0.08) 0%, transparent 55%),
+    linear-gradient(175deg, #060c1e 0%, #040810 40%, #030710 70%, #030510 100%);
+}
+
+/* ── Aurora conic layer ── */
+.ihc-aurora {
+  position: absolute;
+  inset: -25% -40% auto -40%;
+  height: 80%;
+  background: conic-gradient(
+    from 215deg at 50% 0%,
+    rgba(80,130,255,0.22) 0deg,
+    rgba(140,90,255,0.16) 60deg,
+    transparent 115deg,
+    transparent 195deg,
+    rgba(100,210,255,0.13) 252deg,
+    rgba(80,130,255,0.18) 315deg,
+    transparent 360deg
+  );
+  filter: blur(88px);
+  animation: ihc-aurora-shift 36s ease-in-out infinite;
+  opacity: 0.75;
+}
+@keyframes ihc-aurora-shift {
+  0%,100% { opacity: 0.68; transform: rotate(-3deg) scaleX(1.00); }
+  30%      { opacity: 0.92; transform: rotate( 2deg) scaleX(1.12); }
+  65%      { opacity: 0.52; transform: rotate(-1deg) scaleX(0.93); }
+}
+
+/* ── Ambient orbs ── */
 .ihc-orb { position: absolute; border-radius: 50%; }
 
 .ihc-orb-1 {
-  width: 900px; height: 700px;
-  top: -260px; left: 50%;
+  width: 1200px; height: 900px;
+  top: -340px; left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at 50% 40%, rgba(91,140,255,0.13), transparent 68%);
+  background: radial-gradient(ellipse at 50% 35%, rgba(91,140,255,0.26), transparent 60%);
+  animation: ihc-drift-1 22s ease-in-out infinite;
 }
-
 .ihc-orb-2 {
-  width: 640px; height: 560px;
-  bottom: -140px; right: -120px;
-  background: radial-gradient(ellipse at 55% 55%, rgba(154,108,255,0.11), transparent 68%);
+  width: 820px; height: 720px;
+  bottom: -220px; right: -160px;
+  background: radial-gradient(ellipse at 55% 55%, rgba(154,108,255,0.20), transparent 60%);
+  animation: ihc-drift-2 28s ease-in-out infinite;
 }
-
 .ihc-orb-3 {
-  width: 460px; height: 400px;
-  top: 30%; left: -100px;
-  background: radial-gradient(ellipse at 40% 50%, rgba(122,217,255,0.07), transparent 70%);
+  width: 600px; height: 520px;
+  top: 26%; left: -130px;
+  background: radial-gradient(ellipse at 40% 50%, rgba(122,217,255,0.14), transparent 62%);
+  animation: ihc-drift-3 19s ease-in-out infinite;
+}
+.ihc-orb-4 {
+  width: 540px; height: 440px;
+  bottom: 5%; right: 6%;
+  background: radial-gradient(ellipse at 50% 60%, rgba(20,184,166,0.13), transparent 64%);
+  animation: ihc-drift-2 24s ease-in-out infinite reverse;
+}
+.ihc-orb-5 {
+  width: 400px; height: 330px;
+  top: 8%; right: 4%;
+  background: radial-gradient(ellipse at 50% 40%, rgba(200,100,255,0.09), transparent 66%);
+  animation: ihc-drift-1 30s ease-in-out infinite 7s;
 }
 
+@keyframes ihc-drift-1 {
+  0%,100% { transform: translateX(-50%) translateY(  0px) scale(1.00); }
+  33%      { transform: translateX(-50%) translateY(-30px) scale(1.05); }
+  66%      { transform: translateX(-50%) translateY( 18px) scale(0.97); }
+}
+@keyframes ihc-drift-2 {
+  0%,100% { transform: translateY(  0px) scale(1.00); }
+  50%      { transform: translateY(-38px) scale(1.07); }
+}
+@keyframes ihc-drift-3 {
+  0%,100% { transform: translateY(  0px); }
+  38%      { transform: translateY( 24px); }
+  78%      { transform: translateY(-15px); }
+}
+
+/* ── Perspective grid ── */
 .ihc-grid {
   position: absolute;
   inset: -10%;
   background-image:
-    linear-gradient(rgba(255,255,255,0.042) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.042) 1px, transparent 1px);
+    linear-gradient(rgba(120,160,255,0.065) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,160,255,0.065) 1px, transparent 1px);
   background-size: 88px 88px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black, transparent 88%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black, transparent 88%);
+  mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, black, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, black, transparent 85%);
   transform: perspective(1200px) rotateX(58deg) translateY(28%) scale(1.5);
-  opacity: 0.5;
+  opacity: 0.60;
 }
 
+/* ── Horizon glow ── */
 .ihc-horizon {
   position: absolute;
   left: -5%; right: -5%;
@@ -356,27 +473,90 @@ const css = `
   height: 1px;
   background: linear-gradient(
     90deg,
-    transparent,
-    rgba(122,217,255,0.0) 8%,
-    rgba(122,217,255,0.45) 30%,
-    rgba(154,108,255,0.5) 55%,
-    rgba(91,140,255,0.4) 75%,
-    transparent 94%
+    transparent 2%,
+    rgba(122,217,255,0.55) 28%,
+    rgba(154,108,255,0.62) 52%,
+    rgba(91,140,255,0.50) 74%,
+    transparent 96%
   );
-  filter: blur(0.4px);
-  box-shadow: 0 0 30px rgba(91,140,255,0.3), 0 0 80px rgba(154,108,255,0.2);
+  filter: blur(0.5px);
+  box-shadow: 0 0 36px rgba(91,140,255,0.40), 0 0 90px rgba(154,108,255,0.22);
 }
 
+/* ── Light streaks ── */
+.ihc-streak {
+  position: absolute;
+  height: 1px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+.ihc-streak-1 {
+  width: 45%; top: 36%; left: 4%;
+  background: linear-gradient(90deg, transparent, rgba(122,217,255,0.60) 40%, rgba(154,108,255,0.50) 70%, transparent);
+  filter: blur(0.5px);
+  box-shadow: 0 0 32px rgba(91,140,255,0.36), 0 0 80px rgba(154,108,255,0.20);
+  animation: ihc-streak-glow 7s ease-in-out infinite;
+}
+.ihc-streak-2 {
+  width: 26%; top: 55%; right: 6%;
+  background: linear-gradient(90deg, transparent, rgba(91,140,255,0.40) 55%, transparent);
+  filter: blur(0.4px);
+  box-shadow: 0 0 22px rgba(91,140,255,0.24);
+  animation: ihc-streak-glow 9s ease-in-out infinite 2.5s;
+}
+.ihc-streak-3 {
+  width: 18%; top: 22%; left: 60%;
+  background: linear-gradient(90deg, transparent, rgba(20,184,166,0.32) 55%, transparent);
+  filter: blur(0.3px);
+  animation: ihc-streak-glow 11s ease-in-out infinite 5s;
+}
+@keyframes ihc-streak-glow {
+  0%,100% { opacity: 0.65; }
+  50%      { opacity: 1.00; }
+}
+
+/* ── Floating particles ── */
+.ihc-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.ihc-p {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: rgba(140,210,255,0.9);
+  box-shadow: 0 0 7px rgba(122,217,255,0.85), 0 0 14px rgba(91,140,255,0.45);
+  opacity: 0;
+  animation: ihc-p-rise var(--dur,10s) ease-in-out var(--delay,0s) infinite;
+}
+@keyframes ihc-p-rise {
+  0%        { opacity: 0;   transform: translateY(  0) scale(0.3); }
+  8%        { opacity: 0.9; transform: translateY(  0) scale(1.0); }
+  88%       { opacity: 0.4; }
+  100%      { opacity: 0;   transform: translateY(-110px) scale(0.4); }
+}
+
+/* ── Mouse-reactive glow ── */
+.ihc-mouse-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(540px circle at var(--mx,50%) var(--my,32%), rgba(91,140,255,0.14), transparent 52%);
+  pointer-events: none;
+}
+
+/* ── Vignette ── */
 .ihc-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 110% 100% at 50% 50%, transparent 38%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.88) 100%);
+  background: radial-gradient(ellipse 110% 100% at 50% 50%, transparent 34%, rgba(0,0,0,0.58) 76%, rgba(0,0,0,0.88) 100%);
 }
 
+/* ── Film grain ── */
 .ihc-noise {
   position: absolute;
   inset: 0;
-  opacity: 0.028;
+  opacity: 0.030;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
@@ -693,13 +873,22 @@ const css = `
   .ihc-feature { min-width: 135px; padding: 14px 16px; }
   .ihc-feature-title { font-size: 12px; }
   .ihc-feature-desc  { font-size: 10.5px; }
+  /* Background perf on mobile */
+  .ihc-orb-1 { width: 700px; height: 550px; }
+  .ihc-orb-2 { width: 500px; height: 440px; }
+  .ihc-orb-3, .ihc-orb-4, .ihc-orb-5 { display: none; }
+  .ihc-aurora { filter: blur(60px); opacity: 0.55; }
+  .ihc-streak-2, .ihc-streak-3 { display: none; }
+  .ihc-p { display: none; }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .ihc-in, .ihc-card, .ihc-card-img, .ihc-dot,
   .ihc-cta, .ihc-cta-secondary, .ihc-cta-arrow, .ihc-feature,
-  .ihc-pulse, .ihc-card-ring {
+  .ihc-pulse, .ihc-card-ring,
+  .ihc-orb-1, .ihc-orb-2, .ihc-orb-3, .ihc-orb-4, .ihc-orb-5,
+  .ihc-aurora, .ihc-streak-1, .ihc-streak-2, .ihc-streak-3, .ihc-p {
     animation: none !important;
     transition: none !important;
   }
@@ -708,5 +897,6 @@ const css = `
     opacity: 1 !important;
     transform: none !important;
   }
+  .ihc-p { opacity: 0 !important; }
 }
 `
