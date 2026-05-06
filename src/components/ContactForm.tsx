@@ -7,10 +7,9 @@ import type { Dictionary } from "@/lib/i18n";
 
 const WHATSAPP_NUMBER = "212771450503";
 
-const totalSteps = 4;
+const totalSteps = 3;
 const defaultLabels: Dictionary["contactForm"] = {
   projectTypes: ["Site web", "Branding", "Marketing", "Autre"],
-  budgets: ["< 5 000 MAD", "5 000 - 15 000 MAD", "15 000+"],
   introStep: "Une question a la fois pour un brief plus fluide.",
   introSimple: "Tous les champs sur un seul ecran.",
   simpleMode: "Retour au formulaire simple",
@@ -20,14 +19,12 @@ const defaultLabels: Dictionary["contactForm"] = {
     "Nous avons prepare votre brief. Vous pouvez aussi continuer la discussion directement sur WhatsApp.",
   whatsappIntro: "Bonjour INNOVMARK, je souhaite envoyer une demande.",
   projectTypeLabel: "Type de projet",
-  budgetLabel: "Budget",
   projectLabel: "Projet",
   nameLabel: "Nom",
   emailLabel: "Email",
   phoneLabel: "Telephone",
   stepLabel: "Etape",
   projectTypeQuestion: "Quel type de projet ?",
-  budgetQuestion: "Quel est votre budget ?",
   projectQuestion: "Parlez-nous de votre projet",
   projectPlaceholder: "Quelques lignes suffisent: objectif, contexte, delai...",
   infoTitle: "Vos informations",
@@ -45,7 +42,6 @@ type FormMode = "step" | "simple";
 
 type Brief = {
   projectType: string;
-  budget: string;
   message: string;
   name: string;
   email: string;
@@ -54,7 +50,6 @@ type Brief = {
 
 const initialBrief: Brief = {
   projectType: "",
-  budget: "",
   message: "",
   name: "",
   email: "",
@@ -77,7 +72,6 @@ export default function ContactForm({
       labels.whatsappIntro,
       "",
       `${labels.projectTypeLabel}: ${brief.projectType}`,
-      `${labels.budgetLabel}: ${brief.budget}`,
       "",
       `${labels.projectLabel}: ${brief.message}`,
       "",
@@ -91,15 +85,13 @@ export default function ContactForm({
 
   const canContinue =
     (step === 1 && brief.projectType) ||
-    (step === 2 && brief.budget) ||
-    (step === 3 && brief.message.trim().length > 2) ||
-    (step === 4 && brief.name.trim() && brief.email.trim());
+    (step === 2 && brief.message.trim().length > 2) ||
+    (step === 3 && brief.name.trim() && brief.email.trim());
 
   const canSubmitSimple =
     brief.name.trim() &&
     brief.email.trim() &&
     brief.projectType &&
-    brief.budget &&
     brief.message.trim().length > 2;
 
   const updateBrief = (field: keyof Brief, value: string) => {
@@ -241,7 +233,7 @@ function StepForm({
     <form onSubmit={onSubmit} className="flex min-h-[430px] flex-col">
       <div>
         <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-white/50">
-          <span>{labels.stepLabel} {step}/4</span>
+          <span>{labels.stepLabel} {step}/{totalSteps}</span>
           <span>{Math.round((step / totalSteps) * 100)}%</span>
         </div>
         <div className="h-1 overflow-hidden rounded-full bg-white/10">
@@ -264,15 +256,6 @@ function StepForm({
           )}
 
           {step === 2 && (
-            <ChoiceStep
-              title={labels.budgetQuestion}
-              options={labels.budgets}
-              selected={brief.budget}
-              onSelect={(value) => updateBrief("budget", value)}
-            />
-          )}
-
-          {step === 3 && (
             <div>
               <StepTitle>{labels.projectQuestion}</StepTitle>
               <textarea
@@ -286,7 +269,7 @@ function StepForm({
             </div>
           )}
 
-          {step === 4 && (
+          {step === 3 && (
             <div>
               <StepTitle>{labels.infoTitle}</StepTitle>
               <div className="mt-6 grid gap-4">
@@ -406,22 +389,13 @@ function SimpleForm({
         autoComplete="tel"
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <SelectField
-          label={labels.projectTypeLabel}
-          value={brief.projectType}
-          onChange={(value) => updateBrief("projectType", value)}
-          options={labels.projectTypes}
-          emptyLabel={labels.choose}
-        />
-        <SelectField
-          label={labels.budgetLabel}
-          value={brief.budget}
-          onChange={(value) => updateBrief("budget", value)}
-          options={labels.budgets}
-          emptyLabel={labels.choose}
-        />
-      </div>
+      <SelectField
+        label={labels.projectTypeLabel}
+        value={brief.projectType}
+        onChange={(value) => updateBrief("projectType", value)}
+        options={labels.projectTypes}
+        emptyLabel={labels.choose}
+      />
 
       <label className="grid gap-2">
         <span className="text-[10px] uppercase tracking-[0.24em] text-white/56">
