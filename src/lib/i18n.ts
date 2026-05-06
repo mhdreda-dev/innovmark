@@ -75,7 +75,37 @@ export const dictionaries = {
       contact: {
         kicker: "Brief rapide",
         title: "Parlez-nous de votre projet",
-        subtitle: "Reponse en moins de 24h",
+        subtitle: "Réponse en moins de 24h",
+        heroSubtitle:
+          "Une idée, une marque, une campagne ou un site web ? Transformons-la en expérience digitale premium.",
+        processTitle: "La suite après votre contact",
+        processSteps: [
+          {
+            step: "01",
+            title: "Analyse du besoin",
+            desc: "Nous étudions votre demande pour cerner vos objectifs et vos contraintes.",
+          },
+          {
+            step: "02",
+            title: "Proposition claire",
+            desc: "Un plan d'action précis et un devis vous sont soumis sous 24h.",
+          },
+          {
+            step: "03",
+            title: "Lancement du projet",
+            desc: "On démarre ensemble avec un calendrier et des livrables définis.",
+          },
+        ],
+        serviceCards: [
+          { label: "Branding", tag: "Identité visuelle" },
+          { label: "Site web", tag: "Design & Dev" },
+          { label: "Marketing", tag: "Stratégie & Croissance" },
+        ],
+        trustItems: [
+          { value: "< 24h", label: "Réponse rapide" },
+          { value: "Premium", label: "Vision créative" },
+          { value: "360°", label: "Accompagnement" },
+        ],
       },
     },
     contactForm: {
@@ -157,6 +187,36 @@ export const dictionaries = {
         kicker: "Quick brief",
         title: "Tell us about your project",
         subtitle: "Reply in less than 24h",
+        heroSubtitle:
+          "An idea, a brand, a campaign or a website? Let's turn it into a premium digital experience.",
+        processTitle: "What happens after you reach out",
+        processSteps: [
+          {
+            step: "01",
+            title: "Needs analysis",
+            desc: "We review your request to understand your goals and constraints.",
+          },
+          {
+            step: "02",
+            title: "Clear proposal",
+            desc: "A precise action plan and quote are submitted to you within 24h.",
+          },
+          {
+            step: "03",
+            title: "Project launch",
+            desc: "We start together with a defined timeline and deliverables.",
+          },
+        ],
+        serviceCards: [
+          { label: "Branding", tag: "Visual identity" },
+          { label: "Website", tag: "Design & Dev" },
+          { label: "Marketing", tag: "Strategy & Growth" },
+        ],
+        trustItems: [
+          { value: "< 24h", label: "Fast reply" },
+          { value: "Premium", label: "Creative vision" },
+          { value: "360°", label: "Full support" },
+        ],
       },
     },
     contactForm: {
@@ -238,6 +298,36 @@ export const dictionaries = {
         kicker: "موجز سريع",
         title: "أخبرنا عن مشروعك",
         subtitle: "سنرد عليك خلال 24 ساعة",
+        heroSubtitle:
+          "فكرة، علامة تجارية، حملة أو موقع إلكتروني؟ دعنا نحولها إلى تجربة رقمية راقية.",
+        processTitle: "ماذا يحدث بعد تواصلك معنا",
+        processSteps: [
+          {
+            step: "01",
+            title: "تحليل الاحتياج",
+            desc: "ندرس طلبك لفهم أهدافك ومتطلباتك بدقة.",
+          },
+          {
+            step: "02",
+            title: "اقتراح واضح",
+            desc: "نقدم لك خطة عمل محددة وعرض سعر خلال 24 ساعة.",
+          },
+          {
+            step: "03",
+            title: "إطلاق المشروع",
+            desc: "ننطلق معاً بجدول زمني واضح ومخرجات محددة.",
+          },
+        ],
+        serviceCards: [
+          { label: "الهوية البصرية", tag: "Branding" },
+          { label: "الموقع الإلكتروني", tag: "Design & Dev" },
+          { label: "التسويق", tag: "نمو واستراتيجية" },
+        ],
+        trustItems: [
+          { value: "< 24h", label: "رد سريع" },
+          { value: "Premium", label: "رؤية إبداعية" },
+          { value: "360°", label: "مرافقة كاملة" },
+        ],
       },
     },
     contactForm: {
