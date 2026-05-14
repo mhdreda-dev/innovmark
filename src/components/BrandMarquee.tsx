@@ -10,14 +10,14 @@ const items = [
 ];
 
 const arItems = [
-  "فيديوهات سينمائية",
-  "مواقع عالية التحويل",
-  "هوية بصرية",
-  "إدارة الشبكات الاجتماعية",
+  "فيديوهات احترافية",
+  "مواقع كتجيب زبناء",
+  "لوغو وشكل قوي",
+  "صفحات التواصل",
   "إعلانات مدفوعة",
-  "إدارة المخزون",
-  "استراتيجية رقمية",
-  "إخراج إبداعي",
+  "تسيير المخزون",
+  "خطة واضحة فالإنترنت",
+  "تصميم منظم",
 ];
 
 export default function BrandMarquee({ locale }: { locale?: string }) {
@@ -34,9 +34,9 @@ export default function BrandMarquee({ locale }: { locale?: string }) {
       <div
         className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent"
       />
-      <div className="flex w-max animate-marquee gap-12 whitespace-nowrap text-sm font-light uppercase tracking-[0.32em] text-white/42 md:gap-16 md:text-base md:tracking-[0.42em]">
+      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap text-xs font-light uppercase tracking-[0.18em] text-white/42 sm:text-sm md:gap-12 md:text-base md:tracking-[0.36em]">
         {[...displayedItems, ...displayedItems, ...displayedItems].map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-12 md:gap-16">
+          <span key={i} className="inline-flex items-center gap-8 md:gap-12">
             {item}
             <span className="h-1 w-1 rounded-full bg-cyan-200/40" />
           </span>

@@ -17,7 +17,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   if (!isLocale(locale)) notFound();
 
   return (
-    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="min-w-0 overflow-x-clip">
       <LocaleHtmlAttrs locale={locale} />
 
       {/* ── Shared ambient background ─ fixed layer behind all page content ── */}

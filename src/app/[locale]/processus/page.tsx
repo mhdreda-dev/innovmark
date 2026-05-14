@@ -10,11 +10,28 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Processus · INNOVMARK",
-  description:
-    "Un processus clair en quatre étapes pour transformer votre idée en expérience digitale premium.",
+const metadataByLocale: Record<string, Metadata> = {
+  fr: {
+    title: "Processus · INNOVMARK",
+    description:
+      "Un processus clair en quatre étapes pour transformer votre idée en expérience digitale premium.",
+  },
+  en: {
+    title: "Process · INNOVMARK",
+    description:
+      "A clear four-step process to turn your idea into a premium digital experience.",
+  },
+  ar: {
+    title: "طريقة الخدمة · INNOVMARK",
+    description:
+      "طريقة خدمة واضحة فـ أربع مراحل باش نحولو الفكرة ديالك لحضور احترافي فالإنترنت وجاهز للانطلاق.",
+  },
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return metadataByLocale[locale] ?? metadataByLocale.fr;
+}
 
 export default async function LocalizedProcessusPage({ params }: Props) {
   const { locale } = await params;
@@ -25,7 +42,7 @@ export default async function LocalizedProcessusPage({ params }: Props) {
   return (
     <>
       <Nav labels={dict.nav} locale={locale} />
-      <main className="relative z-10 overflow-hidden pt-24">
+      <main className="relative z-10 overflow-hidden pt-20 sm:pt-24">
         <Process hero={dict.pages.process} locale={locale} />
       </main>
       <div className="relative z-10">

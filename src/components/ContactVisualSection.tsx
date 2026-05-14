@@ -51,16 +51,16 @@ export default function ContactVisualSection({
               y: -4,
               transition: { type: "spring", stiffness: 320, damping: 24 },
             }}
-            className={`group relative overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br ${CARD_GRADIENTS[i]} p-5 transition-shadow duration-300 ${CARD_HOVER_SHADOWS[i]} cursor-default select-none`}
+            className={`group relative min-w-0 overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br ${CARD_GRADIENTS[i]} p-4 transition-shadow duration-300 sm:p-5 ${CARD_HOVER_SHADOWS[i]} cursor-default select-none`}
           >
             <div className="absolute inset-0 bg-[#080c11]/70" />
 
-            <div className="relative flex items-center justify-between gap-4">
-              <div>
+            <div className="relative flex items-center justify-between gap-4 rtl-row">
+              <div className="min-w-0">
                 <div className="text-xl font-light tracking-tight text-white">
                   {card.label}
                 </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-[0.22em] text-white/50">
+                <div className="mt-0.5 text-[10px] uppercase tracking-[0.1em] text-white/50 md:tracking-[0.22em]">
                   {card.tag}
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function ContactVisualSection({
       </div>
 
       {/* Trust stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {trustItems.map((item, i) => (
           <motion.div
             key={i}
@@ -86,12 +86,12 @@ export default function ContactVisualSection({
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{ delay: 0.38 + i * 0.1, duration: 0.55, ease: EASE }}
-            className="flex flex-col items-center gap-1.5 rounded-xl border border-white/8 bg-white/[0.03] px-2 py-4 text-center"
+            className="flex min-w-0 flex-col items-center gap-1.5 rounded-xl border border-white/8 bg-white/[0.03] px-2 py-4 text-center"
           >
             <div className="text-base font-light tracking-tight text-white">
               {item.value}
             </div>
-            <div className="text-[9px] uppercase tracking-[0.22em] text-white/48 leading-tight">
+            <div className="text-[9px] uppercase leading-tight tracking-[0.08em] text-white/48 md:tracking-[0.22em]">
               {item.label}
             </div>
           </motion.div>

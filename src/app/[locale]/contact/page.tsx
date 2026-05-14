@@ -12,11 +12,28 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Contact · INNOVMARK",
-  description:
-    "Parlez-nous de votre projet. INNOVMARK vous répond en moins de 24h pour vos sites web, branding et campagnes marketing.",
+const metadataByLocale: Record<string, Metadata> = {
+  fr: {
+    title: "Contact · INNOVMARK",
+    description:
+      "Parlez-nous de votre projet. INNOVMARK vous répond en moins de 24h pour vos sites web, branding et campagnes marketing.",
+  },
+  en: {
+    title: "Contact · INNOVMARK",
+    description:
+      "Tell us about your project. INNOVMARK replies in less than 24h for websites, branding and marketing campaigns.",
+  },
+  ar: {
+    title: "تواصل معنا · INNOVMARK",
+    description:
+      "هضر لينا على المشروع ديالك. INNOVMARK كتجاوبك فـ 24 ساعة بخصوص المواقع، اللوغو وشكل المشروع، التصاور والفيديوهات والمنشورات والإعلانات.",
+  },
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return metadataByLocale[locale] ?? metadataByLocale.fr;
+}
 
 export default async function LocalizedContactPage({ params }: Props) {
   const { locale } = await params;
@@ -30,9 +47,9 @@ export default async function LocalizedContactPage({ params }: Props) {
       <Nav labels={dict.nav} locale={locale} />
       <RevealOnScroll />
 
-      <main className="relative z-10 min-h-screen overflow-hidden pt-24">
+      <main className="relative z-10 min-h-screen overflow-hidden pt-20 sm:pt-24">
         {/* ── Hero ── */}
-        <section className="relative px-6 pb-10 pt-16 md:pb-14 md:pt-24 lg:px-10">
+        <section className="relative px-4 pb-10 pt-12 sm:px-6 md:pb-14 md:pt-24 lg:px-10">
           {/* Background: gradient orbs */}
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div
@@ -63,15 +80,15 @@ export default async function LocalizedContactPage({ params }: Props) {
           <div className="stagger-reveal relative mx-auto max-w-4xl text-center">
             {/* Kicker — child 1 */}
             <div className="reveal-on-scroll mb-6 flex items-center justify-center gap-3">
-              <span className="h-px w-10 bg-gradient-to-r from-transparent via-cyan-300/70 to-violet-300/70" />
-              <span className="cinematic-text text-[10px] uppercase tracking-[0.46em] text-white/60">
+              <span className="h-px w-8 shrink-0 bg-gradient-to-r from-transparent via-cyan-300/70 to-violet-300/70 sm:w-10" />
+              <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-white/60 md:tracking-[0.46em]">
                 {page.kicker}
               </span>
-              <span className="h-px w-10 bg-gradient-to-r from-violet-300/70 via-emerald-300/70 to-transparent" />
+              <span className="h-px w-8 shrink-0 bg-gradient-to-r from-violet-300/70 via-emerald-300/70 to-transparent sm:w-10" />
             </div>
 
             {/* Title — child 2 */}
-            <h1 className="reveal-on-scroll cinematic-text text-4xl font-light leading-[1.04] tracking-tight text-white md:text-6xl lg:text-7xl">
+            <h1 className="reveal-on-scroll cinematic-text text-4xl font-light leading-[1.08] tracking-tight text-white md:text-6xl lg:text-7xl">
               {page.title}
             </h1>
 
@@ -91,12 +108,12 @@ export default async function LocalizedContactPage({ params }: Props) {
         </section>
 
         {/* ── Form + Visual ── */}
-        <section className="relative px-6 pb-16 md:pb-24 lg:px-10">
+        <section className="relative px-4 pb-16 sm:px-6 md:pb-24 lg:px-10">
           <div className="mx-auto max-w-6xl">
             <div className="grid items-start gap-8 lg:grid-cols-[1fr_400px] lg:gap-12">
               {/* Form card */}
               <div className="reveal-on-scroll" style={{ transitionDelay: "80ms" }}>
-                <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.40)] backdrop-blur-sm md:p-8">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 shadow-[0_32px_100px_rgba(0,0,0,0.40)] backdrop-blur-sm sm:p-6 md:p-8">
                   <ContactForm labels={dict.contactForm} />
                 </div>
               </div>
@@ -113,7 +130,7 @@ export default async function LocalizedContactPage({ params }: Props) {
         </section>
 
         {/* ── Process after contact ── */}
-        <section className="relative px-6 pb-20 md:pb-28 lg:px-10">
+        <section className="relative px-4 pb-20 sm:px-6 md:pb-28 lg:px-10">
           {/* Background accent */}
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div

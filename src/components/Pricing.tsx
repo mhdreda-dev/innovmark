@@ -1,5 +1,5 @@
 import SectionLabel from "./SectionLabel";
-import { localizedHref } from "@/lib/i18n";
+import { type Locale, localizedHref } from "@/lib/i18n";
 
 const tiers = [
   {
@@ -23,34 +23,34 @@ const tiers = [
 const arTiers = [
   {
     name: "البداية",
-    line: "للعلامات التي تحتاج إلى انطباع أول راق ومقنع.",
-    scope: ["صفحة هبوط أو تحسين الهوية", "توجيه بصري أساسي", "حزمة محتوى جاهزة للإطلاق"],
+    line: "للمشاريع اللي محتاجة انطباع أول احترافي ومقنع.",
+    scope: ["صفحة هبوط أو تحسين شكل المشروع", "طريقة عرض أساسية", "تصاور وفيديوهات ومنشورات جاهزة للانطلاق"],
   },
   {
     name: "النمو",
-    line: "للشركات الجاهزة لتحويل الانتباه إلى طلبات فعلية.",
-    scope: ["موقع + نظام حملات", "توجيه إبداعي للإعلانات", "إعداد التحويل والتحليلات"],
+    line: "للمشاريع اللي باغية تحول الانتباه لطلبات وزبناء.",
+    scope: ["موقع + سيستيم حملات", "اتجاه إبداعي للإعلانات", "إعداد التحويل والتحليلات"],
     featured: true,
   },
   {
     name: "النخبة",
-    line: "لإطلاقات جدية تحتاج إلى قيادة إبداعية كاملة.",
-    scope: ["هوية، موقع، فيديو وإعلانات", "إيقاع إنتاج بأولوية أعلى", "تقارير واضحة للإدارة"],
+    line: "للانطلاقات الجدية اللي محتاجة قيادة إبداعية كاملة.",
+    scope: ["لوغو وشكل المشروع، موقع، فيديو وإعلانات", "إيقاع إنتاج بأولوية أعلى", "تقارير واضحة للإدارة"],
   },
 ];
 
-export default function Pricing({ locale }: { locale?: string }) {
+export default function Pricing({ locale }: { locale?: Locale }) {
   const isArabic = locale === "ar";
   const displayedTiers = isArabic ? arTiers : tiers;
 
   return (
     <section className="relative py-12 md:py-20" dir={isArabic ? "rtl" : undefined}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="mb-8 md:mb-12">
           <SectionLabel
-            kicker={isArabic ? "باقات العمل" : "Engagements"}
-            title={isArabic ? "باقات راقية لأعمال جادة." : "Premium packages for serious business."}
-            subtitle={isArabic ? "لا نقدم قائمة خدمات جاهزة للجميع. كل تعاون يُبنى حول الهدف والسرعة ومستوى الصقل الذي تحتاجه علامتك." : "No commodity agency menu. Each engagement is scoped around outcome, speed and the level of polish your brand needs."}
+            kicker={isArabic ? "باقات الخدمة" : "Engagements"}
+            title={isArabic ? "باقات احترافية لمشاريع جدية." : "Premium packages for serious business."}
+            subtitle={isArabic ? "ما كنقدموش لائحة خدمات عامة. كل تعاون كنحددو فيه الهدف، السرعة، ومستوى الجودة اللي محتاج المشروع ديالك." : "No commodity agency menu. Each engagement is scoped around outcome, speed and the level of polish your brand needs."}
           />
         </div>
 
@@ -58,7 +58,7 @@ export default function Pricing({ locale }: { locale?: string }) {
           {displayedTiers.map((tier) => (
             <article
               key={tier.name}
-              className={`premium-glass relative flex min-h-[300px] flex-col rounded-2xl p-5 text-left md:min-h-[340px] md:p-8 ${
+              className={`premium-glass relative flex min-h-[300px] min-w-0 flex-col rounded-2xl p-5 text-left md:min-h-[340px] md:p-8 ${
                 tier.featured ? "border-cyan-200/30 bg-white/[0.09]" : ""
               } ${isArabic ? "text-right" : ""}`}
             >
@@ -78,10 +78,10 @@ export default function Pricing({ locale }: { locale?: string }) {
                 ))}
               </ul>
               <a
-                href={localizedHref("/contact", locale === "ar" ? "ar" : undefined)}
-                className={`mt-7 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.14em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:mt-auto md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "md:ms-auto" : ""}`}
+                href={localizedHref("/contact", locale)}
+                className={`mt-7 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:mt-auto md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "md:ms-auto" : ""}`}
               >
-                {isArabic ? "اطلب نطاق العمل" : "Request scope"}
+                {isArabic ? "طلب نطاق الخدمة" : "Request scope"}
               </a>
             </article>
           ))}

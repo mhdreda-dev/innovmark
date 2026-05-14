@@ -41,18 +41,18 @@ const copy = {
     ],
   },
   ar: {
-    kicker: "صيغ إبداعية",
-    title: "ما الذي يمكننا إنشاؤه لعلامتك",
+    kicker: "فورمات إبداعية",
+    title: "شنو نقدروا نصاوبو للمشروع ديالك",
     subtitle:
-      "صيغ مصممة لاستقطاب الانتباه وبناء الثقة وتحقيق التحويل — مكيّفة لكل قناة ولكل طموح تجاري.",
-    cta: "ابدأ مشروعك",
+      "تصاميم وفيديوهات ومنشورات مصممة باش تشد الانتباه، تبني الثقة، وتجيب نتائج فالإنترنت.",
+    cta: "بدا المشروع ديالك",
     formats: [
       { label: "فيديو إعلاني",             tag: "سبوت · ريل · تيزر" },
-      { label: "هوية بصرية راقية",         tag: "شعار · هوية · دليل" },
-      { label: "ريلز الشبكات الاجتماعية",  tag: "إنستغرام · تيك توك · ميتا" },
-      { label: "موقع ويب عصري",            tag: "صفحة هبوط · تعريفي · UX" },
-      { label: "تصوير المنتجات",           tag: "صور · ستوديو · تجارة" },
-      { label: "حملة تسويقية",            tag: "استراتيجية · إعلانات · نمو" },
+      { label: "لوغو وشكل احترافي",        tag: "لوغو · ألوان · دليل بسيط" },
+      { label: "ريلز لصفحات التواصل",      tag: "إنستغرام · تيك توك · ميتا" },
+      { label: "موقع عصري",                tag: "صفحة بيع · موقع تعريفي · سهل الاستعمال" },
+      { label: "تصوير المنتجات",           tag: "صور · ستوديو · بيع فالإنترنت" },
+      { label: "حملة إعلانية",             tag: "خطة واضحة · إعلانات · نمو" },
     ],
   },
 } as const;
@@ -248,7 +248,7 @@ function PhotoVisual() {
 function CampaignVisual() {
   const bars = [55,72,44,88,65,92,38,78,60,95,48,82];
   return (
-    <div className="relative flex w-full items-center gap-6 px-2">
+    <div className="relative flex w-full items-center gap-3 px-1 sm:gap-6 sm:px-2">
       {/* Bar chart */}
       <div className="flex flex-1 items-end gap-0.5" style={{ height: 52 }}>
         {bars.map((h, i) => (
@@ -307,10 +307,10 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.72, delay: index * 0.07, ease: EASE }}
-      className={`group relative overflow-hidden rounded-2xl border border-white/[0.09] ${spanClass}`}
+      className={`group relative min-w-0 overflow-hidden rounded-2xl border border-white/[0.09] ${spanClass}`}
       style={{
         background: config.gradient,
-        minHeight: isCampaign ? 120 : isReels ? 220 : 260,
+        minHeight: isCampaign ? 116 : isReels ? 200 : 220,
       }}
     >
       {/* Hover glow overlay */}
@@ -334,7 +334,7 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
       {/* Noise texture */}
       <div aria-hidden className="absolute inset-0 opacity-[0.022]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px" }} />
 
-      <div className={`relative flex h-full flex-col p-5 ${isCampaign ? "md:flex-row md:items-center md:gap-6" : ""}`}>
+      <div className={`relative flex h-full min-w-0 flex-col p-5 ${isCampaign ? "md:flex-row md:items-center md:gap-6" : ""}`}>
         {/* Visual area */}
         {!isCampaign && (
           <div className={`relative flex ${isReels ? "justify-center" : ""}`} style={{ flex: 1, minHeight: isVideo ? 140 : 110 }}>
@@ -349,10 +349,10 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
 
         {/* Footer label */}
         <div className={`${isCampaign ? "shrink-0 md:min-w-[180px]" : "mt-4 border-t border-white/[0.07] pt-4"}`}>
-          <p className={`font-light leading-tight tracking-tight text-white ${isCampaign ? "text-xl md:text-2xl" : "text-lg md:text-xl"}`}>
+          <p className={`font-light leading-tight tracking-tight text-white ${isCampaign ? "text-lg md:text-2xl" : "text-lg md:text-xl"}`}>
             {label}
           </p>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-white/38">{tag}</p>
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/38 md:tracking-[0.22em]">{tag}</p>
         </div>
       </div>
 
@@ -386,7 +386,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
   ];
 
   return (
-    <section className="relative overflow-hidden px-6 py-14 md:py-20 lg:px-10">
+    <section className="relative overflow-hidden px-4 py-14 sm:px-6 md:py-20 lg:px-10">
       {/* Section ambient accent */}
       <div
         aria-hidden
@@ -399,7 +399,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
 
       <div className="relative mx-auto max-w-7xl">
         {/* Header */}
-        <div className={`mb-10 flex flex-col gap-5 md:mb-14 md:flex-row md:items-end md:justify-between`}>
+        <div className="mb-10 flex min-w-0 flex-col gap-5 md:mb-14 md:flex-row md:items-end md:justify-between rtl-md-row">
           <SectionLabel
             kicker={t.kicker}
             title={t.title}
@@ -407,7 +407,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
           />
           <Link
             href={localizedHref("/contact", locale)}
-            className="reveal-on-scroll inline-flex shrink-0 items-center gap-2 rounded-full border border-white/14 bg-white/[0.05] px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] text-white/72 transition duration-300 hover:border-blue-300/40 hover:bg-white/[0.09] hover:text-white self-start md:self-auto"
+            className="reveal-on-scroll inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-full border border-white/14 bg-white/[0.05] px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.14em] text-white/72 transition duration-300 hover:border-blue-300/40 hover:bg-white/[0.09] hover:text-white sm:w-auto md:self-auto md:tracking-[0.22em]"
           >
             {t.cta}
             {/* Arrow flips via CSS RTL */}
@@ -440,7 +440,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
         {/* Bottom note */}
         <p className="reveal-on-scroll mt-8 text-center text-xs text-white/30 md:mt-10">
           {isArabic
-            ? "كل تنسيق مصمم خصيصاً لعلامتك — ليس قوالب جاهزة."
+            ? "كل حاجة كنصمموها على حساب المشروع ديالك — ماشي قوالب واجدة."
             : lang === "en"
               ? "Every format crafted specifically for your brand — not off-the-shelf templates."
               : "Chaque format est conçu spécifiquement pour votre marque — pas des templates génériques."}

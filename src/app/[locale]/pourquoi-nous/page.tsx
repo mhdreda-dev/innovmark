@@ -10,11 +10,28 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Pourquoi Nous · INNOVMARK",
-  description:
-    "Strategy first, premium execution, fast communication, results focused — découvrez pourquoi les marques exigeantes choisissent INNOVMARK.",
+const metadataByLocale: Record<string, Metadata> = {
+  fr: {
+    title: "Pourquoi Nous · INNOVMARK",
+    description:
+      "Strategy first, premium execution, fast communication, results focused — découvrez pourquoi les marques exigeantes choisissent INNOVMARK.",
+  },
+  en: {
+    title: "Why Us · INNOVMARK",
+    description:
+      "Strategy first, premium execution, fast communication and clear results for brands that want to grow.",
+  },
+  ar: {
+    title: "علاش حنا · INNOVMARK",
+    description:
+      "علاش المشاريع المغربية كتختار INNOVMARK: خطة واضحة، تنفيذ احترافي، تواصل سريع، وتركيز على النتائج.",
+  },
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return metadataByLocale[locale] ?? metadataByLocale.fr;
+}
 
 export default async function LocalizedPourquoiNousPage({ params }: Props) {
   const { locale } = await params;
@@ -25,7 +42,7 @@ export default async function LocalizedPourquoiNousPage({ params }: Props) {
   return (
     <>
       <Nav labels={dict.nav} locale={locale} />
-      <main className="relative z-10 overflow-hidden pt-24">
+      <main className="relative z-10 overflow-hidden pt-20 sm:pt-24">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"

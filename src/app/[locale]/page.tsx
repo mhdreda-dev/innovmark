@@ -10,46 +10,86 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { ImageCarouselHero } from "@/components/ui/ai-image-generator-hero";
-import { heroImages } from "@/data/hero-images";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
+import { getPublishedHomeContent } from "@/lib/cms/content";
+import { getFallbackHomeContent } from "@/lib/cms/fallbacks";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const content = await getPublishedHomeContent(locale);
+
+  return {
+    title: content.seo.title,
+    description: content.seo.description,
+    keywords: content.seo.keywords,
+    robots: content.seo.noIndex ? { index: false, follow: false } : undefined,
+    openGraph: {
+      title: content.seo.title,
+      description: content.seo.description,
+      images: content.seo.ogImage ? [{ url: content.seo.ogImage }] : undefined,
+      type: "website",
+    },
+  };
+}
+
 export default async function LocalizedHome({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
   const dict = dictionaries[locale];
+  const content = await getPublishedHomeContent(locale);
+  const fallback = getFallbackHomeContent(locale);
+  const safeCarouselImages = content.hero.carouselImages?.length
+    ? content.hero.carouselImages
+    : fallback.hero.carouselImages;
+  const sectionNodes: Record<string, ReactNode> = {
+    "creative-formats": <CreativeFormats locale={locale} />,
+    "brand-marquee": <BrandMarquee locale={locale} />,
+    stats: <StatsBand locale={locale} />,
+    "saad-belkaadi": <SaadBelkaadiTeaser locale={locale} />,
+    capabilities: <CapabilitiesPreview locale={locale} />,
+    testimonials: <Testimonials locale={locale} items={content.testimonials} />,
+    pricing: <Pricing locale={locale} />,
+    cta: <CTA locale={locale} />,
+  };
 
   return (
     <>
       <Nav labels={dict.nav} locale={locale} />
-      <main className="relative z-10">
+      <main className="relative z-10 overflow-x-clip">
         <div id="top">
           <ImageCarouselHero
-            title={dict.home.heroTitle}
-            subtitle={dict.home.heroSubtitle}
-            description={dict.home.heroDescription}
-            ctaText={dict.home.heroCta}
-            ctaHref={`https://wa.me/212771450503?text=${encodeURIComponent(dict.home.heroWhatsappMessage)}`}
-            secondaryCtaText={dict.home.heroSecondaryCta}
-            secondaryCtaHref={localizedHref("/contact", locale)}
-            images={heroImages}
-            features={[...dict.home.features]}
+            title={content.hero.title}
+            subtitle={content.hero.eyebrow}
+            description={content.hero.description}
+            ctaText={content.hero.ctaLabel}
+            ctaHref={content.hero.ctaHref || `https://wa.me/212771450503?text=${encodeURIComponent(dict.home.heroWhatsappMessage)}`}
+            secondaryCtaText={content.hero.secondaryCtaLabel}
+            secondaryCtaHref={content.hero.secondaryCtaHref || localizedHref("/contact", locale)}
+            images={safeCarouselImages}
+            features={content.hero.features}
+            heroVideoUrl={content.hero.heroVideoUrl || undefined}
           />
         </div>
 
-        <CreativeFormats locale={locale} />
-        <BrandMarquee locale={locale} />
-        <StatsBand locale={locale} />
-        <SaadBelkaadiTeaser locale={locale} />
-        <CapabilitiesPreview locale={locale} />
-        <Testimonials locale={locale} />
-        <Pricing locale={locale} />
-        <CTA locale={locale} />
+        {content.sections.map((section) => (
+          <div key={section}>{sectionNodes[section]}</div>
+        ))}
+        {content.seo.structuredData && (
+          <script
+            type="application/ld+json"
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(content.seo.structuredData) }}
+          />
+        )}
       </main>
       <div className="relative z-10">
         <Footer locale={locale} />

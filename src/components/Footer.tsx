@@ -27,14 +27,14 @@ const footerLinks = {
 
 const arFooterLinks = {
   "الاستوديو": [
-    { label: "من نحن",      href: "/ar#why" },
-    { label: "المنهجية",    href: "/ar/processus" },
+    { label: "علاش حنا",    href: "/ar#why" },
+    { label: "طريقة الخدمة", href: "/ar/processus" },
     { label: "الأعمال",     href: "/ar#work" },
   ],
   "الخدمات": [
     { label: "الفيديو",     href: "/ar/services/promotional-videos" },
     { label: "المواقع",     href: "/ar/services/website-creation" },
-    { label: "الهوية",      href: "/ar/services/branding" },
+    { label: "لوغو وشكل المشروع",  href: "/ar/services/branding" },
     { label: "الإعلانات",   href: "/ar/services/paid-ads" },
   ],
   "التواصل": [
@@ -53,6 +53,8 @@ function t(locale: string | undefined, fr: string, en: string, ar: string) {
 
 function localHref(path: string, locale?: string) {
   if (!locale) return path;
+  if (path.startsWith("http") || path.startsWith("mailto:") || path.startsWith("tel:") || path.startsWith("#")) return path;
+  if (path.startsWith(`/${locale}`)) return path;
   if (path === "/") return `/${locale}`;
   return `/${locale}${path}`;
 }
@@ -82,7 +84,7 @@ export default function Footer({ locale }: { locale?: string }) {
     locale,
     "Studio créatif premium pour marques exigeantes.",
     "Premium creative studio for demanding brands.",
-    "أنظمة تسويق راقية للعلامات الطموحة.",
+    "خدمة احترافية كتعاون المشاريع المغربية تبان مزيان فالإنترنت.",
   );
 
   const copyright = t(
@@ -92,9 +94,9 @@ export default function Footer({ locale }: { locale?: string }) {
     `© ${CURRENT_YEAR} Innovmark Studio. جميع الحقوق محفوظة.`,
   );
 
-  const legalLabel   = t(locale, "Mentions légales", "Legal",        "الشروط القانونية");
+  const legalLabel   = t(locale, "Mentions légales", "Legal",        "المعلومات القانونية");
   const privacyLabel = t(locale, "Confidentialité",  "Privacy",      "الخصوصية");
-  const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل عبر واتساب");
+  const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل معنا فواتساب");
 
   return (
     <footer className="border-t border-white/12 bg-white/[0.055] backdrop-blur-md">
@@ -105,7 +107,7 @@ export default function Footer({ locale }: { locale?: string }) {
       <div className="hidden md:block">
         <div className="mx-auto max-w-7xl px-6 pt-20 pb-8 lg:px-10">
           {/* 4-column grid — unchanged from original */}
-          <div className="grid grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-12 pb-16">
+          <div className="grid grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-10 pb-16 rtl-text-right">
             {/* Brand column */}
             <div>
               <div className="mb-5 flex items-center gap-2">
@@ -116,7 +118,7 @@ export default function Footer({ locale }: { locale?: string }) {
               </div>
               <p className="max-w-xs text-sm leading-7 text-white/68">
                 {isArabic
-                  ? "أنظمة تسويق راقية للعلامات التي تريد حضوراً أقوى، تواصلاً أوضح، ونمواً بثقة."
+                  ? "خدمات فالإنترنت للمشاريع اللي باغية تبان بقيمة، توصل الرسالة بوضوح، وتكبر بثقة."
                   : "Premium marketing systems for brands that want to look expensive, communicate clearly and grow with confidence."}
               </p>
             </div>
@@ -131,7 +133,7 @@ export default function Footer({ locale }: { locale?: string }) {
                   {cols.map((l) => (
                     <li key={l.label}>
                       <a
-                        href={l.href}
+                        href={localHref(l.href, locale)}
                         className="text-sm text-white/68 transition-colors hover:text-white"
                       >
                         {l.label}
@@ -144,7 +146,7 @@ export default function Footer({ locale }: { locale?: string }) {
           </div>
 
           {/* Desktop bottom bar */}
-          <div className="flex items-center justify-between border-t border-white/10 pt-8">
+          <div className="flex items-center justify-between gap-6 border-t border-white/10 pt-8 rtl-row">
             <span className="text-xs text-white/52">{copyright}</span>
             <div className="flex items-center gap-6">
               <a href="#" className="text-xs text-white/48 transition-colors hover:text-white/78">{legalLabel}</a>
@@ -158,12 +160,12 @@ export default function Footer({ locale }: { locale?: string }) {
           MOBILE layout  (below md)
       ══════════════════════════════════════════ */}
       <div className="md:hidden">
-        <div className="mx-auto max-w-lg px-6 pt-10 pb-8">
+        <div className="mx-auto max-w-lg px-4 pt-10 pb-8 sm:px-6">
 
           {/* Logo */}
-          <div className="mb-3 flex items-center gap-2">
+          <div className="mb-3 flex items-center gap-2 rtl-row">
             <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400" />
-            <span className="text-sm font-light tracking-[0.38em] uppercase text-white">
+            <span className="text-sm font-light uppercase tracking-[0.26em] text-white sm:tracking-[0.38em]">
               Innovmark
             </span>
           </div>
@@ -173,12 +175,12 @@ export default function Footer({ locale }: { locale?: string }) {
 
           {/* Essential nav links — horizontal row */}
           <nav aria-label="Footer navigation">
-            <ul className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <ul className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-3 sm:gap-x-5">
               {mobileNavLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/70 transition-colors hover:text-white"
+                    className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/70 transition-colors hover:text-white sm:tracking-[0.22em]"
                   >
                     {l.label}
                   </Link>

@@ -8,6 +8,32 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+a,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+span {
+  overflow-wrap: anywhere;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -21,6 +47,10 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+body > div {
+  min-width: 0;
 }
 
 .cinematic-text {
@@ -73,6 +103,16 @@ body {
 
 [dir="rtl"] .rtl-row {
   flex-direction: row-reverse;
+}
+
+[dir="rtl"] .rtl-md-row {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  [dir="rtl"] .rtl-md-row {
+    flex-direction: row-reverse;
+  }
 }
 
 [dir="rtl"] .rtl-text-right {
@@ -227,6 +267,14 @@ body {
 
 /* Mobile performance: strip heavy blur effects */
 @media (max-width: 767px) {
+  [class*="tracking-"] {
+    letter-spacing: min(var(--tw-tracking, 0.12em), 0.18em);
+  }
+
+  [dir="rtl"] [class*="tracking-"] {
+    letter-spacing: 0;
+  }
+
   .blur-xl, .blur-2xl, .blur-3xl {
     filter: none !important;
   }

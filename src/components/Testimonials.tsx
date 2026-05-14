@@ -36,27 +36,34 @@ const testimonials = [
 const arTestimonials = [
   {
     quote:
-      "أصبحت علامتنا تبدو أكثر نضجاً واحترافية. العمل كان دقيقاً وسريعاً وواضحاً من ناحية تجارية.",
+      "المشروع ديالنا ولى كيبان فمستوى أحسن. الخدمة كانت نقية، سريعة، وواضحة تجارياً.",
     name: "ياسين ب.",
-    role: "مؤسس · علامة تجزئة",
+    role: "مؤسس · محل تجاري",
   },
   {
     quote:
-      "الموقع والفيديوهات ومواد الحملات صارت تعمل كمنظومة واحدة. لم نعد نشرح قيمتنا كثيراً، أصبحنا نعرضها بوضوح.",
+      "الموقع، الفيديوهات ومواد الحملات ولاو خدامين كمنظومة وحدة. بقينا كنوريو القيمة ديالنا بلا ما نشرحو بزاف.",
     name: "سلمى أ.",
-    role: "شريكة مديرة · شركة خدمات",
+    role: "مسيرة · شركة خدمات",
   },
   {
     quote:
-      "التواصل كان مباشراً ومنظماً وراقياً. فهموا جانب الأعمال وليس الشكل البصري فقط.",
+      "التواصل كان واضح ومنظم واحترافي. فهمو الخدمة ديالنا ماشي غير الشكل.",
     name: "عمر ل.",
     role: "مالك · مجموعة عقارية",
   },
 ];
 
-export default function Testimonials({ locale }: { locale?: string }) {
+type TestimonialItem = {
+  quote: string;
+  name: string;
+  role: string;
+  rating?: number;
+};
+
+export default function Testimonials({ locale, items: cmsItems }: { locale?: string; items?: TestimonialItem[] }) {
   const isArabic = locale === "ar";
-  const items = isArabic ? arTestimonials : testimonials;
+  const items: TestimonialItem[] = cmsItems?.length ? cmsItems : isArabic ? arTestimonials : testimonials;
   const loop = [...items, ...items];
 
   return (
@@ -70,11 +77,11 @@ export default function Testimonials({ locale }: { locale?: string }) {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <SectionLabel
-          kicker={isArabic ? "ثقة العملاء" : "Client signal"}
-          title={isArabic ? "يثق بنا أصحاب الأعمال الذين يهتمون بالصورة والانطباع." : "Trusted by owners who care about perception."}
-          subtitle={isArabic ? "العمل الراقي لا يتعلق بالشكل فقط، بل بالطريقة التي تقدم بها علامتك نفسها بعد الإطلاق." : "Premium work is not only how it looks — it is how confidently the business presents itself after launch."}
+          kicker={isArabic ? "ثقة الزبناء" : "Client signal"}
+          title={isArabic ? "كيخدمو معنا أصحاب المشاريع اللي كيهتمو بالصورة والنتائج." : "Trusted by owners who care about perception."}
+          subtitle={isArabic ? "الخدمة الاحترافية ماشي غير الشكل، هي كيفاش المشروع ديالك كيبان بثقة من بعد الانطلاق." : "Premium work is not only how it looks — it is how confidently the business presents itself after launch."}
         />
       </div>
 
@@ -93,17 +100,17 @@ export default function Testimonials({ locale }: { locale?: string }) {
       )}
 
       <div className="mt-10 md:mt-14">
-        <div className={isArabic ? "mx-auto grid max-w-7xl gap-5 px-6 md:grid-cols-2 md:gap-6 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow gap-5 px-6 md:gap-6 lg:px-10"}>
+        <div className={isArabic ? "mx-auto grid max-w-7xl gap-5 px-4 sm:px-6 md:grid-cols-2 md:gap-6 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow gap-4 px-4 sm:px-6 md:gap-6 lg:px-10"}>
           {(isArabic ? items : loop).map((item, index) => (
             <figure
               key={`${item.name}-${index}`}
-              className={`premium-glass group flex min-h-[300px] flex-col justify-between rounded-3xl p-6 transition-colors hover:border-cyan-200/24 md:p-8 ${
-                isArabic ? "w-full text-right" : "w-[300px] shrink-0 md:w-[420px]"
+              className={`premium-glass group flex min-h-[280px] min-w-0 flex-col justify-between rounded-3xl p-5 transition-colors hover:border-cyan-200/24 md:min-h-[300px] md:p-8 ${
+                isArabic ? "w-full text-right" : "w-[82vw] max-w-[340px] shrink-0 sm:w-[320px] md:w-[420px] md:max-w-none"
               }`}
             >
               <div className={`mb-4 flex items-center justify-between md:mb-6 ${isArabic ? "flex-row-reverse" : ""}`}>
                 <div className="flex gap-1 text-cyan-100/80">
-                  {Array.from({ length: 5 }).map((_, i) => (
+                  {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
                     <span key={i}>★</span>
                   ))}
                 </div>
@@ -116,7 +123,7 @@ export default function Testimonials({ locale }: { locale?: string }) {
                   <path d="M9 7H4v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7zm11 0h-5v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7z" />
                 </svg>
               </div>
-              <blockquote className={`text-base font-light text-white md:text-lg ${isArabic ? "leading-9 md:leading-10" : "leading-7 md:leading-8"}`}>
+              <blockquote className={`text-base font-light text-white md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
                 “{item.quote}”
               </blockquote>
               <figcaption className={`mt-6 flex items-center gap-3 border-t border-white/10 pt-5 md:mt-8 md:pt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
@@ -125,7 +132,7 @@ export default function Testimonials({ locale }: { locale?: string }) {
                 </span>
                 <span className="min-w-0">
                   <div className="text-sm text-white">{item.name}</div>
-                  <div className={`mt-1 text-[10px] uppercase text-white/54 ${isArabic ? "tracking-normal" : "tracking-[0.24em]"}`}>
+                  <div className={`mt-1 text-[10px] uppercase text-white/54 ${isArabic ? "tracking-normal" : "tracking-[0.12em] md:tracking-[0.24em]"}`}>
                     {item.role}
                   </div>
                 </span>

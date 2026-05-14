@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef, PointerEvent as ReactPointerEvent } from "react"
+import { useState, useEffect, useCallback, PointerEvent as ReactPointerEvent } from "react"
 import Image from "next/image"
 
 // ─── WhatsApp CTA ────────────────────────────────────────────────────────────
@@ -32,6 +32,7 @@ interface Props {
   onCtaClick?: () => void
   images: CarouselImage[]
   features?: CarouselFeature[]
+  heroVideoUrl?: string
 }
 
 // ─── Particles (static positions — no hydration mismatch) ────────────────────
@@ -50,23 +51,6 @@ const PARTICLES = [
   { l: "28%", t: "30%", d: "16s", e: "3.9s" },
 ] as const
 
-// ─── Card geometry per fan slot (-2 … +2) ────────────────────────────────────
-const GEO_DESKTOP = [
-  { w: 175, h: 220, x: -340, opacity: 0.30 },
-  { w: 205, h: 260, x: -170, opacity: 0.60 },
-  { w: 245, h: 308, x:    0, opacity: 1.00 },
-  { w: 205, h: 260, x:  170, opacity: 0.60 },
-  { w: 175, h: 220, x:  340, opacity: 0.30 },
-] as const
-
-const GEO_MOBILE = [
-  { w:   0, h:   0, x:   0, opacity: 0.00 },
-  { w: 145, h: 184, x: -115, opacity: 0.48 },
-  { w: 175, h: 222, x:    0, opacity: 1.00 },
-  { w: 145, h: 184, x:  115, opacity: 0.48 },
-  { w:   0, h:   0, x:   0, opacity: 0.00 },
-] as const
-
 // ─── Component ────────────────────────────────────────────────────────────────
 export function ImageCarouselHero({
   title,
@@ -78,16 +62,21 @@ export function ImageCarouselHero({
   secondaryCtaHref = "/contact",
   onCtaClick,
   images,
-  features = [],
+  heroVideoUrl,
 }: Props) {
+  const safeImages = images.filter((image) => image.src)
+  const marqueeSource = safeImages.length
+    ? Array.from({ length: Math.max(8, safeImages.length) }, (_, index) => safeImages[index % safeImages.length])
+    : []
+  const marqueeSets = marqueeSource.length ? [marqueeSource, marqueeSource] : []
   const [mounted, setMounted]         = useState(false)
   const [isMobile, setIsMobile]       = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
 
-  // Pause state lives in a ref — no re-render needed, avoids restarting the timer
-  const pausedRef      = useRef(false)
-  const timerRef       = useRef<ReturnType<typeof setInterval> | null>(null)
-  const touchResumeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      console.debug("[Innovmark CMS] heroVideoUrl received:", heroVideoUrl || "(empty)")
+    }
+  }, [heroVideoUrl])
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
@@ -101,34 +90,6 @@ export function ImageCarouselHero({
     }
   }, [])
 
-  // Start (or restart) the 1.9 s interval from zero
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current)
-    timerRef.current = setInterval(() => {
-      if (!pausedRef.current) {
-        setActiveIndex((i) => (i + 1) % images.length)
-      }
-    }, 1900)
-  }, [images.length])
-
-  useEffect(() => {
-    startTimer()
-    return () => {
-      if (timerRef.current)       clearInterval(timerRef.current)
-      if (touchResumeRef.current) clearTimeout(touchResumeRef.current)
-    }
-  }, [startTimer])
-
-  // Navigate manually and reset countdown so the next auto-advance is a full 1.9 s away
-  const goTo = useCallback((idx: number) => {
-    setActiveIndex(idx)
-    startTimer()
-  }, [startTimer])
-
-  // Desktop hover — pause / resume without touching the timer
-  const handleMouseEnter = () => { pausedRef.current = true }
-  const handleMouseLeave = () => { pausedRef.current = false }
-
   // Mouse-reactive glow — updates CSS custom properties directly (no re-render)
   const handlePointerMove = useCallback((e: ReactPointerEvent<HTMLElement>) => {
     const el = e.currentTarget
@@ -139,42 +100,29 @@ export function ImageCarouselHero({
     el.style.setProperty("--my", `${y}%`)
   }, [])
 
-  // Mobile touch — pause immediately, resume 1.5 s after finger lifts
-  const handleTouchStart = () => {
-    pausedRef.current = true
-    if (touchResumeRef.current) clearTimeout(touchResumeRef.current)
-  }
-  const handleTouchEnd = () => {
-    if (touchResumeRef.current) clearTimeout(touchResumeRef.current)
-    touchResumeRef.current = setTimeout(() => {
-      pausedRef.current = false
-    }, 1500)
-  }
-
-  const GEO = isMobile ? GEO_MOBILE : GEO_DESKTOP
-
-  const slots = Array.from({ length: 5 }, (_, offset) => {
-    const slotIdx = offset - 2
-    const imgIdx  = (activeIndex + slotIdx + images.length) % images.length
-    return { ...images[imgIdx], slotIdx, imgIdx, geo: GEO[offset] }
-  })
-
   return (
     <>
       <style>{css}</style>
 
       <section
-        className="ihc-section"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        className={`ihc-section${heroVideoUrl ? " ihc-has-video" : ""}`}
         onPointerMove={handlePointerMove}
       >
         {/* ── Background layers ── */}
         <div className="ihc-bg" aria-hidden>
           {/* Deep base gradient */}
           <div className="ihc-base" />
+          {heroVideoUrl && (
+            <video
+              src={heroVideoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="ihc-video absolute inset-0 h-full w-full object-cover"
+            />
+          )}
           {/* Aurora conic layer */}
           <div className="ihc-aurora" />
           {/* Ambient orbs */}
@@ -233,72 +181,10 @@ export function ImageCarouselHero({
             {description}
           </p>
 
-          {/* ── Fan carousel ── */}
-          <div
-            className={`ihc-stage${mounted ? " ihc-in" : ""}`}
-            style={{ animationDelay: "0.60s" }}
-          >
-            {slots.map(({ id, src, alt, rotation, slotIdx, imgIdx, geo }) => {
-              if (geo.w === 0) return null
-              const isCenter = slotIdx === 0
-              return (
-                <button
-                  key={`${id}-${slotIdx}`}
-                  onClick={() => goTo(imgIdx)}
-                  className={`ihc-card${isCenter ? " ihc-card--center" : ""}`}
-                  style={{
-                    width:     geo.w,
-                    height:    geo.h,
-                    transform: `translateX(${geo.x}px) rotate(${rotation}deg)`,
-                    opacity:   geo.opacity,
-                    zIndex:    5 - Math.abs(slotIdx),
-                  }}
-                  aria-label={alt}
-                >
-                  <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes={
-                      isCenter
-                        ? "(max-width:767px) 175px, 245px"
-                        : "(max-width:767px) 145px, 205px"
-                    }
-                    className="ihc-card-img"
-                    priority={isCenter}
-                    draggable={false}
-                  />
-                  <span className="ihc-card-gradient" aria-hidden />
-                  <span className="ihc-card-label">{alt}</span>
-                  {isCenter && <span className="ihc-card-ring" aria-hidden />}
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Dots */}
-          <div
-            className={`ihc-dots${mounted ? " ihc-in" : ""}`}
-            style={{ animationDelay: "0.80s" }}
-            role="tablist"
-            aria-label="Carousel navigation"
-          >
-            {images.map((img, i) => (
-              <button
-                key={i}
-                role="tab"
-                aria-selected={i === activeIndex}
-                aria-label={img.alt}
-                onClick={() => goTo(i)}
-                className={`ihc-dot${i === activeIndex ? " ihc-dot--active" : ""}`}
-              />
-            ))}
-          </div>
-
           {/* CTA row — WhatsApp (primary) + Contact (secondary) */}
           <div
             className={`ihc-cta-wrap${mounted ? " ihc-in" : ""}`}
-            style={{ animationDelay: "0.96s" }}
+            style={{ animationDelay: "0.60s" }}
           >
             <a
               href={ctaHref}
@@ -323,21 +209,41 @@ export function ImageCarouselHero({
             </a>
           </div>
 
-          {/* Feature pills */}
-          {features.length > 0 && (
-            <div
-              className={`ihc-features${mounted ? " ihc-in" : ""}`}
-              style={{ animationDelay: "1.14s" }}
-            >
-              {features.map((f) => (
-                <div key={f.title} className="ihc-feature">
-                  <div className="ihc-feature-title">{f.title}</div>
-                  <div className="ihc-feature-desc">{f.description}</div>
+        </div>
+
+        {/* ── Bottom image marquee ── */}
+        {!heroVideoUrl && marqueeSets.length > 0 && (
+          <div
+            className={`ihc-stage${mounted ? " ihc-in" : ""}`}
+            style={{ animationDelay: "0.78s" }}
+          >
+            <span className="ihc-rail-glow" aria-hidden />
+            <div className="ihc-track" aria-label="Hero media gallery">
+              {marqueeSets.map((set, setIndex) => (
+                <div className="ihc-loop" key={setIndex} aria-hidden={setIndex === 1}>
+                  {set.map(({ id, src, alt }, index) => (
+                    <figure
+                      key={`${id}-${setIndex}-${index}`}
+                      className="ihc-card"
+                      aria-label={alt}
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        sizes="(max-width: 767px) 132px, (max-width: 1023px) 168px, 192px"
+                        className="ihc-card-img"
+                        priority={setIndex === 0 && index < (isMobile ? 3 : 6)}
+                        draggable={false}
+                      />
+                      <span className="ihc-card-gradient" aria-hidden />
+                    </figure>
+                  ))}
                 </div>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </section>
     </>
   )
@@ -353,9 +259,13 @@ const css = `
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6.5rem 1.5rem 5rem;
+  padding: 7.25rem 1.25rem 34svh;
   font-family: var(--font-geist-sans), var(--font-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.ihc-section.ihc-has-video {
+  padding-bottom: 7.5rem;
 }
 
 .ihc-bg {
@@ -363,6 +273,11 @@ const css = `
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+.ihc-video {
+  opacity: 0.52;
+  filter: saturate(1.08) contrast(1.08);
 }
 
 /* ── Deep base gradient ── */
@@ -563,13 +478,14 @@ const css = `
 
 .ihc-col {
   position: relative;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
   max-width: 920px;
+  min-width: 0;
 }
 
 /* ── Entrance animations ── */
@@ -602,6 +518,8 @@ const css = `
   text-transform: uppercase;
   color: rgba(255,255,255,0.62);
   margin-bottom: 22px;
+  max-width: 100%;
+  text-align: center;
 }
 
 .ihc-pulse {
@@ -623,13 +541,15 @@ const css = `
   font-size: clamp(1.85rem, 4.8vw, 3.6rem);
   font-weight: 300;
   line-height: 1.08;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   background: linear-gradient(180deg, #ffffff 0%, #ccd3e6 55%, #8891a4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   max-width: 780px;
   margin-bottom: 18px;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 /* Description */
@@ -638,105 +558,117 @@ const css = `
   color: rgba(255,255,255,0.52);
   line-height: 1.7;
   max-width: 520px;
+  text-wrap: balance;
 }
 
 /* Stage */
 .ihc-stage {
-  position: relative;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
   width: 100%;
-  height: 330px;
-  margin-top: 3.75rem;
+  height: 30svh;
+  overflow: hidden;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, black 18%, black 86%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, black 18%, black 86%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.ihc-rail-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -18%;
+  width: min(980px, 92vw);
+  height: 58%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(122,217,255,0.18), transparent 62%),
+    radial-gradient(ellipse at 48% 40%, rgba(154,108,255,0.18), transparent 66%);
+  filter: blur(24px);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.ihc-track {
+  position: absolute;
+  left: 0;
+  bottom: 1.5rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  width: max-content;
+  animation: ihc-rail-scroll 42s linear infinite;
+  will-change: transform;
+}
+
+.ihc-stage:hover .ihc-track {
+  animation-play-state: paused;
+}
+
+@keyframes ihc-rail-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.ihc-loop {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  width: max-content;
+  padding-right: 0.75rem;
 }
 
 /* Card */
 .ihc-card {
-  position: absolute;
-  border-radius: 20px;
+  position: relative;
+  flex: 0 0 auto;
+  height: 11rem;
+  aspect-ratio: 3 / 4;
+  border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.11);
-  background: #0d0f14;
-  box-shadow: 0 20px 60px -14px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04) inset;
-  cursor: pointer;
-  transition:
-    transform  0.58s cubic-bezier(0.34, 1.15, 0.64, 1),
-    opacity    0.48s ease,
-    width      0.48s ease,
-    height     0.48s ease,
-    box-shadow 0.48s ease;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(13,15,20,0.55));
+  box-shadow:
+    0 30px 80px -34px rgba(0,0,0,0.76),
+    0 0 0 1px rgba(255,255,255,0.08) inset;
+  transform-origin: 50% 70%;
+  will-change: transform, opacity;
+  transition: transform 0.45s ease, opacity 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+}
+.ihc-card:nth-child(odd) { transform: rotate(-2deg); }
+.ihc-card:nth-child(even) { transform: rotate(3deg); }
+.ihc-card:hover {
+  transform: translateY(-3px) rotate(0deg);
+  border-color: rgba(255,255,255,0.24);
+  box-shadow:
+    0 42px 100px -34px rgba(0,0,0,0.92),
+    0 0 65px -28px rgba(122,217,255,0.45),
+    0 0 0 1px rgba(255,255,255,0.12) inset;
 }
 .ihc-card:focus-visible {
   outline: 2px solid rgba(122,217,255,0.55);
   outline-offset: 3px;
 }
-.ihc-card--center {
-  box-shadow:
-    0 28px 72px -16px rgba(0,0,0,0.85),
-    0 0 0 1px rgba(122,217,255,0.18) inset,
-    0 0 55px -12px rgba(91,140,255,0.28);
-}
 .ihc-card-img {
   object-fit: cover;
-  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.ihc-card:hover .ihc-card-img { transform: scale(1.05); }
+.ihc-card:hover .ihc-card-img { transform: scale(1.045); }
 
 /* Bottom gradient overlay — text always readable */
 .ihc-card-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 38%, rgba(4,5,9,0.48) 70%, rgba(4,5,9,0.84) 100%);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.07), transparent 50%, rgba(4,5,9,0.08) 100%),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), transparent 44%);
   pointer-events: none;
-}
-
-.ihc-card-label {
-  position: absolute;
-  bottom: 11px;
-  left: 0; right: 0;
-  text-align: center;
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.72);
-  pointer-events: none;
-}
-
-/* Active glow ring */
-.ihc-card-ring {
-  position: absolute;
-  inset: -1px;
-  border-radius: 21px;
-  border: 1px solid rgba(122,217,255,0.28);
-  box-shadow: 0 0 28px rgba(91,140,255,0.28), inset 0 0 22px rgba(91,140,255,0.06);
-  pointer-events: none;
-  animation: ihc-ring-pulse 3.2s ease-in-out infinite;
-}
-@keyframes ihc-ring-pulse {
-  0%, 100% { opacity: 0.65; }
-  50%       { opacity: 1; }
-}
-
-/* Pagination dots */
-.ihc-dots {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 26px;
-}
-.ihc-dot {
-  height: 6px; width: 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.20);
-  transition: width 0.38s cubic-bezier(0.34,1.2,0.64,1), background 0.38s ease;
-  cursor: pointer;
-}
-.ihc-dot--active {
-  width: 26px;
-  background: #7ad9ff;
-  box-shadow: 0 0 10px rgba(122,217,255,0.55);
 }
 
 /* CTA row */
@@ -842,6 +774,27 @@ const css = `
 .ihc-feature-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 5px; }
 .ihc-feature-desc  { font-size: 11.5px; color: rgba(255,255,255,0.45); line-height: 1.55; }
 
+@media (min-width: 768px) {
+  .ihc-section { padding-bottom: 40svh; }
+  .ihc-section.ihc-has-video { padding-bottom: 7.5rem; }
+  .ihc-stage { height: 34svh; }
+  .ihc-track {
+    bottom: 2rem;
+  }
+  .ihc-loop {
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+  .ihc-card {
+    height: 14rem;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ihc-card { height: 16rem; }
+}
+
 [dir="rtl"] .ihc-section {
   font-family: var(--font-cairo), "Tajawal", "IBM Plex Sans Arabic", system-ui, sans-serif;
 }
@@ -864,15 +817,42 @@ const css = `
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
-  .ihc-section { padding: 5.5rem 1.25rem 4rem; }
-  .ihc-stage   { height: 250px; margin-top: 2.75rem; }
+  .ihc-section {
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 100svh;
+    padding: 6rem 1rem 33svh;
+  }
+  .ihc-section.ihc-has-video {
+    align-items: center;
+    padding-bottom: 5rem;
+  }
+  .ihc-col { max-width: 620px; }
+  .ihc-badge {
+    margin-bottom: 16px;
+    padding: 7px 13px;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+  }
+  .ihc-title {
+    font-size: clamp(2rem, 11vw, 3rem);
+    line-height: 1.08;
+  }
+  .ihc-title { margin-bottom: 16px; }
+  .ihc-desc {
+    max-width: 460px;
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+  .ihc-stage { height: 28svh; }
+  .ihc-track {
+    animation-duration: 36s;
+    bottom: 1.1rem;
+  }
+  .ihc-card { border-radius: 1.5rem; }
   .ihc-cta-wrap { flex-direction: column; gap: 12px; }
   .ihc-cta           { height: 54px; padding: 0 22px 0 18px; font-size: 14px; width: 100%; max-width: 280px; }
   .ihc-cta-secondary { height: 54px; font-size: 14px; width: 100%; max-width: 280px; }
-  .ihc-features { gap: 9px; margin-top: 40px; }
-  .ihc-feature { min-width: 135px; padding: 14px 16px; }
-  .ihc-feature-title { font-size: 12px; }
-  .ihc-feature-desc  { font-size: 10.5px; }
   /* Background perf on mobile */
   .ihc-orb-1 { width: 700px; height: 550px; }
   .ihc-orb-2 { width: 500px; height: 440px; }
@@ -884,7 +864,7 @@ const css = `
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .ihc-in, .ihc-card, .ihc-card-img, .ihc-dot,
+  .ihc-in, .ihc-track, .ihc-card, .ihc-card-img, .ihc-dot,
   .ihc-cta, .ihc-cta-secondary, .ihc-cta-arrow, .ihc-feature,
   .ihc-pulse, .ihc-card-ring,
   .ihc-orb-1, .ihc-orb-2, .ihc-orb-3, .ihc-orb-4, .ihc-orb-5,
