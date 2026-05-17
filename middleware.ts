@@ -10,8 +10,12 @@ function authSecret() {
   return process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? (process.env.NODE_ENV !== "production" ? "innovmark-local-development-secret" : undefined);
 }
 
+function isProtectedAdminPath(pathname: string) {
+  return pathname === "/admin" || pathname === "/admin/content" || pathname.startsWith("/admin/content/");
+}
+
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
   if (pathname === "/admin/login") {
     const token = await getToken({ req: request, secret: authSecret() });
@@ -21,10 +25,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (!isProtectedAdminPath(pathname)) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({ req: request, secret: authSecret() });
   if (!isAdminRole(token?.role)) {
     const loginUrl = new URL("/admin/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+    loginUrl.searchParams.set("callbackUrl", `${pathname}${search}`);
     return NextResponse.redirect(loginUrl);
   }
 
