@@ -51,6 +51,16 @@ export type CmsTestimonial = {
   sortOrder: number;
 };
 
+export type CmsPartner = {
+  id?: string;
+  name: string;
+  logoUrl: string;
+  websiteUrl: string;
+  description?: string;
+  order: number;
+  isActive: boolean;
+};
+
 export type CmsSeo = {
   title: string;
   description: string;
@@ -80,6 +90,7 @@ export type CmsHomeContent = {
   sections: string[];
   hero: CmsHero;
   services: CmsService[];
+  partners: CmsPartner[];
   testimonials: CmsTestimonial[];
   seo: CmsSeo;
 };

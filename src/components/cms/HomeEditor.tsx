@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { publishHomepage, saveHero, saveHomeSectionItems } from "@/actions/cms/home";
 import { CmsCard } from "@/components/cms/CmsShell";
+import { PartnersEditor } from "@/components/cms/CollectionEditors";
 import { Field, ItemToolbar, JsonListEditor, SubmitBar } from "@/components/cms/FormControls";
 import { ImageUpload } from "@/components/cms/ImageUpload";
 import { VideoUpload } from "@/components/cms/VideoUpload";
@@ -16,6 +17,7 @@ const sectionOptions = [
   { id: "stats", label: "Stats band", help: "Numbers and quick trust signals." },
   { id: "saad-belkaadi", label: "Saad Belkaadi", help: "Founder or personality teaser section." },
   { id: "capabilities", label: "Services preview", help: "Cards that guide visitors to deeper pages." },
+  { id: "partners", label: "Partners", help: "Premium partner logo carousel shown between Services and Testimonials." },
   { id: "testimonials", label: "Testimonials preview", help: "Client quotes and trust proof." },
   { id: "pricing", label: "Packages preview", help: "Premium engagement/package cards." },
   { id: "cta", label: "CTA section", help: "Final call-to-action before the footer." },
@@ -70,11 +72,24 @@ export function HomeEditor({ content }: { content: CmsHomeContent }) {
         </div>
       )}
 
+      <div className="sticky top-4 z-30 flex gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-black/54 p-2 shadow-2xl backdrop-blur-xl">
+        {[
+          ["#hero-panel", "Hero"],
+          ["#partners-panel", "Partners"],
+          ["#sections-panel", "Homepage parts"],
+        ].map(([href, label]) => (
+          <a key={href} href={href} className="shrink-0 rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.16em] text-white/62 transition hover:border-cyan-100/40 hover:text-white">
+            {label}
+          </a>
+        ))}
+      </div>
+
       <form className="grid gap-6" onChange={() => setDirty(true)}>
         <input type="hidden" name="locale" value={content.locale} />
         <input type="hidden" name="heroVideoUrl" value={heroVideoUrl} />
 
         <CmsCard title="Hero Section" description="This is the first text visitors see on the homepage. Keep it clear, emotional, and direct.">
+          <div id="hero-panel" className="scroll-mt-24" />
           <StepHeader number="01" title="Hero Section" help="Edit the main headline, subtitle, short description, and the small feature promises under the buttons.">
             <div className="flex flex-wrap gap-2">
               <Badge tone="cyan">Draft</Badge>
@@ -229,7 +244,12 @@ export function HomeEditor({ content }: { content: CmsHomeContent }) {
         </CmsCard>
       </form>
 
+      <div id="partners-panel" className="scroll-mt-24">
+        <PartnersEditor content={content} onMessage={showToast} />
+      </div>
+
       <CmsCard title="Homepage Parts" description="Choose which homepage sections are shown and in what order. This is separate from the hero draft above.">
+        <div id="sections-panel" className="scroll-mt-24" />
         <form>
           <input type="hidden" name="locale" value={content.locale} />
           <JsonListEditor<Record<string, string>>

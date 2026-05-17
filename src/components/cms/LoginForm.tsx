@@ -17,9 +17,9 @@ export function LoginForm({ hasError }: { hasError?: boolean }) {
             email: formData.get("email"),
             password: formData.get("password"),
             redirect: false,
-            callbackUrl: "/admin/content",
+            callbackUrl: "/admin/content/home",
           });
-          if (result?.ok) window.location.href = result.url ?? "/admin/content";
+          if (result?.ok) window.location.href = result.url ?? "/admin/content/home";
           else setError("Invalid credentials.");
         });
       }}
@@ -27,7 +27,7 @@ export function LoginForm({ hasError }: { hasError?: boolean }) {
     >
       <div className="text-[10px] uppercase tracking-[0.38em] text-cyan-100/70">Innovmark CMS</div>
       <h1 className="mt-3 text-4xl font-light tracking-tight">Admin sign in</h1>
-      <p className="mt-3 text-sm leading-6 text-white/58">Use the email in `ADMIN_EMAILS` and the password in `ADMIN_PASSWORD`.</p>
+      <p className="mt-3 text-sm leading-6 text-white/58">Use your Innovmark admin email and password.</p>
       {error && <p className="mt-4 rounded-xl border border-red-300/20 bg-red-500/10 px-4 py-3 text-sm text-red-100">{error}</p>}
       <label className="mt-6 block text-sm text-white/74">
         Email

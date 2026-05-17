@@ -5,7 +5,7 @@ import type { Prisma } from "@prisma/client";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getFallbackHomeContent } from "./fallbacks";
 import { getPrisma } from "./prisma";
-import type { CmsCarouselImage, CmsFeature, CmsHomeContent, CmsService, CmsTestimonial } from "./types";
+import type { CmsCarouselImage, CmsFeature, CmsHomeContent, CmsPartner, CmsService, CmsTestimonial } from "./types";
 
 function asFeatures(value: Prisma.JsonValue | null | undefined): CmsFeature[] {
   return Array.isArray(value)
@@ -30,6 +30,17 @@ function asSections(value: Prisma.JsonValue | null | undefined): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
 }
 
+function withPartnersSection(sections: string[]) {
+  if (sections.includes("partners")) return sections;
+  const capabilitiesIndex = sections.indexOf("capabilities");
+  if (capabilitiesIndex === -1) return [...sections, "partners"];
+  return [
+    ...sections.slice(0, capabilitiesIndex + 1),
+    "partners",
+    ...sections.slice(capabilitiesIndex + 1),
+  ];
+}
+
 async function getPublishedHomeContentUncached(localeInput: string): Promise<CmsHomeContent> {
   const locale: Locale = isLocale(localeInput) ? localeInput : "fr";
   const fallback = getFallbackHomeContent(locale);
@@ -37,7 +48,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
   if (!prisma) return fallback;
 
   try {
-    const [home, hero, services, testimonials, seo] = await prisma.$transaction([
+    const [home, hero, services, partners, testimonials, seo] = await prisma.$transaction([
       prisma.homePageContent.findUnique({ where: { locale_status: { locale, status: "PUBLISHED" } } }),
       prisma.heroSection.findUnique({
         where: { locale_status: { locale, status: "PUBLISHED" } },
@@ -46,6 +57,10 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
       prisma.serviceSection.findMany({
         where: { locale, status: "PUBLISHED", isActive: true },
         orderBy: [{ sortOrder: "asc" }, { updatedAt: "desc" }],
+      }),
+      prisma.partner.findMany({
+        where: { locale, status: "PUBLISHED", isActive: true },
+        orderBy: [{ order: "asc" }, { updatedAt: "desc" }],
       }),
       prisma.testimonial.findMany({
         where: { locale, status: "PUBLISHED", isActive: true },
@@ -59,7 +74,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
 
     return {
       locale,
-      sections: home ? asSections(home.sections) : fallback.sections,
+      sections: withPartnersSection(home ? asSections(home.sections) : fallback.sections),
       hero: hero
         ? {
             eyebrow: hero.eyebrow,
@@ -89,6 +104,17 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
             sortOrder: service.sortOrder,
           }))
         : fallback.services,
+      partners: partners.length
+        ? partners.map((partner): CmsPartner => ({
+            id: partner.id,
+            name: partner.name,
+            logoUrl: partner.logoUrl,
+            websiteUrl: partner.websiteUrl,
+            description: partner.description ?? undefined,
+            order: partner.order,
+            isActive: partner.isActive,
+          }))
+        : fallback.partners,
       testimonials: testimonials.length
         ? testimonials.map((item): CmsTestimonial => ({
             id: item.id,
@@ -127,17 +153,18 @@ export async function getDraftHomeContent(locale: Locale): Promise<CmsHomeConten
   const fallback = getFallbackHomeContent(locale);
   if (!prisma) return fallback;
 
-  const [home, hero, services, testimonials, seo] = await prisma.$transaction([
+  const [home, hero, services, partners, testimonials, seo] = await prisma.$transaction([
     prisma.homePageContent.findUnique({ where: { locale_status: { locale, status: "DRAFT" } } }),
     prisma.heroSection.findUnique({ where: { locale_status: { locale, status: "DRAFT" } }, include: { backgroundVideo: true } }),
     prisma.serviceSection.findMany({ where: { locale, status: "DRAFT" }, orderBy: [{ sortOrder: "asc" }] }),
+    prisma.partner.findMany({ where: { locale, status: "DRAFT" }, orderBy: [{ order: "asc" }] }),
     prisma.testimonial.findMany({ where: { locale, status: "DRAFT" }, orderBy: [{ sortOrder: "asc" }] }),
     prisma.seoMetadata.findUnique({ where: { locale_status_pagePath: { locale, status: "DRAFT", pagePath: `/${locale}` } }, include: { ogImage: true } }),
   ]);
 
   return {
     ...fallback,
-    sections: home ? asSections(home.sections) : fallback.sections,
+    sections: withPartnersSection(home ? asSections(home.sections) : fallback.sections),
     hero: hero ? {
       ...fallback.hero,
       eyebrow: hero.eyebrow,
@@ -164,6 +191,15 @@ export async function getDraftHomeContent(locale: Locale): Promise<CmsHomeConten
       isActive: service.isActive,
       sortOrder: service.sortOrder,
     })) : fallback.services,
+    partners: partners.length ? partners.map((partner) => ({
+      id: partner.id,
+      name: partner.name,
+      logoUrl: partner.logoUrl,
+      websiteUrl: partner.websiteUrl,
+      description: partner.description ?? undefined,
+      order: partner.order,
+      isActive: partner.isActive,
+    })) : fallback.partners,
     testimonials: testimonials.length ? testimonials.map((item) => ({
       id: item.id,
       quote: item.quote,

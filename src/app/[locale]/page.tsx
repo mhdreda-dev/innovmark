@@ -4,6 +4,7 @@ import BrandMarquee from "@/components/BrandMarquee";
 import StatsBand from "@/components/StatsBand";
 import { SaadBelkaadiTeaser } from "@/components/SaadBelkaadi";
 import CapabilitiesPreview from "@/components/CapabilitiesPreview";
+import Partners from "@/components/Partners";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
@@ -56,6 +57,7 @@ export default async function LocalizedHome({ params }: Props) {
     stats: <StatsBand locale={locale} />,
     "saad-belkaadi": <SaadBelkaadiTeaser locale={locale} />,
     capabilities: <CapabilitiesPreview locale={locale} />,
+    partners: <Partners locale={locale} items={content.partners} />,
     testimonials: <Testimonials locale={locale} items={content.testimonials} />,
     pricing: <Pricing locale={locale} />,
     cta: <CTA locale={locale} />,

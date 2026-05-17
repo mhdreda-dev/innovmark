@@ -4,12 +4,12 @@ import { authOptions } from "@/auth";
 
 export async function getAdminSession() {
   const session = await getServerSession(authOptions);
-  if (session?.user?.role === "admin") return session;
+  if (String(session?.user?.role ?? "").toUpperCase() === "ADMIN") return session;
   return null;
 }
 
 export async function requireAdmin() {
   const session = await getAdminSession();
-  if (!session) redirect("/admin/login");
+  if (!session) redirect("/admin/login?callbackUrl=/admin/content/home");
   return session;
 }

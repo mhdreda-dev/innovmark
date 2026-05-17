@@ -1,6 +1,6 @@
 import { heroImages } from "@/data/hero-images";
 import { dictionaries, localizedHref, type Locale } from "@/lib/i18n";
-import type { CmsHomeContent, CmsService, CmsTestimonial } from "./types";
+import type { CmsHomeContent, CmsPartner, CmsService, CmsTestimonial } from "./types";
 
 export const defaultHomeSections = [
   "creative-formats",
@@ -8,6 +8,7 @@ export const defaultHomeSections = [
   "stats",
   "saad-belkaadi",
   "capabilities",
+  "partners",
   "testimonials",
   "pricing",
   "cta",
@@ -46,6 +47,12 @@ export const fallbackTestimonials: Record<Locale, CmsTestimonial[]> = {
     { quote: "المشروع ديالنا ولى كيبان فمستوى أحسن. الخدمة كانت نقية وسريعة وواضحة.", name: "ياسين ب.", role: "مؤسس · محل تجاري", rating: 5, isActive: true, sortOrder: 0 },
     { quote: "الموقع والفيديوهات ومواد الحملات ولاو خدامين كمنظومة وحدة.", name: "سلمى أ.", role: "مسيرة · شركة خدمات", rating: 5, isActive: true, sortOrder: 1 },
   ],
+};
+
+export const fallbackPartners: Record<Locale, CmsPartner[]> = {
+  fr: [],
+  en: [],
+  ar: [],
 };
 
 const seoByLocale: Record<Locale, NonNullable<CmsHomeContent["seo"]>> = {
@@ -89,6 +96,7 @@ export function getFallbackHomeContent(locale: Locale): CmsHomeContent {
       carouselImages: heroImages,
     },
     services: fallbackServices[locale],
+    partners: fallbackPartners[locale],
     testimonials: fallbackTestimonials[locale],
     seo: seoByLocale[locale],
   };

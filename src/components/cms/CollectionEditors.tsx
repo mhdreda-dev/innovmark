@@ -1,9 +1,10 @@
 "use client";
 
-import { publishHomepage, saveSeo, saveServices, saveTestimonials } from "@/actions/cms/home";
+import { publishHomepage, savePartners, saveSeo, saveServices, saveTestimonials } from "@/actions/cms/home";
 import { CmsCard } from "@/components/cms/CmsShell";
 import { Field, ItemToolbar, JsonListEditor, SubmitBar } from "@/components/cms/FormControls";
-import type { CmsHomeContent, CmsService, CmsTestimonial } from "@/lib/cms/types";
+import { ImageUpload } from "@/components/cms/ImageUpload";
+import type { CmsHomeContent, CmsPartner, CmsService, CmsTestimonial } from "@/lib/cms/types";
 
 export function ServicesEditor({ content }: { content: CmsHomeContent }) {
   return (
@@ -36,6 +37,53 @@ export function ServicesEditor({ content }: { content: CmsHomeContent }) {
           )}
         />
         <SubmitBar action={saveServices} publishAction={publishHomepage} />
+      </form>
+    </CmsCard>
+  );
+}
+
+export function PartnersEditor({ content, onMessage }: { content: CmsHomeContent; onMessage?: (message: string, ok?: boolean) => void }) {
+  return (
+    <CmsCard title="Partners" description="Add partner logos, links, descriptions, visibility and drag-and-drop order for the homepage carousel.">
+      <form>
+        <input type="hidden" name="locale" value={content.locale} />
+        <JsonListEditor<CmsPartner>
+          name="items"
+          initial={content.partners}
+          emptyItem={{ name: "New partner", logoUrl: "", websiteUrl: "https://example.com", description: "", isActive: true, order: content.partners.length }}
+          renderItem={(item, _, update, remove, move) => (
+            <>
+              <ItemToolbar onRemove={remove} onMove={move} />
+              <div className="grid gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
+                <ImageUpload
+                  value={item.logoUrl}
+                  alt={item.name}
+                  onChange={(logoUrl) => update({ logoUrl })}
+                  onMessage={onMessage}
+                />
+                <div className="grid content-start gap-3 md:grid-cols-2">
+                  <label className="block text-sm text-white/74">
+                    Partner name
+                    <input value={item.name} onChange={(event) => update({ name: event.target.value })} className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none" />
+                  </label>
+                  <label className="block text-sm text-white/74">
+                    Website URL
+                    <input value={item.websiteUrl} onChange={(event) => update({ websiteUrl: event.target.value })} className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none" />
+                  </label>
+                  <label className="block text-sm text-white/74 md:col-span-2">
+                    Short description
+                    <textarea value={item.description ?? ""} onChange={(event) => update({ description: event.target.value })} rows={3} className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none" />
+                  </label>
+                  <label className="flex items-center gap-3 text-sm text-white/70">
+                    <input type="checkbox" checked={item.isActive} onChange={(event) => update({ isActive: event.target.checked })} />
+                    Active on homepage
+                  </label>
+                </div>
+              </div>
+            </>
+          )}
+        />
+        <SubmitBar action={savePartners} publishAction={publishHomepage} />
       </form>
     </CmsCard>
   );

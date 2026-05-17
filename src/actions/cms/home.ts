@@ -62,6 +62,16 @@ const testimonialSchema = z.object({
   sortOrder: z.coerce.number(),
 });
 
+const partnerSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1).max(160),
+  logoUrl: z.string().min(1).max(1200),
+  websiteUrl: z.string().min(1).max(1200),
+  description: z.string().max(300).optional(),
+  order: z.coerce.number().optional(),
+  isActive: z.boolean(),
+});
+
 const seoSchema = z.object({
   locale: localeSchema,
   title: z.string().min(1).max(180),
@@ -228,6 +238,52 @@ export async function saveTestimonials(_: ActionState, formData: FormData): Prom
   return { ok: true, message: "Testimonials saved as draft." };
 }
 
+export async function savePartners(_: ActionState, formData: FormData): Promise<ActionState> {
+  await requireAdmin();
+  const prisma = dbOrMessage();
+  if (!prisma) return { ok: false, message: "DATABASE_URL is required before saving CMS content." };
+
+  const locale = localeSchema.parse(formData.get("locale"));
+  const parsedResult = z.array(partnerSchema).safeParse(safeJson(formData.get("items"), []));
+  if (!parsedResult.success) {
+    return { ok: false, message: zodMessage(parsedResult.error) };
+  }
+
+  const items = parsedResult.data.map((item) => ({
+    name: cleanText(item.name, 160),
+    logoUrl: cleanUrl(item.logoUrl),
+    websiteUrl: cleanUrl(item.websiteUrl),
+    description: cleanText(item.description, 300),
+    isActive: item.isActive,
+  }));
+
+  const invalid = items.find((item) => !item.name || !item.logoUrl || !item.websiteUrl);
+  if (invalid) {
+    return { ok: false, message: "Each partner needs a name, logo and valid website URL before saving." };
+  }
+
+  await prisma.$transaction(async (tx) => {
+    await tx.partner.deleteMany({ where: { locale, status: "DRAFT" } });
+    if (items.length) {
+      await tx.partner.createMany({
+        data: items.map((item, index) => ({
+          locale,
+          status: "DRAFT",
+          name: item.name,
+          logoUrl: item.logoUrl,
+          websiteUrl: item.websiteUrl,
+          description: item.description || null,
+          order: index,
+          isActive: item.isActive,
+        })),
+      });
+    }
+  });
+
+  refresh(locale);
+  return { ok: true, message: "Partners saved as draft." };
+}
+
 export async function saveSeo(_: ActionState, formData: FormData): Promise<ActionState> {
   await requireAdmin();
   const prisma = dbOrMessage();
@@ -272,10 +328,11 @@ export async function publishHomepage(_: ActionState, formData: FormData): Promi
   const now = new Date();
 
   await prisma.$transaction(async (tx) => {
-    const [homeDraft, heroDraft, serviceDrafts, testimonialDrafts, seoDraft] = await Promise.all([
+    const [homeDraft, heroDraft, serviceDrafts, partnerDrafts, testimonialDrafts, seoDraft] = await Promise.all([
       tx.homePageContent.findUnique({ where: { locale_status: { locale, status: "DRAFT" } } }),
       tx.heroSection.findUnique({ where: { locale_status: { locale, status: "DRAFT" } } }),
       tx.serviceSection.findMany({ where: { locale, status: "DRAFT" }, orderBy: { sortOrder: "asc" } }),
+      tx.partner.findMany({ where: { locale, status: "DRAFT" }, orderBy: { order: "asc" } }),
       tx.testimonial.findMany({ where: { locale, status: "DRAFT" }, orderBy: { sortOrder: "asc" } }),
       tx.seoMetadata.findUnique({ where: { locale_status_pagePath: { locale, status: "DRAFT", pagePath: `/${locale}` } } }),
     ]);
@@ -337,6 +394,23 @@ export async function publishHomepage(_: ActionState, formData: FormData): Promi
         publishedAt: now,
       })),
     });
+
+    await tx.partner.deleteMany({ where: { locale, status: "PUBLISHED" } });
+    if (partnerDrafts.length) {
+      await tx.partner.createMany({
+        data: partnerDrafts.map((partner, index) => ({
+          locale,
+          status: "PUBLISHED",
+          name: partner.name,
+          logoUrl: partner.logoUrl,
+          websiteUrl: partner.websiteUrl,
+          description: partner.description,
+          order: index,
+          isActive: partner.isActive,
+          publishedAt: now,
+        })),
+      });
+    }
 
     await tx.testimonial.deleteMany({ where: { locale, status: "PUBLISHED" } });
     await tx.testimonial.createMany({

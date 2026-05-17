@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "seed:admin": "node prisma/seed-admin.mjs",
     "remotion:studio": "remotion studio src/remotion/index.tsx",
     "remotion:render:chart": "remotion render src/remotion/index.tsx FiveBarChart out/five-bar-chart.mp4"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
     "@vercel/blob": "^2.3.3",
+    "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",

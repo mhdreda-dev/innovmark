@@ -198,6 +198,23 @@ body > div {
   animation: bentoHeroPulse 8s ease-in-out infinite;
 }
 
+@keyframes partnersMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.partners-marquee {
+  animation: partnersMarquee 32s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* Glow pulse — for CTAs / accent dots */
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.55; transform: scale(1); }

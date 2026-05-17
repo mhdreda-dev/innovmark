@@ -55,6 +55,7 @@ export function JsonListEditor<T extends Record<string, unknown>>({
   renderItem: (item: T, index: number, update: (patch: Partial<T>) => void, remove: () => void, move: (direction: -1 | 1) => void) => React.ReactNode;
 }) {
   const [items, setItems] = useState<T[]>(initial);
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
   function update(index: number, patch: Partial<T>) {
     setItems((current) => current.map((item, i) => (i === index ? { ...item, ...patch } : item)));
@@ -74,12 +75,34 @@ export function JsonListEditor<T extends Record<string, unknown>>({
     });
   }
 
+  function moveTo(index: number, target: number) {
+    if (index === target || target < 0 || target >= items.length) return;
+    setItems((current) => {
+      const next = [...current];
+      const [moved] = next.splice(index, 1);
+      next.splice(target, 0, moved);
+      return next;
+    });
+  }
+
   return (
     <div>
-      <input type="hidden" name={name} value={JSON.stringify(items.map((item, index) => ({ ...item, sortOrder: index })))} />
+      <input type="hidden" name={name} value={JSON.stringify(items.map((item, index) => ({ ...item, sortOrder: index, order: index })))} />
       <div className="grid gap-4">
         {items.map((item, index) => (
-          <div key={index} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+          <div
+            key={index}
+            draggable
+            onDragStart={() => setDraggingIndex(index)}
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              event.preventDefault();
+              if (draggingIndex !== null) moveTo(draggingIndex, index);
+              setDraggingIndex(null);
+            }}
+            onDragEnd={() => setDraggingIndex(null)}
+            className={`rounded-2xl border border-white/10 bg-black/20 p-4 transition ${draggingIndex === index ? "scale-[0.99] opacity-60" : "opacity-100"}`}
+          >
             {renderItem(item, index, (patch) => update(index, patch), () => remove(index), (direction) => move(index, direction))}
           </div>
         ))}
@@ -94,7 +117,8 @@ export function JsonListEditor<T extends Record<string, unknown>>({
 
 export function ItemToolbar({ onRemove, onMove }: { onRemove: () => void; onMove: (direction: -1 | 1) => void }) {
   return (
-    <div className="mb-4 flex justify-end gap-2">
+    <div className="mb-4 flex flex-wrap justify-end gap-2">
+      <span className="mr-auto cursor-grab rounded-full border border-white/10 px-3 py-1 text-xs text-white/44 active:cursor-grabbing">Drag to reorder</span>
       <button type="button" onClick={() => onMove(-1)} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/60 hover:text-white">Up</button>
       <button type="button" onClick={() => onMove(1)} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/60 hover:text-white">Down</button>
       <button type="button" onClick={onRemove} className="inline-flex items-center gap-1 rounded-full border border-red-300/20 px-3 py-1 text-xs text-red-100/70 hover:text-red-100">

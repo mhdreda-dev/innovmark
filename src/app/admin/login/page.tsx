@@ -4,7 +4,7 @@ import { getAdminSession } from "@/lib/cms/auth";
 
 export default async function AdminLoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const session = await getAdminSession();
-  if (session) redirect("/admin/content");
+  if (session) redirect("/admin/content/home");
   const { error } = await searchParams;
 
   return (
