@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "seed:admin": "node prisma/seed-admin.mjs",
     "remotion:studio": "remotion studio src/remotion/index.tsx",
