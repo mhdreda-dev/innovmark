@@ -3,9 +3,15 @@
 import { useState, useTransition } from "react";
 import { signIn } from "next-auth/react";
 
-export function LoginForm({ hasError }: { hasError?: boolean }) {
+function safeCallbackUrl(value?: string) {
+  if (!value?.startsWith("/admin/content")) return "/admin/content/home";
+  return value;
+}
+
+export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; hasError?: boolean }) {
   const [error, setError] = useState(hasError ? "Invalid credentials." : "");
   const [pending, startTransition] = useTransition();
+  const safeCallback = safeCallbackUrl(callbackUrl);
 
   return (
     <form
@@ -17,9 +23,9 @@ export function LoginForm({ hasError }: { hasError?: boolean }) {
             email: formData.get("email"),
             password: formData.get("password"),
             redirect: false,
-            callbackUrl: "/admin/content/home",
+            callbackUrl: safeCallback,
           });
-          if (result?.ok) window.location.href = result.url ?? "/admin/content/home";
+          if (result?.ok) window.location.href = result.url ?? safeCallback;
           else setError("Invalid credentials.");
         });
       }}
