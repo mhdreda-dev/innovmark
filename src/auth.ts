@@ -14,10 +14,6 @@ function normalizeEmail(email: unknown) {
   return String(email ?? "").toLowerCase().trim();
 }
 
-function isAdminRole(role: unknown) {
-  return String(role ?? "").toUpperCase() === "ADMIN";
-}
-
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   secret: getAuthSecret(),
@@ -33,23 +29,20 @@ export const authOptions: NextAuthOptions = {
         const password = String(credentials?.password ?? "");
         const prisma = getPrisma();
 
+        console.log("LOGIN EMAIL:", email);
+
         if (!email || !password || !prisma) {
           return null;
         }
 
         const user = await prisma.user.findUnique({
           where: { email },
-          select: {
-            id: true,
-            email: true,
-            name: true,
-            passwordHash: true,
-            role: true,
-            isActive: true,
-          },
         });
 
-        if (!user?.isActive || !isAdminRole(user.role)) {
+        console.log("USER FOUND:", !!user);
+        console.log("HAS HASH:", !!user?.passwordHash);
+
+        if (!user || !user.isActive) {
           return null;
         }
 
