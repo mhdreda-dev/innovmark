@@ -22,7 +22,7 @@ const carouselSchema = z.object({
   id: z.string().min(1).max(120),
   src: z.string().min(1).max(1200),
   alt: z.string().min(1).max(180),
-  rotation: z.coerce.number().min(-30).max(30),
+  rotation: z.coerce.number().min(-20).max(20),
 });
 
 const heroSchema = z.object({
@@ -91,6 +91,12 @@ function refresh(locale: Locale) {
   revalidatePath(`/${locale}`);
 }
 
+function clampTilt(value: unknown) {
+  const numericValue = Number(value ?? 0);
+  if (!Number.isFinite(numericValue)) return 0;
+  return Math.min(20, Math.max(-20, numericValue));
+}
+
 function cleanCarouselImages(value: unknown) {
   return safeJson<unknown[]>(value, [])
     .filter((item): item is Record<string, unknown> => Boolean(item && typeof item === "object"))
@@ -98,7 +104,7 @@ function cleanCarouselImages(value: unknown) {
       id: cleanText(item.id, 120) || `hero-image-${index + 1}`,
       src: cleanUrl(item.src),
       alt: cleanText(item.alt, 180) || "Hero image",
-      rotation: Number(item.rotation ?? 0),
+      rotation: clampTilt(item.rotation),
     }))
     .filter((item) => item.src);
 }

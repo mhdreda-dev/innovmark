@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { publishHomepage, saveHero, saveHomeSectionItems } from "@/actions/cms/home";
 import { CmsCard } from "@/components/cms/CmsShell";
 import { PartnersEditor } from "@/components/cms/CollectionEditors";
@@ -22,6 +22,45 @@ const sectionOptions = [
   { id: "pricing", label: "Packages preview", help: "Premium engagement/package cards." },
   { id: "cta", label: "CTA section", help: "Final call-to-action before the footer." },
 ];
+
+function clampTilt(value: number) {
+  if (!Number.isFinite(value)) return 0;
+  return Math.min(20, Math.max(-20, value));
+}
+
+function TiltInput({ value, onChange }: { value: number; onChange: (value: number) => void }) {
+  const [text, setText] = useState(String(clampTilt(value)));
+
+  useEffect(() => {
+    setText(String(clampTilt(value)));
+  }, [value]);
+
+  function commit(raw: string) {
+    const next = clampTilt(Number(raw));
+    setText(String(next));
+    onChange(next);
+  }
+
+  return (
+    <input
+      type="number"
+      min={-20}
+      max={20}
+      step={1}
+      value={text}
+      onChange={(event) => {
+        const raw = event.target.value;
+        setText(raw);
+        const numericValue = Number(raw);
+        if (raw !== "" && raw !== "-" && Number.isFinite(numericValue)) {
+          onChange(clampTilt(numericValue));
+        }
+      }}
+      onBlur={(event) => commit(event.target.value)}
+      className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none"
+    />
+  );
+}
 
 function StepHeader({ number, title, help, children }: { number: string; title: string; help: string; children?: React.ReactNode }) {
   return (
@@ -168,7 +207,7 @@ export function HomeEditor({ content }: { content: CmsHomeContent }) {
                     </label>
                     <label className="block text-sm text-white/74">
                       Card tilt
-                      <input type="number" value={item.rotation} onChange={(event) => update({ rotation: Number(event.target.value) })} className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none" />
+                      <TiltInput value={item.rotation} onChange={(rotation) => update({ rotation })} />
                     </label>
                     <div className="rounded-xl border border-white/10 bg-white/[0.035] p-4 text-xs leading-5 text-white/46">
                       Uploads are saved immediately to the media library. Click Save Draft to attach them to this homepage draft.
