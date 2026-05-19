@@ -51,6 +51,8 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        console.log("AUTHORIZE SUCCESS:", user.email);
+
         return {
           id: user.id,
           email: user.email,
@@ -62,6 +64,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     jwt({ token, user }) {
+      console.log("JWT CALLBACK USER:", !!user);
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -69,6 +72,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session({ session, token }) {
+      console.log("SESSION CALLBACK TOKEN ROLE:", token.role);
       if (session.user) {
         session.user.id = token.id;
         session.user.role = token.role;

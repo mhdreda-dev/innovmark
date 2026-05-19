@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function safeCallbackUrl(value?: string) {
   if (!value?.startsWith("/admin/content")) return "/admin/content/home";
@@ -9,6 +10,7 @@ function safeCallbackUrl(value?: string) {
 }
 
 export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; hasError?: boolean }) {
+  const router = useRouter();
   const [error, setError] = useState(hasError ? "Invalid credentials." : "");
   const [pending, startTransition] = useTransition();
   const safeCallback = safeCallbackUrl(callbackUrl);
@@ -23,10 +25,22 @@ export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; has
             email: formData.get("email"),
             password: formData.get("password"),
             redirect: false,
-            callbackUrl: safeCallback,
           });
-          if (result?.ok) window.location.href = result.url ?? safeCallback;
-          else setError("Invalid credentials.");
+
+          console.log("SIGNIN RESULT:", {
+            ok: result?.ok,
+            error: result?.error,
+            status: result?.status,
+            url: result?.url,
+          });
+
+          if (result?.ok) {
+            router.replace(safeCallback);
+            router.refresh();
+            return;
+          }
+
+          if (result?.error) setError("Invalid credentials.");
         });
       }}
       className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur-xl"
