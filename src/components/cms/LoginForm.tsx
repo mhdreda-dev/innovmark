@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { type FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 function safeCallbackUrl(value?: string) {
   if (!value?.startsWith("/admin/content")) return "/admin/content/home";
@@ -10,39 +9,37 @@ function safeCallbackUrl(value?: string) {
 }
 
 export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; hasError?: boolean }) {
-  const router = useRouter();
   const [error, setError] = useState(hasError ? "Invalid credentials." : "");
-  const [pending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(false);
   const safeCallback = safeCallbackUrl(callbackUrl);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const formData = new FormData(event.currentTarget);
+    const result = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+      callbackUrl: safeCallback,
+    });
+
+    console.log("SIGNIN RESULT", result);
+
+    if (result?.ok) {
+      window.location.href = safeCallback;
+      return;
+    }
+
+    setError("Invalid credentials.");
+    setLoading(false);
+  }
 
   return (
     <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        startTransition(async () => {
-          const result = await signIn("credentials", {
-            email: formData.get("email"),
-            password: formData.get("password"),
-            redirect: false,
-          });
-
-          console.log("SIGNIN RESULT:", {
-            ok: result?.ok,
-            error: result?.error,
-            status: result?.status,
-            url: result?.url,
-          });
-
-          if (result?.ok) {
-            router.replace(safeCallback);
-            router.refresh();
-            return;
-          }
-
-          if (result?.error) setError("Invalid credentials.");
-        });
-      }}
+      onSubmit={handleSubmit}
       className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur-xl"
     >
       <div className="text-[10px] uppercase tracking-[0.38em] text-cyan-100/70">Innovmark CMS</div>
@@ -57,8 +54,8 @@ export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; has
         Password
         <input name="password" type="password" required className="mt-2 w-full rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none focus:border-cyan-100/40" />
       </label>
-      <button disabled={pending} className="mt-6 min-h-12 w-full rounded-full bg-white px-5 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-cyan-100 disabled:opacity-50">
-        {pending ? "Signing in..." : "Enter CMS"}
+      <button type="submit" disabled={loading} className="mt-6 min-h-12 w-full rounded-full bg-white px-5 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-cyan-100 disabled:opacity-50">
+        {loading ? "Signing in..." : "Enter CMS"}
       </button>
     </form>
   );
