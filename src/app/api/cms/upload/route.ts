@@ -96,11 +96,16 @@ async function uploadToCloudinary(file: File, filename: string, kind: "IMAGE" | 
 
 async function uploadToBlob(file: File, filename: string) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
-  const blob = await put(`cms/${filename}`, file, {
-    access: "public",
-    contentType: file.type,
-  });
-  return { provider: "vercel-blob", url: blob.url, publicId: blob.pathname };
+  try {
+    const blob = await put(`cms/${filename}`, file, {
+      access: "public",
+      contentType: file.type,
+    });
+    return { provider: "vercel-blob", url: blob.url, publicId: blob.pathname };
+  } catch (error) {
+    console.error("Blob upload failed, trying next CMS media provider:", error);
+    return null;
+  }
 }
 
 export async function GET(request: Request) {

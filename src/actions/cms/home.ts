@@ -100,12 +100,15 @@ function clampTilt(value: unknown) {
 function cleanCarouselImages(value: unknown) {
   return safeJson<unknown[]>(value, [])
     .filter((item): item is Record<string, unknown> => Boolean(item && typeof item === "object"))
-    .map((item, index) => ({
-      id: cleanText(item.id, 120) || `hero-image-${index + 1}`,
-      src: cleanUrl(item.src),
-      alt: cleanText(item.alt, 180) || "Hero image",
-      rotation: clampTilt(item.rotation),
-    }))
+    .map((item, index) => {
+      console.log("CAROUSEL ITEM:", item);
+      return {
+        id: cleanText(item.id, 120) || `hero-image-${index + 1}`,
+        src: cleanUrl(item.src),
+        alt: cleanText(item.alt, 180) || "Hero image",
+        rotation: clampTilt(Number(item.rotation ?? 0)),
+      };
+    })
     .filter((item) => item.src);
 }
 
@@ -151,7 +154,7 @@ export async function saveHero(_: ActionState, formData: FormData): Promise<Acti
   const prisma = dbOrMessage();
   if (!prisma) return { ok: false, message: "DATABASE_URL is required before saving CMS content." };
 
-  const parsedResult = heroSchema.safeParse({
+  const data = {
     locale: formData.get("locale"),
     eyebrow: cleanText(formData.get("eyebrow"), 160),
     title: cleanText(formData.get("title"), 220),
@@ -164,7 +167,10 @@ export async function saveHero(_: ActionState, formData: FormData): Promise<Acti
     heroVideoUrl: cleanUrl(formData.get("heroVideoUrl")),
     features: safeJson(formData.get("features"), []),
     carouselImages: cleanCarouselImages(formData.get("carouselImages")),
-  });
+  };
+  console.log("CMS SUBMIT DATA:", data);
+
+  const parsedResult = heroSchema.safeParse(data);
 
   if (!parsedResult.success) {
     return { ok: false, message: zodMessage(parsedResult.error) };

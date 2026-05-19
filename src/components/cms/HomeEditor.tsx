@@ -123,7 +123,7 @@ export function HomeEditor({ content }: { content: CmsHomeContent }) {
         ))}
       </div>
 
-      <form className="grid gap-6" onChange={() => setDirty(true)}>
+      <form className="grid gap-6" noValidate onChange={() => setDirty(true)}>
         <input type="hidden" name="locale" value={content.locale} />
         <input type="hidden" name="heroVideoUrl" value={heroVideoUrl} />
 
