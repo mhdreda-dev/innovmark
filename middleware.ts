@@ -19,8 +19,11 @@ export async function middleware(req: NextRequest) {
   if (pathname === "/admin/login") {
     const token = await getToken({
       req,
-      secret: process.env.NEXTAUTH_SECRET,
+      secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+      secureCookie: true,
     });
+
+    console.log("MIDDLEWARE TOKEN EXISTS:", !!token);
 
     if (isAdminToken(token)) {
       return NextResponse.redirect(new URL("/admin/content/home", req.url));
@@ -39,8 +42,11 @@ export async function middleware(req: NextRequest) {
 
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+    secureCookie: true,
   });
+
+  console.log("MIDDLEWARE TOKEN EXISTS:", !!token);
 
   if (!isAdminToken(token)) {
     const loginUrl = new URL("/admin/login", req.url);

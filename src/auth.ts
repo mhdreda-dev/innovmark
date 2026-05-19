@@ -3,20 +3,14 @@ import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { getPrisma } from "@/lib/cms/prisma";
 
-function getAuthSecret() {
-  if (process.env.NEXTAUTH_SECRET) return process.env.NEXTAUTH_SECRET;
-  if (process.env.AUTH_SECRET) return process.env.AUTH_SECRET;
-  if (process.env.NODE_ENV !== "production") return "innovmark-local-development-secret";
-  return undefined;
-}
-
 function normalizeEmail(email: unknown) {
   return String(email ?? "").toLowerCase().trim();
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions & { trustHost: true } = {
+  trustHost: true,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
-  secret: getAuthSecret(),
   providers: [
     Credentials({
       name: "Innovmark Admin",
@@ -56,14 +50,14 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id,
           email: user.email,
-          name: user.name ?? "Innovmark Admin",
-          role: "ADMIN",
+          name: user.name ?? user.email,
+          role: user.role,
         };
       },
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    async jwt({ token, user }) {
       console.log("JWT CALLBACK USER:", !!user);
       if (user) {
         token.id = user.id;
@@ -71,11 +65,11 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    session({ session, token }) {
+    async session({ session, token }) {
       console.log("SESSION CALLBACK TOKEN ROLE:", token.role);
       if (session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
