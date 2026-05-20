@@ -39,7 +39,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
     <section className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_82%_58%,rgba(16,185,129,0.10),transparent_30%)]" />
       <div className="relative mx-auto max-w-7xl px-5">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : undefined}>
           <div className="text-[11px] uppercase tracking-[0.34em] text-cyan-100/58">{copy.eyebrow}</div>
           <h2 className="mt-4 text-3xl font-light tracking-tight text-white sm:text-4xl">{copy.title}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/56 sm:text-base">{copy.description}</p>
@@ -49,7 +49,11 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       <div className="relative mt-10 overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
-        <div dir="ltr" className="partners-marquee flex w-max hover:[animation-play-state:paused]">
+        <div
+          dir="ltr"
+          style={{ direction: "ltr", unicodeBidi: "isolate" }}
+          className="partners-marquee flex w-max min-w-max hover:[animation-play-state:paused]"
+        >
           {marqueeGroups.map((group, groupIndex) => (
             <div key={groupIndex} className="flex shrink-0 gap-4 px-5 sm:gap-5" aria-hidden={groupIndex === 1}>
               {group.map((partner, index) => (
