@@ -15,7 +15,7 @@ const labels: Record<Locale, { eyebrow: string; title: string; description: stri
   ar: {
     eyebrow: "الشركاء",
     title: "مشاريع وفرق خدامين مع Innovmark",
-    description: "لوغوهات كتدوز بهدوء باش تبين الثقة بلا ما تقطع إيقاع الصفحة.",
+    description: "لوغوهات ديال شركاء وثقو فينا، بلا ما نقطعو عليك تصفح الصفحة.",
   },
 };
 
@@ -41,7 +41,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       <div className="relative mt-10 overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
-        <div className="partners-marquee flex w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
+        <div dir="ltr" className="partners-marquee flex w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
           {loop.map((partner, index) => (
             <a
               key={`${partner.name}-${index}`}

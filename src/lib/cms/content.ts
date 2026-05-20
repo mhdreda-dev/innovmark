@@ -101,6 +101,14 @@ function mapTestimonial(item: {
   };
 }
 
+const arabicHeroCopy = {
+  eyebrow: "وكالة ماركتينغ بريميوم",
+  title: "INNOVMARK — خلّي البراند ديالك يبان باحترافية",
+  description: "كنصايبو ليك مواقع، براندينغ، إعلانات ومحتوى كرييتيف باش المشروع ديالك يكبر ويبان بثقة.",
+  ctaLabel: "طلب عرض السعر",
+  secondaryCtaLabel: "تواصل معنا",
+};
+
 async function getPublishedHomeContentUncached(localeInput: string): Promise<CmsHomeContent> {
   const locale: Locale = isLocale(localeInput) ? localeInput : "fr";
   const fallback = getFallbackHomeContent(locale);
@@ -162,22 +170,23 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
     const partnerSource = partners.length ? partners : frPartners;
     const testimonialSource = testimonials.length ? testimonials : frTestimonials;
     const seoSource = seo ?? frSeo;
+    const heroTextSource = locale === "ar" ? null : heroSource;
 
     return {
       locale,
       sections: withPartnersSection(homeSource ? asSections(homeSource.sections) : fallback.sections),
       hero: heroSource
         ? {
-            eyebrow: hero?.eyebrow ?? heroSource.eyebrow,
-            title: hero?.title ?? heroSource.title,
-            description: hero?.description ?? heroSource.description,
-            ctaLabel: hero?.ctaLabel ?? heroSource.ctaLabel,
-            ctaHref: hero?.ctaHref ?? heroSource.ctaHref,
-            secondaryCtaLabel: hero?.secondaryCtaLabel ?? heroSource.secondaryCtaLabel ?? fallback.hero.secondaryCtaLabel,
-            secondaryCtaHref: hero?.secondaryCtaHref ?? heroSource.secondaryCtaHref ?? fallback.hero.secondaryCtaHref,
-            whatsappMessage: hero?.whatsappMessage ?? heroSource.whatsappMessage ?? fallback.hero.whatsappMessage,
+            eyebrow: locale === "ar" ? arabicHeroCopy.eyebrow : hero?.eyebrow ?? heroTextSource?.eyebrow ?? fallback.hero.eyebrow,
+            title: locale === "ar" ? arabicHeroCopy.title : hero?.title ?? heroTextSource?.title ?? fallback.hero.title,
+            description: locale === "ar" ? arabicHeroCopy.description : hero?.description ?? heroTextSource?.description ?? fallback.hero.description,
+            ctaLabel: locale === "ar" ? arabicHeroCopy.ctaLabel : hero?.ctaLabel ?? heroTextSource?.ctaLabel ?? fallback.hero.ctaLabel,
+            ctaHref: locale === "ar" ? hero?.ctaHref ?? fallback.hero.ctaHref : hero?.ctaHref ?? heroSource.ctaHref,
+            secondaryCtaLabel: locale === "ar" ? arabicHeroCopy.secondaryCtaLabel : hero?.secondaryCtaLabel ?? heroTextSource?.secondaryCtaLabel ?? fallback.hero.secondaryCtaLabel,
+            secondaryCtaHref: locale === "ar" ? hero?.secondaryCtaHref ?? fallback.hero.secondaryCtaHref : hero?.secondaryCtaHref ?? heroSource.secondaryCtaHref ?? fallback.hero.secondaryCtaHref,
+            whatsappMessage: locale === "ar" ? hero?.whatsappMessage ?? fallback.hero.whatsappMessage : hero?.whatsappMessage ?? heroSource.whatsappMessage ?? fallback.hero.whatsappMessage,
             heroVideoUrl: hero?.heroVideoUrl ?? hero?.backgroundVideo?.url ?? heroSource.heroVideoUrl ?? heroSource.backgroundVideo?.url ?? "",
-            features: hero ? asFeatures(hero.features) : asFeatures(heroSource.features),
+            features: locale === "ar" ? (hero ? asFeatures(hero.features) : fallback.hero.features) : hero ? asFeatures(hero.features) : asFeatures(heroSource.features),
             carouselImages: carouselImages.length ? carouselImages : fallback.hero.carouselImages,
             backgroundVideoUrl: hero?.backgroundVideo?.url ?? heroSource.backgroundVideo?.url,
           }
