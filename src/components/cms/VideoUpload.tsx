@@ -64,9 +64,11 @@ export function VideoUpload({ value, onChange, onMessage }: VideoUploadProps) {
 
       {showRemote && (
         <input
+          type="text"
           value={value}
           placeholder="Paste a remote MP4/WebM URL or use the uploader above"
           onChange={(event) => onChange(event.target.value)}
+          autoComplete="off"
           className="rounded-xl border border-white/10 bg-black/24 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/28 focus:border-cyan-100/40"
         />
       )}
