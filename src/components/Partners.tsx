@@ -25,7 +25,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
 
   const copy = labels[locale];
   const basePartners = partners.length > 0 ? partners : [];
-  const minCards = 12;
+  const minCards = 24;
   const repeatCount = basePartners.length > 0
     ? Math.max(4, Math.ceil(minCards / basePartners.length))
     : 0;
@@ -46,14 +46,14 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
         </div>
       </div>
 
-      <div className="relative mt-10 overflow-hidden">
+      <div
+        className="relative left-1/2 right-1/2 mt-10 w-screen -translate-x-1/2 overflow-hidden"
+        dir="ltr"
+        style={{ direction: "ltr", unicodeBidi: "isolate" }}
+      >
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
-        <div
-          dir="ltr"
-          style={{ direction: "ltr", unicodeBidi: "isolate" }}
-          className="partners-marquee flex w-max min-w-max hover:[animation-play-state:paused]"
-        >
+        <div className="partners-marquee flex w-max min-w-max hover:[animation-play-state:paused]">
           {marqueeGroups.map((group, groupIndex) => (
             <div key={groupIndex} className="flex shrink-0 gap-4 px-5 sm:gap-5" aria-hidden={groupIndex === 1}>
               {group.map((partner, index) => (
