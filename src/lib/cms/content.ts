@@ -57,6 +57,50 @@ function withPartnersSection(sections: string[]) {
   ];
 }
 
+function mapService(service: {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  icon: string;
+  tone: string;
+  href: string | null;
+  isActive: boolean;
+  sortOrder: number;
+}): CmsService {
+  return {
+    id: service.id,
+    slug: service.slug,
+    title: service.title,
+    description: service.description,
+    icon: service.icon,
+    tone: service.tone as CmsService["tone"],
+    href: service.href ?? undefined,
+    isActive: service.isActive,
+    sortOrder: service.sortOrder,
+  };
+}
+
+function mapTestimonial(item: {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  rating: number;
+  isActive: boolean;
+  sortOrder: number;
+}): CmsTestimonial {
+  return {
+    id: item.id,
+    quote: item.quote,
+    name: item.name,
+    role: item.role,
+    rating: item.rating,
+    isActive: item.isActive,
+    sortOrder: item.sortOrder,
+  };
+}
+
 async function getPublishedHomeContentUncached(localeInput: string): Promise<CmsHomeContent> {
   const locale: Locale = isLocale(localeInput) ? localeInput : "fr";
   const fallback = getFallbackHomeContent(locale);
@@ -64,7 +108,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
   if (!prisma) return fallback;
 
   try {
-    const [home, hero, services, partners, testimonials, seo] = await prisma.$transaction([
+    const [home, hero, services, partners, testimonials, seo, frHome, frHero, frServices, frTestimonials, frSeo] = await prisma.$transaction([
       prisma.homePageContent.findUnique({ where: { locale_status: { locale, status: "PUBLISHED" } } }),
       prisma.heroSection.findUnique({
         where: { locale_status: { locale, status: "PUBLISHED" } },
@@ -86,39 +130,55 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
         where: { locale_status_pagePath: { locale, status: "PUBLISHED", pagePath: `/${locale}` } },
         include: { ogImage: true },
       }),
+      prisma.homePageContent.findUnique({ where: { locale_status: { locale: "fr", status: "PUBLISHED" } } }),
+      prisma.heroSection.findUnique({
+        where: { locale_status: { locale: "fr", status: "PUBLISHED" } },
+        include: { backgroundVideo: true },
+      }),
+      prisma.serviceSection.findMany({
+        where: { locale: "fr", status: "PUBLISHED", isActive: true },
+        orderBy: [{ sortOrder: "asc" }, { updatedAt: "desc" }],
+      }),
+      prisma.testimonial.findMany({
+        where: { locale: "fr", status: "PUBLISHED", isActive: true },
+        orderBy: [{ sortOrder: "asc" }, { updatedAt: "desc" }],
+      }),
+      prisma.seoMetadata.findUnique({
+        where: { locale_status_pagePath: { locale: "fr", status: "PUBLISHED", pagePath: "/fr" } },
+        include: { ogImage: true },
+      }),
     ]);
+
+    const homeSource = home ?? frHome;
+    const heroSource = hero ?? frHero;
+    const localeCarouselImages = hero ? asCarousel(hero.carouselImages) : [];
+    const frCarouselImages = frHero ? asCarousel(frHero.carouselImages) : [];
+    const carouselImages = localeCarouselImages.length ? localeCarouselImages : frCarouselImages;
+    const serviceSource = services.length ? services : frServices;
+    const testimonialSource = testimonials.length ? testimonials : frTestimonials;
+    const seoSource = seo ?? frSeo;
 
     return {
       locale,
-      sections: withPartnersSection(home ? asSections(home.sections) : fallback.sections),
-      hero: hero
+      sections: withPartnersSection(homeSource ? asSections(homeSource.sections) : fallback.sections),
+      hero: heroSource
         ? {
-            eyebrow: hero.eyebrow,
-            title: hero.title,
-            description: hero.description,
-            ctaLabel: hero.ctaLabel,
-            ctaHref: hero.ctaHref,
-            secondaryCtaLabel: hero.secondaryCtaLabel ?? fallback.hero.secondaryCtaLabel,
-            secondaryCtaHref: hero.secondaryCtaHref ?? fallback.hero.secondaryCtaHref,
-            whatsappMessage: hero.whatsappMessage ?? fallback.hero.whatsappMessage,
-            heroVideoUrl: hero.heroVideoUrl ?? hero.backgroundVideo?.url ?? "",
-            features: asFeatures(hero.features),
-            carouselImages: asCarousel(hero.carouselImages).length ? asCarousel(hero.carouselImages) : fallback.hero.carouselImages,
-            backgroundVideoUrl: hero.backgroundVideo?.url,
+            eyebrow: hero?.eyebrow ?? heroSource.eyebrow,
+            title: hero?.title ?? heroSource.title,
+            description: hero?.description ?? heroSource.description,
+            ctaLabel: hero?.ctaLabel ?? heroSource.ctaLabel,
+            ctaHref: hero?.ctaHref ?? heroSource.ctaHref,
+            secondaryCtaLabel: hero?.secondaryCtaLabel ?? heroSource.secondaryCtaLabel ?? fallback.hero.secondaryCtaLabel,
+            secondaryCtaHref: hero?.secondaryCtaHref ?? heroSource.secondaryCtaHref ?? fallback.hero.secondaryCtaHref,
+            whatsappMessage: hero?.whatsappMessage ?? heroSource.whatsappMessage ?? fallback.hero.whatsappMessage,
+            heroVideoUrl: hero?.heroVideoUrl ?? hero?.backgroundVideo?.url ?? heroSource.heroVideoUrl ?? heroSource.backgroundVideo?.url ?? "",
+            features: hero ? asFeatures(hero.features) : asFeatures(heroSource.features),
+            carouselImages: carouselImages.length ? carouselImages : fallback.hero.carouselImages,
+            backgroundVideoUrl: hero?.backgroundVideo?.url ?? heroSource.backgroundVideo?.url,
           }
         : fallback.hero,
-      services: services.length
-        ? services.map((service): CmsService => ({
-            id: service.id,
-            slug: service.slug,
-            title: service.title,
-            description: service.description,
-            icon: service.icon,
-            tone: service.tone as CmsService["tone"],
-            href: service.href ?? undefined,
-            isActive: service.isActive,
-            sortOrder: service.sortOrder,
-          }))
+      services: serviceSource.length
+        ? serviceSource.map(mapService)
         : fallback.services,
       partners: partners.length
         ? partners.map((partner): CmsPartner => ({
@@ -131,25 +191,17 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
             isActive: partner.isActive,
           }))
         : fallback.partners,
-      testimonials: testimonials.length
-        ? testimonials.map((item): CmsTestimonial => ({
-            id: item.id,
-            quote: item.quote,
-            name: item.name,
-            role: item.role,
-            rating: item.rating,
-            isActive: item.isActive,
-            sortOrder: item.sortOrder,
-          }))
+      testimonials: testimonialSource.length
+        ? testimonialSource.map(mapTestimonial)
         : fallback.testimonials,
-      seo: seo
+      seo: seoSource
         ? {
-            title: seo.title,
-            description: seo.description,
-            keywords: seo.keywords,
-            ogImage: seo.ogImage?.url,
-            structuredData: seo.structuredData && typeof seo.structuredData === "object" && !Array.isArray(seo.structuredData) ? seo.structuredData as Record<string, unknown> : undefined,
-            noIndex: seo.noIndex,
+            title: seo?.title ?? seoSource.title,
+            description: seo?.description ?? seoSource.description,
+            keywords: seo?.keywords ?? seoSource.keywords,
+            ogImage: seo?.ogImage?.url ?? seoSource.ogImage?.url,
+            structuredData: seoSource.structuredData && typeof seoSource.structuredData === "object" && !Array.isArray(seoSource.structuredData) ? seoSource.structuredData as Record<string, unknown> : undefined,
+            noIndex: seo?.noIndex ?? seoSource.noIndex,
           }
         : fallback.seo,
     };
