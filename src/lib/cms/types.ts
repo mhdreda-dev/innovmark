@@ -10,6 +10,10 @@ export type CmsFeature = {
 export type CmsCarouselImage = {
   id: string;
   src: string;
+  imageUrl?: string;
+  url?: string;
+  secureUrl?: string;
+  mediaUrl?: string;
   alt: string;
   rotation: number;
 };

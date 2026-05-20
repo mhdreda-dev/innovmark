@@ -13,17 +13,33 @@ function asFeatures(value: Prisma.JsonValue | null | undefined): CmsFeature[] {
     : [];
 }
 
+function getCarouselImageUrl(item: Record<string, unknown>) {
+  const imageUrl = item.imageUrl || item.url || item.secureUrl || item.src || item.mediaUrl;
+  return typeof imageUrl === "string" ? imageUrl : "";
+}
+
 function asCarousel(value: Prisma.JsonValue | null | undefined): CmsCarouselImage[] {
-  return Array.isArray(value)
-    ? value.filter((item): item is CmsCarouselImage => Boolean(
-        item &&
-        typeof item === "object" &&
-        "src" in item &&
-        typeof item.src === "string" &&
-        item.src.length > 0 &&
-        "alt" in item,
-      ))
-    : [];
+  if (!Array.isArray(value)) return [];
+
+  return value
+    .filter((item) => Boolean(item && typeof item === "object" && !Array.isArray(item)))
+    .map((item, index): CmsCarouselImage | null => {
+      const record = item as Record<string, unknown>;
+      const imageUrl = getCarouselImageUrl(record);
+      if (!imageUrl) {
+        console.warn("Missing hero carousel imageUrl", record);
+        return null;
+      }
+
+      return {
+        id: typeof record.id === "string" && record.id ? record.id : `hero-image-${index + 1}`,
+        src: imageUrl,
+        imageUrl,
+        alt: typeof record.alt === "string" && record.alt ? record.alt : "Hero image",
+        rotation: Number.isFinite(Number(record.rotation)) ? Number(record.rotation) : 0,
+      };
+    })
+    .filter((item): item is CmsCarouselImage => Boolean(item));
 }
 
 function asSections(value: Prisma.JsonValue | null | undefined): string[] {

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useCallback, PointerEvent as ReactPointerEvent } from "react"
-import Image from "next/image"
 
 // ─── WhatsApp CTA ────────────────────────────────────────────────────────────
 const WHATSAPP_URL =
@@ -11,6 +10,10 @@ const WHATSAPP_URL =
 export interface CarouselImage {
   id: string
   src: string
+  imageUrl?: string
+  url?: string
+  secureUrl?: string
+  mediaUrl?: string
   alt: string
   rotation: number
 }
@@ -64,7 +67,17 @@ export function ImageCarouselHero({
   images,
   heroVideoUrl,
 }: Props) {
-  const safeImages = images.filter((image) => image.src)
+  const safeImages = images
+    .map((image) => {
+      const imageUrl = image.imageUrl || image.url || image.secureUrl || image.src || image.mediaUrl
+      if (!imageUrl) {
+        console.warn("Missing hero carousel imageUrl", image)
+        return null
+      }
+
+      return { ...image, imageUrl }
+    })
+    .filter((image): image is CarouselImage & { imageUrl: string } => Boolean(image))
   const marqueeSource = safeImages.length
     ? Array.from({ length: Math.max(8, safeImages.length) }, (_, index) => safeImages[index % safeImages.length])
     : []
@@ -221,20 +234,19 @@ export function ImageCarouselHero({
             <div className="ihc-track" aria-label="Hero media gallery">
               {marqueeSets.map((set, setIndex) => (
                 <div className="ihc-loop" key={setIndex} aria-hidden={setIndex === 1}>
-                  {set.map(({ id, src, alt }, index) => (
+                  {set.map(({ id, imageUrl, alt }, index) => (
                     <figure
                       key={`${id}-${setIndex}-${index}`}
                       className="ihc-card"
                       aria-label={alt}
                     >
-                      <Image
-                        src={src}
+                      <img
+                        src={imageUrl}
                         alt={alt}
-                        fill
-                        sizes="(max-width: 767px) 132px, (max-width: 1023px) 168px, 192px"
                         className="ihc-card-img"
-                        priority={setIndex === 0 && index < (isMobile ? 3 : 6)}
                         draggable={false}
+                        loading={setIndex === 0 && index < (isMobile ? 3 : 6) ? "eager" : "lazy"}
+                        decoding="async"
                       />
                       <span className="ihc-card-gradient" aria-hidden />
                     </figure>
@@ -656,6 +668,9 @@ const css = `
   outline-offset: 3px;
 }
 .ihc-card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
 }
