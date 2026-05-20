@@ -32,9 +32,9 @@ const arFooterLinks = {
     { label: "الأعمال",     href: "/ar#work" },
   ],
   "الخدمات": [
-    { label: "الفيديو",     href: "/ar/services/promotional-videos" },
+    { label: "الفيديوهات",     href: "/ar/services/promotional-videos" },
     { label: "المواقع",     href: "/ar/services/website-creation" },
-    { label: "لوغو وشكل المشروع",  href: "/ar/services/branding" },
+    { label: "براندينغ وهوية",  href: "/ar/services/branding" },
     { label: "الإعلانات",   href: "/ar/services/paid-ads" },
   ],
   "التواصل": [
@@ -75,7 +75,7 @@ export default function Footer({ locale }: { locale?: string }) {
       href: localHref("/services", locale),
     },
     {
-      label: t(locale, "Contact", "Contact", "تواصل"),
+      label: t(locale, "Contact", "Contact", "تواصل معنا"),
       href: localHref("/contact", locale),
     },
   ];
@@ -84,7 +84,7 @@ export default function Footer({ locale }: { locale?: string }) {
     locale,
     "Studio créatif premium pour marques exigeantes.",
     "Premium creative studio for demanding brands.",
-    "خدمة احترافية كتعاون المشاريع المغربية تبان مزيان فالإنترنت.",
+    "وكالة ماركتينغ بريميوم كتعاون المشاريع تبان باحترافية فالإنترنت.",
   );
 
   const copyright = t(
@@ -94,7 +94,7 @@ export default function Footer({ locale }: { locale?: string }) {
     `© ${CURRENT_YEAR} Innovmark Studio. جميع الحقوق محفوظة.`,
   );
 
-  const legalLabel   = t(locale, "Mentions légales", "Legal",        "المعلومات القانونية");
+  const legalLabel   = t(locale, "Mentions légales", "Legal",        "معلومات قانونية");
   const privacyLabel = t(locale, "Confidentialité",  "Privacy",      "الخصوصية");
   const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل معنا فواتساب");
 

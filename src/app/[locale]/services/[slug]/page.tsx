@@ -159,7 +159,7 @@ export default async function LocalizedServicePage({ params }: Props) {
               href={localizedHref("/contact", locale)}
               className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#25D366] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-black transition-colors hover:bg-[#1ebe5a] md:mt-0 md:w-auto md:tracking-[0.18em]"
             >
-              {isArabic ? "حل فورم التواصل" : "Open contact form"}
+              {isArabic ? "فتح فورم التواصل" : "Open contact form"}
             </a>
           </div>
         </section>

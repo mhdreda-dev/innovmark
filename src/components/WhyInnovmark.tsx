@@ -52,7 +52,7 @@ const advantages = [
 const arAdvantages = [
   {
     title: "خطة واضحة",
-    body: "كنحددو العرض، الناس اللي باغي توصل ليهم، والوعد ديالك قبل ما نبداو الخدمة، باش الشكل يخدم هدف واضح.",
+    body: "كنحددو العرض، الجمهور، والوعد ديالك قبل ما نبداو الخدمة، باش التصميم يخدم هدف واضح.",
     icon: ShieldCheck,
   },
   {
@@ -62,12 +62,12 @@ const arAdvantages = [
   },
   {
     title: "تصميم احترافي",
-    body: "الخط، الحركة، اللون والترتيب كيقويو القيمة اللي كيشوفها الزبون فالمشروع ديالك.",
+    body: "الخط، الحركة، اللون والترتيب كيقويو القيمة اللي كيشوفها الزبون فالبراند ديالك.",
     icon: Palette,
   },
   {
     title: "نتائج واضحة",
-    body: "كنصممو المخرجات باش تزاد الثقة، يتأهلو الزبناء المحتملين، ويتسهل البيع.",
+    body: "كنصممو المخرجات باش تزيد الثقة، يتأهلو الزبناء المحتملين، ويتسهل البيع.",
     icon: LineChart,
   },
 ];
@@ -159,8 +159,8 @@ export default function WhyInnovmark({
         <div className="mx-auto max-w-7xl">
           <SectionLabel
             kicker={isArabic ? "طريقة التفكير" : "Approche"}
-            title={isArabic ? "مسار واضح لمشروع يبان أقوى." : "Une trajectoire simple vers une marque plus forte."}
-            subtitle={isArabic ? "كنقصو الدوران والتعقيد بطريقة خدمة مفهومة، من الخطة الواضحة حتى قياس النتائج." : "Nous evitons les allers-retours inutiles avec une methode lisible, de la strategie a la preuve de performance."}
+            title={isArabic ? "مسار واضح باش البراند ديالك يبان أقوى." : "Une trajectoire simple vers une marque plus forte."}
+            subtitle={isArabic ? "كنقصو الدوران والتعقيد بطريقة خدمة مفهومة، من الخطة حتى قياس النتائج." : "Nous evitons les allers-retours inutiles avec une methode lisible, de la strategie a la preuve de performance."}
           />
 
           <ol className="relative mt-10 grid gap-4 md:grid-cols-4">
@@ -192,10 +192,10 @@ export default function WhyInnovmark({
           <div>
             <Sparkles className="mb-5 h-6 w-6 text-violet-200" strokeWidth={1.6} />
             <h2 className="cinematic-text text-3xl font-light tracking-tight text-white md:text-5xl">
-              {isArabic ? "واجد تخلي المشروع ديالك يبان أكثر احترافية؟" : "Pret a construire une presence plus premium?"}
+              {isArabic ? "واجد تخلي البراند ديالك يبان أكثر احترافية؟" : "Pret a construire une presence plus premium?"}
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-white/66">
-              {isArabic ? "نهضرو على الهدف ديالك، التوقيت، وأحسن طريقة باش المشروع ديالك يبان أوضح ويجيب زبناء." : "Parlons de votre objectif, de votre timing et du meilleur angle pour rendre votre marque impossible a ignorer."}
+              {isArabic ? "نهضرو على الهدف ديالك، التوقيت، وأحسن طريقة باش المشروع ديالك يبان أوضح ويجيب طلبات." : "Parlons de votre objectif, de votre timing et du meilleur angle pour rendre votre marque impossible a ignorer."}
             </p>
           </div>
           <Link

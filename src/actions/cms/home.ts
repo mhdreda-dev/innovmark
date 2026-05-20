@@ -101,7 +101,6 @@ function cleanCarouselImages(value: unknown) {
   return safeJson<unknown[]>(value, [])
     .filter((item): item is Record<string, unknown> => Boolean(item && typeof item === "object"))
     .map((item, index) => {
-      console.log("CAROUSEL ITEM:", item);
       return {
         id: cleanText(item.id, 120) || `hero-image-${index + 1}`,
         src: cleanUrl(item.src),
@@ -168,8 +167,6 @@ export async function saveHero(_: ActionState, formData: FormData): Promise<Acti
     features: safeJson(formData.get("features"), []),
     carouselImages: cleanCarouselImages(formData.get("carouselImages")),
   };
-  console.log("CMS SUBMIT DATA:", data);
-
   const parsedResult = heroSchema.safeParse(data);
 
   if (!parsedResult.success) {

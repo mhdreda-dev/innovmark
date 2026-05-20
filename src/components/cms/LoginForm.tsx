@@ -26,8 +26,6 @@ export function LoginForm({ callbackUrl, hasError }: { callbackUrl?: string; has
       callbackUrl: safeCallback,
     });
 
-    console.log("SIGNIN RESULT", result);
-
     if (result?.ok) {
       window.location.href = safeCallback;
       return;

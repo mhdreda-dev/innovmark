@@ -23,8 +23,6 @@ export const authOptions: NextAuthOptions & { trustHost: true } = {
         const password = String(credentials?.password ?? "");
         const prisma = getPrisma();
 
-        console.log("LOGIN EMAIL:", email);
-
         if (!email || !password || !prisma) {
           return null;
         }
@@ -32,9 +30,6 @@ export const authOptions: NextAuthOptions & { trustHost: true } = {
         const user = await prisma.user.findUnique({
           where: { email },
         });
-
-        console.log("USER FOUND:", !!user);
-        console.log("HAS HASH:", !!user?.passwordHash);
 
         if (!user || !user.isActive) {
           return null;
@@ -44,8 +39,6 @@ export const authOptions: NextAuthOptions & { trustHost: true } = {
         if (!passwordMatches) {
           return null;
         }
-
-        console.log("AUTHORIZE SUCCESS:", user.email);
 
         return {
           id: user.id,
@@ -58,7 +51,6 @@ export const authOptions: NextAuthOptions & { trustHost: true } = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log("JWT CALLBACK USER:", !!user);
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -66,7 +58,6 @@ export const authOptions: NextAuthOptions & { trustHost: true } = {
       return token;
     },
     async session({ session, token }) {
-      console.log("SESSION CALLBACK TOKEN ROLE:", token.role);
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;

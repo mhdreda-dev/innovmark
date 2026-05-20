@@ -19,12 +19,16 @@ const labels: Record<Locale, { eyebrow: string; title: string; description: stri
   },
 };
 
+function repeatForMarquee(partners: CmsPartner[], minimum = 12) {
+  return Array.from({ length: Math.max(minimum, partners.length) }, (_, index) => partners[index % partners.length]);
+}
+
 export default function Partners({ locale, items }: { locale: Locale; items: CmsPartner[] }) {
   const partners = items.filter((item) => item.isActive && item.logoUrl && item.websiteUrl);
   if (!partners.length) return null;
 
   const copy = labels[locale];
-  const rail = partners.length < 5 ? [...partners, ...partners, ...partners] : partners;
+  const rail = repeatForMarquee(partners);
   const loop = [...rail, ...rail];
 
   return (

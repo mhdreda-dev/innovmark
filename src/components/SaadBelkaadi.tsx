@@ -26,12 +26,12 @@ const arHighlights = [
   { label: "تجربة مع عدة وكالات", icon: Users },
   { label: "متخصص فالبيع فالإنترنت فإفريقيا", icon: ShoppingBag },
   { label: "فيديوهات منتجات ومونتاج إعلاني", icon: Clapperboard },
-  { label: "تصاور وفيديوهات ومنشورات كتعاون على البيع", icon: Megaphone },
+  { label: "محتوى كرييتيف كيساعد على البيع", icon: Megaphone },
   { label: "فهم ميداني للسوق الإفريقي", icon: Globe2 },
 ];
 
 const arDescription =
-  "كيعاون سعد بلقاضي INNOVMARK بتجربة قوية فالتعامل مع الوكالات، إنتاج فيديوهات المنتجات، المونتاج الإعلاني، وتصاور وفيديوهات ومنشورات الحملات. عندو فهم قريب لتحديات البيع فالإنترنت فإفريقيا، وكيعاون المشاريع تصاوب مواد عملية وجذابة كتزيد فرص البيع.";
+  "كيعاون سعد بلقاضي INNOVMARK بتجربة قوية فالتعامل مع الوكالات، إنتاج فيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الحملات. عندو فهم قريب لتحديات البيع فالإنترنت فإفريقيا، وكيعاون المشاريع تصاوب مواد عملية وجذابة كتزيد فرص البيع.";
 
 export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
   const isArabic = locale === "ar";
@@ -166,7 +166,7 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
                 {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "E-commerce & Creative Ads Specialist"}
               </p>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/64">
-                {isArabic ? "خبرة ففيديوهات المنتجات، المونتاج الإعلاني، وتصاور وفيديوهات ومنشورات الإعلانات اللي كتعون مشاريع البيع فالإنترنت فإفريقيا تجيب نتائج أحسن." : "Une expertise en vidéos produits, montage publicitaire et contenus ads orientés conversion pour les marques e-commerce en Afrique."}
+                {isArabic ? "خبرة ففيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الإعلانات اللي كيعاون مشاريع البيع فالإنترنت فإفريقيا تجيب نتائج أحسن." : "Une expertise en vidéos produits, montage publicitaire et contenus ads orientés conversion pour les marques e-commerce en Afrique."}
               </p>
             </div>
           </div>

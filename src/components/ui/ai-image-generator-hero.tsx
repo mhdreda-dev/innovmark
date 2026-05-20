@@ -86,12 +86,6 @@ export function ImageCarouselHero({
   const [isMobile, setIsMobile]       = useState(false)
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      console.debug("[Innovmark CMS] heroVideoUrl received:", heroVideoUrl || "(empty)")
-    }
-  }, [heroVideoUrl])
-
-  useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
     const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     setIsMobile(mq.matches)

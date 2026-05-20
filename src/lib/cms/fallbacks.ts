@@ -26,9 +26,9 @@ export const fallbackServices: Record<Locale, CmsService[]> = {
     { slug: "branding", title: "Branding & Identity", description: "Logo, art direction and visual systems for a more desirable brand.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
   ],
   ar: [
-    { slug: "promotional-videos", title: "فيديوهات إعلانية", description: "فيديوهات قصيرة وإعلانات كتشد الانتباه وكتبيّن قيمة المشروع ديالك.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
-    { slug: "website-creation", title: "تصميم المواقع", description: "مواقع وصفحات هبوط سريعة كتخلي الزائر يثق فالمشروع.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
-    { slug: "branding", title: "لوغو وشكل المشروع", description: "نصاوبو ليك لوغو وألوان وشكل احترافي يخلي المشروع ديالك واضح ومميز.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
+    { slug: "promotional-videos", title: "فيديوهات وإعلانات", description: "فيديوهات قصيرة وإعلانات كتشد الانتباه وكتبيّن قيمة المشروع ديالك.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
+    { slug: "website-creation", title: "تصميم المواقع", description: "مواقع وصفحات هبوط سريعة كتخلي الزائر يثق فالبراند من أول لحظة.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
+    { slug: "branding", title: "براندينغ وهوية", description: "لوغو، ألوان وطريقة عرض كتخلي المشروع ديالك واضح ومميز.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
   ],
 };
 
@@ -69,10 +69,10 @@ const seoByLocale: Record<Locale, NonNullable<CmsHomeContent["seo"]>> = {
     noIndex: false,
   },
   ar: {
-    title: "Innovmark — الإشهار والتواصل للمشاريع المغربية فالدار البيضاء",
+    title: "Innovmark — وكالة ماركتينغ بريميوم فالدار البيضاء",
     description:
-      "مواقع، لوغو، تصاور وفيديوهات ومنشورات وإعلانات كيعونو المشاريع المغربية تبان مزيان فالإنترنت وتجيب زبناء أكثر.",
-    keywords: ["Innovmark", "الإشهار والتواصل", "لوغو", "المواقع", "الإعلانات"],
+      "مواقع، براندينغ، إعلانات ومحتوى كرييتيف كيعونو المشاريع المغربية تبان باحترافية فالإنترنت وتكبر بثقة.",
+    keywords: ["Innovmark", "ماركتينغ", "براندينغ", "تصميم المواقع", "الإعلانات", "دار البيضاء"],
     noIndex: false,
   },
 };

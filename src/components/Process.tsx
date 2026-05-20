@@ -58,29 +58,29 @@ const steps = [
 const arSteps = [
   {
     n: "01",
-    title: "الفهم والتحليل",
+    title: "الفهم",
     body: "كنفهمو المشروع ديالك، السوق، القيود، والنتائج اللي خاص الخدمة تجيبها.",
-    points: ["تدقيق سريع", "أهداف تجارية", "أولويات واضحة"],
+    points: ["تدقيق سريع", "أهداف واضحة", "أولويات مفهومة"],
     icon: ClipboardCheck,
   },
   {
     n: "02",
-    title: "الخطة الواضحة",
+    title: "الخطة",
     body: "كنحددو الرسالة، العرض، الترتيب وطريقة التصميم قبل ما نبداو الإنتاج.",
-    points: ["قيمة المشروع", "خطة خدمة", "شكل بصري"],
+    points: ["قيمة البراند", "خطة خدمة", "شكل بصري"],
     icon: Target,
   },
   {
     n: "03",
-    title: "الإنتاج",
+    title: "التنفيذ",
     body: "تصميم، فيديو، موقع أو حملات: الخدمة كتقدم بنقاط اعتماد واضحة.",
-    points: ["إبداع احترافي", "مراجعات مضبوطة", "متابعة شفافة"],
+    points: ["تنفيذ بريميوم", "مراجعات مضبوطة", "متابعة واضحة"],
     icon: Layers3,
   },
   {
     n: "04",
     title: "التسليم",
-    body: "كنسلمو، نطلقو، ونعطيوك الأصول أو السيستيم اللي تحتاجو تكمل بثقة.",
+    body: "كنسلمو، نطلقو، ونعطيوك الملفات أو النظام اللي تحتاجو تكمل بثقة.",
     points: ["انطلاق", "تسليم منظم", "تحسين"],
     icon: Rocket,
   },
@@ -130,7 +130,7 @@ export default function Process({
         <div className="mx-auto max-w-7xl">
           <SectionLabel
             kicker={isArabic ? "طريقة الخدمة" : "Workflow"}
-              title={isArabic ? "أربع مراحل. نفس مستوى الدقة." : "Quatre etapes. Un niveau d'exigence constant."}
+              title={isArabic ? "أربع مراحل. نفس المستوى ديال الدقة." : "Quatre etapes. Un niveau d'exigence constant."}
               subtitle={isArabic ? "كل مرحلة عندها هدف واضح، مخرجات محددة، ونقطة اعتماد باش المشروع يبقى سلس." : "Chaque phase a un objectif clair, des livrables attendus et un point de validation pour garder le projet fluide."}
             />
 

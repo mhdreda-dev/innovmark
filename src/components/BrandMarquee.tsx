@@ -34,7 +34,7 @@ export default function BrandMarquee({ locale }: { locale?: string }) {
       <div
         className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent"
       />
-      <div className="flex w-max animate-marquee gap-8 whitespace-nowrap text-xs font-light uppercase tracking-[0.18em] text-white/42 sm:text-sm md:gap-12 md:text-base md:tracking-[0.36em]">
+      <div dir="ltr" className="flex w-max animate-marquee gap-8 whitespace-nowrap text-xs font-light uppercase tracking-[0.18em] text-white/42 sm:text-sm md:gap-12 md:text-base md:tracking-[0.36em]">
         {[...displayedItems, ...displayedItems, ...displayedItems].map((item, i) => (
           <span key={i} className="inline-flex items-center gap-8 md:gap-12">
             {item}
