@@ -19,17 +19,15 @@ const labels: Record<Locale, { eyebrow: string; title: string; description: stri
   },
 };
 
-function repeatForMarquee(partners: CmsPartner[], minimum = 12) {
-  return Array.from({ length: Math.max(minimum, partners.length) }, (_, index) => partners[index % partners.length]);
-}
-
 export default function Partners({ locale, items }: { locale: Locale; items: CmsPartner[] }) {
   const partners = items.filter((item) => item.isActive && item.logoUrl && item.websiteUrl);
   if (!partners.length) return null;
 
   const copy = labels[locale];
-  const rail = repeatForMarquee(partners);
-  const loop = [...rail, ...rail];
+  const repeatedPartners = Array.from({ length: 4 }).flatMap(() => partners);
+  const marqueePartners = repeatedPartners.length >= 12
+    ? repeatedPartners
+    : Array.from({ length: Math.ceil(12 / partners.length) }).flatMap(() => partners);
 
   return (
     <section className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20">
@@ -46,7 +44,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
         <div dir="ltr" className="partners-marquee flex w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
-          {loop.map((partner, index) => (
+          {marqueePartners.map((partner, index) => (
             <a
               key={`${partner.name}-${index}`}
               href={partner.websiteUrl}
