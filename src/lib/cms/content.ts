@@ -108,7 +108,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
   if (!prisma) return fallback;
 
   try {
-    const [home, hero, services, partners, testimonials, seo, frHome, frHero, frServices, frTestimonials, frSeo] = await prisma.$transaction([
+    const [home, hero, services, partners, testimonials, seo, frHome, frHero, frServices, frPartners, frTestimonials, frSeo] = await prisma.$transaction([
       prisma.homePageContent.findUnique({ where: { locale_status: { locale, status: "PUBLISHED" } } }),
       prisma.heroSection.findUnique({
         where: { locale_status: { locale, status: "PUBLISHED" } },
@@ -139,6 +139,10 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
         where: { locale: "fr", status: "PUBLISHED", isActive: true },
         orderBy: [{ sortOrder: "asc" }, { updatedAt: "desc" }],
       }),
+      prisma.partner.findMany({
+        where: { locale: "fr", status: "PUBLISHED", isActive: true },
+        orderBy: [{ order: "asc" }, { updatedAt: "desc" }],
+      }),
       prisma.testimonial.findMany({
         where: { locale: "fr", status: "PUBLISHED", isActive: true },
         orderBy: [{ sortOrder: "asc" }, { updatedAt: "desc" }],
@@ -155,6 +159,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
     const frCarouselImages = frHero ? asCarousel(frHero.carouselImages) : [];
     const carouselImages = localeCarouselImages.length ? localeCarouselImages : frCarouselImages;
     const serviceSource = services.length ? services : frServices;
+    const partnerSource = partners.length ? partners : frPartners;
     const testimonialSource = testimonials.length ? testimonials : frTestimonials;
     const seoSource = seo ?? frSeo;
 
@@ -180,8 +185,8 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
       services: serviceSource.length
         ? serviceSource.map(mapService)
         : fallback.services,
-      partners: partners.length
-        ? partners.map((partner): CmsPartner => ({
+      partners: partnerSource.length
+        ? partnerSource.map((partner): CmsPartner => ({
             id: partner.id,
             name: partner.name,
             logoUrl: partner.logoUrl,
