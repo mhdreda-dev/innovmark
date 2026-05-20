@@ -14,6 +14,7 @@ const imageTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"
 const videoTypes = new Set(["video/mp4", "video/webm", "video/quicktime"]);
 const maxImageBytes = 8 * 1024 * 1024;
 const maxVideoBytes = 120 * 1024 * 1024;
+const storageNotConfiguredMessage = "Upload storage is not configured. Add BLOB_READ_WRITE_TOKEN or Cloudinary env variables.";
 
 type UploadedAsset = {
   provider: string;
@@ -97,15 +98,21 @@ async function uploadToCloudinary(file: File, filename: string, kind: "IMAGE" | 
 async function uploadToBlob(file: File, filename: string) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
   try {
-    const blob = await put(`cms/${filename}`, file, {
-      access: "public",
-      contentType: file.type,
-    });
+    const blob = await put(filename, file, { access: "public" });
     return { provider: "vercel-blob", url: blob.url, publicId: blob.pathname };
   } catch (error) {
     console.error("Blob upload failed, trying next CMS media provider:", error);
     return null;
   }
+}
+
+async function uploadFile(file: File, filename: string, kind: "IMAGE" | "VIDEO"): Promise<UploadedAsset | null> {
+  const uploaded = (await uploadToBlob(file, filename)) ?? (await uploadToCloudinary(file, filename, kind));
+  if (uploaded) return uploaded;
+
+  if (process.env.NODE_ENV === "production") return null;
+
+  return uploadToLocal(file, filename);
 }
 
 export async function GET(request: Request) {
@@ -159,9 +166,11 @@ export async function POST(request: Request) {
 
   const kind = isVideo ? "VIDEO" : "IMAGE";
   const filename = `${Date.now()}-${randomUUID()}${extension(file.name, file.type)}`;
-  const uploaded: UploadedAsset = isVideo
-    ? (await uploadToCloudinary(file, filename, kind)) ?? (await uploadToBlob(file, filename)) ?? (await uploadToLocal(file, filename))
-    : (await uploadToBlob(file, filename)) ?? (await uploadToCloudinary(file, filename, kind)) ?? (await uploadToLocal(file, filename));
+  const uploaded = await uploadFile(file, filename, kind);
+
+  if (!uploaded) {
+    return NextResponse.json({ error: storageNotConfiguredMessage }, { status: 500 });
+  }
 
   const asset = await prisma.mediaAsset.create({
     data: {
