@@ -24,11 +24,16 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
   if (!partners.length) return null;
 
   const copy = labels[locale];
-  const repeatedPartners = Array.from({ length: 4 }).flatMap(() => partners);
-  const marqueePartners = repeatedPartners.length >= 12
-    ? repeatedPartners
-    : Array.from({ length: Math.ceil(12 / partners.length) }).flatMap(() => partners);
-  const marqueeGroups = [marqueePartners, marqueePartners];
+  const basePartners = partners.length > 0 ? partners : [];
+  const minCards = 12;
+  const repeatCount = basePartners.length > 0
+    ? Math.max(4, Math.ceil(minCards / basePartners.length))
+    : 0;
+  const marqueePartners = Array.from({ length: repeatCount }).flatMap(() => basePartners);
+  const marqueeGroups = [
+    marqueePartners,
+    marqueePartners,
+  ];
 
   return (
     <section className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20">
