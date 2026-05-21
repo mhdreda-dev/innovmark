@@ -39,7 +39,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_82%_58%,rgba(16,185,129,0.10),transparent_30%)]" />
       <div className="relative mx-auto max-w-7xl px-5">
-        <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : undefined}>
+        <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
           <div className="text-[11px] uppercase tracking-[0.34em] text-cyan-100/58">{copy.eyebrow}</div>
           <h2 className="mt-4 text-3xl font-light tracking-tight text-white sm:text-4xl">{copy.title}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/56 sm:text-base">{copy.description}</p>
