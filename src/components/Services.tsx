@@ -99,12 +99,12 @@ const reasons = [
 ];
 
 const arServices = [
-  { slug: "promotional-videos", title: "فيديوهات وإعلانات", desc: "فيديوهات قصيرة وإعلانات كتشد الانتباه وكتبيّن قيمة البراند ديالك عند الزبناء.", icon: Clapperboard, tone: "cyan" },
-  { slug: "website-creation", title: "تصميم المواقع", desc: "مواقع وصفحات هبوط سريعة وواضحة كتخلي الزائر يثق فالبراند من أول لحظة.", icon: Globe2, tone: "violet" },
-  { slug: "branding", title: "براندينغ وهوية", desc: "لوغو، ألوان وطريقة عرض كتخلي المشروع ديالك واضح ومميز.", icon: Palette, tone: "emerald" },
-  { slug: "social-media", title: "صفحات التواصل", desc: "خطة منشورات وحضور منظم باش المشروع ديالك يبقى حاضر ومفهوم عند الناس.", icon: Share2, tone: "cyan" },
-  { slug: "paid-ads", title: "الإعلانات المدفوعة", desc: "إعلانات فيسبوك، إنستغرام، گوگل وتيك توك مع تصميم، تتبع وتحسين مركز على النتائج.", icon: Megaphone, tone: "violet" },
-  { slug: "stock-management", title: "تسيير المخزون", desc: "لوحات متابعة وطرق خدمة على القياس باش تتحكم فالمخزون، المبيعات والخدمة اليومية.", icon: Boxes, tone: "emerald" },
+  { slug: "promotional-videos", title: "فيديوهات إعلانية", desc: "فيديوهات قصيرة وإعلانات مصممة باش تشد الانتباه وتوصل قيمة المشروع ديالك بسرعة.", icon: Clapperboard, tone: "cyan" },
+  { slug: "website-creation", title: "تصميم المواقع", desc: "مواقع وصفحات هبوط سريعة وواضحة كتخلي الزائر يثق فخدمتك من أول لحظة.", icon: Globe2, tone: "violet" },
+  { slug: "branding", title: "البراندينغ والهوية", desc: "لوغو، ألوان وطريقة عرض كتخلي الإسم ديال خدمتك واضح، منظم وساهل يتفكر.", icon: Palette, tone: "emerald" },
+  { slug: "social-media", title: "تسيير السوشيال ميديا", desc: "خطة منشورات وتصاميم منظمة باش تبقى حاضر فالسوشيال ميديا بصورة احترافية.", icon: Share2, tone: "cyan" },
+  { slug: "paid-ads", title: "الإعلانات الممولة", desc: "إعلانات Meta وGoogle وTikTok مبنية على عرض واضح وتتبع كيبين شنو خدام.", icon: Megaphone, tone: "violet" },
+  { slug: "stock-management", title: "الاستراتيجية الرقمية", desc: "خطة واضحة فالإنترنت كتجمع الرسالة، المحتوى والإعلانات باش الخدمة تجيب نتائج مفهومة.", icon: Boxes, tone: "emerald" },
 ];
 
 const arReasons = [

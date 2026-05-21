@@ -3,7 +3,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import type { Prisma } from "@prisma/client";
 import { isLocale, type Locale } from "@/lib/i18n";
-import { getFallbackHomeContent } from "./fallbacks";
+import { fallbackServices, getFallbackHomeContent } from "./fallbacks";
 import { getPrisma } from "./prisma";
 import type { CmsCarouselImage, CmsFeature, CmsHomeContent, CmsPartner, CmsService, CmsTestimonial } from "./types";
 
@@ -78,6 +78,55 @@ function mapService(service: {
     href: service.href ?? undefined,
     isActive: service.isActive,
     sortOrder: service.sortOrder,
+  };
+}
+
+const arabicServiceCopy = new Map(
+  fallbackServices.ar.map((service) => [
+    service.slug,
+    {
+      title: service.title,
+      description: service.description,
+    },
+  ]),
+);
+
+const arabicServiceTitleAliases = new Map([
+  ["branding & identite", "branding"],
+  ["branding & identity", "branding"],
+  ["creation de sites web", "website-creation"],
+  ["website creation", "website-creation"],
+  ["videos promotionnelles", "promotional-videos"],
+  ["promotional videos", "promotional-videos"],
+  ["gestion reseaux sociaux", "social-media"],
+  ["social media", "social-media"],
+  ["publicites payantes", "paid-ads"],
+  ["paid ads", "paid-ads"],
+  ["publicite", "paid-ads"],
+  ["ads", "paid-ads"],
+  ["strategy", "stock-management"],
+  ["strategie", "stock-management"],
+  ["strategie digitale", "stock-management"],
+]);
+
+function normalizeServiceTitle(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function localizeArabicService(service: CmsService): CmsService {
+  const aliasSlug = arabicServiceTitleAliases.get(normalizeServiceTitle(service.title));
+  const copy = arabicServiceCopy.get(service.slug) ?? (aliasSlug ? arabicServiceCopy.get(aliasSlug) : undefined);
+  if (!copy) return service;
+
+  return {
+    ...service,
+    title: copy.title,
+    description: copy.description,
   };
 }
 
@@ -166,7 +215,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
     const localeCarouselImages = hero ? asCarousel(hero.carouselImages) : [];
     const frCarouselImages = frHero ? asCarousel(frHero.carouselImages) : [];
     const carouselImages = localeCarouselImages.length ? localeCarouselImages : frCarouselImages;
-    const serviceSource = services.length ? services : frServices;
+    const serviceSource = locale === "ar" ? services : services.length ? services : frServices;
     const partnerSource = partners.length ? partners : frPartners;
     const testimonialSource = testimonials.length ? testimonials : frTestimonials;
     const seoSource = seo ?? frSeo;
@@ -192,7 +241,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
           }
         : fallback.hero,
       services: serviceSource.length
-        ? serviceSource.map(mapService)
+        ? serviceSource.map(mapService).map((service) => locale === "ar" ? localizeArabicService(service) : service)
         : fallback.services,
       partners: partnerSource.length
         ? partnerSource.map((partner): CmsPartner => ({

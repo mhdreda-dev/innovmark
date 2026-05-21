@@ -26,9 +26,12 @@ export const fallbackServices: Record<Locale, CmsService[]> = {
     { slug: "branding", title: "Branding & Identity", description: "Logo, art direction and visual systems for a more desirable brand.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
   ],
   ar: [
-    { slug: "promotional-videos", title: "فيديوهات وإعلانات", description: "فيديوهات قصيرة وإعلانات كتشد الانتباه وكتبيّن قيمة المشروع ديالك.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
-    { slug: "website-creation", title: "تصميم المواقع", description: "مواقع وصفحات هبوط سريعة كتخلي الزائر يثق فالبراند من أول لحظة.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
-    { slug: "branding", title: "براندينغ وهوية", description: "لوغو، ألوان وطريقة عرض كتخلي المشروع ديالك واضح ومميز.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
+    { slug: "promotional-videos", title: "فيديوهات إعلانية", description: "فيديوهات قصيرة وإعلانات مصممة باش تشد الانتباه وتوصل قيمة المشروع ديالك بسرعة.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
+    { slug: "website-creation", title: "تصميم المواقع", description: "مواقع وصفحات هبوط سريعة وواضحة كتخلي الزائر يثق فخدمتك من أول لحظة.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
+    { slug: "branding", title: "البراندينغ والهوية", description: "لوغو، ألوان وطريقة عرض كتخلي الإسم ديال خدمتك واضح، منظم وساهل يتفكر.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
+    { slug: "social-media", title: "تسيير السوشيال ميديا", description: "خطة منشورات وتصاميم منظمة باش تبقى حاضر فالسوشيال ميديا بصورة احترافية.", icon: "Share2", tone: "cyan", isActive: true, sortOrder: 3 },
+    { slug: "paid-ads", title: "الإعلانات الممولة", description: "إعلانات Meta وGoogle وTikTok مبنية على عرض واضح وتتبع كيبين شنو خدام.", icon: "Megaphone", tone: "violet", isActive: true, sortOrder: 4 },
+    { slug: "stock-management", title: "الاستراتيجية الرقمية", description: "خطة واضحة فالإنترنت كتجمع الرسالة، المحتوى والإعلانات باش الخدمة تجيب نتائج مفهومة.", icon: "Boxes", tone: "emerald", isActive: true, sortOrder: 5 },
   ],
 };
 
