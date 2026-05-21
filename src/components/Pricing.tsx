@@ -51,27 +51,29 @@ export default function Pricing({ locale }: { locale?: Locale }) {
             kicker={isArabic ? "باقات الخدمة" : "Engagements"}
             title={isArabic ? "باقات احترافية لمشاريع جدية." : "Premium packages for serious business."}
             subtitle={isArabic ? "ما كنقدموش لائحة خدمات عامة. كل تعاون كنحددو فيه الهدف، السرعة، ومستوى الجودة اللي محتاج المشروع ديالك." : "No commodity agency menu. Each engagement is scoped around outcome, speed and the level of polish your brand needs."}
+            align={isArabic ? "center" : "left"}
           />
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className={`grid gap-5 md:grid-cols-2 xl:grid-cols-3 ${isArabic ? "items-stretch" : ""}`}>
           {displayedTiers.map((tier) => (
             <article
               key={tier.name}
-              className={`premium-glass relative flex min-h-[300px] min-w-0 flex-col rounded-2xl p-5 text-left md:min-h-[340px] md:p-8 ${
-                tier.featured ? "border-cyan-200/30 bg-white/[0.09]" : ""
-              } ${isArabic ? "text-right" : ""}`}
+              dir={isArabic ? "rtl" : "ltr"}
+              className={`premium-glass relative flex min-h-[300px] min-w-0 flex-col rounded-2xl md:min-h-[340px] ${
+                isArabic ? "h-full border-white/14 bg-white/[0.065] p-6 text-right md:p-8" : "p-5 text-left md:p-8"
+              } ${tier.featured ? "border-cyan-200/30 bg-white/[0.09]" : ""}`}
             >
               {tier.featured && (
-                <div className={`mb-5 w-fit rounded-full border border-cyan-200/24 bg-cyan-200/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-cyan-100 ${isArabic ? "ms-auto" : ""}`}>
+                <div className={`mb-5 w-fit rounded-full border border-cyan-200/24 bg-cyan-200/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-cyan-100 ${isArabic ? "self-start" : ""}`}>
                   {isArabic ? "الأكثر اختياراً" : "Most chosen"}
                 </div>
               )}
               <h3 className="text-2xl font-light tracking-tight text-white md:text-3xl">{tier.name}</h3>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-white/72 md:mt-4 md:leading-7">{tier.line}</p>
-              <ul className="mt-6 space-y-3 md:mt-8">
+              <p className={`mt-3 max-w-sm text-sm leading-6 md:mt-4 md:leading-7 ${isArabic ? "text-white/82" : "text-white/72"}`}>{tier.line}</p>
+              <ul className={`mt-6 space-y-3 md:mt-8 ${isArabic ? "text-right" : ""}`}>
                 {tier.scope.map((item) => (
-                  <li key={item} className={`flex items-start gap-3 text-sm leading-7 text-white/76 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
+                  <li key={item} className={`flex items-start gap-3 text-sm leading-7 ${isArabic ? "text-right text-white/84" : "text-white/76"}`}>
                     <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200/80" />
                     <span className="min-w-0">{item}</span>
                   </li>
@@ -79,7 +81,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
               </ul>
               <a
                 href={localizedHref("/contact", locale)}
-                className={`mt-7 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:mt-auto md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "md:ms-auto" : ""}`}
+                className={`mt-7 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:mt-auto md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "self-stretch border-white/24 bg-white/[0.035] text-white/90 md:self-start" : ""}`}
               >
                 {isArabic ? "طلب نطاق الخدمة" : "Request scope"}
               </a>
