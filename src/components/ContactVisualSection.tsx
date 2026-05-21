@@ -1,101 +1,41 @@
-"use client";
-
-import { motion } from "framer-motion";
-
-const CARD_GRADIENTS = [
-  "from-violet-500/25 via-purple-400/15 to-fuchsia-500/15",
-  "from-cyan-400/25 via-sky-400/15 to-blue-500/15",
-  "from-emerald-400/25 via-teal-400/15 to-green-500/15",
-];
-
-const CARD_DOT_COLORS = ["bg-violet-400", "bg-cyan-400", "bg-emerald-400"];
-
-const CARD_HOVER_SHADOWS = [
-  "hover:shadow-[0_0_56px_rgba(139,92,246,0.26)]",
-  "hover:shadow-[0_0_56px_rgba(34,211,238,0.26)]",
-  "hover:shadow-[0_0_56px_rgba(16,185,129,0.26)]",
-];
-
-const CARD_BAR_GRADIENTS = [
-  "from-violet-500/40 to-fuchsia-500/20",
-  "from-cyan-400/40 to-blue-500/20",
-  "from-emerald-400/40 to-teal-500/20",
-];
-
-/* Cubic bezier as a properly typed tuple */
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-type ServiceCard = { readonly label: string; readonly tag: string };
-type TrustItem = { readonly value: string; readonly label: string };
+const CONTACT_VISUAL_SRC = "/innovmark-frames/lg/frame_0090.webp";
 
 export default function ContactVisualSection({
-  serviceCards,
-  trustItems,
+  imageAlt = "INNOVMARK creative studio visual",
+  imageSrc = CONTACT_VISUAL_SRC,
 }: {
-  serviceCards: ReadonlyArray<ServiceCard>;
-  trustItems: ReadonlyArray<TrustItem>;
+  imageAlt?: string;
+  imageSrc?: string;
 }) {
   return (
-    <div className="flex flex-col gap-5">
-      {/* Service cards */}
-      <div className="flex flex-col gap-4">
-        {serviceCards.map((card, i) => (
-          <motion.div
-            key={card.label}
-            initial={{ opacity: 0, y: 22, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.13, duration: 0.72, ease: EASE }}
-            whileHover={{
-              scale: 1.025,
-              y: -4,
-              transition: { type: "spring", stiffness: 320, damping: 24 },
-            }}
-            className={`group relative min-w-0 overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br ${CARD_GRADIENTS[i]} p-4 transition-shadow duration-300 sm:p-5 ${CARD_HOVER_SHADOWS[i]} cursor-default select-none`}
-          >
-            <div className="absolute inset-0 bg-[#080c11]/70" />
+    <div className="relative h-[320px] overflow-hidden rounded-3xl border border-white/12 bg-white/[0.045] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm lg:h-[560px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-20 top-10 h-56 w-56 rounded-full bg-cyan-300/18 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 bottom-12 h-64 w-64 rounded-full bg-violet-400/20 blur-3xl"
+      />
 
-            <div className="relative flex items-center justify-between gap-4 rtl-row">
-              <div className="min-w-0">
-                <div className="text-xl font-light tracking-tight text-white">
-                  {card.label}
-                </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-[0.1em] text-white/50 md:tracking-[0.22em]">
-                  {card.tag}
-                </div>
-              </div>
-              <span
-                className={`h-2 w-2 shrink-0 rounded-full ${CARD_DOT_COLORS[i]} opacity-80`}
-              />
-            </div>
-
-            <div className="relative mt-4 h-12 overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.03]">
-              <div className={`absolute inset-0 bg-gradient-to-r ${CARD_BAR_GRADIENTS[i]}`} />
-              <div className="shimmer absolute inset-0" />
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Trust stats */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3">
-        {trustItems.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 14, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-30px" }}
-            transition={{ delay: 0.38 + i * 0.1, duration: 0.55, ease: EASE }}
-            className="flex min-w-0 flex-col items-center gap-1.5 rounded-xl border border-white/8 bg-white/[0.03] px-2 py-4 text-center"
-          >
-            <div className="text-base font-light tracking-tight text-white">
-              {item.value}
-            </div>
-            <div className="text-[9px] uppercase leading-tight tracking-[0.08em] text-white/48 md:tracking-[0.22em]">
-              {item.label}
-            </div>
-          </motion.div>
-        ))}
+      <div className="relative h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-[#080c11]">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="h-full w-full object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-br from-cyan-300/18 via-transparent to-violet-500/24"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.18),transparent_34%),linear-gradient(180deg,transparent,rgba(5,8,12,0.42))]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/50 to-transparent"
+        />
       </div>
     </div>
   );

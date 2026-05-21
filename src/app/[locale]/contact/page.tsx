@@ -118,11 +118,10 @@ export default async function LocalizedContactPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Visual section — Framer Motion handles its own entrance */}
+              {/* Visual card */}
               <div className="lg:sticky lg:top-32">
                 <ContactVisualSection
-                  serviceCards={page.serviceCards}
-                  trustItems={page.trustItems}
+                  imageAlt={`${page.title} · INNOVMARK`}
                 />
               </div>
             </div>
