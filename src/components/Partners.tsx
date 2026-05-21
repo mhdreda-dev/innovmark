@@ -24,19 +24,19 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
   if (!partners.length) return null;
 
   const copy = labels[locale];
-  const basePartners = partners.length > 0 ? partners : [];
+  const basePartners = partners.length ? partners : [];
   const minCards = 24;
-  const repeatCount = basePartners.length > 0
-    ? Math.max(4, Math.ceil(minCards / basePartners.length))
-    : 0;
-  const marqueePartners = Array.from({ length: repeatCount }).flatMap(() => basePartners);
-  const marqueeGroups = [
-    marqueePartners,
-    marqueePartners,
-  ];
+  const repeatedPartners = Array.from({
+    length: Math.max(6, Math.ceil(minCards / basePartners.length)),
+  }).flatMap(() => basePartners);
+  const marqueeItems = [...repeatedPartners, ...repeatedPartners];
 
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20">
+    <section
+      className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20"
+      dir="ltr"
+      style={{ direction: "ltr", unicodeBidi: "isolate" }}
+    >
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_82%_58%,rgba(16,185,129,0.10),transparent_30%)]" />
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : undefined}>
@@ -53,28 +53,25 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       >
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
-        <div className="partners-marquee flex w-max min-w-max hover:[animation-play-state:paused]">
-          {marqueeGroups.map((group, groupIndex) => (
-            <div key={groupIndex} className="flex shrink-0 gap-4 px-5 sm:gap-5" aria-hidden={groupIndex === 1}>
-              {group.map((partner, index) => (
-                <a
-                  key={`${partner.name}-${groupIndex}-${index}`}
-                  href={partner.websiteUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
-                  className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.055] px-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-100/32 hover:bg-white/[0.09] sm:h-32 sm:w-60"
-                >
-                  <img
-                    src={partner.logoUrl}
-                    alt={partner.name}
-                    className="max-h-14 w-auto max-w-full object-contain opacity-72 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:max-h-16"
-                    loading="lazy"
-                  />
-                  <span className="sr-only">{partner.name}</span>
-                </a>
-              ))}
-            </div>
+        <div className="partners-marquee flex w-max min-w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
+          {marqueeItems.map((partner, index) => (
+            <a
+              key={`${partner.name}-${index}`}
+              href={partner.websiteUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
+              aria-hidden={index >= repeatedPartners.length}
+              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.055] px-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-100/32 hover:bg-white/[0.09] sm:h-32 sm:w-60"
+            >
+              <img
+                src={partner.logoUrl}
+                alt={partner.name}
+                className="max-h-14 w-auto max-w-full object-contain opacity-72 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:max-h-16"
+                loading="lazy"
+              />
+              <span className="sr-only">{partner.name}</span>
+            </a>
           ))}
         </div>
       </div>
