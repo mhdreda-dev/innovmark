@@ -228,11 +228,12 @@ export function ImageCarouselHero({
             <div className="ihc-track" aria-label="Hero media gallery">
               {marqueeSets.map((set, setIndex) => (
                 <div className="ihc-loop" key={setIndex} aria-hidden={setIndex === 1}>
-                  {set.map(({ id, imageUrl, alt }, index) => (
+                  {set.map(({ id, imageUrl, alt, rotation }, index) => (
                     <figure
                       key={`${id}-${setIndex}-${index}`}
                       className="ihc-card"
                       aria-label={alt}
+                      style={{ "--card-rotation": `${rotation ?? 0}deg` } as React.CSSProperties}
                     >
                       <img
                         src={imageUrl}
@@ -635,26 +636,35 @@ const css = `
   position: relative;
   flex: 0 0 auto;
   height: 11rem;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(13,15,20,0.55));
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.045);
   box-shadow:
-    0 30px 80px -34px rgba(0,0,0,0.76),
+    0 28px 72px -38px rgba(0,0,0,0.86),
+    0 0 46px -32px rgba(122,217,255,0.72),
     0 0 0 1px rgba(255,255,255,0.08) inset;
   transform-origin: 50% 70%;
   will-change: transform, opacity;
+  transform: rotate(var(--card-rotation, 0deg));
   transition: transform 0.45s ease, opacity 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
 }
-.ihc-card:nth-child(odd) { transform: rotate(-2deg); }
-.ihc-card:nth-child(even) { transform: rotate(3deg); }
+.ihc-card::before {
+  content: "";
+  position: absolute;
+  inset: -24%;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 8%, rgba(122,217,255,0.28), transparent 44%);
+  opacity: 0.72;
+  pointer-events: none;
+}
 .ihc-card:hover {
   transform: translateY(-3px) rotate(0deg);
   border-color: rgba(255,255,255,0.24);
   box-shadow:
-    0 42px 100px -34px rgba(0,0,0,0.92),
-    0 0 65px -28px rgba(122,217,255,0.45),
+    0 34px 86px -38px rgba(0,0,0,0.92),
+    0 0 58px -30px rgba(122,217,255,0.58),
     0 0 0 1px rgba(255,255,255,0.12) inset;
 }
 .ihc-card:focus-visible {
@@ -666,17 +676,19 @@ const css = `
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.ihc-card:hover .ihc-card-img { transform: scale(1.045); }
+.ihc-card:hover .ihc-card-img { transform: scale(1.025); }
 
 /* Bottom gradient overlay — text always readable */
 .ihc-card-gradient {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
-    linear-gradient(to bottom, rgba(255,255,255,0.07), transparent 50%, rgba(4,5,9,0.08) 100%),
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), transparent 44%);
+    linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 42%, rgba(4,7,14,0.38) 100%),
+    linear-gradient(135deg, rgba(122,217,255,0.18), transparent 45%, rgba(154,108,255,0.18)),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.16), transparent 44%);
   pointer-events: none;
 }
 
