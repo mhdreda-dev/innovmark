@@ -15,7 +15,7 @@ export interface HeroImage {
 export const heroImages: HeroImage[] = [
   {
     id: "product-shoot",
-    src: "/images/hero-showcase/product-shoot.jpg",
+    src: "/images/hero-showcase/product-shoot.png",
     alt: "Product shoot showcase",
     rotation: -3,
   },
@@ -33,7 +33,7 @@ export const heroImages: HeroImage[] = [
   },
   {
     id: "social-media-showcase",
-    src: "/images/hero-showcase/social-media-showcase.jpg",
+    src: "/images/hero-showcase/social-media-showcase.png",
     alt: "Social media showcase",
     rotation: 3,
   },
