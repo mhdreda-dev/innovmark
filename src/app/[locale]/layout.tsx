@@ -23,7 +23,42 @@ export default async function LocaleLayout({ children, params }: Props) {
       {/* ── Shared ambient background ─ fixed layer behind all page content ── */}
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden" style={{ zIndex: 0 }}>
         {/* Base canvas */}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(165deg,#ffffff 0%,#f8fbff 34%,#f3f6fb 68%,#ffffff 100%)" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(165deg,#ffffff 0%,#fbfdff 30%,#f6f8fc 62%,#ffffff 100%)",
+          }}
+        />
+        {/* Soft depth wash, like a premium product page canvas */}
+        <div
+          className="absolute inset-0 opacity-80"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 52% at 50% -8%,rgba(79,140,255,0.105),transparent 64%), radial-gradient(ellipse 52% 42% at 8% 18%,rgba(125,211,252,0.07),transparent 68%), radial-gradient(ellipse 46% 48% at 92% 12%,rgba(79,140,255,0.06),transparent 70%)",
+          }}
+        />
+        {/* Almost invisible grid to keep the light theme from feeling flat */}
+        <div
+          className="absolute inset-0 opacity-[0.26]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(79,140,255,0.045) 1px,transparent 1px), linear-gradient(90deg,rgba(79,140,255,0.04) 1px,transparent 1px)",
+            backgroundSize: "88px 88px",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 78% 58% at 50% 18%,black,transparent 78%)",
+            maskImage:
+              "radial-gradient(ellipse 78% 58% at 50% 18%,black,transparent 78%)",
+          }}
+        />
+        {/* Fine paper grain */}
+        <div
+          className="absolute inset-0 opacity-[0.11] mix-blend-multiply"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.33 0 0 0 0 0.42 0 0 0 0 0.55 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          }}
+        />
         {/* Top-center hero glow — gives every page a lit feel from the top */}
         <div className="absolute -top-[8%] left-1/2 -translate-x-1/2 w-[80vw] h-[55vh] rounded-full" style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(79,140,255,0.13),transparent 64%)", filter: "blur(82px)" }} />
         {/* Upper-left blue orb */}

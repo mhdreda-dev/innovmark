@@ -270,11 +270,12 @@ body > div {
 
 .innovmark-light-theme .premium-glass {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.54)),
-    radial-gradient(ellipse at 20% 0%, rgba(79, 140, 255, 0.08), transparent 58%);
-  border: 1px solid rgba(79, 140, 255, 0.14);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
+    radial-gradient(ellipse at 20% 0%, rgba(79, 140, 255, 0.09), transparent 58%);
+  border: 1px solid rgba(79, 140, 255, 0.16);
   box-shadow:
-    0 26px 80px rgba(15, 23, 42, 0.09),
+    0 24px 70px rgba(15, 23, 42, 0.085),
+    0 12px 28px rgba(79, 140, 255, 0.045),
     0 1px 0 rgba(255, 255, 255, 0.9) inset;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
