@@ -140,10 +140,10 @@ export default function Services({
       <section className="relative overflow-hidden px-4 pb-14 pt-10 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[900px] -translate-x-1/2 rounded-full opacity-70 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-4 h-[180px] w-[360px] -translate-x-1/2 rounded-full opacity-35 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(56,189,248,0.16), transparent 32%), radial-gradient(circle at 70% 40%, rgba(139,92,246,0.18), transparent 38%), radial-gradient(circle at 30% 70%, rgba(16,185,129,0.12), transparent 40%)",
+              "radial-gradient(circle, rgba(79,140,255,0.07), transparent 56%), radial-gradient(circle at 70% 40%, rgba(125,211,252,0.045), transparent 62%)",
           }}
         />
 
@@ -184,7 +184,7 @@ export default function Services({
                 <Link
                   key={service.slug}
                   href={localizedHref("href" in service && service.href ? service.href : `/services/${service.slug}`, locale)}
-                  className="premium-glass group reveal-on-scroll relative flex min-h-[240px] min-w-0 flex-col overflow-hidden rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.085] md:min-h-[250px] md:p-8"
+                  className="premium-glass group reveal-on-scroll relative flex min-h-[250px] min-w-0 flex-col overflow-hidden rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/95 md:min-h-[260px] md:p-8"
                   style={{ transitionDelay: `${Math.min(index, 5) * 70}ms` }}
                 >
                   <div
@@ -192,7 +192,7 @@ export default function Services({
                     className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${toneClass[service.tone as keyof typeof toneClass]} to-transparent`}
                   />
                   <div
-                    className={`mb-8 flex h-12 w-12 items-center justify-center rounded-xl border border-white/12 bg-gradient-to-br ${toneClass[service.tone as keyof typeof toneClass]} to-transparent transition duration-300 group-hover:shadow-[0_0_34px_rgba(34,211,238,0.16)]`}
+                    className={`mb-8 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-100/80 bg-gradient-to-br ${toneClass[service.tone as keyof typeof toneClass]} to-white/70 text-slate-700 transition duration-300 group-hover:shadow-[0_10px_24px_rgba(79,140,255,0.12)]`}
                   >
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </div>
@@ -227,7 +227,7 @@ export default function Services({
               return (
                 <article
                   key={reason.title}
-                  className="reveal-on-scroll rounded-2xl border border-white/10 bg-white/[0.045] p-5 transition duration-300 hover:-translate-y-1 hover:border-emerald-200/25 hover:bg-white/[0.07] md:p-6"
+                  className="reveal-on-scroll rounded-2xl border border-blue-100/70 bg-white/78 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.055)] transition duration-300 hover:-translate-y-1 hover:border-blue-300/40 hover:bg-white md:p-6"
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
                   <Icon className="h-5 w-5 text-emerald-200" strokeWidth={1.7} />
@@ -246,7 +246,7 @@ export default function Services({
         <div className="premium-glass reveal-on-scroll relative mx-auto flex max-w-7xl flex-col gap-7 overflow-hidden rounded-2xl p-5 md:flex-row md:items-center md:justify-between md:p-10 rtl-md-row">
           <div
             aria-hidden
-            className="absolute right-0 top-0 h-44 w-44 rounded-full bg-cyan-300/10 blur-3xl"
+            className="absolute right-6 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl"
           />
           <div className="relative">
             <BadgeCheck className="mb-5 h-6 w-6 text-cyan-200" strokeWidth={1.6} />
@@ -259,7 +259,7 @@ export default function Services({
           </div>
           <Link
             href={localizedHref("/contact", locale)}
-            className="relative inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:bg-cyan-100 md:w-auto md:min-w-64 md:tracking-[0.18em]"
+            className="relative inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-[#fff] shadow-[0_12px_28px_rgba(79,140,255,0.24)] transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto md:min-w-64 md:tracking-[0.18em]"
           >
             {isArabic ? "بدا دابا" : "Demarrer"} <ArrowRight className="h-4 w-4 rtl-arrow" />
           </Link>

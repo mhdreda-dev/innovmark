@@ -99,16 +99,23 @@ export default function Footer({ locale }: { locale?: string }) {
   const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل معنا فواتساب");
 
   return (
-    <footer className="relative overflow-hidden bg-white/68 backdrop-blur-md">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/80 to-transparent" />
+    <footer className="relative overflow-hidden border-t border-blue-100/80 bg-white/86 shadow-[0_-18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/70 to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-28 max-w-4xl opacity-[0.10] blur-3xl"
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(79,140,255,0.55), transparent 68%)",
+        }}
+      />
 
       {/* ══════════════════════════════════════════
           DESKTOP layout  (md and above)
       ══════════════════════════════════════════ */}
       <div className="hidden md:block">
-        <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-10">
+        <div className="relative mx-auto max-w-7xl px-6 pb-8 pt-[4.5rem] lg:px-10">
           {/* 4-column grid — unchanged from original */}
-          <div className="grid grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-10 pb-16 rtl-text-right">
+          <div className="grid grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-10 pb-14 rtl-text-right">
             {/* Brand column */}
             <div>
               <div className="mb-5 flex items-center gap-2">
@@ -130,7 +137,7 @@ export default function Footer({ locale }: { locale?: string }) {
                 <h4 className="mb-5 text-[11px] tracking-[0.34em] uppercase text-slate-900">
                   {title}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-3.5">
                   {cols.map((l) => (
                     <li key={l.label}>
                       <a
@@ -161,7 +168,7 @@ export default function Footer({ locale }: { locale?: string }) {
           MOBILE layout  (below md)
       ══════════════════════════════════════════ */}
       <div className="md:hidden">
-        <div className="mx-auto max-w-lg px-4 pt-10 pb-8 sm:px-6">
+        <div className="relative mx-auto max-w-lg px-4 pb-8 pt-11 sm:px-6">
 
           {/* Logo */}
           <div className="mb-3 flex items-center gap-2 rtl-row">

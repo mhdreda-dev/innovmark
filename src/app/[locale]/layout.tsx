@@ -32,19 +32,19 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
         {/* Soft depth wash, like a premium product page canvas */}
         <div
-          className="absolute inset-0 opacity-80"
+          className="absolute inset-0 opacity-70"
           style={{
             background:
-              "radial-gradient(ellipse 80% 52% at 50% -8%,rgba(79,140,255,0.105),transparent 64%), radial-gradient(ellipse 52% 42% at 8% 18%,rgba(125,211,252,0.07),transparent 68%), radial-gradient(ellipse 46% 48% at 92% 12%,rgba(79,140,255,0.06),transparent 70%)",
+              "radial-gradient(ellipse 58% 34% at 50% -6%,rgba(79,140,255,0.075),transparent 68%), radial-gradient(ellipse 26% 22% at 10% 16%,rgba(125,211,252,0.035),transparent 72%), radial-gradient(ellipse 26% 24% at 92% 14%,rgba(79,140,255,0.032),transparent 74%)",
           }}
         />
         {/* Almost invisible grid to keep the light theme from feeling flat */}
         <div
-          className="absolute inset-0 opacity-[0.26]"
+          className="absolute inset-0 opacity-[0.16]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(79,140,255,0.045) 1px,transparent 1px), linear-gradient(90deg,rgba(79,140,255,0.04) 1px,transparent 1px)",
-            backgroundSize: "88px 88px",
+              "linear-gradient(rgba(79,140,255,0.035) 1px,transparent 1px), linear-gradient(90deg,rgba(79,140,255,0.032) 1px,transparent 1px)",
+            backgroundSize: "104px 104px",
             WebkitMaskImage:
               "radial-gradient(ellipse 78% 58% at 50% 18%,black,transparent 78%)",
             maskImage:
@@ -53,24 +53,20 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
         {/* Fine paper grain */}
         <div
-          className="absolute inset-0 opacity-[0.11] mix-blend-multiply"
+          className="absolute inset-0 opacity-[0.075] mix-blend-multiply"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.33 0 0 0 0 0.42 0 0 0 0 0.55 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
           }}
         />
-        {/* Top-center hero glow — gives every page a lit feel from the top */}
-        <div className="absolute -top-[8%] left-1/2 -translate-x-1/2 w-[80vw] h-[55vh] rounded-full" style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(79,140,255,0.13),transparent 64%)", filter: "blur(82px)" }} />
-        {/* Upper-left blue orb */}
-        <div className="absolute -top-[5%] -left-[8%] w-[52vw] h-[52vh] rounded-full" style={{ background: "radial-gradient(ellipse,rgba(79,140,255,0.10),transparent 68%)", filter: "blur(92px)" }} />
-        {/* Mid-right violet orb */}
-        <div className="absolute top-[30%] -right-[6%] w-[48vw] h-[50vh] rounded-full" style={{ background: "radial-gradient(ellipse at right,rgba(79,140,255,0.08),transparent 68%)", filter: "blur(104px)" }} />
-        {/* Lower-center teal orb */}
-        <div className="absolute top-[62%] left-[18%] w-[58vw] h-[48vh] rounded-full" style={{ background: "radial-gradient(ellipse,rgba(125,211,252,0.08),transparent 68%)", filter: "blur(108px)" }} />
-        {/* Bottom-right accent */}
-        <div className="absolute top-[85%] right-[12%] w-[44vw] h-[42vh] rounded-full" style={{ background: "radial-gradient(ellipse at right,rgba(79,140,255,0.09),transparent 68%)", filter: "blur(92px)" }} />
+        {/* Top-center hero glow — small and restrained */}
+        <div className="absolute -top-[4%] left-1/2 h-[24vh] w-[34vw] -translate-x-1/2 rounded-full" style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(79,140,255,0.075),transparent 70%)", filter: "blur(72px)" }} />
+        {/* Small corner accents, reduced to avoid random blob noise */}
+        <div className="absolute top-[14%] -left-[4%] h-[18vh] w-[18vw] rounded-full" style={{ background: "radial-gradient(ellipse,rgba(79,140,255,0.045),transparent 72%)", filter: "blur(70px)" }} />
+        <div className="absolute top-[42%] -right-[4%] h-[18vh] w-[17vw] rounded-full" style={{ background: "radial-gradient(ellipse at right,rgba(79,140,255,0.038),transparent 74%)", filter: "blur(76px)" }} />
+        <div className="absolute top-[78%] left-[16%] h-[16vh] w-[22vw] rounded-full" style={{ background: "radial-gradient(ellipse,rgba(125,211,252,0.035),transparent 74%)", filter: "blur(80px)" }} />
         {/* Subtle aurora shimmer across upper area */}
-        <div className="absolute top-[5%] left-[10%] w-[80vw] h-[40vh] rounded-full" style={{ background: "radial-gradient(ellipse at 40% 0%,rgba(79,140,255,0.06),transparent 58%)", filter: "blur(128px)", animation: "ambientAurora 28s ease-in-out infinite alternate" }} />
+        <div className="absolute top-[7%] left-[20%] h-[22vh] w-[42vw] rounded-full" style={{ background: "radial-gradient(ellipse at 40% 0%,rgba(79,140,255,0.032),transparent 64%)", filter: "blur(108px)", animation: "ambientAurora 28s ease-in-out infinite alternate" }} />
       </div>
       <style>{`
         @keyframes ambientAurora {

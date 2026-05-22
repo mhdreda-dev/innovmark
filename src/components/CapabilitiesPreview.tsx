@@ -83,11 +83,11 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
             >
               <div
                 aria-hidden
-                className={`absolute -right-12 -top-12 h-48 w-48 rounded-full bg-gradient-to-br ${c.accent} blur-2xl transition-opacity duration-500 group-hover:opacity-150`}
+                className={`absolute -right-8 -top-8 h-28 w-28 rounded-full bg-gradient-to-br ${c.accent} opacity-55 blur-2xl transition-opacity duration-500 group-hover:opacity-80`}
               />
               <div
                 aria-hidden
-                className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/14 to-transparent"
+                className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-200/45 to-transparent"
               />
 
               <div className="relative">
@@ -103,13 +103,13 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
                 </p>
               </div>
 
-              <div className="relative mt-7 flex items-center justify-between border-t border-white/[0.08] pt-5 md:mt-9 md:pt-6 rtl-row">
+              <div className="relative mt-7 flex items-center justify-between border-t border-blue-100/70 pt-5 md:mt-9 md:pt-6 rtl-row">
                 <span className="text-[10px] uppercase tracking-[0.12em] text-white/64 transition-colors group-hover:text-white md:tracking-[0.26em]">
                   {c.cta}
                 </span>
                 <span
                   aria-hidden
-                  className="grid h-9 w-9 place-items-center rounded-full border border-white/16 bg-white/[0.04] text-white/72 transition-all duration-300 group-hover:translate-x-1 group-hover:border-cyan-200/40 group-hover:bg-cyan-200/10 group-hover:text-white rtl-arrow"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-blue-100/80 bg-white/72 text-slate-600 shadow-[0_8px_20px_rgba(15,23,42,0.055)] transition-all duration-300 group-hover:translate-x-1 group-hover:border-blue-300/50 group-hover:bg-white group-hover:text-blue-700 rtl-arrow"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-3.5 w-3.5">
                     <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />

@@ -101,10 +101,10 @@ export default function Process({
       <section className="relative overflow-hidden px-4 pb-14 pt-10 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 h-[440px] w-[820px] -translate-x-1/2 rounded-full opacity-70 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-4 h-[180px] w-[340px] -translate-x-1/2 rounded-full opacity-35 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle at 30% 42%, rgba(56,189,248,0.17), transparent 36%), radial-gradient(circle at 66% 36%, rgba(139,92,246,0.18), transparent 38%), radial-gradient(circle at 52% 78%, rgba(16,185,129,0.11), transparent 36%)",
+              "radial-gradient(circle at 40% 36%, rgba(79,140,255,0.07), transparent 58%), radial-gradient(circle at 66% 48%, rgba(125,211,252,0.045), transparent 64%)",
           }}
         />
 
@@ -137,7 +137,7 @@ export default function Process({
           <div className="relative mt-10 md:mt-14">
             <div
               aria-hidden
-              className="absolute bottom-10 start-6 top-10 w-px bg-gradient-to-b from-cyan-200/30 via-violet-200/25 to-emerald-200/30 md:start-1/2 md:-translate-x-1/2"
+              className="absolute bottom-10 start-6 top-10 w-px bg-gradient-to-b from-blue-300/35 via-blue-200/22 to-cyan-200/28 md:start-1/2 md:-translate-x-1/2"
             />
 
             <ol className="grid gap-5">
@@ -152,16 +152,16 @@ export default function Process({
                     style={{ transitionDelay: `${index * 90}ms` }}
                   >
                     <div className="hidden md:block" />
-                    <div className="relative z-10 ml-0 flex h-14 w-14 items-center justify-center rounded-full border border-white/14 bg-black shadow-[0_0_40px_rgba(34,211,238,0.14)] md:mx-auto">
-                      <span className="font-mono text-sm text-white">{step.n}</span>
+                    <div className="relative z-10 ml-0 flex h-14 w-14 items-center justify-center rounded-full border border-blue-100/80 bg-white shadow-[0_12px_28px_rgba(79,140,255,0.12)] md:mx-auto">
+                      <span className="font-mono text-sm text-blue-700">{step.n}</span>
                     </div>
                     <article
-                      className={`premium-glass group min-w-0 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-200/25 hover:bg-white/[0.08] md:p-8 ${
+                      className={`premium-glass group min-w-0 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/95 md:p-8 ${
                         alignRight ? "md:col-start-3" : "md:col-start-1 md:row-start-1"
                       }`}
                     >
                       <div className="flex items-center gap-4 rtl-row">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/12 bg-white/[0.055] text-cyan-200 transition group-hover:text-emerald-200">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100/80 bg-white/72 text-blue-600 transition group-hover:text-blue-700">
                           <Icon className="h-5 w-5" strokeWidth={1.6} />
                         </div>
                         <h3 className="text-2xl font-light tracking-tight text-white">
@@ -178,7 +178,7 @@ export default function Process({
                             className="flex items-center gap-3 text-sm text-white/70 rtl-row"
                           >
                             <CheckCircle2
-                            className="h-4 w-4 shrink-0 text-emerald-200"
+                            className="h-4 w-4 shrink-0 text-blue-500"
                               strokeWidth={1.8}
                             />
                             {point}
@@ -199,7 +199,7 @@ export default function Process({
         <div className="premium-glass reveal-on-scroll relative mx-auto flex max-w-7xl flex-col gap-7 overflow-hidden rounded-2xl p-5 md:flex-row md:items-center md:justify-between md:p-10 rtl-md-row">
           <div
             aria-hidden
-            className="absolute right-0 top-0 h-44 w-44 rounded-full bg-violet-300/10 blur-3xl"
+            className="absolute right-6 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl"
           />
           <div className="relative">
             <Sparkles className="mb-5 h-6 w-6 text-violet-200" strokeWidth={1.6} />
@@ -212,7 +212,7 @@ export default function Process({
           </div>
           <Link
             href={localizedHref("/contact", locale)}
-            className="relative inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:bg-violet-100 md:w-auto md:min-w-72 md:tracking-[0.18em]"
+            className="relative inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-[#fff] shadow-[0_12px_28px_rgba(79,140,255,0.24)] transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto md:min-w-72 md:tracking-[0.18em]"
           >
             {isArabic ? "بدا دابا" : "Demarrer"} <ArrowRight className="h-4 w-4 rtl-arrow" />
           </Link>

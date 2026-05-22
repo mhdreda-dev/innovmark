@@ -41,10 +41,10 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
     <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-20 lg:px-10">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-4 mx-auto h-[420px] max-w-5xl rounded-full opacity-70 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-8 mx-auto h-[170px] max-w-2xl rounded-full opacity-30 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle at 28% 36%, rgba(34,211,238,0.18), transparent 34%), radial-gradient(circle at 72% 46%, rgba(16,185,129,0.16), transparent 36%), radial-gradient(circle at 50% 74%, rgba(255,255,255,0.06), transparent 34%)",
+            "radial-gradient(circle at 38% 40%, rgba(79,140,255,0.07), transparent 58%), radial-gradient(circle at 68% 48%, rgba(125,211,252,0.045), transparent 64%)",
         }}
       />
 
@@ -58,11 +58,11 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
         <article className="premium-glass reveal-on-scroll relative mt-10 min-w-0 overflow-hidden rounded-3xl p-4 shadow-[0_34px_140px_rgba(6,182,212,0.10)] sm:p-5 md:mt-14 md:p-8 lg:p-10">
           <div
             aria-hidden
-            className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cyan-300/15 blur-3xl"
+            className="absolute right-4 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl"
           />
           <div
             aria-hidden
-            className="absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-emerald-300/12 blur-3xl"
+            className="absolute bottom-0 left-10 h-24 w-24 rounded-full bg-cyan-300/[0.045] blur-3xl"
           />
           <div
             aria-hidden
@@ -144,11 +144,11 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
         >
           <div
             aria-hidden
-            className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-cyan-300/14 blur-3xl transition-opacity duration-500 group-hover:opacity-150"
+            className="absolute right-4 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl transition-opacity duration-500 group-hover:opacity-80"
           />
           <div
             aria-hidden
-            className="absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-emerald-300/12 blur-3xl"
+            className="absolute bottom-0 left-1/3 h-20 w-20 rounded-full bg-cyan-300/[0.045] blur-3xl"
           />
 
           <div className="relative flex min-w-0 flex-col gap-5 sm:flex-row rtl-md-row">

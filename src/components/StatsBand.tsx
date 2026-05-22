@@ -19,28 +19,28 @@ export default function StatsBand({ locale }: { locale?: string }) {
     <section className="relative overflow-hidden py-16 md:py-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-50"
+        className="pointer-events-none absolute inset-x-0 top-8 mx-auto h-36 max-w-3xl opacity-25 blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse 50% 32% at 22% 20%, rgba(56,189,248,0.10), transparent 64%), radial-gradient(ellipse 50% 32% at 78% 80%, rgba(167,139,250,0.10), transparent 64%)",
+            "radial-gradient(ellipse 52% 36% at 50% 0%, rgba(79,140,255,0.055), transparent 70%)",
         }}
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.015] backdrop-blur-md md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-blue-100/80 bg-blue-100/50 shadow-[0_18px_48px_rgba(15,23,42,0.075)] backdrop-blur-md md:grid-cols-4">
           {items.map((s) => (
             <div
               key={s.label}
-              className="relative min-w-0 bg-black/45 px-4 py-7 text-center md:px-8 md:py-12 md:text-left rtl-text-right"
+              className="relative min-w-0 bg-white/88 px-4 py-7 text-center md:px-8 md:py-12 md:text-left rtl-text-right"
             >
               <div
                 aria-hidden
-                className="absolute start-5 top-5 h-6 w-px bg-gradient-to-b from-cyan-200/60 to-transparent md:start-8 md:top-8 md:h-7"
+                className="absolute start-5 top-5 h-6 w-px bg-gradient-to-b from-blue-400/50 to-transparent md:start-8 md:top-8 md:h-7"
               />
-              <div className="cinematic-text text-3xl font-light tracking-tight text-white md:text-5xl">
+              <div className="cinematic-text text-3xl font-light tracking-tight text-slate-950 md:text-5xl">
                 {s.value}
               </div>
-              <div className="mt-3 text-[10px] uppercase tracking-[0.12em] text-white/52 md:mt-4 md:text-[11px] md:tracking-[0.28em]">
+              <div className="mt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500 md:mt-4 md:text-[11px] md:tracking-[0.28em]">
                 {s.label}
               </div>
             </div>

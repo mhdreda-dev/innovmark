@@ -13,15 +13,15 @@ export default function CTA({ locale }: { locale?: string }) {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-12 md:py-20"
+      className="relative overflow-hidden py-16 md:py-24"
     >
       {/* Layered gradient background — pure CSS */}
       <div
         aria-hidden
-        className="absolute inset-x-8 inset-y-4 opacity-[0.18] blur-3xl"
+        className="absolute inset-x-10 top-10 mx-auto h-40 max-w-3xl opacity-[0.12] blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse 46% 50% at 50% 100%, rgba(79,140,255,0.72), transparent 70%), radial-gradient(ellipse 34% 42% at 14% 34%, rgba(125,211,252,0.62), transparent 72%)",
+            "radial-gradient(ellipse 42% 46% at 50% 50%, rgba(79,140,255,0.52), transparent 72%), radial-gradient(ellipse 28% 34% at 18% 42%, rgba(125,211,252,0.35), transparent 76%)",
         }}
       />
       <div
@@ -34,7 +34,7 @@ export default function CTA({ locale }: { locale?: string }) {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-      <div className="premium-glass relative min-w-0 rounded-2xl px-4 py-9 text-center sm:px-5 md:px-10 md:py-16">
+      <div className="premium-glass relative min-w-0 rounded-2xl px-4 py-9 text-center shadow-[0_24px_70px_rgba(15,23,42,0.09)] sm:px-5 md:px-10 md:py-16">
         <div className="mb-5 inline-flex max-w-full items-center gap-3 md:mb-6">
           <span className="h-px w-6 shrink-0 bg-gradient-to-r from-cyan-200 to-violet-400 sm:w-8" />
           <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-blue-700/72 md:text-[11px] md:tracking-[0.46em]">

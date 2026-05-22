@@ -270,15 +270,30 @@ body > div {
 
 .innovmark-light-theme .premium-glass {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
-    radial-gradient(ellipse at 20% 0%, rgba(79, 140, 255, 0.09), transparent 58%);
-  border: 1px solid rgba(79, 140, 255, 0.16);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.74)),
+    radial-gradient(ellipse at 18% 0%, rgba(79, 140, 255, 0.055), transparent 60%);
+  border: 1px solid rgba(79, 140, 255, 0.13);
   box-shadow:
-    0 24px 70px rgba(15, 23, 42, 0.085),
-    0 12px 28px rgba(79, 140, 255, 0.045),
+    0 20px 54px rgba(15, 23, 42, 0.075),
+    0 8px 22px rgba(79, 140, 255, 0.035),
     0 1px 0 rgba(255, 255, 255, 0.9) inset;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+.innovmark-light-theme main > div:not(:first-child) {
+  position: relative;
+}
+
+.innovmark-light-theme main > div:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: max(1rem, calc((100vw - 80rem) / 2));
+  right: max(1rem, calc((100vw - 80rem) / 2));
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 140, 255, 0.16), transparent);
+  pointer-events: none;
 }
 
 .innovmark-light-theme [class*="text-white"] {
@@ -342,7 +357,7 @@ body > div {
 .innovmark-light-theme [class*="shadow-[0_32"],
 .innovmark-light-theme [class*="shadow-[0_34"],
 .innovmark-light-theme [class*="shadow-2xl"] {
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.075) !important;
 }
 
 .innovmark-light-theme [class*="from-black"] {
@@ -405,9 +420,9 @@ body > div {
 
   .innovmark-light-theme .premium-glass {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.62)),
-      radial-gradient(ellipse at 20% 0%, rgba(79, 140, 255, 0.08), transparent 58%);
-    box-shadow: 0 14px 38px rgba(15, 23, 42, 0.08);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)),
+      radial-gradient(ellipse at 20% 0%, rgba(79, 140, 255, 0.055), transparent 58%);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
     backdrop-filter: blur(12px);
   }
 

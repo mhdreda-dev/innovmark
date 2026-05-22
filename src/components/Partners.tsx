@@ -33,16 +33,16 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
 
   return (
     <section
-      className="relative overflow-hidden border-y border-blue-100/60 bg-white/54 py-16 shadow-[0_18px_70px_rgba(79,140,255,0.06)] backdrop-blur-xl sm:py-20"
+      className="relative overflow-hidden border-y border-blue-100/70 bg-white/76 py-16 shadow-[0_18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:py-20"
       dir="ltr"
       style={{ direction: "ltr", unicodeBidi: "isolate" }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-28 h-72 opacity-[0.08] blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-28 h-32 opacity-[0.06] blur-3xl"
         style={{
           background:
-            "radial-gradient(circle at 18% 55%, rgba(34,211,238,0.9), transparent 24%), radial-gradient(circle at 82% 62%, rgba(16,185,129,0.75), transparent 26%)",
+            "radial-gradient(circle at 28% 55%, rgba(79,140,255,0.8), transparent 32%), radial-gradient(circle at 72% 62%, rgba(125,211,252,0.55), transparent 34%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-5">
@@ -69,7 +69,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
               rel="noreferrer"
               aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
               aria-hidden={index >= repeatedPartners.length}
-              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-blue-100/70 bg-white/72 px-6 shadow-[0_18px_54px_rgba(15,23,42,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/44 hover:bg-white/90 sm:h-32 sm:w-60"
+              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-blue-100/80 bg-white/90 px-6 shadow-[0_12px_34px_rgba(15,23,42,0.07)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/55 hover:bg-white hover:shadow-[0_18px_44px_rgba(15,23,42,0.10)] sm:h-32 sm:w-60"
             >
               <img
                 src={partner.logoUrl}

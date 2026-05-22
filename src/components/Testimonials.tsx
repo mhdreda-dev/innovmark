@@ -67,13 +67,13 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
   const loop = [...items, ...items];
 
   return (
-    <section className="relative overflow-hidden py-14 md:py-24" dir={isArabic ? "rtl" : undefined}>
+    <section className="relative overflow-hidden py-16 md:py-24" dir={isArabic ? "rtl" : undefined}>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-40 max-w-3xl opacity-30 blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(56,189,248,0.10), transparent 64%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(167,139,250,0.10), transparent 64%)",
+            "radial-gradient(ellipse 50% 40% at 50% 0%, rgba(79,140,255,0.055), transparent 70%)",
         }}
       />
 
@@ -90,11 +90,11 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
         <>
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent md:w-40"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white via-white/92 to-transparent md:w-40"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent md:w-40"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white via-white/92 to-transparent md:w-40"
           />
         </>
       )}
@@ -104,12 +104,12 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
           {(isArabic ? items : loop).map((item, index) => (
             <figure
               key={`${item.name}-${index}`}
-              className={`premium-glass group flex min-h-[320px] min-w-0 flex-col rounded-3xl p-5 transition-colors hover:border-cyan-200/24 md:min-h-[340px] md:p-8 ${
+              className={`group flex min-h-[320px] min-w-0 flex-col rounded-3xl border border-blue-100/70 bg-white/88 p-5 shadow-[0_16px_42px_rgba(15,23,42,0.075)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/45 hover:shadow-[0_22px_54px_rgba(15,23,42,0.10)] md:min-h-[340px] md:p-8 ${
                 isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[340px] shrink-0 sm:w-[320px] md:w-[420px] md:max-w-none"
               }`}
             >
               <div className={`mb-4 flex items-center justify-between md:mb-6 ${isArabic ? "flex-row-reverse" : ""}`}>
-                <div className="flex gap-1 text-cyan-100/80">
+                <div className="flex gap-1 text-blue-500/80">
                   {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
                     <span key={i}>★</span>
                   ))}
@@ -117,22 +117,22 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="h-5 w-5 text-white/14 transition-colors group-hover:text-cyan-200/40"
+                  className="h-5 w-5 text-blue-200/70 transition-colors group-hover:text-blue-400/70"
                   aria-hidden
                 >
                   <path d="M9 7H4v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7zm11 0h-5v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7z" />
                 </svg>
               </div>
-              <blockquote className={`min-w-0 flex-1 overflow-visible break-words text-base font-light text-white md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
+              <blockquote className={`min-w-0 flex-1 overflow-visible break-words text-base font-light text-slate-800 md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
                 “{item.quote}”
               </blockquote>
-              <figcaption className={`mt-6 flex items-center gap-3 border-t border-white/10 pt-5 md:mt-8 md:pt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-cyan-200 to-violet-300 text-[11px] font-semibold text-black">
+              <figcaption className={`mt-6 flex items-center gap-3 border-t border-blue-100/70 pt-5 md:mt-8 md:pt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 text-[11px] font-semibold text-blue-900 shadow-[0_8px_20px_rgba(79,140,255,0.14)]">
                   {item.name.split(" ").map((n) => n[0]).join("")}
                 </span>
                 <span className="min-w-0">
-                  <div className="text-sm text-white">{item.name}</div>
-                  <div className={`mt-1 text-[10px] uppercase text-white/54 ${isArabic ? "tracking-normal" : "tracking-[0.12em] md:tracking-[0.24em]"}`}>
+                  <div className="text-sm text-slate-950">{item.name}</div>
+                  <div className={`mt-1 text-[10px] uppercase text-slate-500 ${isArabic ? "tracking-normal" : "tracking-[0.12em] md:tracking-[0.24em]"}`}>
                     {item.role}
                   </div>
                 </span>
