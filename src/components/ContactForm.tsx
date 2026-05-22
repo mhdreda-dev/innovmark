@@ -133,13 +133,13 @@ export default function ContactForm({
     return (
       <div className="grid min-h-[430px] place-items-center text-center">
         <div className="max-w-md">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-300/12 text-emerald-200 shadow-[0_0_46px_rgba(16,185,129,0.20)]">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-blue-200/80 bg-blue-50 text-blue-600 shadow-[0_18px_46px_rgba(79,140,255,0.16)]">
             <Check className="h-7 w-7" strokeWidth={1.7} />
           </div>
-          <h2 className="cinematic-text mt-7 text-3xl font-light tracking-tight text-white md:text-4xl">
+          <h2 className="cinematic-text mt-7 text-3xl font-light tracking-tight text-slate-950 md:text-4xl">
             {labels.successTitle}
           </h2>
-          <p className="mt-4 text-sm leading-6 text-white/64">
+          <p className="mt-4 text-sm leading-6 text-slate-600">
             {labels.successBody}
           </p>
           <WhatsAppButton href={whatsappUrl} className="mt-8" label={labels.whatsapp} />
@@ -150,8 +150,8 @@ export default function ContactForm({
 
   return (
     <div>
-      <div className="mb-7 flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 sm:flex-row sm:items-center sm:justify-between rtl-md-row">
-        <p className="px-2 text-sm text-white/62">
+      <div className="mb-7 flex flex-col gap-3 rounded-2xl border border-blue-100/80 bg-white/72 p-3 shadow-[0_12px_34px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between rtl-md-row">
+        <p className="px-2 text-sm text-slate-600">
           {mode === "step" ? labels.introStep : labels.introSimple}
         </p>
 
@@ -159,7 +159,7 @@ export default function ContactForm({
           <button
             type="button"
             onClick={() => switchMode("simple")}
-            className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/10 bg-[#0f141a] px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-white/76 transition duration-300 hover:border-cyan-200/35 hover:text-white hover:shadow-[0_0_26px_rgba(34,211,238,0.12)] md:tracking-[0.14em]"
+            className="inline-flex min-h-10 items-center justify-center rounded-full border border-blue-100/80 bg-white px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-slate-700 shadow-[0_8px_22px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-[0_14px_34px_rgba(79,140,255,0.12)] md:tracking-[0.14em]"
           >
             {labels.simpleMode}
           </button>
@@ -167,7 +167,7 @@ export default function ContactForm({
           <button
             type="button"
             onClick={() => switchMode("step")}
-            className="inline-flex min-h-10 items-center justify-center rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-emerald-100 transition duration-300 hover:border-emerald-200/40 hover:shadow-[0_0_28px_rgba(16,185,129,0.16)] md:tracking-[0.14em]"
+            className="inline-flex min-h-10 items-center justify-center rounded-full border border-blue-200/80 bg-blue-600 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.1em] text-[#fff] shadow-[0_14px_34px_rgba(79,140,255,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-[0_18px_44px_rgba(79,140,255,0.28)] md:tracking-[0.14em]"
           >
             {labels.guidedMode}
           </button>
@@ -232,13 +232,13 @@ function StepForm({
   return (
     <form onSubmit={onSubmit} className="flex min-h-[430px] flex-col">
       <div>
-        <div className="mb-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.12em] text-white/50 md:tracking-[0.24em]">
+        <div className="mb-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.12em] text-slate-500 md:tracking-[0.24em]">
           <span>{labels.stepLabel} {step}/{totalSteps}</span>
           <span>{Math.round((step / totalSteps) * 100)}%</span>
         </div>
-        <div className="h-1 overflow-hidden rounded-full bg-white/10">
+        <div className="h-1 overflow-hidden rounded-full bg-blue-100">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-200 via-violet-300 to-emerald-300 transition-all duration-500 ease-out"
+            className="h-full rounded-full bg-gradient-to-r from-blue-600 via-[#4F8CFF] to-cyan-300 transition-all duration-500 ease-out"
             style={{ width: progress }}
           />
         </div>
@@ -300,13 +300,13 @@ function StepForm({
         </div>
       </div>
 
-      <div className="border-t border-white/10 pt-5">
+      <div className="border-t border-blue-100/80 pt-5">
         <div className="flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:items-center rtl-md-row">
           <button
             type="button"
             onClick={goBack}
             disabled={step === 1}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] text-white/70 transition duration-300 hover:border-white/20 hover:bg-white/[0.07] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-blue-100/80 bg-white/78 px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] text-slate-600 shadow-[0_8px_22px_rgba(15,23,42,0.045)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:text-blue-700 disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
           >
             <ArrowLeft className="h-4 w-4 rtl-arrow" />
             {labels.back}
@@ -317,7 +317,7 @@ function StepForm({
               type="button"
               onClick={goNext}
               disabled={!canContinue}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-black transition duration-300 hover:scale-[1.02] hover:bg-cyan-100 hover:shadow-[0_14px_38px_rgba(34,211,238,0.18)] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-[#4F8CFF] to-cyan-500 px-5 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#fff] shadow-[0_14px_36px_rgba(79,140,255,0.24)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgba(79,140,255,0.32)] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
             >
               {labels.next}
               <ArrowRight className="h-4 w-4 rtl-arrow" />
@@ -338,7 +338,7 @@ function StepForm({
         <button
           type="button"
           onClick={returnToSimple}
-          className="mt-3 inline-flex min-h-10 w-full items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-white/68 transition duration-300 hover:border-cyan-200/30 hover:text-white hover:shadow-[0_0_24px_rgba(34,211,238,0.10)] sm:w-auto md:tracking-[0.14em]"
+          className="mt-3 inline-flex min-h-10 w-full items-center justify-center rounded-full border border-blue-100/80 bg-white/78 px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-slate-600 shadow-[0_8px_22px_rgba(15,23,42,0.045)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-[0_14px_34px_rgba(79,140,255,0.10)] sm:w-auto md:tracking-[0.14em]"
         >
           {labels.simpleMode}
         </button>
@@ -398,7 +398,7 @@ function SimpleForm({
       />
 
       <label className="grid gap-2">
-        <span className="text-[10px] uppercase tracking-[0.12em] text-white/56 md:tracking-[0.24em]">
+        <span className="text-[10px] uppercase tracking-[0.12em] text-slate-500 md:tracking-[0.24em]">
           {labels.messageLabel}
         </span>
         <textarea
@@ -407,7 +407,7 @@ function SimpleForm({
           rows={4}
           required
           placeholder={labels.messagePlaceholder}
-          className={`${fieldClassName} min-h-32 resize-y py-3 leading-6`}
+          className={`${fieldClassName} min-h-32 resize-y py-4 leading-6`}
         />
       </label>
 
@@ -445,10 +445,10 @@ function ChoiceStep({
               key={option}
               type="button"
               onClick={() => onSelect(option)}
-              className={`group min-h-20 rounded-xl border px-5 py-4 text-start text-lg font-light tracking-tight transition duration-300 hover:scale-[1.02] hover:border-cyan-200/40 hover:bg-white/[0.075] hover:shadow-[0_0_34px_rgba(34,211,238,0.13)] ${
+              className={`group min-h-20 rounded-2xl border px-5 py-4 text-start text-lg font-light tracking-tight shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-[0_18px_44px_rgba(79,140,255,0.12)] ${
                 active
-                  ? "border-emerald-200/45 bg-emerald-300/10 text-white shadow-[0_0_34px_rgba(16,185,129,0.16)]"
-                  : "border-white/10 bg-[#0f141a] text-white/76"
+                  ? "border-blue-300/80 bg-blue-600 text-[#fff] shadow-[0_16px_44px_rgba(79,140,255,0.22)]"
+                  : "border-blue-100/80 bg-white/82 text-slate-800"
               }`}
             >
               <span className="flex items-center justify-between gap-4">
@@ -456,8 +456,8 @@ function ChoiceStep({
                 <span
                   className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition ${
                     active
-                      ? "border-emerald-200 bg-emerald-300 text-black"
-                      : "border-white/18 text-transparent group-hover:border-cyan-200/50"
+                      ? "border-white/70 bg-white text-blue-600"
+                      : "border-blue-200 text-transparent group-hover:border-blue-300"
                   }`}
                 >
                   <Check className="h-3 w-3" strokeWidth={2.2} />
@@ -473,17 +473,17 @@ function ChoiceStep({
 
 function StepTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="cinematic-text text-3xl font-light leading-tight tracking-tight text-white md:text-4xl">
+    <h2 className="cinematic-text text-3xl font-light leading-tight tracking-tight text-slate-950 md:text-4xl">
       {children}
     </h2>
   );
 }
 
 const fieldClassName =
-  "w-full rounded-xl border border-white/10 bg-[#0f141a] px-4 text-sm text-white outline-none transition duration-300 placeholder:text-white/32 focus:border-cyan-200/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.10),0_0_28px_rgba(34,211,238,0.12)]";
+  "w-full rounded-2xl border border-blue-100/80 bg-white/88 px-4 text-sm text-slate-900 shadow-[0_8px_22px_rgba(15,23,42,0.045)] outline-none transition duration-300 placeholder:text-slate-400 focus:border-blue-400/70 focus:bg-white focus:shadow-[0_0_0_4px_rgba(79,140,255,0.12),0_14px_34px_rgba(79,140,255,0.10)]";
 
 const primaryButtonClassName =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 via-green-400 to-emerald-500 px-5 py-2 text-center text-xs font-semibold uppercase tracking-[0.1em] text-black shadow-[0_12px_36px_rgba(16,185,129,0.20)] transition duration-300 hover:scale-[1.02] hover:shadow-[0_16px_48px_rgba(16,185,129,0.34)] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-[#4F8CFF] to-cyan-500 px-5 py-2 text-center text-xs font-semibold uppercase tracking-[0.1em] text-[#fff] shadow-[0_14px_36px_rgba(79,140,255,0.24)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgba(79,140,255,0.32)] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]";
 
 function Field({
   label,
@@ -502,7 +502,7 @@ function Field({
 }) {
   return (
     <label className="grid gap-2">
-      <span className="text-[10px] uppercase tracking-[0.12em] text-white/56 md:tracking-[0.24em]">
+      <span className="text-[10px] uppercase tracking-[0.12em] text-slate-500 md:tracking-[0.24em]">
         {label}
       </span>
       <input
@@ -511,7 +511,7 @@ function Field({
         type={type}
         autoComplete={autoComplete}
         required={required}
-        className={`${fieldClassName} min-h-12`}
+        className={`${fieldClassName} min-h-[54px]`}
       />
     </label>
   );
@@ -532,20 +532,20 @@ function SelectField({
 }) {
   return (
     <label className="grid gap-2">
-      <span className="text-[10px] uppercase tracking-[0.12em] text-white/56 md:tracking-[0.24em]">
+      <span className="text-[10px] uppercase tracking-[0.12em] text-slate-500 md:tracking-[0.24em]">
         {label}
       </span>
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
         required
-        className={`${fieldClassName} min-h-12`}
+        className={`${fieldClassName} min-h-[54px]`}
       >
-        <option value="" disabled className="bg-[#0f141a]">
+        <option value="" disabled className="bg-white text-slate-500">
           {emptyLabel}
         </option>
         {options.map((option) => (
-          <option key={option} value={option} className="bg-[#0f141a]">
+          <option key={option} value={option} className="bg-white text-slate-900">
             {option}
           </option>
         ))}
@@ -568,7 +568,7 @@ function WhatsAppButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-emerald-100 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200/40 hover:bg-emerald-300/15 hover:shadow-[0_0_30px_rgba(16,185,129,0.18)] md:tracking-[0.14em] ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-200/80 bg-white px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-emerald-700 shadow-[0_10px_26px_rgba(16,185,129,0.10)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-[0_16px_38px_rgba(16,185,129,0.16)] md:tracking-[0.14em] ${className}`}
     >
       {label}
       <MessageCircle className="h-4 w-4" strokeWidth={1.7} />
