@@ -1,4 +1,4 @@
-const CONTACT_VISUAL_SRC = "/innovmark-frames/lg/frame_0090.webp";
+const CONTACT_VISUAL_SRC = "/images/hero-showcase/hy.jpg";
 
 export default function ContactVisualSection({
   imageAlt = "INNOVMARK creative studio visual",

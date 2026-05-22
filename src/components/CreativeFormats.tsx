@@ -64,7 +64,7 @@ interface CardVisualConfig {
 
 const cardConfigs: CardVisualConfig[] = [
   {
-    image: "/images/hero-showcase/product-shoot.png",
+    image: "/images/hero-showcase/vid.webp",
     glowColor: "rgba(60,120,255,0.55)",
   },
   {
@@ -84,7 +84,7 @@ const cardConfigs: CardVisualConfig[] = [
     glowColor: "rgba(16,185,129,0.45)",
   },
   {
-    image: "/images/hero-showcase/social-media-showcase.png",
+    image: "/images/hero-showcase/ads.png",
     glowColor: "rgba(91,140,255,0.50)",
   },
 ];
