@@ -109,7 +109,7 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
               }`}
             >
               <div className={`mb-4 flex items-center justify-between md:mb-6 ${isArabic ? "flex-row-reverse" : ""}`}>
-                <div className="flex gap-1 text-blue-500/80">
+                <div className="flex gap-1 text-[#4F8CFF] opacity-100">
                   {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
                     <span key={i}>★</span>
                   ))}
@@ -117,7 +117,7 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="h-5 w-5 text-blue-200/70 transition-colors group-hover:text-blue-400/70"
+                  className="h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105"
                   aria-hidden
                 >
                   <path d="M9 7H4v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7zm11 0h-5v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7z" />

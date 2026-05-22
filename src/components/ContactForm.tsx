@@ -133,8 +133,8 @@ export default function ContactForm({
     return (
       <div className="grid min-h-[430px] place-items-center text-center">
         <div className="max-w-md">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-blue-200/80 bg-blue-50 text-blue-600 shadow-[0_18px_46px_rgba(79,140,255,0.16)]">
-            <Check className="h-7 w-7" strokeWidth={1.7} />
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105">
+            <Check className="h-5 w-5 opacity-100" strokeWidth={1.9} />
           </div>
           <h2 className="cinematic-text mt-7 text-3xl font-light tracking-tight text-slate-950 md:text-4xl">
             {labels.successTitle}
@@ -308,7 +308,7 @@ function StepForm({
             disabled={step === 1}
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-blue-100/80 bg-white/78 px-4 py-2 text-xs font-medium uppercase tracking-[0.1em] text-slate-600 shadow-[0_8px_22px_rgba(15,23,42,0.045)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:text-blue-700 disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
           >
-            <ArrowLeft className="h-4 w-4 rtl-arrow" />
+            <ArrowLeft className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105 rtl-arrow" />
             {labels.back}
           </button>
 
@@ -320,7 +320,7 @@ function StepForm({
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-[#4F8CFF] to-cyan-500 px-5 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#fff] shadow-[0_14px_36px_rgba(79,140,255,0.24)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgba(79,140,255,0.32)] disabled:pointer-events-none disabled:opacity-35 md:tracking-[0.16em]"
             >
               {labels.next}
-              <ArrowRight className="h-4 w-4 rtl-arrow" />
+              <ArrowRight className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105 rtl-arrow" />
             </button>
           ) : (
             <button
@@ -329,7 +329,7 @@ function StepForm({
               className={primaryButtonClassName}
             >
               {labels.send}
-              <Send className="h-4 w-4" />
+              <Send className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" />
             </button>
           )}
         </div>
@@ -414,7 +414,7 @@ function SimpleForm({
       <div className="mt-2 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
         <button type="submit" disabled={!canSubmit} className={primaryButtonClassName}>
           {labels.submitRequest}
-          <Send className="h-4 w-4" />
+          <Send className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" />
         </button>
         <WhatsAppButton href={whatsappUrl} label={labels.whatsapp} />
       </div>
@@ -454,13 +454,13 @@ function ChoiceStep({
               <span className="flex items-center justify-between gap-4">
                 {option}
                 <span
-                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition ${
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border p-1.5 opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105 ${
                     active
-                      ? "border-white/70 bg-white text-blue-600"
-                      : "border-blue-200 text-transparent group-hover:border-blue-300"
+                      ? "border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] text-[#4F8CFF]"
+                      : "border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] text-[#4F8CFF]"
                   }`}
                 >
-                  <Check className="h-3 w-3" strokeWidth={2.2} />
+                  <Check className="h-4 w-4 opacity-100" strokeWidth={2.2} />
                 </span>
               </span>
             </button>
@@ -571,7 +571,7 @@ function WhatsAppButton({
       className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-200/80 bg-white px-4 py-2 text-center text-xs font-medium uppercase tracking-[0.1em] text-emerald-700 shadow-[0_10px_26px_rgba(16,185,129,0.10)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-[0_16px_38px_rgba(16,185,129,0.16)] md:tracking-[0.14em] ${className}`}
     >
       {label}
-      <MessageCircle className="h-4 w-4" strokeWidth={1.7} />
+      <MessageCircle className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
     </Link>
   );
 }

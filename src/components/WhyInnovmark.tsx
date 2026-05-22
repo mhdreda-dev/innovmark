@@ -139,8 +139,8 @@ export default function WhyInnovmark({
                   className="premium-glass reveal-on-scroll group min-w-0 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-200/25 hover:bg-white/[0.08] md:p-7"
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] text-cyan-200 transition group-hover:text-emerald-200">
-                    <Icon className="h-5 w-5" strokeWidth={1.6} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
+                    <Icon className="h-5 w-5 opacity-100" strokeWidth={1.8} />
                   </div>
                   <h2 className="mt-7 text-xl font-light tracking-tight text-white">
                     {item.title}
@@ -190,7 +190,7 @@ export default function WhyInnovmark({
       <section className="px-4 pb-16 pt-2 sm:px-6 md:pb-24 lg:px-10">
         <div className="reveal-on-scroll mx-auto flex max-w-7xl flex-col items-start gap-6 border-y border-white/10 py-10 md:flex-row md:items-center md:justify-between rtl-md-row">
           <div>
-            <Sparkles className="mb-5 h-6 w-6 text-violet-200" strokeWidth={1.6} />
+            <Sparkles className="mb-5 h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
             <h2 className="cinematic-text text-3xl font-light tracking-tight text-white md:text-5xl">
               {isArabic ? "واجد تخلي البراند ديالك يبان أكثر احترافية؟" : "Pret a construire une presence plus premium?"}
             </h2>

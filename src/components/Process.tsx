@@ -161,8 +161,8 @@ export default function Process({
                       }`}
                     >
                       <div className="flex items-center gap-4 rtl-row">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-100/80 bg-white/72 text-blue-600 transition group-hover:text-blue-700">
-                          <Icon className="h-5 w-5" strokeWidth={1.6} />
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
+                          <Icon className="h-5 w-5 opacity-100" strokeWidth={1.8} />
                         </div>
                         <h3 className="text-2xl font-light tracking-tight text-white">
                           {step.title}
@@ -177,10 +177,12 @@ export default function Process({
                             key={point}
                             className="flex items-center gap-3 text-sm text-white/70 rtl-row"
                           >
-                            <CheckCircle2
-                            className="h-4 w-4 shrink-0 text-blue-500"
-                              strokeWidth={1.8}
-                            />
+                            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
+                              <CheckCircle2
+                                className="h-4 w-4 opacity-100"
+                                strokeWidth={1.9}
+                              />
+                            </span>
                             {point}
                           </li>
                         ))}
@@ -202,7 +204,7 @@ export default function Process({
             className="absolute right-6 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl"
           />
           <div className="relative">
-            <Sparkles className="mb-5 h-6 w-6 text-violet-200" strokeWidth={1.6} />
+            <Sparkles className="mb-5 h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
             <h2 className="cinematic-text text-3xl font-light tracking-tight text-white md:text-5xl">
               {isArabic ? "بدا المشروع ديالك" : "Demarrer votre projet"}
             </h2>

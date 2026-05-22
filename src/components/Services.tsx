@@ -191,10 +191,8 @@ export default function Services({
                     aria-hidden
                     className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${toneClass[service.tone as keyof typeof toneClass]} to-transparent`}
                   />
-                  <div
-                    className={`mb-8 flex h-12 w-12 items-center justify-center rounded-xl border border-blue-100/80 bg-gradient-to-br ${toneClass[service.tone as keyof typeof toneClass]} to-white/70 text-slate-700 transition duration-300 group-hover:shadow-[0_10px_24px_rgba(79,140,255,0.12)]`}
-                  >
-                    <Icon className="h-5 w-5" strokeWidth={1.6} />
+                  <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
+                    <Icon className="h-5 w-5 opacity-100" strokeWidth={1.8} />
                   </div>
                   <h3 className="text-xl font-light leading-tight tracking-tight text-white md:text-2xl">
                     {service.title}
@@ -203,7 +201,7 @@ export default function Services({
                     {"description" in service ? service.description : service.desc}
                   </p>
                   <span className="mt-auto inline-flex items-center gap-2 pt-8 text-[10px] font-medium uppercase tracking-[0.12em] text-white/58 transition group-hover:text-cyan-100 md:tracking-[0.24em]">
-                    {isArabic ? "شوف الخدمة" : "Explorer"} <ArrowRight className="h-3.5 w-3.5 rtl-arrow" />
+                    {isArabic ? "شوف الخدمة" : "Explorer"} <ArrowRight className="h-5 w-5 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-1 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105 rtl-arrow" />
                   </span>
                 </Link>
               );
@@ -230,7 +228,7 @@ export default function Services({
                   className="reveal-on-scroll rounded-2xl border border-blue-100/70 bg-white/78 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.055)] transition duration-300 hover:-translate-y-1 hover:border-blue-300/40 hover:bg-white md:p-6"
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
-                  <Icon className="h-5 w-5 text-emerald-200" strokeWidth={1.7} />
+                  <Icon className="h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
                   <h3 className="mt-5 text-lg font-light tracking-tight text-white">
                     {reason.title}
                   </h3>
@@ -249,7 +247,7 @@ export default function Services({
             className="absolute right-6 top-0 h-24 w-24 rounded-full bg-blue-300/[0.055] blur-3xl"
           />
           <div className="relative">
-            <BadgeCheck className="mb-5 h-6 w-6 text-cyan-200" strokeWidth={1.6} />
+            <BadgeCheck className="mb-5 h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
             <h2 className="cinematic-text text-3xl font-light tracking-tight text-white md:text-5xl">
               {isArabic ? "نهضرو على المشروع ديالك" : "Parlons de votre projet"}
             </h2>

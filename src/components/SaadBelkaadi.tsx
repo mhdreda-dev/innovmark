@@ -82,7 +82,7 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
 
                 <div>
                   <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-cyan-100/70 md:tracking-[0.32em] rtl-row">
-                    <BadgeCheck className="h-4 w-4 text-emerald-200" strokeWidth={1.7} />
+                    <BadgeCheck className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
                     {isArabic ? "فريق INNOVMARK" : "Team INNOVMARK"}
                   </p>
                   <h2 className="mt-4 text-3xl font-light tracking-tight text-white md:text-5xl">
@@ -115,8 +115,8 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
                     key={item.label}
                     className="group rounded-2xl border border-white/10 bg-white/[0.045] p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-200/30 hover:bg-white/[0.075]"
                   >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/12 bg-black/40 text-cyan-200 transition group-hover:text-emerald-200">
-                      <Icon className="h-5 w-5" strokeWidth={1.6} />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
+                      <Icon className="h-5 w-5 opacity-100" strokeWidth={1.8} />
                     </div>
                     <h3 className="mt-5 text-base font-light leading-snug tracking-tight text-white">
                       {item.label}
@@ -173,8 +173,8 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
 
           <div className="relative flex items-center gap-3 text-[10px] uppercase tracking-[0.12em] text-white/64 transition group-hover:text-white md:tracking-[0.24em] rtl-row">
             {isArabic ? "تعرف على الفريق" : "Découvrir l'équipe"}
-            <span className="grid h-10 w-10 place-items-center rounded-full border border-white/16 bg-white/[0.04] text-white/72 transition-all duration-300 group-hover:translate-x-1 group-hover:border-cyan-200/40 group-hover:bg-cyan-200/10 group-hover:text-white">
-              <ArrowRight className="h-4 w-4 rtl-arrow" />
+            <span className="grid h-10 w-10 place-items-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105 rtl-arrow">
+              <ArrowRight className="h-4 w-4 opacity-100" />
             </span>
           </div>
         </Link>

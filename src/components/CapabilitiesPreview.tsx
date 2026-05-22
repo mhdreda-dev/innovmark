@@ -109,9 +109,9 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
                 </span>
                 <span
                   aria-hidden
-                  className="grid h-9 w-9 place-items-center rounded-full border border-blue-100/80 bg-white/72 text-slate-600 shadow-[0_8px_20px_rgba(15,23,42,0.055)] transition-all duration-300 group-hover:translate-x-1 group-hover:border-blue-300/50 group-hover:bg-white group-hover:text-blue-700 rtl-arrow"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105 rtl-arrow"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-3.5 w-3.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4 opacity-100">
                     <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
