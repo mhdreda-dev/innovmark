@@ -261,7 +261,7 @@ const css = `
 .ihc-section {
   position: relative;
   min-height: 100svh;
-  background: #040610;
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 58%, #f3f6fb 100%);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -283,8 +283,8 @@ const css = `
 }
 
 .ihc-video {
-  opacity: 0.52;
-  filter: saturate(1.08) contrast(1.08);
+  opacity: 0.18;
+  filter: saturate(0.9) contrast(0.86) brightness(1.18);
 }
 
 /* ── Deep base gradient ── */
@@ -292,10 +292,10 @@ const css = `
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(60,100,255,0.18) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 85% 90%, rgba(120,60,255,0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 5% 60%, rgba(0,200,255,0.08) 0%, transparent 55%),
-    linear-gradient(175deg, #060c1e 0%, #040810 40%, #030710 70%, #030510 100%);
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(79,140,255,0.12) 0%, transparent 58%),
+    radial-gradient(ellipse 80% 60% at 85% 90%, rgba(79,140,255,0.06) 0%, transparent 58%),
+    radial-gradient(ellipse 60% 50% at 5% 60%, rgba(125,211,252,0.06) 0%, transparent 58%),
+    linear-gradient(175deg, #ffffff 0%, #f8fbff 42%, #f4f7fb 72%, #ffffff 100%);
 }
 
 /* ── Aurora conic layer ── */
@@ -305,17 +305,17 @@ const css = `
   height: 80%;
   background: conic-gradient(
     from 215deg at 50% 0%,
-    rgba(80,130,255,0.22) 0deg,
-    rgba(140,90,255,0.16) 60deg,
+    rgba(79,140,255,0.10) 0deg,
+    rgba(147,197,253,0.08) 60deg,
     transparent 115deg,
     transparent 195deg,
-    rgba(100,210,255,0.13) 252deg,
-    rgba(80,130,255,0.18) 315deg,
+    rgba(125,211,252,0.07) 252deg,
+    rgba(79,140,255,0.08) 315deg,
     transparent 360deg
   );
   filter: blur(88px);
   animation: ihc-aurora-shift 36s ease-in-out infinite;
-  opacity: 0.75;
+  opacity: 0.62;
 }
 @keyframes ihc-aurora-shift {
   0%,100% { opacity: 0.68; transform: rotate(-3deg) scaleX(1.00); }
@@ -330,31 +330,31 @@ const css = `
   width: 1200px; height: 900px;
   top: -340px; left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at 50% 35%, rgba(91,140,255,0.26), transparent 60%);
+  background: radial-gradient(ellipse at 50% 35%, rgba(79,140,255,0.10), transparent 64%);
   animation: ihc-drift-1 22s ease-in-out infinite;
 }
 .ihc-orb-2 {
   width: 820px; height: 720px;
   bottom: -220px; right: -160px;
-  background: radial-gradient(ellipse at 55% 55%, rgba(154,108,255,0.20), transparent 60%);
+  background: radial-gradient(ellipse at 55% 55%, rgba(79,140,255,0.08), transparent 64%);
   animation: ihc-drift-2 28s ease-in-out infinite;
 }
 .ihc-orb-3 {
   width: 600px; height: 520px;
   top: 26%; left: -130px;
-  background: radial-gradient(ellipse at 40% 50%, rgba(122,217,255,0.14), transparent 62%);
+  background: radial-gradient(ellipse at 40% 50%, rgba(125,211,252,0.08), transparent 64%);
   animation: ihc-drift-3 19s ease-in-out infinite;
 }
 .ihc-orb-4 {
   width: 540px; height: 440px;
   bottom: 5%; right: 6%;
-  background: radial-gradient(ellipse at 50% 60%, rgba(20,184,166,0.13), transparent 64%);
+  background: radial-gradient(ellipse at 50% 60%, rgba(79,140,255,0.06), transparent 66%);
   animation: ihc-drift-2 24s ease-in-out infinite reverse;
 }
 .ihc-orb-5 {
   width: 400px; height: 330px;
   top: 8%; right: 4%;
-  background: radial-gradient(ellipse at 50% 40%, rgba(200,100,255,0.09), transparent 66%);
+  background: radial-gradient(ellipse at 50% 40%, rgba(79,140,255,0.05), transparent 68%);
   animation: ihc-drift-1 30s ease-in-out infinite 7s;
 }
 
@@ -378,13 +378,13 @@ const css = `
   position: absolute;
   inset: -10%;
   background-image:
-    linear-gradient(rgba(120,160,255,0.065) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120,160,255,0.065) 1px, transparent 1px);
+    linear-gradient(rgba(79,140,255,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,140,255,0.055) 1px, transparent 1px);
   background-size: 88px 88px;
   mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, black, transparent 85%);
   -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, black, transparent 85%);
   transform: perspective(1200px) rotateX(58deg) translateY(28%) scale(1.5);
-  opacity: 0.60;
+  opacity: 0.36;
 }
 
 /* ── Horizon glow ── */
@@ -396,13 +396,13 @@ const css = `
   background: linear-gradient(
     90deg,
     transparent 2%,
-    rgba(122,217,255,0.55) 28%,
-    rgba(154,108,255,0.62) 52%,
-    rgba(91,140,255,0.50) 74%,
+    rgba(79,140,255,0.20) 28%,
+    rgba(147,197,253,0.22) 52%,
+    rgba(79,140,255,0.18) 74%,
     transparent 96%
   );
   filter: blur(0.5px);
-  box-shadow: 0 0 36px rgba(91,140,255,0.40), 0 0 90px rgba(154,108,255,0.22);
+  box-shadow: 0 0 36px rgba(79,140,255,0.12), 0 0 90px rgba(79,140,255,0.08);
 }
 
 /* ── Light streaks ── */
@@ -463,7 +463,7 @@ const css = `
 .ihc-mouse-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(540px circle at var(--mx,50%) var(--my,32%), rgba(91,140,255,0.14), transparent 52%);
+  background: radial-gradient(540px circle at var(--mx,50%) var(--my,32%), rgba(79,140,255,0.10), transparent 54%);
   pointer-events: none;
 }
 
@@ -471,7 +471,7 @@ const css = `
 .ihc-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 110% 100% at 50% 50%, transparent 34%, rgba(0,0,0,0.58) 76%, rgba(0,0,0,0.88) 100%);
+  background: radial-gradient(ellipse 110% 100% at 50% 50%, transparent 42%, rgba(255,255,255,0.46) 82%, rgba(255,255,255,0.78) 100%);
 }
 
 /* ── Film grain ── */
@@ -524,7 +524,7 @@ const css = `
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.62);
+  color: rgba(30,41,59,0.64);
   margin-bottom: 22px;
   max-width: 100%;
   text-align: center;
@@ -550,7 +550,7 @@ const css = `
   font-weight: 300;
   line-height: 1.08;
   letter-spacing: 0;
-  background: linear-gradient(180deg, #ffffff 0%, #ccd3e6 55%, #8891a4 100%);
+  background: linear-gradient(180deg, #061327 0%, #1f3a68 58%, #4f8cff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -563,7 +563,7 @@ const css = `
 /* Description */
 .ihc-desc {
   font-size: clamp(0.92rem, 1.6vw, 1.07rem);
-  color: rgba(255,255,255,0.52);
+  color: rgba(30,41,59,0.66);
   line-height: 1.7;
   max-width: 520px;
   text-wrap: balance;
@@ -597,8 +597,8 @@ const css = `
   transform: translateX(-50%);
   border-radius: 999px;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(122,217,255,0.18), transparent 62%),
-    radial-gradient(ellipse at 48% 40%, rgba(154,108,255,0.18), transparent 66%);
+    radial-gradient(ellipse at 50% 50%, rgba(79,140,255,0.12), transparent 64%),
+    radial-gradient(ellipse at 48% 40%, rgba(147,197,253,0.11), transparent 68%);
   filter: blur(24px);
   opacity: 0.72;
   pointer-events: none;
@@ -643,9 +643,9 @@ const css = `
   border: 1px solid rgba(255,255,255,0.16);
   background: rgba(255,255,255,0.045);
   box-shadow:
-    0 28px 72px -38px rgba(0,0,0,0.86),
-    0 0 46px -32px rgba(122,217,255,0.72),
-    0 0 0 1px rgba(255,255,255,0.08) inset;
+    0 24px 64px -34px rgba(15,23,42,0.24),
+    0 0 46px -32px rgba(79,140,255,0.52),
+    0 0 0 1px rgba(255,255,255,0.78) inset;
   transform-origin: 50% 70%;
   will-change: transform, opacity;
   transform: rotate(var(--card-rotation, 0deg));
@@ -656,7 +656,7 @@ const css = `
   position: absolute;
   inset: -24%;
   z-index: 1;
-  background: radial-gradient(circle at 50% 8%, rgba(122,217,255,0.28), transparent 44%);
+  background: radial-gradient(circle at 50% 8%, rgba(79,140,255,0.18), transparent 44%);
   opacity: 0.72;
   pointer-events: none;
 }
@@ -664,9 +664,9 @@ const css = `
   transform: translateY(-3px) rotate(0deg);
   border-color: rgba(255,255,255,0.24);
   box-shadow:
-    0 34px 86px -38px rgba(0,0,0,0.92),
-    0 0 58px -30px rgba(122,217,255,0.58),
-    0 0 0 1px rgba(255,255,255,0.12) inset;
+    0 34px 86px -38px rgba(15,23,42,0.32),
+    0 0 58px -30px rgba(79,140,255,0.44),
+    0 0 0 1px rgba(255,255,255,0.92) inset;
 }
 .ihc-card:focus-visible {
   outline: 2px solid rgba(122,217,255,0.55);
@@ -687,9 +687,9 @@ const css = `
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 42%, rgba(4,7,14,0.38) 100%),
-    linear-gradient(135deg, rgba(122,217,255,0.18), transparent 45%, rgba(154,108,255,0.18)),
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.16), transparent 44%);
+    linear-gradient(180deg, rgba(255,255,255,0.30) 0%, transparent 48%, rgba(255,255,255,0.24) 100%),
+    linear-gradient(135deg, rgba(79,140,255,0.14), transparent 48%, rgba(147,197,253,0.16)),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.42), transparent 46%);
   pointer-events: none;
 }
 
@@ -737,9 +737,9 @@ const css = `
   height: 58px;
   padding: 0 26px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.20);
-  background: transparent;
-  color: #fff;
+  border: 1px solid rgba(79,140,255,0.24);
+  background: rgba(255,255,255,0.62);
+  color: #0f172a;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.015em;
@@ -747,8 +747,8 @@ const css = `
   transition: background 0.22s ease, border-color 0.22s ease, transform 0.24s cubic-bezier(0.34,1.2,0.64,1);
 }
 .ihc-cta-secondary:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.30);
+  background: rgba(255,255,255,0.88);
+  border-color: rgba(79,140,255,0.36);
   transform: translateY(-2px);
 }
 .ihc-cta-secondary:focus-visible {

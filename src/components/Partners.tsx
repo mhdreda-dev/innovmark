@@ -33,7 +33,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
 
   return (
     <section
-      className="relative overflow-hidden border-y border-white/[0.06] bg-[#05080f]/72 py-16 sm:py-20"
+      className="relative overflow-hidden border-y border-blue-100/60 bg-white/54 py-16 shadow-[0_18px_70px_rgba(79,140,255,0.06)] backdrop-blur-xl sm:py-20"
       dir="ltr"
       style={{ direction: "ltr", unicodeBidi: "isolate" }}
     >
@@ -47,9 +47,9 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       />
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
-          <div className="text-[11px] uppercase tracking-[0.34em] text-cyan-100/58">{copy.eyebrow}</div>
-          <h2 className="mt-4 text-3xl font-light tracking-tight text-white sm:text-4xl">{copy.title}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/56 sm:text-base">{copy.description}</p>
+          <div className="text-[11px] uppercase tracking-[0.34em] text-blue-700/60">{copy.eyebrow}</div>
+          <h2 className="mt-4 text-3xl font-light tracking-tight text-slate-950 sm:text-4xl">{copy.title}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">{copy.description}</p>
         </div>
       </div>
 
@@ -58,8 +58,8 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
         dir="ltr"
         style={{ direction: "ltr", unicodeBidi: "isolate" }}
       >
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#05080f] to-transparent sm:w-40" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#05080f] to-transparent sm:w-40" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent sm:w-40" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent sm:w-40" />
         <div className="partners-marquee flex w-max min-w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
           {marqueeItems.map((partner, index) => (
             <a
@@ -69,7 +69,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
               rel="noreferrer"
               aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
               aria-hidden={index >= repeatedPartners.length}
-              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.055] px-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-100/32 hover:bg-white/[0.09] sm:h-32 sm:w-60"
+              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-blue-100/70 bg-white/72 px-6 shadow-[0_18px_54px_rgba(15,23,42,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/44 hover:bg-white/90 sm:h-32 sm:w-60"
             >
               <img
                 src={partner.logoUrl}

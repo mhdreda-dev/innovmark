@@ -107,7 +107,7 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.72, delay: index * 0.07, ease: EASE }}
-      className={`group relative min-w-0 overflow-hidden rounded-3xl border border-white/[0.10] bg-[#050912] shadow-[0_28px_84px_-42px_rgba(0,0,0,0.92),0_0_52px_-34px_rgba(122,217,255,0.72)] ${spanClass}`}
+      className={`light-on-media group relative min-w-0 overflow-hidden rounded-3xl border border-white/[0.42] bg-white shadow-[0_24px_70px_-42px_rgba(15,23,42,0.34),0_0_52px_-36px_rgba(79,140,255,0.52)] ${spanClass}`}
       style={{
         minHeight: isCampaign ? 220 : 240,
       }}
@@ -128,14 +128,14 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
         decoding="async"
       />
 
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/18 via-[#030712]/32 to-black/84" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-cyan-300/16 via-transparent to-violet-500/18" />
-      <div aria-hidden className="absolute inset-0 shadow-[inset_0_0_68px_rgba(15,23,42,0.72),inset_0_0_42px_rgba(122,217,255,0.10)]" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-white/10 via-slate-950/10 to-slate-950/64" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-blue-300/14 via-transparent to-cyan-300/14" />
+      <div aria-hidden className="absolute inset-0 shadow-[inset_0_0_54px_rgba(15,23,42,0.36),inset_0_0_42px_rgba(79,140,255,0.08)]" />
       <div aria-hidden className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent" />
 
       <div className={`relative flex h-full min-w-0 flex-col justify-end p-5 ${isCampaign ? "md:p-7" : ""}`}>
         <div className="border-t border-white/[0.10] pt-4">
-          <p className={`font-light leading-tight tracking-tight text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)] ${isCampaign ? "text-xl md:text-3xl" : "text-lg md:text-xl"}`}>
+          <p className={`font-light leading-tight tracking-tight text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] ${isCampaign ? "text-xl md:text-3xl" : "text-lg md:text-xl"}`}>
             {label}
           </p>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/62 md:tracking-[0.22em]">{tag}</p>
@@ -224,6 +224,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
       </div>
 
       <style>{`
+        .creative-formats-card {}
         @media (prefers-reduced-motion: reduce) {
           .creative-formats-card { animation: none !important; transition: none !important; }
         }

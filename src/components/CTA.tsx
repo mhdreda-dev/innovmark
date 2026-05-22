@@ -21,7 +21,7 @@ export default function CTA({ locale }: { locale?: string }) {
         className="absolute inset-x-8 inset-y-4 opacity-[0.18] blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse 46% 50% at 50% 100%, rgba(124,58,237,1), transparent 68%), radial-gradient(ellipse 34% 42% at 14% 34%, rgba(56,189,248,0.9), transparent 70%)",
+            "radial-gradient(ellipse 46% 50% at 50% 100%, rgba(79,140,255,0.72), transparent 70%), radial-gradient(ellipse 34% 42% at 14% 34%, rgba(125,211,252,0.62), transparent 72%)",
         }}
       />
       <div
@@ -37,21 +37,21 @@ export default function CTA({ locale }: { locale?: string }) {
       <div className="premium-glass relative min-w-0 rounded-2xl px-4 py-9 text-center sm:px-5 md:px-10 md:py-16">
         <div className="mb-5 inline-flex max-w-full items-center gap-3 md:mb-6">
           <span className="h-px w-6 shrink-0 bg-gradient-to-r from-cyan-200 to-violet-400 sm:w-8" />
-          <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-white/76 md:text-[11px] md:tracking-[0.46em]">
+          <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-blue-700/72 md:text-[11px] md:tracking-[0.46em]">
             {isArabic ? "مراجعة خاصة للمشروع" : "Private project review"}
           </span>
           <span className="h-px w-6 shrink-0 bg-gradient-to-l from-cyan-200 to-violet-400 sm:w-8" />
         </div>
 
-        <h2 className="cinematic-text mb-5 text-3xl font-light leading-[1.12] tracking-tight text-white sm:text-4xl md:mb-6 md:text-6xl md:leading-[1.08]">
+        <h2 className="cinematic-text mb-5 text-3xl font-light leading-[1.12] tracking-tight text-slate-950 sm:text-4xl md:mb-6 md:text-6xl md:leading-[1.08]">
             {isArabic ? "باغي المشروع ديالك يبان" : "Ready to look more serious"}
           <br className="hidden sm:block" />
-          <span className="bg-gradient-to-r from-white via-cyan-100 to-violet-200 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-slate-950 via-blue-700 to-blue-400 bg-clip-text text-transparent">
             {isArabic ? "أكثر احترافية من المنافسين؟" : "than your competition?"}
           </span>
         </h2>
 
-        <p className="cinematic-text mx-auto mb-7 max-w-xl text-sm leading-6 text-white/76 md:mb-10 md:text-lg md:leading-8">
+        <p className="cinematic-text mx-auto mb-7 max-w-xl text-sm leading-6 text-slate-600 md:mb-10 md:text-lg md:leading-8">
           {isArabic
             ? "صيفط لينا رسالة قصيرة وغادي نرجعو ليك بخطوة واضحة: مراجعة سريعة، شنو غادي نخدمو، التوقيت، أو خطة الانطلاق."
             : "Send a short message. We will reply quickly with the clearest next step: audit, scope, timeline or launch plan."}
@@ -71,19 +71,19 @@ export default function CTA({ locale }: { locale?: string }) {
           </a>
           <a
             href="tel:+212771450503"
-            className="inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-white/20 px-5 py-3 text-center text-sm uppercase tracking-[0.08em] text-white/80 transition-colors hover:border-white/50 hover:text-white sm:w-auto md:px-8 md:py-4 md:tracking-[0.15em]"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-blue-200/80 bg-white/62 px-5 py-3 text-center text-sm uppercase tracking-[0.08em] text-slate-700 transition-colors hover:border-blue-400/50 hover:bg-white hover:text-slate-950 sm:w-auto md:px-8 md:py-4 md:tracking-[0.15em]"
           >
             {isArabic ? "عيط لينا" : "Call the studio"}
           </a>
           <a
             href="mailto:contact@innovmark.ma"
-            className="inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-white/14 px-5 py-3 text-center text-sm uppercase tracking-[0.08em] text-white/72 transition-colors hover:border-cyan-100/40 hover:text-white sm:w-auto md:px-8 md:py-4 md:tracking-[0.15em]"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-blue-200/70 bg-white/52 px-5 py-3 text-center text-sm uppercase tracking-[0.08em] text-slate-600 transition-colors hover:border-blue-400/45 hover:bg-white hover:text-slate-950 sm:w-auto md:px-8 md:py-4 md:tracking-[0.15em]"
           >
             {isArabic ? "الإيميل" : "Email"}
           </a>
         </div>
 
-        <div className="mt-8 hidden flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs uppercase tracking-widest text-white/62 md:flex">
+        <div className="mt-8 hidden flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs uppercase tracking-widest text-slate-500 md:flex">
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-emerald-400" />
             {isArabic ? "جواب سريع" : "Quick response"}

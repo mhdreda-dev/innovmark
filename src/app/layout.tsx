@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="fr"
       className={`${geist.variable} ${manrope.variable} ${jetbrains.variable} ${cairo.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-transparent text-white selection:bg-violet-500/30">
+      <body className="min-h-full bg-transparent text-slate-950 selection:bg-blue-200/60">
         {children}
         <RevealOnScroll />
       </body>

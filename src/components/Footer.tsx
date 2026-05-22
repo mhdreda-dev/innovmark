@@ -99,8 +99,8 @@ export default function Footer({ locale }: { locale?: string }) {
   const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل معنا فواتساب");
 
   return (
-    <footer className="relative overflow-hidden bg-white/[0.055] backdrop-blur-md">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/16 to-transparent" />
+    <footer className="relative overflow-hidden bg-white/68 backdrop-blur-md">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/80 to-transparent" />
 
       {/* ══════════════════════════════════════════
           DESKTOP layout  (md and above)
@@ -113,11 +113,11 @@ export default function Footer({ locale }: { locale?: string }) {
             <div>
               <div className="mb-5 flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_18px_rgba(122,217,255,0.65)]" />
-                <span className="text-sm font-light tracking-[0.38em] uppercase text-white">
+                <span className="text-sm font-light tracking-[0.38em] uppercase text-slate-950">
                   Innovmark
                 </span>
               </div>
-              <p className="max-w-xs text-sm leading-7 text-white/68">
+              <p className="max-w-xs text-sm leading-7 text-slate-600">
                 {isArabic
                   ? "خدمات فالإنترنت للمشاريع اللي باغية تبان بقيمة، توصل الرسالة بوضوح، وتكبر بثقة."
                   : "Premium marketing systems for brands that want to look expensive, communicate clearly and grow with confidence."}
@@ -127,7 +127,7 @@ export default function Footer({ locale }: { locale?: string }) {
             {/* Link columns */}
             {Object.entries(desktopLinks).map(([title, cols]) => (
               <div key={title}>
-                <h4 className="mb-5 text-[11px] tracking-[0.34em] uppercase text-white/82">
+                <h4 className="mb-5 text-[11px] tracking-[0.34em] uppercase text-slate-900">
                   {title}
                 </h4>
                 <ul className="space-y-3">
@@ -135,7 +135,7 @@ export default function Footer({ locale }: { locale?: string }) {
                     <li key={l.label}>
                       <a
                         href={localHref(l.href, locale)}
-                        className="inline-flex text-sm text-white/68 transition duration-200 hover:translate-x-0.5 hover:text-white"
+                        className="inline-flex text-sm text-slate-600 transition duration-200 hover:translate-x-0.5 hover:text-blue-700"
                       >
                         {l.label}
                       </a>
@@ -147,11 +147,11 @@ export default function Footer({ locale }: { locale?: string }) {
           </div>
 
           {/* Desktop bottom bar */}
-          <div className="flex items-center justify-between gap-6 border-t border-white/10 pt-8 rtl-row">
-            <span className="text-xs text-white/52">{copyright}</span>
+          <div className="flex items-center justify-between gap-6 border-t border-blue-100/70 pt-8 rtl-row">
+            <span className="text-xs text-slate-500">{copyright}</span>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-xs text-white/48 transition-colors hover:text-white/78">{legalLabel}</a>
-              <a href="#" className="text-xs text-white/48 transition-colors hover:text-white/78">{privacyLabel}</a>
+              <a href="#" className="text-xs text-slate-500 transition-colors hover:text-blue-700">{legalLabel}</a>
+              <a href="#" className="text-xs text-slate-500 transition-colors hover:text-blue-700">{privacyLabel}</a>
             </div>
           </div>
         </div>
@@ -166,13 +166,13 @@ export default function Footer({ locale }: { locale?: string }) {
           {/* Logo */}
           <div className="mb-3 flex items-center gap-2 rtl-row">
             <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_18px_rgba(122,217,255,0.65)]" />
-            <span className="text-sm font-light uppercase tracking-[0.26em] text-white sm:tracking-[0.38em]">
+            <span className="text-sm font-light uppercase tracking-[0.26em] text-slate-950 sm:tracking-[0.38em]">
               Innovmark
             </span>
           </div>
 
           {/* Tagline */}
-          <p className="mb-8 text-sm leading-6 text-white/58">{tagline}</p>
+          <p className="mb-8 text-sm leading-6 text-slate-600">{tagline}</p>
 
           {/* Essential nav links — horizontal row */}
           <nav aria-label="Footer navigation">
@@ -181,7 +181,7 @@ export default function Footer({ locale }: { locale?: string }) {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="inline-flex text-[11px] font-medium uppercase tracking-[0.12em] text-white/70 transition duration-200 hover:-translate-y-0.5 hover:text-white sm:tracking-[0.22em]"
+                    className="inline-flex text-[11px] font-medium uppercase tracking-[0.12em] text-slate-600 transition duration-200 hover:-translate-y-0.5 hover:text-blue-700 sm:tracking-[0.22em]"
                   >
                     {l.label}
                   </Link>
@@ -195,7 +195,7 @@ export default function Footer({ locale }: { locale?: string }) {
             href={WA_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-8 flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full border border-white/14 bg-white/[0.06] text-sm font-medium tracking-wide text-white transition-all duration-200 hover:border-cyan-100/34 hover:bg-white/[0.085] active:scale-95"
+            className="mb-8 flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full border border-blue-100/80 bg-white/72 text-sm font-medium tracking-wide text-slate-800 shadow-[0_10px_30px_rgba(15,23,42,0.07)] transition-all duration-200 hover:border-blue-300/50 hover:bg-white active:scale-95"
           >
             {/* WhatsApp icon */}
             <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 fill-[#25D366]" aria-hidden>
@@ -205,8 +205,8 @@ export default function Footer({ locale }: { locale?: string }) {
           </a>
 
           {/* Divider + copyright */}
-          <div className="border-t border-white/[0.08] pt-6 text-center">
-            <span className="text-[11px] text-white/38">{copyright}</span>
+          <div className="border-t border-blue-100/70 pt-6 text-center">
+            <span className="text-[11px] text-slate-500">{copyright}</span>
           </div>
         </div>
       </div>
