@@ -55,12 +55,12 @@ export default function Pricing({ locale }: { locale?: Locale }) {
           />
         </div>
 
-        <div className={`grid gap-5 md:grid-cols-2 xl:grid-cols-3 ${isArabic ? "items-stretch" : ""}`}>
+        <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3">
           {displayedTiers.map((tier) => (
             <article
               key={tier.name}
               dir={isArabic ? "rtl" : "ltr"}
-              className={`premium-glass relative flex min-h-[300px] min-w-0 flex-col rounded-2xl md:min-h-[340px] ${
+              className={`premium-glass relative flex h-full min-h-[390px] min-w-0 flex-col rounded-2xl md:min-h-[380px] ${
                 isArabic ? "h-full border-white/14 bg-white/[0.065] p-6 text-right md:p-8" : "p-5 text-left md:p-8"
               } ${tier.featured ? "border-cyan-200/30 bg-white/[0.09]" : ""}`}
             >
@@ -71,17 +71,17 @@ export default function Pricing({ locale }: { locale?: Locale }) {
               )}
               <h3 className="text-2xl font-light tracking-tight text-white md:text-3xl">{tier.name}</h3>
               <p className={`mt-3 max-w-sm text-sm leading-6 md:mt-4 md:leading-7 ${isArabic ? "text-white/82" : "text-white/72"}`}>{tier.line}</p>
-              <ul className={`mt-6 space-y-3 md:mt-8 ${isArabic ? "text-right" : ""}`}>
+              <ul className={`mt-6 flex-1 space-y-3 md:mt-8 ${isArabic ? "text-right" : ""}`}>
                 {tier.scope.map((item) => (
                   <li key={item} className={`flex items-start gap-3 text-sm leading-7 ${isArabic ? "text-right text-white/84" : "text-white/76"}`}>
-                    <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200/80" />
+                    <span className="mt-[0.72em] h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200/80 shadow-[0_0_12px_rgba(125,211,252,0.45)]" />
                     <span className="min-w-0">{item}</span>
                   </li>
                 ))}
               </ul>
               <a
                 href={localizedHref("/contact", locale)}
-                className={`mt-7 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:mt-auto md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "self-stretch border-white/24 bg-white/[0.035] text-white/90 md:self-start" : ""}`}
+                className={`mt-8 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-white/18 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-white/84 transition-all hover:border-cyan-200/50 hover:bg-white/[0.08] hover:text-white md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "self-stretch border-white/24 bg-white/[0.035] text-white/90 md:self-start" : ""}`}
               >
                 {isArabic ? "طلب نطاق الخدمة" : "Request scope"}
               </a>

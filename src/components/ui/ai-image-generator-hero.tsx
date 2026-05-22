@@ -266,13 +266,13 @@ const css = `
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7.25rem 1.25rem 34svh;
+  padding: 5.75rem 1.25rem 32svh;
   font-family: var(--font-geist-sans), var(--font-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 .ihc-section.ihc-has-video {
-  padding-bottom: 7.5rem;
+  padding-bottom: 6.5rem;
 }
 
 .ihc-bg {
@@ -493,6 +493,7 @@ const css = `
   width: 100%;
   max-width: 920px;
   min-width: 0;
+  margin-top: -3svh;
 }
 
 /* ── Entrance animations ── */
@@ -796,8 +797,8 @@ const css = `
 .ihc-feature-desc  { font-size: 11.5px; color: rgba(255,255,255,0.45); line-height: 1.55; }
 
 @media (min-width: 768px) {
-  .ihc-section { padding-bottom: 40svh; }
-  .ihc-section.ihc-has-video { padding-bottom: 7.5rem; }
+  .ihc-section { padding-bottom: 36svh; }
+  .ihc-section.ihc-has-video { padding-bottom: 6.5rem; }
   .ihc-stage { height: 34svh; }
   .ihc-track {
     bottom: 2rem;
@@ -842,13 +843,13 @@ const css = `
     align-items: flex-start;
     justify-content: flex-start;
     min-height: 100svh;
-    padding: 6rem 1rem 33svh;
+    padding: 5rem 1rem 31svh;
   }
   .ihc-section.ihc-has-video {
     align-items: center;
     padding-bottom: 5rem;
   }
-  .ihc-col { max-width: 620px; }
+  .ihc-col { max-width: 620px; margin-top: 0; }
   .ihc-badge {
     margin-bottom: 16px;
     padding: 7px 13px;

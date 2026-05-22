@@ -18,10 +18,10 @@ export default function CTA({ locale }: { locale?: string }) {
       {/* Layered gradient background — pure CSS */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="absolute inset-x-8 inset-y-4 opacity-[0.18] blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse 70% 80% at 50% 100%, rgba(124,58,237,0.26), transparent 60%), radial-gradient(ellipse 50% 60% at 10% 30%, rgba(56,189,248,0.22), transparent 60%)",
+            "radial-gradient(ellipse 46% 50% at 50% 100%, rgba(124,58,237,1), transparent 68%), radial-gradient(ellipse 34% 42% at 14% 34%, rgba(56,189,248,0.9), transparent 70%)",
         }}
       />
       <div

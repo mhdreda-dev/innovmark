@@ -99,19 +99,20 @@ export default function Footer({ locale }: { locale?: string }) {
   const waLabel      = t(locale, "Écrire sur WhatsApp", "Chat on WhatsApp", "تواصل معنا فواتساب");
 
   return (
-    <footer className="border-t border-white/12 bg-white/[0.055] backdrop-blur-md">
+    <footer className="relative overflow-hidden bg-white/[0.055] backdrop-blur-md">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/16 to-transparent" />
 
       {/* ══════════════════════════════════════════
           DESKTOP layout  (md and above)
       ══════════════════════════════════════════ */}
       <div className="hidden md:block">
-        <div className="mx-auto max-w-7xl px-6 pt-20 pb-8 lg:px-10">
+        <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-10">
           {/* 4-column grid — unchanged from original */}
           <div className="grid grid-cols-[1.2fr_0.8fr_0.8fr_1fr] gap-10 pb-16 rtl-text-right">
             {/* Brand column */}
             <div>
               <div className="mb-5 flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400" />
+                <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_18px_rgba(122,217,255,0.65)]" />
                 <span className="text-sm font-light tracking-[0.38em] uppercase text-white">
                   Innovmark
                 </span>
@@ -134,7 +135,7 @@ export default function Footer({ locale }: { locale?: string }) {
                     <li key={l.label}>
                       <a
                         href={localHref(l.href, locale)}
-                        className="text-sm text-white/68 transition-colors hover:text-white"
+                        className="inline-flex text-sm text-white/68 transition duration-200 hover:translate-x-0.5 hover:text-white"
                       >
                         {l.label}
                       </a>
@@ -164,7 +165,7 @@ export default function Footer({ locale }: { locale?: string }) {
 
           {/* Logo */}
           <div className="mb-3 flex items-center gap-2 rtl-row">
-            <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400" />
+            <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_18px_rgba(122,217,255,0.65)]" />
             <span className="text-sm font-light uppercase tracking-[0.26em] text-white sm:tracking-[0.38em]">
               Innovmark
             </span>
@@ -180,7 +181,7 @@ export default function Footer({ locale }: { locale?: string }) {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/70 transition-colors hover:text-white sm:tracking-[0.22em]"
+                    className="inline-flex text-[11px] font-medium uppercase tracking-[0.12em] text-white/70 transition duration-200 hover:-translate-y-0.5 hover:text-white sm:tracking-[0.22em]"
                   >
                     {l.label}
                   </Link>
@@ -194,7 +195,7 @@ export default function Footer({ locale }: { locale?: string }) {
             href={WA_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-8 flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full border border-white/14 bg-white/[0.06] text-sm font-medium tracking-wide text-white transition-all duration-200 active:scale-95"
+            className="mb-8 flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full border border-white/14 bg-white/[0.06] text-sm font-medium tracking-wide text-white transition-all duration-200 hover:border-cyan-100/34 hover:bg-white/[0.085] active:scale-95"
           >
             {/* WhatsApp icon */}
             <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 fill-[#25D366]" aria-hidden>

@@ -107,14 +107,14 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.72, delay: index * 0.07, ease: EASE }}
-      className={`group relative min-w-0 overflow-hidden rounded-3xl border border-white/[0.10] bg-[#050912] shadow-[0_28px_84px_-42px_rgba(0,0,0,0.92)] ${spanClass}`}
+      className={`group relative min-w-0 overflow-hidden rounded-3xl border border-white/[0.10] bg-[#050912] shadow-[0_28px_84px_-42px_rgba(0,0,0,0.92),0_0_52px_-34px_rgba(122,217,255,0.72)] ${spanClass}`}
       style={{
         minHeight: isCampaign ? 220 : 240,
       }}
     >
       <div
         aria-hidden
-        className="absolute -inset-8 opacity-70 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+        className="absolute -inset-8 opacity-75 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
         style={{ background: `radial-gradient(ellipse 64% 48% at 50% 12%,${config.glowColor},transparent 68%)` }}
       />
 
@@ -128,8 +128,9 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
         decoding="async"
       />
 
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/8 via-black/20 to-black/78" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-cyan-300/14 via-transparent to-violet-500/18" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/18 via-[#030712]/32 to-black/84" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-cyan-300/16 via-transparent to-violet-500/18" />
+      <div aria-hidden className="absolute inset-0 shadow-[inset_0_0_68px_rgba(15,23,42,0.72),inset_0_0_42px_rgba(122,217,255,0.10)]" />
       <div aria-hidden className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent" />
 
       <div className={`relative flex h-full min-w-0 flex-col justify-end p-5 ${isCampaign ? "md:p-7" : ""}`}>

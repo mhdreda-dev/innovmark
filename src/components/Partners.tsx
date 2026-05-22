@@ -37,7 +37,14 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       dir="ltr"
       style={{ direction: "ltr", unicodeBidi: "isolate" }}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_82%_58%,rgba(16,185,129,0.10),transparent_30%)]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-28 h-72 opacity-[0.08] blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle at 18% 55%, rgba(34,211,238,0.9), transparent 24%), radial-gradient(circle at 82% 62%, rgba(16,185,129,0.75), transparent 26%)",
+        }}
+      />
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
           <div className="text-[11px] uppercase tracking-[0.34em] text-cyan-100/58">{copy.eyebrow}</div>

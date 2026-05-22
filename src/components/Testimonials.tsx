@@ -100,12 +100,12 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
       )}
 
       <div className="mt-10 md:mt-14">
-        <div className={isArabic ? "mx-auto grid max-w-7xl gap-5 px-4 sm:px-6 md:grid-cols-2 md:gap-6 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow gap-4 px-4 sm:px-6 md:gap-6 lg:px-10"}>
+        <div className={isArabic ? "mx-auto grid max-w-7xl items-stretch gap-5 px-4 sm:px-6 md:grid-cols-2 md:gap-6 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow items-stretch gap-4 px-4 sm:px-6 md:gap-6 lg:px-10"}>
           {(isArabic ? items : loop).map((item, index) => (
             <figure
               key={`${item.name}-${index}`}
-              className={`premium-glass group flex min-h-[280px] min-w-0 flex-col justify-between rounded-3xl p-5 transition-colors hover:border-cyan-200/24 md:min-h-[300px] md:p-8 ${
-                isArabic ? "w-full text-right" : "w-[82vw] max-w-[340px] shrink-0 sm:w-[320px] md:w-[420px] md:max-w-none"
+              className={`premium-glass group flex min-h-[320px] min-w-0 flex-col rounded-3xl p-5 transition-colors hover:border-cyan-200/24 md:min-h-[340px] md:p-8 ${
+                isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[340px] shrink-0 sm:w-[320px] md:w-[420px] md:max-w-none"
               }`}
             >
               <div className={`mb-4 flex items-center justify-between md:mb-6 ${isArabic ? "flex-row-reverse" : ""}`}>
@@ -123,7 +123,7 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
                   <path d="M9 7H4v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7zm11 0h-5v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7z" />
                 </svg>
               </div>
-              <blockquote className={`text-base font-light text-white md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
+              <blockquote className={`min-w-0 flex-1 overflow-visible break-words text-base font-light text-white md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
                 “{item.quote}”
               </blockquote>
               <figcaption className={`mt-6 flex items-center gap-3 border-t border-white/10 pt-5 md:mt-8 md:pt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
