@@ -74,7 +74,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
               <img
                 src={partner.logoUrl}
                 alt={partner.name}
-                className="max-h-14 w-auto max-w-full object-contain opacity-72 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 sm:max-h-16"
+                className="max-h-14 w-auto max-w-full object-contain opacity-100 transition duration-300 group-hover:scale-105 sm:max-h-16"
                 loading="lazy"
               />
               <span className="sr-only">{partner.name}</span>
