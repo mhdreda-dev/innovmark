@@ -24,6 +24,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
   if (!partners.length) return null;
 
   const copy = labels[locale];
+  const marqueePartners = partners.length >= 4 ? partners : Array.from({ length: Math.ceil(4 / partners.length) }).flatMap(() => partners);
 
   return (
     <section
@@ -47,28 +48,71 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
         </div>
       </div>
 
-      <div className="relative mx-auto mt-10 max-w-7xl px-5" dir="ltr" style={{ direction: "ltr", unicodeBidi: "isolate" }}>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-          {partners.map((partner) => (
-            <a
-              key={partner.id}
-              href={partner.websiteUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
-              className="group grid min-h-24 min-w-0 place-items-center rounded-[1.35rem] border border-white/70 bg-white/78 px-4 py-5 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-[1.025] hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.10)] sm:min-h-30 sm:px-6"
-            >
-              <img
-                src={partner.logoUrl}
-                alt={partner.name}
-                className="max-h-12 w-auto max-w-[92%] object-contain opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:max-h-16"
-                loading="lazy"
-              />
-              <span className="sr-only">{partner.name}</span>
-            </a>
+      <div
+        className="relative left-1/2 right-1/2 mt-10 w-screen -translate-x-1/2 overflow-hidden"
+        dir="ltr"
+        style={{ direction: "ltr", unicodeBidi: "isolate" }}
+      >
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white via-white/90 to-transparent sm:w-36" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white via-white/90 to-transparent sm:w-36" />
+
+        <div className="partners-marquee flex w-max min-w-max px-5 py-3 hover:[animation-play-state:paused]">
+          {[0, 1].map((groupIndex) => (
+            <div key={groupIndex} className="flex shrink-0 gap-3 pr-3 sm:gap-5 sm:pr-5">
+              {marqueePartners.map((partner) => (
+                <a
+                  key={`${partner.id}-${groupIndex}`}
+                  href={partner.websiteUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
+                  aria-hidden={groupIndex === 1}
+                  tabIndex={groupIndex === 1 ? -1 : undefined}
+                  className="group grid h-24 w-40 shrink-0 place-items-center rounded-[1.35rem] border border-white/70 bg-white/78 px-5 py-5 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.12)] sm:h-32 sm:w-60 sm:px-7"
+                >
+                  <img
+                    src={partner.logoUrl}
+                    alt={partner.name}
+                    className="max-h-12 w-auto max-w-[92%] object-contain opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:max-h-16"
+                    loading="lazy"
+                  />
+                  <span className="sr-only">{partner.name}</span>
+                </a>
+              ))}
+            </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        .partners-marquee {
+          animation: partners-marquee 36s linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+        }
+
+        @media (max-width: 640px) {
+          .partners-marquee {
+            animation-duration: 46s;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .partners-marquee {
+            animation: none;
+            transform: none;
+          }
+        }
+
+        @keyframes partners-marquee {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+          to {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+      `}</style>
     </section>
   );
 }
