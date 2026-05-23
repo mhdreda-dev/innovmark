@@ -140,7 +140,7 @@ export default function Footer({ locale }: { locale?: string }) {
                   href={WA_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-cyan-200/20 bg-cyan-200/10 px-4 py-2 text-xs font-medium tracking-[0.18em] text-cyan-100 uppercase shadow-[0_12px_38px_rgba(34,211,238,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-cyan-200/45 hover:bg-cyan-200/15"
+                  className="rounded-full border border-emerald-400 bg-emerald-500 px-4 py-2 text-xs font-medium tracking-[0.18em] text-white uppercase shadow-[0_14px_32px_rgba(16,185,129,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-600 hover:shadow-[0_18px_42px_rgba(16,185,129,0.34)]"
                 >
                   {waLabel}
                 </a>

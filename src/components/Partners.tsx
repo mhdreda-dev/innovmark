@@ -5,17 +5,17 @@ const labels: Record<Locale, { eyebrow: string; title: string; description: stri
   fr: {
     eyebrow: "Partenaires",
     title: "Marques et équipes qui avancent avec Innovmark",
-    description: "Un défilé discret de logos, pensé comme une preuve sociale premium sans interrompre le rythme de la page.",
+    description: "Une sélection de marques et projets qui nous font confiance.",
   },
   en: {
     eyebrow: "Partners",
     title: "Brands and teams moving with Innovmark",
-    description: "A quiet logo flow designed as premium proof without interrupting the page rhythm.",
+    description: "A selection of brands and projects that trust our work.",
   },
   ar: {
     eyebrow: "الشركاء",
     title: "مشاريع وفرق خدامين مع Innovmark",
-    description: "لوغوهات ديال شركاء وثقو فينا، بلا ما نقطعو عليك تصفح الصفحة.",
+    description: "اختيار من الماركات والمشاريع اللي وثقو فخدمتنا.",
   },
 };
 
@@ -24,25 +24,19 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
   if (!partners.length) return null;
 
   const copy = labels[locale];
-  const basePartners = partners.length ? partners : [];
-  const minCards = 24;
-  const repeatedPartners = Array.from({
-    length: Math.max(6, Math.ceil(minCards / basePartners.length)),
-  }).flatMap(() => basePartners);
-  const marqueeItems = [...repeatedPartners, ...repeatedPartners];
 
   return (
     <section
-      className="relative overflow-hidden border-y border-blue-100/70 bg-white/76 py-16 shadow-[0_18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:py-20"
+      className="relative overflow-hidden border-y border-blue-100/70 bg-white/82 py-14 shadow-[0_18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:py-18"
       dir="ltr"
       style={{ direction: "ltr", unicodeBidi: "isolate" }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-28 h-32 opacity-[0.06] blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-16 h-44 opacity-[0.12] blur-3xl"
         style={{
           background:
-            "radial-gradient(circle at 28% 55%, rgba(79,140,255,0.8), transparent 32%), radial-gradient(circle at 72% 62%, rgba(125,211,252,0.55), transparent 34%)",
+            "radial-gradient(circle at 28% 48%, rgba(79,140,255,0.68), transparent 34%), radial-gradient(circle at 72% 58%, rgba(125,211,252,0.50), transparent 36%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-5">
@@ -53,28 +47,21 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
         </div>
       </div>
 
-      <div
-        className="relative left-1/2 right-1/2 mt-10 w-screen -translate-x-1/2 overflow-hidden"
-        dir="ltr"
-        style={{ direction: "ltr", unicodeBidi: "isolate" }}
-      >
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent sm:w-40" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent sm:w-40" />
-        <div className="partners-marquee flex w-max min-w-max gap-4 px-5 hover:[animation-play-state:paused] sm:gap-5">
-          {marqueeItems.map((partner, index) => (
+      <div className="relative mx-auto mt-10 max-w-7xl px-5" dir="ltr" style={{ direction: "ltr", unicodeBidi: "isolate" }}>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+          {partners.map((partner) => (
             <a
-              key={`${partner.name}-${index}`}
+              key={partner.id}
               href={partner.websiteUrl}
               target="_blank"
               rel="noreferrer"
               aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
-              aria-hidden={index >= repeatedPartners.length}
-              className="group grid h-28 w-48 shrink-0 place-items-center rounded-2xl border border-blue-100/80 bg-white/90 px-6 shadow-[0_12px_34px_rgba(15,23,42,0.07)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/55 hover:bg-white hover:shadow-[0_18px_44px_rgba(15,23,42,0.10)] sm:h-32 sm:w-60"
+              className="group grid min-h-24 min-w-0 place-items-center rounded-[1.35rem] border border-white/70 bg-white/78 px-4 py-5 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-[1.025] hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.10)] sm:min-h-30 sm:px-6"
             >
               <img
                 src={partner.logoUrl}
                 alt={partner.name}
-                className="max-h-14 w-auto max-w-full object-contain opacity-100 transition duration-300 group-hover:scale-105 sm:max-h-16"
+                className="max-h-12 w-auto max-w-[92%] object-contain opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:max-h-16"
                 loading="lazy"
               />
               <span className="sr-only">{partner.name}</span>

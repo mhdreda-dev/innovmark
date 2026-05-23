@@ -65,6 +65,8 @@ export default async function LocalizedHome({ params }: Props) {
     "creative-formats",
     ...content.sections.filter((section) => section !== "creative-formats"),
   ];
+  const sectionSpacingClass = (section: string) =>
+    section === "capabilities" ? "-mt-10 md:-mt-16" : undefined;
 
   return (
     <>
@@ -87,7 +89,7 @@ export default async function LocalizedHome({ params }: Props) {
         </div>
 
         {orderedSections.map((section) => (
-          <div key={section} id={section === "creative-formats" ? "work" : undefined}>
+          <div key={section} id={section === "creative-formats" ? "work" : undefined} className={sectionSpacingClass(section)}>
             {sectionNodes[section]}
           </div>
         ))}

@@ -156,13 +156,13 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
               SB
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.14em] text-cyan-100/64 md:tracking-[0.32em]">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-blue-600 md:tracking-[0.32em]">
                 {isArabic ? "عضو أساسي" : "Membre clé"}
               </p>
               <h2 className="mt-3 text-2xl font-light tracking-tight text-white md:text-3xl">
                 Saad Belkaadi
               </h2>
-              <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-emerald-100/68 md:tracking-[0.18em]">
+              <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-slate-600 md:tracking-[0.18em]">
                 {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "Spécialiste commerce en ligne & créations publicitaires"}
               </p>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/64">
