@@ -61,6 +61,10 @@ export default async function LocalizedHome({ params }: Props) {
     pricing: <Pricing locale={locale} />,
     cta: <CTA locale={locale} />,
   };
+  const orderedSections = [
+    "creative-formats",
+    ...content.sections.filter((section) => section !== "creative-formats"),
+  ];
 
   return (
     <>
@@ -82,7 +86,7 @@ export default async function LocalizedHome({ params }: Props) {
           />
         </div>
 
-        {content.sections.map((section) => (
+        {orderedSections.map((section) => (
           <div key={section} id={section === "creative-formats" ? "work" : undefined}>
             {sectionNodes[section]}
           </div>
