@@ -99,17 +99,17 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
         </>
       )}
 
-      <div className="mt-10 md:mt-14">
-        <div className={isArabic ? "mx-auto grid max-w-7xl items-stretch gap-5 px-4 sm:px-6 md:grid-cols-2 md:gap-6 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow items-stretch gap-4 px-4 sm:px-6 md:gap-6 lg:px-10"}>
+      <div className="mt-8 md:mt-10">
+        <div className={isArabic ? "mx-auto grid max-w-7xl items-stretch gap-4 px-4 sm:px-6 md:grid-cols-2 md:gap-5 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow items-stretch gap-4 px-4 sm:px-6 md:gap-5 lg:px-10"}>
           {(isArabic ? items : loop).map((item, index) => (
             <figure
               key={`${item.name}-${index}`}
-              className={`group flex min-h-[320px] min-w-0 flex-col rounded-3xl border border-blue-100/70 bg-white/88 p-5 shadow-[0_16px_42px_rgba(15,23,42,0.075)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-300/45 hover:shadow-[0_22px_54px_rgba(15,23,42,0.10)] md:min-h-[340px] md:p-8 ${
-                isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[340px] shrink-0 sm:w-[320px] md:w-[420px] md:max-w-none"
+              className={`group flex min-h-[270px] min-w-0 flex-col rounded-[1.45rem] border border-blue-100/80 bg-white/92 p-4 shadow-[0_16px_42px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.90)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-blue-300/55 hover:bg-white/96 hover:shadow-[0_24px_58px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.08)] md:min-h-[292px] md:p-6 ${
+                isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[330px] shrink-0 sm:w-[310px] md:w-[370px] md:max-w-none"
               }`}
             >
-              <div className={`mb-4 flex items-center justify-between md:mb-6 ${isArabic ? "flex-row-reverse" : ""}`}>
-                <div className="flex gap-1 text-[#4F8CFF] opacity-100">
+              <div className={`mb-4 flex items-center justify-between ${isArabic ? "flex-row-reverse" : ""}`}>
+                <div className="flex gap-1.5 text-[15px] leading-none text-[#4F8CFF] opacity-100 drop-shadow-[0_6px_14px_rgba(79,140,255,0.18)] md:text-base">
                   {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
                     <span key={i}>★</span>
                   ))}
@@ -117,22 +117,22 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
                 <svg
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="h-[42px] w-[42px] rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105"
+                  className="h-11 w-11 rounded-full border border-[#4F8CFF]/20 bg-gradient-to-br from-[#4F8CFF]/14 to-cyan-200/22 p-2.5 text-[#2563EB] opacity-100 shadow-[0_10px_26px_rgba(79,140,255,0.13)] transition duration-300 group-hover:scale-105 group-hover:border-[#4F8CFF]/35 group-hover:shadow-[0_14px_34px_rgba(79,140,255,0.20)]"
                   aria-hidden
                 >
                   <path d="M9 7H4v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7zm11 0h-5v6c0 3.3 2.7 6 6 6v-3a3 3 0 0 1-3-3v-1h2V7z" />
                 </svg>
               </div>
-              <blockquote className={`min-w-0 flex-1 overflow-visible break-words text-base font-light text-slate-800 md:text-lg ${isArabic ? "leading-8 md:leading-10" : "leading-7 md:leading-8"}`}>
+              <blockquote className={`min-w-0 flex-1 overflow-visible break-words text-[15px] font-normal text-slate-800 md:text-base ${isArabic ? "leading-8" : "leading-7"}`}>
                 “{item.quote}”
               </blockquote>
-              <figcaption className={`mt-6 flex items-center gap-3 border-t border-blue-100/70 pt-5 md:mt-8 md:pt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 text-[11px] font-semibold text-blue-900 shadow-[0_8px_20px_rgba(79,140,255,0.14)]">
+              <figcaption className={`mt-5 flex items-center gap-3 border-t border-blue-100/80 pt-4 md:mt-6 ${isArabic ? "flex-row-reverse text-right" : ""}`}>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-blue-200/70 bg-gradient-to-br from-blue-100 via-white to-cyan-100 text-xs font-semibold text-blue-900 shadow-[0_10px_24px_rgba(79,140,255,0.18)] transition duration-300 group-hover:scale-105">
                   {item.name.split(" ").map((n) => n[0]).join("")}
                 </span>
                 <span className="min-w-0">
-                  <div className="text-sm text-slate-950">{item.name}</div>
-                  <div className={`mt-1 text-[10px] uppercase text-slate-500 ${isArabic ? "tracking-normal" : "tracking-[0.12em] md:tracking-[0.24em]"}`}>
+                  <div className="text-sm font-medium text-slate-950">{item.name}</div>
+                  <div className={`mt-1 text-[10px] uppercase text-slate-600 ${isArabic ? "tracking-normal" : "tracking-[0.12em] md:tracking-[0.20em]"}`}>
                     {item.role}
                   </div>
                 </span>
