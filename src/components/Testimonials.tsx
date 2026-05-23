@@ -3,33 +3,33 @@ import SectionLabel from "./SectionLabel";
 const testimonials = [
   {
     quote:
-      "Innovmark made our brand look like it belonged in a higher category. The work was sharp, fast, and commercially clear.",
+      "Innovmark a donné à notre marque une présence plus haut de gamme. Le travail était précis, rapide et très clair commercialement.",
     name: "Yassine B.",
-    role: "Founder · Retail Brand",
+    role: "Fondateur · Marque retail",
   },
   {
     quote:
-      "The website, videos and campaign assets finally felt connected. We stopped explaining our value and started showing it.",
+      "Le site, les vidéos et les supports de campagne sont enfin devenus cohérents. Nous n'avions plus besoin d'expliquer notre valeur, elle se voyait.",
     name: "Salma A.",
-    role: "Managing Partner · Service Co.",
+    role: "Associée gérante · Société de services",
   },
   {
     quote:
-      "Communication was direct, premium and structured. They understood the business side, not only the visuals.",
+      "La communication était directe, premium et structurée. Ils ont compris les enjeux business, pas seulement l'esthétique.",
     name: "Omar L.",
-    role: "Owner · Real Estate Group",
+    role: "Dirigeant · Groupe immobilier",
   },
   {
     quote:
       "Le rendu final dépasse ce qu'on imaginait. Et surtout, les délais ont été tenus à la lettre.",
     name: "Reda M.",
-    role: "CEO · Hospitality",
+    role: "CEO · Hôtellerie",
   },
   {
     quote:
-      "A studio that thinks first, designs second. The strategy work alone changed how we sell.",
+      "Un studio qui pense avant de créer. Le travail stratégique a transformé notre manière de vendre.",
     name: "Karim T.",
-    role: "Director · Industrial",
+    role: "Directeur · Industrie",
   },
 ];
 
@@ -79,9 +79,9 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <SectionLabel
-          kicker={isArabic ? "ثقة الزبناء" : "Client signal"}
-          title={isArabic ? "كيخدمو معنا أصحاب المشاريع اللي كيهتمو بالصورة والنتائج." : "Trusted by owners who care about perception."}
-          subtitle={isArabic ? "الخدمة الاحترافية ماشي غير الشكل، هي كيفاش المشروع ديالك كيبان بثقة من بعد الانطلاق." : "Premium work is not only how it looks — it is how confidently the business presents itself after launch."}
+          kicker={isArabic ? "ثقة الزبناء" : "Témoignages clients"}
+          title={isArabic ? "كيخدمو معنا أصحاب المشاريع اللي كيهتمو بالصورة والنتائج." : "Ils nous font confiance."}
+          subtitle={isArabic ? "الخدمة الاحترافية ماشي غير الشكل، هي كيفاش المشروع ديالك كيبان بثقة من بعد الانطلاق." : "Une réalisation premium ne se limite pas à l'esthétique : elle renforce la confiance avec laquelle votre marque se présente."}
         />
       </div>
 

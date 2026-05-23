@@ -35,13 +35,14 @@ export const dictionaries = {
       heroTitle: "INNOVMARK — Transformez votre présence digitale",
       heroSubtitle: "Agence Marketing Premium",
       heroDescription:
-        "Sites web, branding, publicité, contenu créatif et stratégie digitale pour faire grandir votre marque.",
-      heroCta: "Demander un devis",
-      heroSecondaryCta: "Nous contacter",
-      heroWhatsappMessage: "Bonjour INNOVMARK, je veux un devis",
+        "Création de contenu, branding, publicité et stratégie digitale pour développer votre entreprise.",
+      heroCta: "Obtenir un audit gratuit",
+      heroSecondaryCta: "Voir nos réalisations",
+      heroWhatsappMessage: "Bonjour INNOVMARK, je souhaite obtenir un audit gratuit.",
+      heroTrustSignals: ["Réponse sous 24h", "Stratégie personnalisée", "Accompagnement premium"],
       features: [
         {
-          title: "Branding Premium",
+          title: "Identité de marque premium",
           description: "Identités visuelles qui marquent les esprits.",
         },
         {
@@ -50,25 +51,25 @@ export const dictionaries = {
         },
         {
           title: "Croissance IA",
-          description: "Stratégies data-driven, résultats mesurables.",
+          description: "Stratégies pilotées par les données, résultats mesurables.",
         },
       ],
     },
     pages: {
       services: {
-        kicker: "Premium Services",
+        kicker: "Services premium",
         title: "Nos Services",
         subtitle:
           "Une offre integree pour transformer votre marque en experience premium: claire, memorable et orientee conversion.",
       },
       why: {
-        kicker: "Trust & Authority",
+        kicker: "Confiance & autorité",
         title: "Pourquoi choisir INNOVMARK",
         subtitle:
           "Une agence pour les marques qui veulent paraitre plus etablies, vendre avec plus de clarte et avancer sans friction.",
       },
       process: {
-        kicker: "Clean Step System",
+        kicker: "Méthode structurée",
         title: "Notre Processus",
         subtitle:
           "Une methode lisible en quatre etapes pour passer d'une intention ambitieuse a une livraison precise, sans confusion.",
@@ -98,7 +99,7 @@ export const dictionaries = {
           },
         ],
         serviceCards: [
-          { label: "Branding", tag: "Identité visuelle" },
+          { label: "Identité de marque", tag: "Univers visuel" },
           { label: "Site web", tag: "Design & Dev" },
           { label: "Marketing", tag: "Stratégie & Croissance" },
         ],
@@ -110,7 +111,7 @@ export const dictionaries = {
       },
     },
     contactForm: {
-      projectTypes: ["Site web", "Branding", "Marketing", "Autre"],
+      projectTypes: ["Site web", "Identité de marque", "Communication", "Autre"],
       introStep: "Une question a la fois pour un brief plus fluide.",
       introSimple: "Tous les champs sur un seul ecran.",
       simpleMode: "Retour au formulaire simple",
@@ -157,6 +158,7 @@ export const dictionaries = {
       heroCta: "Request a quote",
       heroSecondaryCta: "Contact us",
       heroWhatsappMessage: "Hello INNOVMARK, I would like a quote",
+      heroTrustSignals: ["Reply within 24h", "Personalized strategy", "Premium support"],
       features: [
         { title: "Premium Branding", description: "Visual identities that stay in mind." },
         { title: "HD Content", description: "Videos, photos and advertising creatives." },
@@ -266,6 +268,7 @@ export const dictionaries = {
       heroCta: "طلب عرض السعر",
       heroSecondaryCta: "تواصل معنا",
       heroWhatsappMessage: "السلام عليكم INNOVMARK، بغيت عرض سعر للمشروع ديالي.",
+      heroTrustSignals: ["جواب فـ 24 ساعة", "خطة على حساب مشروعك", "مواكبة بريميوم"],
       features: [
         { title: "صورة احترافية", description: "لوغو، ألوان وطريقة عرض كتخلي البراند ديالك واضح." },
         { title: "محتوى كيبان", description: "تصاور، فيديوهات ومنشورات بجودة كتليق بالخدمة ديالك." },

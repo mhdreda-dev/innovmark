@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -49,7 +48,6 @@ export default function ContactPage() {
         </section>
       </main>
       <Footer />
-      <WhatsAppFloat />
     </>
   );
 }

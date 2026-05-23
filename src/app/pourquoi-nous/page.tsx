@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import WhyInnovmark from "@/components/WhyInnovmark";
 
 export const metadata: Metadata = {
@@ -28,7 +27,6 @@ export default function PourquoiNousPage() {
       <div className="relative z-10">
         <Footer />
       </div>
-      <WhatsAppFloat />
     </>
   );
 }

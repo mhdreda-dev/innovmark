@@ -16,25 +16,25 @@ export const heroImages: HeroImage[] = [
   {
     id: "product-shoot",
     src: "/images/hero-showcase/product-shoot.png",
-    alt: "Product shoot showcase",
+    alt: "Mise en scène produit",
     rotation: -3,
   },
   {
     id: "branding-showcase",
     src: "/images/hero-showcase/branding-showcase.jpg",
-    alt: "Branding showcase",
+    alt: "Présentation d'identité de marque",
     rotation: 2,
   },
   {
     id: "website-showcase",
     src: "/images/hero-showcase/website-showcase.jpg",
-    alt: "Website showcase",
+    alt: "Présentation de site web",
     rotation: -2,
   },
   {
     id: "social-media-showcase",
     src: "/images/hero-showcase/social-media-showcase.png",
-    alt: "Social media showcase",
+    alt: "Présentation réseaux sociaux",
     rotation: 3,
   },
 ]

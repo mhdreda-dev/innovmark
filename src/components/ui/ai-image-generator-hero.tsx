@@ -35,6 +35,7 @@ interface Props {
   onCtaClick?: () => void
   images: CarouselImage[]
   features?: CarouselFeature[]
+  trustSignals?: readonly string[]
   heroVideoUrl?: string
 }
 
@@ -65,6 +66,7 @@ export function ImageCarouselHero({
   secondaryCtaHref = "/contact",
   onCtaClick,
   images,
+  trustSignals = [],
   heroVideoUrl,
 }: Props) {
   const safeImages = images
@@ -215,6 +217,21 @@ export function ImageCarouselHero({
               {secondaryCtaText}
             </a>
           </div>
+
+          {trustSignals.length > 0 && (
+            <ul
+              className={`ihc-trust${mounted ? " ihc-in" : ""}`}
+              style={{ animationDelay: "0.72s" }}
+              aria-label="Garanties Innovmark"
+            >
+              {trustSignals.map((signal) => (
+                <li key={signal}>
+                  <span aria-hidden>✓</span>
+                  {signal}
+                </li>
+              ))}
+            </ul>
+          )}
 
         </div>
 
@@ -498,7 +515,7 @@ const css = `
 
 /* ── Entrance animations ── */
 .ihc-badge, .ihc-title, .ihc-desc,
-.ihc-stage, .ihc-dots, .ihc-cta-wrap, .ihc-features {
+.ihc-stage, .ihc-dots, .ihc-cta-wrap, .ihc-trust, .ihc-features {
   opacity: 0;
   transform: translateY(22px);
 }
@@ -767,6 +784,46 @@ const css = `
 }
 .ihc-cta:hover .ihc-cta-arrow { transform: translateX(3px); }
 
+.ihc-trust {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 18px auto 0;
+  padding: 0;
+  list-style: none;
+  max-width: 720px;
+  color: rgba(15,23,42,0.68);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.ihc-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(79,140,255,0.16);
+  background: rgba(255,255,255,0.48);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px -24px rgba(15,23,42,0.28);
+}
+.ihc-trust span {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(37,211,102,0.12);
+  color: #128c5e;
+  font-size: 11px;
+  line-height: 1;
+  box-shadow: 0 0 0 1px rgba(37,211,102,0.14) inset;
+}
+
 /* Feature pills */
 .ihc-features {
   display: flex;
@@ -875,6 +932,18 @@ const css = `
   .ihc-cta-wrap { flex-direction: column; gap: 12px; }
   .ihc-cta           { height: 54px; padding: 0 22px 0 18px; font-size: 14px; width: 100%; max-width: 280px; }
   .ihc-cta-secondary { height: 54px; font-size: 14px; width: 100%; max-width: 280px; }
+  .ihc-trust {
+    max-width: 310px;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 11.5px;
+  }
+  .ihc-trust li {
+    width: 100%;
+    justify-content: center;
+    min-height: 32px;
+    padding: 7px 10px;
+  }
   /* Background perf on mobile */
   .ihc-orb-1 { width: 700px; height: 550px; }
   .ihc-orb-2 { width: 500px; height: 440px; }
@@ -887,7 +956,7 @@ const css = `
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .ihc-in, .ihc-track, .ihc-card, .ihc-card-img, .ihc-dot,
-  .ihc-cta, .ihc-cta-secondary, .ihc-cta-arrow, .ihc-feature,
+  .ihc-cta, .ihc-cta-secondary, .ihc-cta-arrow, .ihc-trust, .ihc-feature,
   .ihc-pulse, .ihc-card-ring,
   .ihc-orb-1, .ihc-orb-2, .ihc-orb-3, .ihc-orb-4, .ihc-orb-5,
   .ihc-aurora, .ihc-streak-1, .ihc-streak-2, .ihc-streak-3, .ihc-p {
@@ -895,7 +964,7 @@ const css = `
     transition: none !important;
   }
   .ihc-badge, .ihc-title, .ihc-desc, .ihc-stage,
-  .ihc-dots, .ihc-cta-wrap, .ihc-features {
+  .ihc-dots, .ihc-cta-wrap, .ihc-trust, .ihc-features {
     opacity: 1 !important;
     transform: none !important;
   }

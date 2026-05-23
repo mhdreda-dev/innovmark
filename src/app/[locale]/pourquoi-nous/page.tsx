@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import WhyInnovmark from "@/components/WhyInnovmark";
 import { dictionaries, isLocale } from "@/lib/i18n";
 
@@ -56,7 +55,6 @@ export default async function LocalizedPourquoiNousPage({ params }: Props) {
       <div className="relative z-10">
         <Footer locale={locale} />
       </div>
-      <WhatsAppFloat locale={locale} />
     </>
   );
 }

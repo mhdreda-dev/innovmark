@@ -9,7 +9,7 @@ const WHATSAPP_NUMBER = "212771450503";
 
 const totalSteps = 3;
 const defaultLabels: Dictionary["contactForm"] = {
-  projectTypes: ["Site web", "Branding", "Marketing", "Autre"],
+  projectTypes: ["Site web", "Identité de marque", "Communication", "Autre"],
   introStep: "Une question a la fois pour un brief plus fluide.",
   introSimple: "Tous les champs sur un seul ecran.",
   simpleMode: "Retour au formulaire simple",

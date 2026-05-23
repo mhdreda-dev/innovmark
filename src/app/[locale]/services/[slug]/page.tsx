@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
 import { getServiceDetail, services } from "@/lib/services";
 
@@ -165,7 +164,6 @@ export default async function LocalizedServicePage({ params }: Props) {
         </section>
       </main>
       <Footer locale={locale} />
-      <WhatsAppFloat locale={locale} />
     </>
   );
 }

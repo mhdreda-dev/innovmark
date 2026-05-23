@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ContactForm from "@/components/ContactForm";
 import ContactVisualSection from "@/components/ContactVisualSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -172,7 +171,6 @@ export default async function LocalizedContactPage({ params }: Props) {
       </main>
 
       <Footer locale={locale} />
-      <WhatsAppFloat locale={locale} />
     </>
   );
 }

@@ -15,12 +15,12 @@ const highlights = [
   { label: "Expérience avec plusieurs agences", icon: Users },
   { label: "Spécialiste e-commerce en Afrique", icon: ShoppingBag },
   { label: "Vidéos produits & montage publicitaire", icon: Clapperboard },
-  { label: "Création de contenus ads orientés conversion", icon: Megaphone },
+  { label: "Création de contenus publicitaires orientés conversion", icon: Megaphone },
   { label: "Vision terrain du marché africain", icon: Globe2 },
 ];
 
 const description =
-  "Saad Belkaadi accompagne INNOVMARK avec une solide expérience dans le travail avec des agences, la création de vidéos produits, le montage vidéo publicitaire et les campagnes ads. Il comprend particulièrement bien les enjeux du e-commerce en Afrique et aide les marques à créer du contenu performant pour vendre mieux.";
+  "Saad Belkaadi accompagne INNOVMARK avec une solide expérience dans le travail avec des agences, la création de vidéos produits, le montage vidéo publicitaire et les campagnes payantes. Il comprend particulièrement bien les enjeux du commerce en ligne en Afrique et aide les marques à créer du contenu performant pour vendre mieux.";
 
 const arHighlights = [
   { label: "تجربة مع عدة وكالات", icon: Users },
@@ -83,13 +83,13 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
                 <div>
                   <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-cyan-100/70 md:tracking-[0.32em] rtl-row">
                     <BadgeCheck className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
-                    {isArabic ? "فريق INNOVMARK" : "Team INNOVMARK"}
+                    {isArabic ? "فريق INNOVMARK" : "Équipe INNOVMARK"}
                   </p>
                   <h2 className="mt-4 text-3xl font-light tracking-tight text-white md:text-5xl">
                     Saad Belkaadi
                   </h2>
                   <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-emerald-100/72 md:tracking-[0.22em]">
-                    {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "E-commerce & Creative Ads Specialist"}
+                    {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "Spécialiste commerce en ligne & créations publicitaires"}
                   </p>
                 </div>
               </div>
@@ -163,10 +163,10 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
                 Saad Belkaadi
               </h2>
               <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-emerald-100/68 md:tracking-[0.18em]">
-                {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "E-commerce & Creative Ads Specialist"}
+                {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "Spécialiste commerce en ligne & créations publicitaires"}
               </p>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/64">
-                {isArabic ? "خبرة ففيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الإعلانات اللي كيعاون مشاريع البيع فالإنترنت فإفريقيا تجيب نتائج أحسن." : "Une expertise en vidéos produits, montage publicitaire et contenus ads orientés conversion pour les marques e-commerce en Afrique."}
+                {isArabic ? "خبرة ففيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الإعلانات اللي كيعاون مشاريع البيع فالإنترنت فإفريقيا تجيب نتائج أحسن." : "Une expertise en vidéos produits, montage publicitaire et contenus payants orientés conversion pour les marques de commerce en ligne en Afrique."}
               </p>
             </div>
           </div>

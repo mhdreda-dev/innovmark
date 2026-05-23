@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { serviceMap, services, type ServiceSlug } from "@/lib/services";
 
 type Props = {
@@ -160,7 +159,6 @@ export default async function ServicePage({ params }: Props) {
         </section>
       </main>
       <Footer />
-      <WhatsAppFloat />
     </>
   );
 }

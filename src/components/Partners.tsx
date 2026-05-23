@@ -3,9 +3,9 @@ import type { Locale } from "@/lib/i18n";
 
 const labels: Record<Locale, { eyebrow: string; title: string; description: string }> = {
   fr: {
-    eyebrow: "Partners",
-    title: "Marques et equipes qui avancent avec Innovmark",
-    description: "Un defile discret de logos, pense comme une preuve sociale premium sans interrompre le rythme de la page.",
+    eyebrow: "Partenaires",
+    title: "Marques et équipes qui avancent avec Innovmark",
+    description: "Un défilé discret de logos, pensé comme une preuve sociale premium sans interrompre le rythme de la page.",
   },
   en: {
     eyebrow: "Partners",

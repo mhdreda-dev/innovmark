@@ -9,7 +9,6 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { ImageCarouselHero } from "@/components/ui/ai-image-generator-hero";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
 import { getPublishedHomeContent } from "@/lib/cms/content";
@@ -78,12 +77,15 @@ export default async function LocalizedHome({ params }: Props) {
             secondaryCtaHref={content.hero.secondaryCtaHref || localizedHref("/contact", locale)}
             images={safeCarouselImages}
             features={content.hero.features}
+            trustSignals={dict.home.heroTrustSignals}
             heroVideoUrl={content.hero.heroVideoUrl || undefined}
           />
         </div>
 
         {content.sections.map((section) => (
-          <div key={section}>{sectionNodes[section]}</div>
+          <div key={section} id={section === "creative-formats" ? "work" : undefined}>
+            {sectionNodes[section]}
+          </div>
         ))}
         {content.seo.structuredData && (
           <script
@@ -96,7 +98,6 @@ export default async function LocalizedHome({ params }: Props) {
       <div className="relative z-10">
         <Footer locale={locale} />
       </div>
-      <WhatsAppFloat locale={locale} />
     </>
   );
 }

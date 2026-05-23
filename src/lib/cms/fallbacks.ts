@@ -16,9 +16,9 @@ export const defaultHomeSections = [
 
 export const fallbackServices: Record<Locale, CmsService[]> = {
   fr: [
-    { slug: "promotional-videos", title: "Videos Promotionnelles", description: "Films, reels et publicites premium concus pour arreter le scroll et elever la perception.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
-    { slug: "website-creation", title: "Creation de Sites Web", description: "Sites vitrines, landing pages et experiences rapides qui inspirent confiance sur chaque ecran.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
-    { slug: "branding", title: "Branding & Identite", description: "Logo, direction artistique et systeme visuel pour installer une marque plus desirable.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
+    { slug: "promotional-videos", title: "Vidéos promotionnelles", description: "Films, reels et publicités premium conçus pour capter l'attention et élever la perception.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
+    { slug: "website-creation", title: "Création de sites web", description: "Sites vitrines, pages d'atterrissage et expériences rapides qui inspirent confiance sur chaque écran.", icon: "Globe2", tone: "violet", isActive: true, sortOrder: 1 },
+    { slug: "branding", title: "Identité de marque", description: "Logo, direction artistique et système visuel pour installer une marque plus désirable.", icon: "Palette", tone: "emerald", isActive: true, sortOrder: 2 },
   ],
   en: [
     { slug: "promotional-videos", title: "Promotional Videos", description: "Premium films, reels and ads designed to stop the scroll and raise perception.", icon: "Clapperboard", tone: "cyan", isActive: true, sortOrder: 0 },
@@ -37,9 +37,9 @@ export const fallbackServices: Record<Locale, CmsService[]> = {
 
 export const fallbackTestimonials: Record<Locale, CmsTestimonial[]> = {
   fr: [
-    { quote: "Innovmark made our brand look like it belonged in a higher category. The work was sharp, fast, and commercially clear.", name: "Yassine B.", role: "Founder · Retail Brand", rating: 5, isActive: true, sortOrder: 0 },
-    { quote: "The website, videos and campaign assets finally felt connected. We stopped explaining our value and started showing it.", name: "Salma A.", role: "Managing Partner · Service Co.", rating: 5, isActive: true, sortOrder: 1 },
-    { quote: "Communication was direct, premium and structured. They understood the business side, not only the visuals.", name: "Omar L.", role: "Owner · Real Estate Group", rating: 5, isActive: true, sortOrder: 2 },
+    { quote: "Innovmark a donné à notre marque une présence plus haut de gamme. Le travail était précis, rapide et très clair commercialement.", name: "Yassine B.", role: "Fondateur · Marque retail", rating: 5, isActive: true, sortOrder: 0 },
+    { quote: "Le site, les vidéos et les supports de campagne sont enfin devenus cohérents. Nous n'avions plus besoin d'expliquer notre valeur, elle se voyait.", name: "Salma A.", role: "Associée gérante · Société de services", rating: 5, isActive: true, sortOrder: 1 },
+    { quote: "La communication était directe, premium et structurée. Ils ont compris les enjeux business, pas seulement l'esthétique.", name: "Omar L.", role: "Dirigeant · Groupe immobilier", rating: 5, isActive: true, sortOrder: 2 },
   ],
   en: [
     { quote: "Innovmark made our brand look like it belonged in a higher category. The work was sharp, fast, and commercially clear.", name: "Yassine B.", role: "Founder · Retail Brand", rating: 5, isActive: true, sortOrder: 0 },
@@ -61,8 +61,8 @@ export const fallbackPartners: Record<Locale, CmsPartner[]> = {
 const seoByLocale: Record<Locale, NonNullable<CmsHomeContent["seo"]>> = {
   fr: {
     title: "Innovmark — Studio Créatif Premium · Casablanca",
-    description: "Vidéos promotionnelles, sites web, branding, réseaux sociaux, publicités et systèmes de gestion.",
-    keywords: ["Innovmark", "marketing", "branding", "web design"],
+    description: "Vidéos promotionnelles, sites web, identité de marque, réseaux sociaux, publicités et systèmes de gestion.",
+    keywords: ["Innovmark", "communication", "identité de marque", "création site web"],
     noIndex: false,
   },
   en: {
@@ -92,7 +92,7 @@ export function getFallbackHomeContent(locale: Locale): CmsHomeContent {
       ctaLabel: dict.home.heroCta,
       ctaHref: `https://wa.me/212771450503?text=${encodeURIComponent(dict.home.heroWhatsappMessage)}`,
       secondaryCtaLabel: dict.home.heroSecondaryCta,
-      secondaryCtaHref: localizedHref("/contact", locale),
+      secondaryCtaHref: locale === "fr" ? "/fr#work" : localizedHref("/contact", locale),
       whatsappMessage: dict.home.heroWhatsappMessage,
       heroVideoUrl: "",
       features: [...dict.home.features],

@@ -10,18 +10,18 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 /* ─── Localised copy ─────────────────────────────── */
 const copy = {
   fr: {
-    kicker: "Formats créatifs",
-    title: "Ce que nous pouvons créer",
+    kicker: "Réalisations",
+    title: "Des réalisations pensées pour attirer, convaincre et convertir",
     subtitle:
-      "Des formats conçus pour capter l'attention, construire la confiance et convertir — adaptés à chaque canal et chaque ambition de marque.",
+      "Chaque projet est conçu pour renforcer l'image de marque et générer des résultats mesurables.",
     cta: "Démarrer un projet",
     formats: [
-      { label: "Vidéo Publicitaire",      tag: "Spot · Reel · Teaser" },
-      { label: "Branding Premium",        tag: "Logo · Identité · Charte" },
-      { label: "Reels Réseaux Sociaux",   tag: "Instagram · TikTok · Meta" },
-      { label: "Site Web Moderne",        tag: "Landing · Vitrine · UX" },
-      { label: "Shooting Produit",        tag: "Photo · Studio · E-commerce" },
-      { label: "Campagne Marketing",      tag: "Stratégie · Ads · Croissance" },
+      { label: "Vidéo publicitaire", category: "Campagne vidéo", result: "+180% engagement", tag: "Spot · Reel · Teaser" },
+      { label: "Identité premium", category: "Branding premium", result: "+65% visibilité", tag: "Logo · Univers · Charte" },
+      { label: "Reels réseaux sociaux", category: "Réseaux sociaux", result: "+3200 interactions", tag: "Instagram · TikTok · Meta" },
+      { label: "Site web moderne", category: "Expérience web", result: "+42% demandes", tag: "Landing · Vitrine · UX" },
+      { label: "Production produit", category: "Contenu produit", result: "+54% intention d'achat", tag: "Photo · Studio · Commerce en ligne" },
+      { label: "Campagne d'acquisition", category: "Campagne marketing", result: "+87 leads générés", tag: "Stratégie · Publicités · Croissance" },
     ],
   },
   en: {
@@ -31,12 +31,12 @@ const copy = {
       "Formats designed to capture attention, build trust and convert — tailored to every channel and every brand ambition.",
     cta: "Start a project",
     formats: [
-      { label: "Advertising Video",       tag: "Spot · Reel · Teaser" },
-      { label: "Premium Branding",        tag: "Logo · Identity · Guidelines" },
-      { label: "Social Media Reels",      tag: "Instagram · TikTok · Meta" },
-      { label: "Modern Website",          tag: "Landing · Showcase · UX" },
-      { label: "Product Shoot",           tag: "Photo · Studio · E-commerce" },
-      { label: "Marketing Campaign",      tag: "Strategy · Ads · Growth" },
+      { label: "Advertising Video", category: "Video campaign", result: "+180% engagement", tag: "Spot · Reel · Teaser" },
+      { label: "Premium Branding", category: "Premium branding", result: "+65% visibility", tag: "Logo · Identity · Guidelines" },
+      { label: "Social Media Reels", category: "Social media", result: "+3200 interactions", tag: "Instagram · TikTok · Meta" },
+      { label: "Modern Website", category: "Web experience", result: "+42% inquiries", tag: "Landing · Showcase · UX" },
+      { label: "Product Shoot", category: "Product content", result: "+54% buying intent", tag: "Photo · Studio · E-commerce" },
+      { label: "Marketing Campaign", category: "Marketing campaign", result: "+87 leads generated", tag: "Strategy · Ads · Growth" },
     ],
   },
   ar: {
@@ -46,12 +46,12 @@ const copy = {
       "تصاميم وفيديوهات ومنشورات مصممة باش تشد الانتباه، تبني الثقة، وتجيب نتائج فالإنترنت.",
     cta: "بدا المشروع ديالك",
     formats: [
-      { label: "فيديو إعلاني",             tag: "سبوت · ريل · تيزر" },
-      { label: "لوغو وشكل احترافي",        tag: "لوغو · ألوان · دليل بسيط" },
-      { label: "ريلز لصفحات التواصل",      tag: "إنستغرام · تيك توك · ميتا" },
-      { label: "موقع عصري",                tag: "صفحة بيع · موقع تعريفي · سهل الاستعمال" },
-      { label: "تصوير المنتجات",           tag: "صور · ستوديو · بيع فالإنترنت" },
-      { label: "حملة إعلانية",             tag: "خطة واضحة · إعلانات · نمو" },
+      { label: "فيديو إعلاني", category: "حملة فيديو", result: "+180% تفاعل", tag: "سبوت · ريل · تيزر" },
+      { label: "لوغو وشكل احترافي", category: "هوية بريميوم", result: "+65% وضوح", tag: "لوغو · ألوان · دليل بسيط" },
+      { label: "ريلز لصفحات التواصل", category: "صفحات التواصل", result: "+3200 تفاعل", tag: "إنستغرام · تيك توك · ميتا" },
+      { label: "موقع عصري", category: "تجربة موقع", result: "+42% طلبات", tag: "صفحة بيع · موقع تعريفي · سهل الاستعمال" },
+      { label: "تصوير المنتجات", category: "محتوى المنتجات", result: "+54% اهتمام بالشراء", tag: "صور · ستوديو · بيع فالإنترنت" },
+      { label: "حملة إعلانية", category: "حملة تسويقية", result: "+87 عميل مهتم", tag: "خطة واضحة · إعلانات · نمو" },
     ],
   },
 } as const;
@@ -92,13 +92,15 @@ const cardConfigs: CardVisualConfig[] = [
 /* ─── Card component ────────────────────────────────── */
 interface CardProps {
   label: string;
+  category: string;
+  result: string;
   tag: string;
   config: CardVisualConfig;
   spanClass: string;
   index: number;
 }
 
-function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
+function FormatCard({ label, category, result, tag, config, spanClass, index }: CardProps) {
   const isCampaign = index === 5;
 
   return (
@@ -130,10 +132,20 @@ function FormatCard({ label, tag, config, spanClass, index }: CardProps) {
 
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-white/8 via-slate-950/6 to-slate-950/48" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-blue-300/10 via-transparent to-cyan-300/10" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-slate-950/16 to-slate-950/18" />
       <div aria-hidden className="absolute inset-0 shadow-[inset_0_0_42px_rgba(15,23,42,0.24),inset_0_0_34px_rgba(79,140,255,0.06)]" />
       <div aria-hidden className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent" />
 
-      <div className={`relative flex h-full min-w-0 flex-col justify-end p-5 ${isCampaign ? "md:p-7" : ""}`}>
+      <div className={`relative flex h-full min-w-0 flex-col justify-between p-5 ${isCampaign ? "md:p-7" : ""}`}>
+        <div className="flex min-w-0 flex-wrap items-start justify-between gap-2 sm:gap-3">
+          <p className="max-w-full rounded-full border border-white/[0.16] bg-slate-950/38 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-cyan-50/78 shadow-[0_10px_26px_rgba(15,23,42,0.22)] backdrop-blur-md sm:max-w-[58%] md:tracking-[0.2em]">
+            {category}
+          </p>
+          <p className="max-w-full rounded-full border border-emerald-100/24 bg-emerald-200/14 px-3 py-1.5 text-[10px] font-semibold tracking-[0.02em] text-emerald-50 shadow-[0_10px_26px_rgba(16,185,129,0.16)] backdrop-blur-md sm:max-w-[58%] sm:text-right">
+            {result}
+          </p>
+        </div>
+
         <div className="border-t border-white/[0.10] pt-4">
           <p className={`font-light leading-tight tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.54)] ${isCampaign ? "text-xl md:text-3xl" : "text-lg md:text-xl"}`}>
             {label}
@@ -205,6 +217,8 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
             <FormatCard
               key={fmt.label}
               label={fmt.label}
+              category={fmt.category}
+              result={fmt.result}
               tag={fmt.tag}
               config={cardConfigs[i]!}
               spanClass={spanClasses[i] ?? "lg:col-span-1"}
@@ -219,7 +233,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
             ? "كل حاجة كنصمموها على حساب المشروع ديالك — ماشي قوالب واجدة."
             : lang === "en"
               ? "Every format crafted specifically for your brand — not off-the-shelf templates."
-              : "Chaque format est conçu spécifiquement pour votre marque — pas des templates génériques."}
+              : "Chaque format est conçu spécifiquement pour votre marque — pas de modèles génériques."}
         </p>
       </div>
 

@@ -158,6 +158,77 @@ const arabicHeroCopy = {
   secondaryCtaLabel: "تواصل معنا",
 };
 
+const frenchTextReplacements = new Map([
+  ["Premium Marketing Agency", "Agence marketing premium"],
+  ["INNOVMARK — Transform your digital presence", "INNOVMARK — Transformez votre présence digitale"],
+  ["Sites web, branding, publicité, contenu créatif et stratégie digitale pour faire grandir votre marque.", "Création de contenu, branding, publicité et stratégie digitale pour développer votre entreprise."],
+  ["Websites, branding, advertising, creative content and digital strategy to grow your brand.", "Création de contenu, branding, publicité et stratégie digitale pour développer votre entreprise."],
+  ["Request a quote", "Obtenir un audit gratuit"],
+  ["Demander un devis", "Obtenir un audit gratuit"],
+  ["Contact us", "Voir nos réalisations"],
+  ["Nous contacter", "Voir nos réalisations"],
+  ["Hello INNOVMARK, I would like a quote", "Bonjour INNOVMARK, je souhaite obtenir un audit gratuit."],
+  ["Bonjour INNOVMARK, je veux un devis", "Bonjour INNOVMARK, je souhaite obtenir un audit gratuit."],
+  ["Premium Branding", "Identité de marque premium"],
+  ["Visual identities that stay in mind.", "Identités visuelles qui marquent les esprits."],
+  ["AI Growth", "Croissance IA"],
+  ["Data-driven strategies with measurable results.", "Stratégies pilotées par les données, résultats mesurables."],
+  ["Promotional Videos", "Vidéos promotionnelles"],
+  ["Premium films, reels and ads designed to stop the scroll and raise perception.", "Films, reels et publicités premium conçus pour capter l'attention et élever la perception."],
+  ["Website Creation", "Création de sites web"],
+  ["Fast websites and landing pages that build trust on every screen.", "Sites vitrines et pages d'atterrissage rapides qui inspirent confiance sur chaque écran."],
+  ["Branding & Identity", "Identité de marque"],
+  ["Logo, art direction and visual systems for a more desirable brand.", "Logo, direction artistique et système visuel pour installer une marque plus désirable."],
+  ["Innovmark made our brand look like it belonged in a higher category. The work was sharp, fast, and commercially clear.", "Innovmark a donné à notre marque une présence plus haut de gamme. Le travail était précis, rapide et très clair commercialement."],
+  ["The website, videos and campaign assets finally felt connected. We stopped explaining our value and started showing it.", "Le site, les vidéos et les supports de campagne sont enfin devenus cohérents. Nous n'avions plus besoin d'expliquer notre valeur, elle se voyait."],
+  ["Communication was direct, premium and structured. They understood the business side, not only the visuals.", "La communication était directe, premium et structurée. Ils ont compris les enjeux business, pas seulement l'esthétique."],
+  ["Founder · Retail Brand", "Fondateur · Marque retail"],
+  ["Managing Partner · Service Co.", "Associée gérante · Société de services"],
+  ["Owner · Real Estate Group", "Dirigeant · Groupe immobilier"],
+]);
+
+const frenchAuditHref = `https://wa.me/212771450503?text=${encodeURIComponent("Bonjour INNOVMARK, je souhaite obtenir un audit gratuit.")}`;
+
+function frenchText(value: string) {
+  return frenchTextReplacements.get(value) ?? value;
+}
+
+function localizeFrenchHomeContent(content: CmsHomeContent): CmsHomeContent {
+  return {
+    ...content,
+    hero: {
+      ...content.hero,
+      eyebrow: frenchText(content.hero.eyebrow),
+      title: frenchText(content.hero.title),
+      description: frenchText(content.hero.description),
+      ctaLabel: frenchText(content.hero.ctaLabel),
+      ctaHref: frenchAuditHref,
+      secondaryCtaLabel: frenchText(content.hero.secondaryCtaLabel),
+      secondaryCtaHref: "/fr#work",
+      whatsappMessage: frenchText(content.hero.whatsappMessage),
+      features: content.hero.features.map((feature) => ({
+        ...feature,
+        title: frenchText(feature.title),
+        description: frenchText(feature.description),
+      })),
+    },
+    services: content.services.map((service) => ({
+      ...service,
+      title: frenchText(service.title),
+      description: frenchText(service.description),
+    })),
+    testimonials: content.testimonials.map((testimonial) => ({
+      ...testimonial,
+      quote: frenchText(testimonial.quote),
+      role: frenchText(testimonial.role),
+    })),
+  };
+}
+
+function localizeHomeContent(locale: Locale, content: CmsHomeContent): CmsHomeContent {
+  return locale === "fr" ? localizeFrenchHomeContent(content) : content;
+}
+
 async function getPublishedHomeContentUncached(localeInput: string): Promise<CmsHomeContent> {
   const locale: Locale = isLocale(localeInput) ? localeInput : "fr";
   const fallback = getFallbackHomeContent(locale);
@@ -221,7 +292,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
     const seoSource = seo ?? frSeo;
     const heroTextSource = locale === "ar" ? null : heroSource;
 
-    return {
+    return localizeHomeContent(locale, {
       locale,
       sections: withPartnersSection(homeSource ? asSections(homeSource.sections) : fallback.sections),
       hero: heroSource
@@ -267,7 +338,7 @@ async function getPublishedHomeContentUncached(localeInput: string): Promise<Cms
             noIndex: seo?.noIndex ?? seoSource.noIndex,
           }
         : fallback.seo,
-    };
+    });
   } catch (error) {
     console.error("CMS content fallback activated", error);
     return fallback;

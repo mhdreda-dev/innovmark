@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cairo, Geist, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full bg-transparent text-slate-950 selection:bg-blue-200/60">
         {children}
+        <FloatingWhatsAppButton />
         <RevealOnScroll />
       </body>
     </html>

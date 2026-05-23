@@ -3,20 +3,20 @@ import { type Locale, localizedHref } from "@/lib/i18n";
 
 const tiers = [
   {
-    name: "Starter",
-    line: "For brands that need a premium first impression.",
-    scope: ["Landing page or brand refresh", "Core visual direction", "Launch-ready content kit"],
+    name: "Essentiel",
+    line: "Pour les marques qui veulent installer une première impression premium.",
+    scope: ["Page d'atterrissage ou rafraîchissement de marque", "Direction visuelle fondamentale", "Kit de lancement prêt à publier"],
   },
   {
-    name: "Growth",
-    line: "For businesses ready to turn attention into demand.",
-    scope: ["Website + campaign system", "Paid ads creative direction", "Conversion and analytics setup"],
+    name: "Croissance",
+    line: "Pour les entreprises prêtes à transformer l'attention en demande.",
+    scope: ["Site web + système de campagne", "Direction créative des publicités payantes", "Configuration conversion et analyse"],
     featured: true,
   },
   {
-    name: "Elite",
-    line: "For serious launches requiring full creative command.",
-    scope: ["Brand, web, video and ads", "Priority production cadence", "Executive-level reporting"],
+    name: "Signature",
+    line: "Pour les lancements ambitieux qui exigent une direction créative complète.",
+    scope: ["Marque, web, vidéo et publicités", "Cadence de production prioritaire", "Reporting stratégique pour la direction"],
   },
 ];
 
@@ -48,9 +48,9 @@ export default function Pricing({ locale }: { locale?: Locale }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="mb-8 md:mb-12">
           <SectionLabel
-            kicker={isArabic ? "باقات الخدمة" : "Engagements"}
-            title={isArabic ? "باقات احترافية لمشاريع جدية." : "Premium packages for serious business."}
-            subtitle={isArabic ? "ما كنقدموش لائحة خدمات عامة. كل تعاون كنحددو فيه الهدف، السرعة، ومستوى الجودة اللي محتاج المشروع ديالك." : "No commodity agency menu. Each engagement is scoped around outcome, speed and the level of polish your brand needs."}
+            kicker={isArabic ? "باقات الخدمة" : "Accompagnements"}
+            title={isArabic ? "باقات احترافية لمشاريع جدية." : "Des solutions pensées pour votre croissance."}
+            subtitle={isArabic ? "ما كنقدموش لائحة خدمات عامة. كل تعاون كنحددو فيه الهدف، السرعة، ومستوى الجودة اللي محتاج المشروع ديالك." : "Pas de catalogue générique. Chaque collaboration est cadrée autour du résultat attendu, du rythme et du niveau d'exigence dont votre marque a besoin."}
             align={isArabic ? "center" : "left"}
           />
         </div>
@@ -66,7 +66,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
             >
               {tier.featured && (
                 <div className={`mb-5 w-fit rounded-full border border-blue-200/70 bg-blue-50 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-blue-700 ${isArabic ? "self-start" : ""}`}>
-                  {isArabic ? "الأكثر اختياراً" : "Most chosen"}
+                  {isArabic ? "الأكثر اختياراً" : "Le plus choisi"}
                 </div>
               )}
               <h3 className="text-2xl font-light tracking-tight text-slate-950 md:text-3xl">{tier.name}</h3>
@@ -83,7 +83,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
                 href={localizedHref("/contact", locale)}
                 className={`mt-8 inline-flex min-h-11 w-full max-w-full items-center justify-center rounded-full border border-blue-500/25 bg-blue-600 px-5 py-3 text-center text-[11px] uppercase tracking-[0.12em] text-[#fff] shadow-[0_12px_28px_rgba(79,140,255,0.24)] transition-all hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-[0_16px_34px_rgba(79,140,255,0.30)] md:w-fit md:min-w-44 md:tracking-[0.18em] ${isArabic ? "self-stretch md:self-start" : ""}`}
               >
-                {isArabic ? "طلب نطاق الخدمة" : "Request scope"}
+                {isArabic ? "طلب نطاق الخدمة" : "Définir le périmètre"}
               </a>
             </article>
           ))}
