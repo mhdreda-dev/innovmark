@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WhyInnovmark from "@/components/WhyInnovmark";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Pourquoi Nous · INNOVMARK",
-  description:
-    "Strategy first, premium execution, fast communication, results focused — découvrez pourquoi les marques exigeantes choisissent INNOVMARK.",
-};
+export const metadata: Metadata = buildPageMetadata("fr", "/pourquoi-nous", localizedSeo.fr.why);
 
 export default function PourquoiNousPage() {
   return (

@@ -4,32 +4,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Process from "@/components/Process";
 import { dictionaries, isLocale } from "@/lib/i18n";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const metadataByLocale: Record<string, Metadata> = {
-  fr: {
-    title: "Processus · INNOVMARK",
-    description:
-      "Un processus clair en quatre étapes pour transformer votre idée en expérience digitale premium.",
-  },
-  en: {
-    title: "Process · INNOVMARK",
-    description:
-      "A clear four-step process to turn your idea into a premium digital experience.",
-  },
-  ar: {
-    title: "طريقة الخدمة · INNOVMARK",
-    description:
-      "طريقة خدمة واضحة فـ أربع مراحل باش نحولو الفكرة ديالك لحضور احترافي فالإنترنت وجاهز للانطلاق.",
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return metadataByLocale[locale] ?? metadataByLocale.fr;
+  const safeLocale = isLocale(locale) ? locale : "fr";
+  return buildPageMetadata(safeLocale, "/processus", localizedSeo[safeLocale].process);
 }
 
 export default async function LocalizedProcessusPage({ params }: Props) {

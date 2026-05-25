@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact · INNOVMARK",
-  description:
-    "Parlez-nous de votre projet. INNOVMARK vous repond en moins de 24h pour vos sites web, branding et campagnes marketing.",
-};
+export const metadata: Metadata = buildPageMetadata("fr", "/contact", localizedSeo.fr.contact);
 
 export default function ContactPage() {
   return (

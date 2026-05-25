@@ -16,25 +16,25 @@ export const heroImages: HeroImage[] = [
   {
     id: "product-shoot",
     src: "/images/hero-showcase/product-shoot.png",
-    alt: "Mise en scène produit",
+    alt: "Création de contenu produit par INNOVMARK à Sidi Kacem",
     rotation: -3,
   },
   {
     id: "branding-showcase",
     src: "/images/hero-showcase/branding-showcase.jpg",
-    alt: "Présentation d'identité de marque",
+    alt: "Identité de marque premium et branding au Maroc par INNOVMARK",
     rotation: 2,
   },
   {
     id: "website-showcase",
     src: "/images/hero-showcase/website-showcase.jpg",
-    alt: "Présentation de site web",
+    alt: "Création de site web à Sidi Kacem pour marque marocaine",
     rotation: -2,
   },
   {
     id: "social-media-showcase",
     src: "/images/hero-showcase/social-media-showcase.png",
-    alt: "Présentation réseaux sociaux",
+    alt: "Création de contenu Instagram au Maroc pour marque locale",
     rotation: 3,
   },
 ]

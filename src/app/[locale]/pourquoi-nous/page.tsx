@@ -4,32 +4,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WhyInnovmark from "@/components/WhyInnovmark";
 import { dictionaries, isLocale } from "@/lib/i18n";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const metadataByLocale: Record<string, Metadata> = {
-  fr: {
-    title: "Pourquoi Nous · INNOVMARK",
-    description:
-      "Strategy first, premium execution, fast communication, results focused — découvrez pourquoi les marques exigeantes choisissent INNOVMARK.",
-  },
-  en: {
-    title: "Why Us · INNOVMARK",
-    description:
-      "Strategy first, premium execution, fast communication and clear results for brands that want to grow.",
-  },
-  ar: {
-    title: "علاش حنا · INNOVMARK",
-    description:
-      "علاش المشاريع كتختار INNOVMARK: خطة واضحة، تنفيذ بريميوم، تواصل منظم، وتركيز على صورة البراند والنتائج.",
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return metadataByLocale[locale] ?? metadataByLocale.fr;
+  const safeLocale = isLocale(locale) ? locale : "fr";
+  return buildPageMetadata(safeLocale, "/pourquoi-nous", localizedSeo[safeLocale].why);
 }
 
 export default async function LocalizedPourquoiNousPage({ params }: Props) {

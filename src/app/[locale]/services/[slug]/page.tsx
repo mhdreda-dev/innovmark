@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
 import { getServiceDetail, services } from "@/lib/services";
+import { buildServiceMetadata, faqSchema, localBusinessSchema } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -23,10 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
-    title: `${service.eyebrow} · INNOVMARK`,
-    description: service.summary,
-  };
+  return buildServiceMetadata(isLocale(locale) ? locale : "fr", service);
 }
 
 export default async function LocalizedServicePage({ params }: Props) {
@@ -162,6 +160,16 @@ export default async function LocalizedServicePage({ params }: Props) {
             </a>
           </div>
         </section>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(locale, service)) }}
+        />
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema(locale)) }}
+        />
       </main>
       <Footer locale={locale} />
     </>

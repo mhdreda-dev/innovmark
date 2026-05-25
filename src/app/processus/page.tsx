@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Process from "@/components/Process";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Processus · INNOVMARK",
-  description:
-    "Découvrez notre méthode en 4 étapes : brief, stratégie créative, production et lancement. Une approche éprouvée pour des livrables de marque sans mauvaise surprise.",
-};
+export const metadata: Metadata = buildPageMetadata("fr", "/processus", localizedSeo.fr.process);
 
 export default function ProcessusPage() {
   return (

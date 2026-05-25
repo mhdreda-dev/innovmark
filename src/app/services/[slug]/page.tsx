@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { serviceMap, services, type ServiceSlug } from "@/lib/services";
+import { buildServiceMetadata, faqSchema, localBusinessSchema } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -22,10 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  return {
-    title: `${service.eyebrow} · INNOVMARK`,
-    description: service.summary,
-  };
+  return buildServiceMetadata("fr", service);
 }
 
 export default async function ServicePage({ params }: Props) {
@@ -157,6 +155,16 @@ export default async function ServicePage({ params }: Props) {
             </a>
           </div>
         </section>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema("fr", service)) }}
+        />
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema("fr")) }}
+        />
       </main>
       <Footer />
     </>

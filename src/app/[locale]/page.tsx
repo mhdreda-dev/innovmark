@@ -13,6 +13,7 @@ import { ImageCarouselHero } from "@/components/ui/ai-image-generator-hero";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
 import { getPublishedHomeContent } from "@/lib/cms/content";
 import { getFallbackHomeContent } from "@/lib/cms/fallbacks";
+import { buildPageMetadata, localBusinessSchema, localizedSeo, seoKeywords } from "@/lib/seo";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -25,18 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const content = await getPublishedHomeContent(locale);
+  const metadata = buildPageMetadata(locale, "/", localizedSeo[locale].home);
 
   return {
-    title: content.seo.title,
-    description: content.seo.description,
-    keywords: content.seo.keywords,
+    ...metadata,
+    keywords: [...seoKeywords, ...content.seo.keywords],
     robots: content.seo.noIndex ? { index: false, follow: false } : undefined,
-    openGraph: {
-      title: content.seo.title,
-      description: content.seo.description,
-      images: content.seo.ogImage ? [{ url: content.seo.ogImage }] : undefined,
-      type: "website",
-    },
   };
 }
 
@@ -93,6 +88,11 @@ export default async function LocalizedHome({ params }: Props) {
             {sectionNodes[section]}
           </div>
         ))}
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema(locale)) }}
+        />
         {content.seo.structuredData && (
           <script
             type="application/ld+json"

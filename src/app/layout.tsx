@@ -3,6 +3,7 @@ import { Cairo, Geist, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
+import { ogImageUrl, seoKeywords, siteUrl } from "@/lib/seo";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -32,13 +33,27 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
-  title: "Innovmark — Studio Créatif Premium · Casablanca",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Agence marketing digital à Sidi Kacem · INNOVMARK",
+    template: "%s",
+  },
   description:
-    "Vidéos promotionnelles, sites web, branding, réseaux sociaux, publicités et systèmes de gestion. Une agence pour les marques exigeantes.",
+    "Agence marketing digital à Sidi Kacem pour création de site web, branding, publicité digitale et contenu Instagram au Maroc.",
+  keywords: seoKeywords,
   openGraph: {
-    title: "Innovmark — Studio Créatif Premium",
-    description: "Vidéos, branding, web et performance pour les marques exigeantes.",
+    title: "Agence marketing digital à Sidi Kacem · INNOVMARK",
+    description: "Sites web, branding, contenu Instagram et publicité digitale pour marques au Maroc.",
+    url: siteUrl,
+    siteName: "INNOVMARK",
+    images: [{ url: ogImageUrl, width: 1200, height: 630, alt: "INNOVMARK studio créatif à Sidi Kacem" }],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agence marketing digital à Sidi Kacem · INNOVMARK",
+    description: "Studio créatif pour sites web, branding, contenu et publicité digitale au Maroc.",
+    images: [ogImageUrl],
   },
 };
 

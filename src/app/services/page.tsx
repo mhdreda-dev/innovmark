@@ -2,12 +2,9 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Services from "@/components/Services";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services · INNOVMARK",
-  description:
-    "Vidéos promotionnelles, sites web, branding, réseaux sociaux, publicités payantes et gestion de stock — six expertises connectées pour faire grandir votre marque.",
-};
+export const metadata: Metadata = buildPageMetadata("fr", "/services", localizedSeo.fr.services);
 
 export default function ServicesPage() {
   return (

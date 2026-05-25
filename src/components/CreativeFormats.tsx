@@ -144,8 +144,7 @@ function FormatCard({ label, category, result, tag, config, index }: CardProps) 
 
       <img
         src={config.image}
-        alt=""
-        aria-hidden
+        alt={`${category} - ${label}`}
         className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.06]"
         draggable={false}
         loading={index < 3 ? "eager" : "lazy"}

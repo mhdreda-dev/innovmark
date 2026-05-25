@@ -6,32 +6,16 @@ import ContactForm from "@/components/ContactForm";
 import ContactVisualSection from "@/components/ContactVisualSection";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { dictionaries, isLocale } from "@/lib/i18n";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const metadataByLocale: Record<string, Metadata> = {
-  fr: {
-    title: "Contact · INNOVMARK",
-    description:
-      "Parlez-nous de votre projet. INNOVMARK vous répond en moins de 24h pour vos sites web, branding et campagnes marketing.",
-  },
-  en: {
-    title: "Contact · INNOVMARK",
-    description:
-      "Tell us about your project. INNOVMARK replies in less than 24h for websites, branding and marketing campaigns.",
-  },
-  ar: {
-    title: "تواصل معنا · INNOVMARK",
-    description:
-      "هضر لينا على المشروع ديالك. INNOVMARK كتجاوبك فـ 24 ساعة بخصوص المواقع، البراندينغ، المحتوى والإعلانات.",
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return metadataByLocale[locale] ?? metadataByLocale.fr;
+  const safeLocale = isLocale(locale) ? locale : "fr";
+  return buildPageMetadata(safeLocale, "/contact", localizedSeo[safeLocale].contact);
 }
 
 export default async function LocalizedContactPage({ params }: Props) {

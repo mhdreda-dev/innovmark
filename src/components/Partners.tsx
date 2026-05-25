@@ -72,7 +72,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
                 >
                   <img
                     src={partner.logoUrl}
-                    alt={partner.name}
+                    alt={partner.description ? `${partner.name} partenaire Innovmark - ${partner.description}` : `${partner.name} partenaire Innovmark`}
                     className="max-h-12 w-auto max-w-[92%] object-contain opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:max-h-16"
                     loading="lazy"
                   />

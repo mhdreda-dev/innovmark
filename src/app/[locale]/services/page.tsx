@@ -5,32 +5,16 @@ import Footer from "@/components/Footer";
 import Services from "@/components/Services";
 import { dictionaries, isLocale } from "@/lib/i18n";
 import { getPublishedHomeContent } from "@/lib/cms/content";
+import { buildPageMetadata, localizedSeo } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const metadataByLocale: Record<string, Metadata> = {
-  fr: {
-    title: "Services · INNOVMARK",
-    description:
-      "Vidéos promotionnelles, sites web, branding, réseaux sociaux, publicités et systèmes de gestion pour marques premium.",
-  },
-  en: {
-    title: "Services · INNOVMARK",
-    description:
-      "Promotional videos, websites, branding, social media, ads and management systems for premium brands.",
-  },
-  ar: {
-    title: "الخدمات · INNOVMARK",
-    description:
-      "مواقع، براندينغ، محتوى وإعلانات باش المشاريع المغربية تبان باحترافية فالإنترنت وتجيب طلبات أكثر.",
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return metadataByLocale[locale] ?? metadataByLocale.fr;
+  const safeLocale = isLocale(locale) ? locale : "fr";
+  return buildPageMetadata(safeLocale, "/services", localizedSeo[safeLocale].services);
 }
 
 export default async function LocalizedServicesPage({ params }: Props) {
