@@ -99,7 +99,7 @@ export default function WhyInnovmark({
 
   return (
     <>
-      <section className="relative overflow-hidden px-4 pb-14 pt-10 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
+      <section className="relative overflow-hidden px-4 pb-12 pt-8 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-24 top-0 h-[460px] w-[760px] rounded-full opacity-70 blur-3xl"
@@ -113,14 +113,14 @@ export default function WhyInnovmark({
           <div className="reveal-on-scroll max-w-4xl rtl-text-right">
             <div className="mb-5 flex items-center gap-3 rtl-row">
               <span className="h-px w-10 shrink-0 bg-gradient-to-r from-cyan-200 via-violet-300 to-emerald-300" />
-              <span className="cinematic-text text-[10px] uppercase tracking-[0.18em] text-white/68 md:tracking-[0.46em]">
+              <span className="cinematic-text text-[10px] uppercase tracking-[0.12em] text-white/68 md:tracking-[0.46em]">
                 {hero.kicker}
               </span>
             </div>
-            <h1 className="cinematic-text text-4xl font-light leading-[1.04] tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl">
+            <h1 className="cinematic-text text-[2.25rem] font-light leading-[1.08] tracking-tight text-white sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl">
               {hero.title}
             </h1>
-            <p className="cinematic-text mt-6 max-w-2xl text-base leading-7 text-white/72 md:text-xl md:leading-8">
+            <p className="cinematic-text mt-5 max-w-2xl text-sm leading-6 text-white/72 sm:text-base md:mt-6 md:text-xl md:leading-8">
               {hero.subtitle}
             </p>
           </div>

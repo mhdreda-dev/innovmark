@@ -119,9 +119,9 @@ export default function Footer({ locale }: { locale?: string }) {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 md:pb-20 md:pt-16 lg:px-10">
-        <div className="rounded-[28px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:p-7 lg:p-9">
-          <div className="grid gap-10 lg:grid-cols-[1.35fr_0.75fr_0.75fr_0.95fr] lg:gap-12 rtl-text-right">
+      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 md:pb-20 md:pt-16 lg:px-10">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 shadow-[0_24px_90px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:rounded-[28px] sm:p-7 lg:p-9">
+          <div className="grid gap-8 lg:grid-cols-[1.35fr_0.75fr_0.75fr_0.95fr] lg:gap-12 rtl-text-right">
             <div>
               <div className="mb-5 flex items-center justify-center gap-3 md:justify-start rtl-row">
                 <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_22px_rgba(122,217,255,0.75)]" />
@@ -133,14 +133,14 @@ export default function Footer({ locale }: { locale?: string }) {
                 {tagline}
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start rtl-row">
-                <span className="rounded-full border border-white/10 bg-white/[0.055] px-4 py-2 text-xs font-medium tracking-[0.18em] text-white/72 uppercase">
+                <span className="w-full rounded-full border border-white/10 bg-white/[0.055] px-4 py-2 text-center text-xs font-medium tracking-[0.12em] text-white/72 uppercase sm:w-auto sm:tracking-[0.18em]">
                   {locationLabel}
                 </span>
                 <a
                   href={WA_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-emerald-400 bg-emerald-500 px-4 py-2 text-xs font-medium tracking-[0.18em] text-white uppercase shadow-[0_14px_32px_rgba(16,185,129,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-600 hover:shadow-[0_18px_42px_rgba(16,185,129,0.34)]"
+                  className="w-full rounded-full border border-emerald-400 bg-emerald-500 px-4 py-2 text-center text-xs font-medium tracking-[0.12em] text-white uppercase shadow-[0_14px_32px_rgba(16,185,129,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-600 hover:shadow-[0_18px_42px_rgba(16,185,129,0.34)] sm:w-auto sm:tracking-[0.18em]"
                 >
                   {waLabel}
                 </a>
@@ -222,7 +222,7 @@ export default function Footer({ locale }: { locale?: string }) {
               </ul>
             </nav>
             <span className="text-xs text-white/54">{copyright}</span>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
               <a href="#" className="text-xs text-white/54 transition-colors hover:text-cyan-100">
                 {legalLabel}
               </a>

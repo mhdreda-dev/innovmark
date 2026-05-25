@@ -87,20 +87,20 @@ export default function Nav({
   return (
     <header
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`fixed inset-x-2 top-2 z-50 rounded-2xl transition-all duration-500 sm:inset-x-3 sm:top-3 ${
+      className={`fixed inset-x-2 top-2 z-50 max-w-[calc(100vw-1rem)] rounded-2xl transition-all duration-500 sm:inset-x-3 sm:top-3 sm:max-w-none ${
         scrolled
           ? "bg-white/82 backdrop-blur-2xl border border-blue-200/45 shadow-[0_20px_60px_rgba(15,23,42,0.10),0_0_0_1px_rgba(255,255,255,0.75)_inset]"
           : "bg-white/58 backdrop-blur-xl border border-blue-100/45 shadow-[0_14px_50px_rgba(79,140,255,0.08)]"
       }`}
     >
-      <nav className="mx-auto flex h-[62px] max-w-7xl items-center justify-between gap-3 px-3 sm:h-[68px] sm:px-5 min-[900px]:px-6">
+      <nav className="mx-auto flex h-[58px] max-w-7xl items-center justify-between gap-2 px-3 sm:h-[68px] sm:gap-3 sm:px-5 min-[900px]:px-6">
         {/* Logo */}
         <Link href={localizedHref("/#top", locale)} className="group flex min-w-0 items-center gap-2.5">
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-300 to-violet-400 opacity-70 animate-ping" />
             <span className="relative rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 w-2 h-2 shadow-[0_0_16px_rgba(125,211,252,0.6)]" />
           </span>
-          <span className="whitespace-nowrap text-[12px] font-light uppercase tracking-[0.28em] text-slate-950 transition-colors group-hover:text-blue-700 sm:text-[13px] sm:tracking-[0.36em]">
+          <span className="whitespace-nowrap text-[11px] font-light uppercase tracking-[0.22em] text-slate-950 transition-colors group-hover:text-blue-700 sm:text-[13px] sm:tracking-[0.36em]">
             Innovmark
           </span>
         </Link>
@@ -182,7 +182,7 @@ export default function Nav({
             : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="flex flex-col gap-1 px-4 py-4 sm:px-6 sm:py-5">
+        <ul className="flex flex-col gap-1 px-3 py-4 sm:px-6 sm:py-5">
           {displayedLinks.map((l) => (
             <li key={l.href}>
               <Link
@@ -202,7 +202,7 @@ export default function Nav({
             <Link
               href={localizedHref("/contact", locale)}
               onClick={() => setOpen(false)}
-              className="block rounded-full bg-blue-600 px-4 py-3.5 text-center text-[12px] font-semibold uppercase tracking-[0.14em] text-[#fff] shadow-[0_12px_28px_rgba(79,140,255,0.24)]"
+              className="block rounded-full bg-blue-600 px-4 py-3.5 text-center text-[11px] font-semibold uppercase tracking-[0.1em] text-[#fff] shadow-[0_12px_28px_rgba(79,140,255,0.24)] sm:text-[12px] sm:tracking-[0.14em]"
             >
               {labels.cta}
             </Link>

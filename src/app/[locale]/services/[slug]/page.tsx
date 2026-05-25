@@ -43,7 +43,7 @@ export default async function LocalizedServicePage({ params }: Props) {
     <>
       <Nav labels={dict.nav} locale={locale} />
       <main className="relative z-10 overflow-hidden pt-20 sm:pt-24">
-        <section className="relative px-4 pb-12 pt-10 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
+        <section className="relative px-4 pb-12 pt-8 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
           <div
             aria-hidden
             className="absolute inset-0 opacity-45"
@@ -56,26 +56,26 @@ export default async function LocalizedServicePage({ params }: Props) {
             <div className="min-w-0 rtl-text-right">
               <div className="mb-5 flex items-center gap-3 rtl-row">
                 <span className="h-px w-9 shrink-0 bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-400" />
-                <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-white/70 md:tracking-[0.42em]">
+                <span className="cinematic-text text-[10px] uppercase tracking-[0.12em] text-white/70 md:tracking-[0.42em]">
                   {service.eyebrow}
                 </span>
               </div>
-              <h1 className="cinematic-text max-w-4xl text-4xl font-light leading-[1.08] tracking-tight text-white md:text-6xl md:leading-[1.02] lg:text-7xl">
+              <h1 className="cinematic-text max-w-4xl text-[2.2rem] font-light leading-[1.1] tracking-tight text-white sm:text-4xl md:text-6xl md:leading-[1.02] lg:text-7xl">
                 {service.title}
               </h1>
-              <p className="cinematic-text mt-6 max-w-2xl text-base leading-7 text-white/72 md:text-lg md:leading-8">
+              <p className="cinematic-text mt-5 max-w-2xl text-sm leading-6 text-white/72 sm:text-base md:mt-6 md:text-lg md:leading-8">
                 {service.summary}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row rtl-md-row">
                 <a
                   href={localizedHref("/contact", locale)}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.12em] text-black transition-colors hover:bg-cyan-50 md:tracking-[0.18em]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.08em] text-black transition-colors hover:bg-cyan-50 md:tracking-[0.18em]"
                 >
                   {isArabic ? "تواصل معنا" : "Contact Us"}
                 </a>
                 <a
                   href={localizedHref("/services", locale)}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/18 bg-white/[0.045] px-6 py-3 text-center text-xs font-medium uppercase tracking-[0.12em] text-white/82 transition-colors hover:border-cyan-100/45 hover:text-white md:tracking-[0.18em]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/18 bg-white/[0.045] px-6 py-3 text-center text-xs font-medium uppercase tracking-[0.08em] text-white/82 transition-colors hover:border-cyan-100/45 hover:text-white md:tracking-[0.18em]"
                 >
                   {isArabic ? "كل الخدمات" : "All Services"}
                 </a>
@@ -88,7 +88,7 @@ export default async function LocalizedServicePage({ params }: Props) {
                   <span className="text-[10px] uppercase tracking-[0.12em] text-cyan-100/64 md:tracking-[0.26em]">
                     {isArabic ? "المدة" : "Timeline"}
                   </span>
-                  <p className="mt-2 text-2xl font-light text-white">{service.timeline}</p>
+                  <p className="mt-2 text-xl font-light text-white sm:text-2xl">{service.timeline}</p>
                 </div>
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.12em] text-cyan-100/64 md:tracking-[0.26em]">

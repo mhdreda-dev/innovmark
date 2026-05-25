@@ -900,7 +900,7 @@ const css = `
     align-items: flex-start;
     justify-content: flex-start;
     min-height: 100svh;
-    padding: 5rem 1rem 31svh;
+    padding: 4.75rem 1rem 28svh;
   }
   .ihc-section.ihc-has-video {
     align-items: center;
@@ -914,7 +914,7 @@ const css = `
     letter-spacing: 0.18em;
   }
   .ihc-title {
-    font-size: clamp(2rem, 11vw, 3rem);
+    font-size: clamp(1.78rem, 9.2vw, 2.55rem);
     line-height: 1.08;
   }
   .ihc-title { margin-bottom: 16px; }
@@ -923,17 +923,17 @@ const css = `
     font-size: 0.94rem;
     line-height: 1.65;
   }
-  .ihc-stage { height: 28svh; }
+  .ihc-stage { height: 25svh; }
   .ihc-track {
     animation-duration: 36s;
     bottom: 1.1rem;
   }
-  .ihc-card { border-radius: 1.5rem; }
+  .ihc-card { height: 9.8rem; border-radius: 1.25rem; }
   .ihc-cta-wrap { flex-direction: column; gap: 12px; }
-  .ihc-cta           { height: 54px; padding: 0 22px 0 18px; font-size: 14px; width: 100%; max-width: 280px; }
-  .ihc-cta-secondary { height: 54px; font-size: 14px; width: 100%; max-width: 280px; }
+  .ihc-cta           { height: 52px; padding: 0 18px; font-size: 13.5px; width: 100%; max-width: 21rem; justify-content: center; }
+  .ihc-cta-secondary { height: 52px; font-size: 13.5px; width: 100%; max-width: 21rem; }
   .ihc-trust {
-    max-width: 310px;
+    max-width: 21rem;
     gap: 8px;
     margin-top: 16px;
     font-size: 11.5px;
@@ -951,6 +951,15 @@ const css = `
   .ihc-aurora { filter: blur(60px); opacity: 0.55; }
   .ihc-streak-2, .ihc-streak-3 { display: none; }
   .ihc-p { display: none; }
+}
+
+@media (max-width: 374px) {
+  .ihc-section { padding-inline: 0.875rem; padding-bottom: 26svh; }
+  .ihc-title { font-size: clamp(1.64rem, 8.8vw, 2.2rem); }
+  .ihc-desc { font-size: 0.9rem; line-height: 1.58; }
+  .ihc-badge { font-size: 8.8px; letter-spacing: 0.13em; }
+  .ihc-card { height: 8.8rem; }
+  .ihc-stage { height: 23svh; }
 }
 
 /* ── Reduced motion ── */

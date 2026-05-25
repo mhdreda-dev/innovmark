@@ -137,7 +137,7 @@ export default function Services({
 
   return (
     <>
-      <section className="relative overflow-hidden px-4 pb-14 pt-10 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
+      <section className="relative overflow-hidden px-4 pb-12 pt-8 sm:px-6 md:pb-20 md:pt-20 lg:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-4 h-[180px] w-[360px] -translate-x-1/2 rounded-full opacity-35 blur-3xl"
@@ -151,14 +151,14 @@ export default function Services({
           <div className="reveal-on-scroll max-w-4xl rtl-text-right">
             <div className="mb-5 flex items-center gap-3 rtl-row">
               <span className="h-px w-10 shrink-0 bg-gradient-to-r from-cyan-200 via-violet-300 to-emerald-300" />
-              <span className="cinematic-text text-[10px] uppercase tracking-[0.18em] text-white/68 md:tracking-[0.46em]">
+              <span className="cinematic-text text-[10px] uppercase tracking-[0.12em] text-white/68 md:tracking-[0.46em]">
                 {hero.kicker}
               </span>
             </div>
-            <h1 className="cinematic-text text-4xl font-light leading-[1.04] tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl">
+            <h1 className="cinematic-text text-[2.25rem] font-light leading-[1.08] tracking-tight text-white sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl">
               {hero.title}
             </h1>
-            <p className="cinematic-text mt-6 max-w-2xl text-base leading-7 text-white/72 md:text-xl md:leading-8">
+            <p className="cinematic-text mt-5 max-w-2xl text-sm leading-6 text-white/72 sm:text-base md:mt-6 md:text-xl md:leading-8">
               {hero.subtitle}
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function Services({
                 <Link
                   key={service.slug}
                   href={localizedHref("href" in service && service.href ? service.href : `/services/${service.slug}`, locale)}
-                  className="premium-glass group reveal-on-scroll relative flex min-h-[250px] min-w-0 flex-col overflow-hidden rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/95 md:min-h-[260px] md:p-8"
+                  className="premium-glass group reveal-on-scroll relative flex min-h-[220px] min-w-0 flex-col overflow-hidden rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/95 md:min-h-[260px] md:p-8"
                   style={{ transitionDelay: `${Math.min(index, 5) * 70}ms` }}
                 >
                   <div
@@ -194,7 +194,7 @@ export default function Services({
                   <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105">
                     <Icon className="h-5 w-5 opacity-100" strokeWidth={1.8} />
                   </div>
-                  <h3 className="text-xl font-light leading-tight tracking-tight text-white md:text-2xl">
+                  <h3 className="text-lg font-light leading-tight tracking-tight text-white md:text-2xl">
                     {service.title}
                   </h3>
                   <p className="mt-4 text-sm leading-6 text-white/68">

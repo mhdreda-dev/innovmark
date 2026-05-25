@@ -134,7 +134,7 @@ function FormatCard({ label, category, result, tag, config, index }: CardProps) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.72, delay: index * 0.07, ease: EASE }}
-      className="creative-formats-card light-on-media group relative min-h-[250px] min-w-0 overflow-hidden rounded-[1.35rem] border border-white/[0.13] bg-slate-950 shadow-[0_20px_54px_-34px_rgba(15,23,42,0.70),0_0_42px_-34px_rgba(79,140,255,0.60)] transition duration-500 hover:-translate-y-1 hover:border-cyan-200/28 hover:shadow-[0_28px_70px_-34px_rgba(15,23,42,0.88),0_0_56px_-30px_rgba(79,140,255,0.68)] sm:min-h-[270px]"
+      className="creative-formats-card light-on-media group relative min-h-[230px] min-w-0 overflow-hidden rounded-[1.2rem] border border-white/[0.13] bg-slate-950 shadow-[0_20px_54px_-34px_rgba(15,23,42,0.70),0_0_42px_-34px_rgba(79,140,255,0.60)] transition duration-500 hover:-translate-y-1 hover:border-cyan-200/28 hover:shadow-[0_28px_70px_-34px_rgba(15,23,42,0.88),0_0_56px_-30px_rgba(79,140,255,0.68)] sm:min-h-[270px] sm:rounded-[1.35rem]"
     >
       <div
         aria-hidden
@@ -157,9 +157,9 @@ function FormatCard({ label, category, result, tag, config, index }: CardProps) 
       <div aria-hidden className="absolute inset-0 shadow-[inset_0_0_42px_rgba(15,23,42,0.24),inset_0_0_34px_rgba(79,140,255,0.06)]" />
       <div aria-hidden className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/55 to-transparent" />
 
-      <div className="relative flex h-full min-w-0 flex-col justify-between p-5">
+      <div className="relative flex h-full min-w-0 flex-col justify-between p-4 sm:p-5">
         <div className="flex min-w-0 flex-wrap items-start justify-between gap-2 sm:gap-3">
-          <p className="max-w-full rounded-full border border-white/[0.16] bg-slate-950/46 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-cyan-50/82 shadow-[0_10px_26px_rgba(15,23,42,0.28)] backdrop-blur-md sm:max-w-[70%] md:tracking-[0.18em]">
+          <p className="max-w-full rounded-full border border-white/[0.16] bg-slate-950/46 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-cyan-50/82 shadow-[0_10px_26px_rgba(15,23,42,0.28)] backdrop-blur-md sm:max-w-[70%] md:tracking-[0.18em]">
             {category}
           </p>
           <p className="max-w-full rounded-full border border-cyan-100/26 bg-cyan-200/14 px-3 py-1.5 text-[10px] font-semibold tracking-[0.02em] text-cyan-50 opacity-100 shadow-[0_12px_30px_rgba(34,211,238,0.18)] backdrop-blur-md transition duration-500 md:translate-y-1 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 sm:max-w-[68%] sm:text-right">
@@ -168,10 +168,10 @@ function FormatCard({ label, category, result, tag, config, index }: CardProps) 
         </div>
 
         <div className="border-t border-white/[0.10] pt-4">
-          <p className="text-lg font-light leading-tight tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.54)] md:text-xl">
+          <p className="text-base font-light leading-tight tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.54)] sm:text-lg md:text-xl">
             {label}
           </p>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/62 md:tracking-[0.22em]">{tag}</p>
+          <p className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-white/62 sm:text-[10px] md:tracking-[0.22em]">{tag}</p>
         </div>
       </div>
     </motion.div>
@@ -189,7 +189,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
     .filter(({ fmt }) => activeFilter === "Tous" || fmt.filter === activeFilter);
 
   return (
-    <section className="relative overflow-hidden px-4 pb-14 pt-8 sm:px-6 md:pb-16 md:pt-10 lg:px-10">
+    <section className="relative overflow-hidden px-4 pb-12 pt-7 sm:px-6 md:pb-16 md:pt-10 lg:px-10">
       {/* Section ambient accent */}
       <div
         aria-hidden
@@ -235,7 +235,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
                   key={filter}
                   type="button"
                   onClick={() => setActiveFilter(filter)}
-                  className={`min-h-10 shrink-0 rounded-full border px-4 text-xs font-medium tracking-[0.12em] transition duration-300 md:tracking-[0.16em] ${
+                  className={`min-h-10 shrink-0 rounded-full border px-3 text-[11px] font-medium tracking-[0.08em] transition duration-300 sm:px-4 sm:text-xs md:tracking-[0.16em] ${
                     isActive
                       ? "border-blue-300/60 bg-[#4F8CFF]/18 text-blue-50 shadow-[0_12px_34px_rgba(79,140,255,0.18)]"
                       : "border-white/12 bg-white/[0.055] text-slate-300/82 backdrop-blur-md hover:-translate-y-0.5 hover:border-blue-200/35 hover:bg-white/[0.085] hover:text-white"

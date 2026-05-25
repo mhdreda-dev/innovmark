@@ -16,7 +16,7 @@ export default function StatsBand({ locale }: { locale?: string }) {
   const items = locale === "ar" ? arStats : stats;
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden py-12 md:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-8 mx-auto h-36 max-w-3xl opacity-25 blur-3xl"
@@ -27,20 +27,20 @@ export default function StatsBand({ locale }: { locale?: string }) {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-blue-100/80 bg-blue-100/50 shadow-[0_18px_48px_rgba(15,23,42,0.075)] backdrop-blur-md md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-blue-100/80 bg-blue-100/50 shadow-[0_18px_48px_rgba(15,23,42,0.075)] backdrop-blur-md min-[390px]:grid-cols-2 sm:rounded-3xl md:grid-cols-4">
           {items.map((s) => (
             <div
               key={s.label}
-              className="relative min-w-0 bg-white/88 px-4 py-7 text-center md:px-8 md:py-12 md:text-left rtl-text-right"
+              className="relative min-w-0 bg-white/88 px-4 py-6 text-center md:px-8 md:py-12 md:text-left rtl-text-right"
             >
               <div
                 aria-hidden
                 className="absolute start-5 top-5 h-6 w-px bg-gradient-to-b from-blue-400/50 to-transparent md:start-8 md:top-8 md:h-7"
               />
-              <div className="cinematic-text text-3xl font-light tracking-tight text-slate-950 md:text-5xl">
+              <div className="cinematic-text text-2xl font-light tracking-tight text-slate-950 min-[390px]:text-3xl md:text-5xl">
                 {s.value}
               </div>
-              <div className="mt-3 text-[10px] uppercase tracking-[0.12em] text-slate-500 md:mt-4 md:text-[11px] md:tracking-[0.28em]">
+              <div className="mt-2 text-[10px] uppercase tracking-[0.08em] text-slate-500 md:mt-4 md:text-[11px] md:tracking-[0.28em]">
                 {s.label}
               </div>
             </div>

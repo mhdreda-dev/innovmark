@@ -48,7 +48,7 @@ export default async function LocalizedContactPage({ params }: Props) {
 
       <main className="relative z-10 min-h-screen overflow-hidden pt-[5.5rem] sm:pt-24">
         {/* ── Hero ── */}
-        <section className="relative px-4 pb-8 pt-9 sm:px-6 md:pb-12 md:pt-14 lg:px-10">
+        <section className="relative px-4 pb-8 pt-8 sm:px-6 md:pb-12 md:pt-14 lg:px-10">
           {/* Background: premium light depth */}
           <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
             <div
@@ -80,25 +80,25 @@ export default async function LocalizedContactPage({ params }: Props) {
             {/* Kicker — child 1 */}
             <div className="reveal-on-scroll mb-6 flex items-center justify-center gap-3">
               <span className="h-px w-8 shrink-0 bg-gradient-to-r from-transparent via-blue-400/60 to-cyan-300/60 sm:w-10" />
-              <span className="cinematic-text text-[10px] uppercase tracking-[0.16em] text-blue-700/60 md:tracking-[0.46em]">
+              <span className="cinematic-text text-[10px] uppercase tracking-[0.12em] text-blue-700/60 md:tracking-[0.46em]">
                 {page.kicker}
               </span>
               <span className="h-px w-8 shrink-0 bg-gradient-to-r from-cyan-300/60 via-blue-400/60 to-transparent sm:w-10" />
             </div>
 
             {/* Title — child 2 */}
-            <h1 className="reveal-on-scroll cinematic-text text-4xl font-light leading-[1.08] tracking-tight text-slate-950 md:text-6xl lg:text-7xl">
+            <h1 className="reveal-on-scroll cinematic-text text-[2.2rem] font-light leading-[1.1] tracking-tight text-slate-950 sm:text-4xl md:text-6xl lg:text-7xl">
               {page.title}
             </h1>
 
             {/* Hero subtitle — child 3 */}
-            <p className="reveal-on-scroll cinematic-text mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 md:text-xl">
+            <p className="reveal-on-scroll cinematic-text mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base md:mt-6 md:text-xl">
               {page.heroSubtitle}
             </p>
 
             {/* Response badge — child 4 */}
             <div className="reveal-on-scroll mt-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-100/80 bg-white/78 px-4 py-2 text-xs text-slate-600 shadow-[0_14px_34px_rgba(79,140,255,0.10)] backdrop-blur-xl">
+              <span className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-blue-100/80 bg-white/78 px-4 py-2 text-center text-xs text-slate-600 shadow-[0_14px_34px_rgba(79,140,255,0.10)] backdrop-blur-xl">
                 <span className="pulse-glow h-1.5 w-1.5 rounded-full bg-blue-500" />
                 {page.subtitle}
               </span>
@@ -156,7 +156,7 @@ export default async function LocalizedContactPage({ params }: Props) {
               {page.processSteps.map((s) => (
                 <div
                   key={s.step}
-                  className="reveal-on-scroll group rounded-2xl border border-blue-100/80 bg-white/84 p-6 shadow-[0_16px_44px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-[0_24px_58px_rgba(79,140,255,0.12)]"
+                  className="reveal-on-scroll group rounded-2xl border border-blue-100/80 bg-white/84 p-5 shadow-[0_16px_44px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-[0_24px_58px_rgba(79,140,255,0.12)] sm:p-6"
                 >
                   <div className="mb-4 font-mono text-xs tracking-[0.28em] text-blue-500/70">
                     {s.step}

@@ -28,7 +28,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
 
   return (
     <section
-      className="relative overflow-hidden border-y border-blue-100/70 bg-white/82 py-14 shadow-[0_18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:py-18"
+      className="relative overflow-hidden border-y border-blue-100/70 bg-white/82 py-12 shadow-[0_18px_54px_rgba(15,23,42,0.055)] backdrop-blur-xl sm:py-18"
       dir="ltr"
       style={{ direction: "ltr", unicodeBidi: "isolate" }}
     >
@@ -43,13 +43,13 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="mx-auto max-w-3xl text-center" dir={locale === "ar" ? "rtl" : "ltr"}>
           <div className="text-[11px] uppercase tracking-[0.34em] text-blue-700/60">{copy.eyebrow}</div>
-          <h2 className="mt-4 text-3xl font-light tracking-tight text-slate-950 sm:text-4xl">{copy.title}</h2>
+          <h2 className="mt-4 text-2xl font-light tracking-tight text-slate-950 sm:text-4xl">{copy.title}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">{copy.description}</p>
         </div>
       </div>
 
       <div
-        className="relative left-1/2 right-1/2 mt-10 w-screen -translate-x-1/2 overflow-hidden"
+        className="relative mt-8 w-full overflow-hidden sm:mt-10"
         dir="ltr"
         style={{ direction: "ltr", unicodeBidi: "isolate" }}
       >
@@ -68,7 +68,7 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
                   aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
                   aria-hidden={groupIndex === 1}
                   tabIndex={groupIndex === 1 ? -1 : undefined}
-                  className="group grid h-24 w-40 shrink-0 place-items-center rounded-[1.35rem] border border-white/70 bg-white/78 px-5 py-5 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.12)] sm:h-32 sm:w-60 sm:px-7"
+                  className="group grid h-20 w-36 shrink-0 place-items-center rounded-[1.1rem] border border-white/70 bg-white/78 px-4 py-4 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.12)] sm:h-32 sm:w-60 sm:rounded-[1.35rem] sm:px-7"
                 >
                   <img
                     src={partner.logoUrl}
