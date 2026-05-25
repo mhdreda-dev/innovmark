@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const WA_HREF =
   "https://wa.me/212771450503?text=Bonjour%20Innovmark%2C%20je%20souhaite%20am%C3%A9liorer%20ma%20pr%C3%A9sence%20digitale.";
 
@@ -8,6 +6,12 @@ const socialLinks = [
   { label: "Facebook", href: "https://www.facebook.com/innovmark" },
   { label: "LinkedIn", href: "https://www.linkedin.com/company/innovmark" },
   { label: "WhatsApp", href: WA_HREF },
+];
+
+const mobileSocialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/innovmark" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/innovmark" },
+  { label: "Facebook", href: "https://www.facebook.com/innovmark" },
 ];
 
 /* ─── Desktop link columns ─────────────────────────── */
@@ -70,22 +74,6 @@ export default function Footer({ locale }: { locale?: string }) {
   const desktopLinks = isArabic ? arFooterLinks : footerLinks;
   const contactLinks = isArabic ? arFooterLinks["التواصل"] : footerLinks.Contact;
 
-  /* Essential mobile links — 3 items max */
-  const mobileNavLinks = [
-    {
-      label: t(locale, "Accueil", "Home", "الرئيسية"),
-      href: localHref("/", locale),
-    },
-    {
-      label: t(locale, "Services", "Services", "الخدمات"),
-      href: localHref("/services", locale),
-    },
-    {
-      label: t(locale, "Contact", "Contact", "تواصل معنا"),
-      href: localHref("/contact", locale),
-    },
-  ];
-
   const tagline = t(
     locale,
     "Studio créatif spécialisé en branding, contenu digital et croissance d’image.",
@@ -119,7 +107,54 @@ export default function Footer({ locale }: { locale?: string }) {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 md:pb-20 md:pt-16 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 md:hidden">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5 text-center shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_22px_rgba(122,217,255,0.75)]" />
+            <span className="text-sm font-light uppercase tracking-[0.3em] text-white">
+              Innovmark
+            </span>
+          </div>
+
+          <p className="mx-auto mt-5 max-w-[18rem] text-sm leading-6 text-white/74">
+            Studio créatif spécialisé en branding, contenu digital et croissance.
+          </p>
+
+          <a
+            href={WA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full border border-emerald-300/80 bg-[#25D366] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.1em] text-white shadow-[0_18px_42px_rgba(37,211,102,0.28)] transition duration-300 hover:bg-[#1ebe5a]"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 shrink-0" aria-hidden>
+              <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.5-.4-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.8-1.3-1.3-2.9-1.3-4.4 0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.6 8.4-8.2 8.4z" />
+            </svg>
+            WhatsApp — Réponse rapide
+          </a>
+
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
+            {mobileSocialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="inline-flex min-h-10 items-center rounded-full border border-white/10 bg-white/[0.065] px-3.5 text-xs font-medium text-white/76 transition duration-300 hover:border-cyan-200/35 hover:bg-white/[0.1] hover:text-white"
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-7 border-t border-white/10 pt-5">
+            <p className="text-xs text-white/58">Sidi Kacem • Maroc</p>
+            <p className="mt-2 text-xs text-white/46">© Innovmark Studio</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mx-auto hidden max-w-7xl px-4 pb-20 pt-10 sm:px-6 md:block md:pb-20 md:pt-16 lg:px-10">
         <div className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 shadow-[0_24px_90px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:rounded-[28px] sm:p-7 lg:p-9">
           <div className="grid gap-8 lg:grid-cols-[1.35fr_0.75fr_0.75fr_0.95fr] lg:gap-12 rtl-text-right">
             <div>
@@ -207,20 +242,6 @@ export default function Footer({ locale }: { locale?: string }) {
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-between gap-5 border-t border-white/10 pt-6 text-center md:flex-row md:text-left rtl-row">
-            <nav aria-label="Footer navigation" className="md:hidden">
-              <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
-                {mobileNavLinks.map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="inline-flex text-[11px] font-medium uppercase tracking-[0.16em] text-white/62 transition duration-200 hover:-translate-y-0.5 hover:text-cyan-100"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
             <span className="text-xs text-white/54">{copyright}</span>
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
               <a href="#" className="text-xs text-white/54 transition-colors hover:text-cyan-100">
