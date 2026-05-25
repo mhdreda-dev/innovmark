@@ -1,44 +1,314 @@
 import type { MetadataRoute } from "next";
-import { blogSlugs } from "@/lib/blog";
-import { locales, type Locale } from "@/lib/i18n";
-import { servicesForSitemap } from "@/lib/seo";
 
 const SITE_URL = "https://innovmark.site";
 
-const staticPaths = ["/", "/contact", "/services", "/pourquoi-nous", "/processus", "/blog"];
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const servicePaths = servicesForSitemap().map((slug) => `/services/${slug}`);
-  const blogPaths = blogSlugs.map((slug) => `/blog/${slug}`);
-
-  return [...staticPaths, ...servicePaths, ...blogPaths].flatMap((path) =>
-    locales.map((locale) => entry(locale, path, now)),
-  );
-}
-
-function entry(locale: Locale, path: string, lastModified: Date): MetadataRoute.Sitemap[number] {
-  const isHome = path === "/";
-  return {
-    url: sitemapUrl(locale, path),
-    lastModified,
-    changeFrequency: isHome || path.startsWith("/blog") ? "weekly" : "monthly",
-    priority: isHome ? 1 : path === "/services" || path === "/blog" ? 0.9 : 0.75,
-    alternates: {
-      languages: sitemapAlternates(path),
+  return [
+    {
+      url: `${SITE_URL}/fr`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
     },
-    images: isHome ? [`${SITE_URL}/images/hero-showcase/branding-showcase.jpg`] : undefined,
-  };
-}
-
-function sitemapUrl(locale: Locale, path = "/") {
-  if (path === "/") return `${SITE_URL}/${locale}`;
-  return `${SITE_URL}/${locale}${path}`;
-}
-
-function sitemapAlternates(path = "/") {
-  return {
-    ...Object.fromEntries(locales.map((locale) => [locale, sitemapUrl(locale, path)])),
-    "x-default": sitemapUrl("fr", path),
-  };
+    {
+      url: `${SITE_URL}/en`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/ar`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/fr/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/en/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/ar/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/fr/services/promotional-videos`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/promotional-videos`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/promotional-videos`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/services/website-creation`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/website-creation`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/website-creation`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/services/branding`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/branding`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/branding`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/services/social-media`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/social-media`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/social-media`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/services/paid-ads`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/paid-ads`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/paid-ads`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/services/stock-management`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/services/stock-management`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/services/stock-management`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/en/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/ar/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/fr/blog/choisir-agence-marketing-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/blog/choisir-agence-marketing-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/blog/choisir-agence-marketing-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/blog/identite-visuelle-entreprise`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/blog/identite-visuelle-entreprise`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/blog/identite-visuelle-entreprise`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/blog/cout-site-web-professionnel-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/blog/cout-site-web-professionnel-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/blog/cout-site-web-professionnel-maroc`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/blog/marketing-digital-commerces-locaux-sidi-kacem`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/blog/marketing-digital-commerces-locaux-sidi-kacem`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/blog/marketing-digital-commerces-locaux-sidi-kacem`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/blog/attirer-clients-instagram`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/blog/attirer-clients-instagram`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/blog/attirer-clients-instagram`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/pourquoi-nous`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/pourquoi-nous`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/pourquoi-nous`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/fr/processus`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/en/processus`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/ar/processus`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+  ];
 }
