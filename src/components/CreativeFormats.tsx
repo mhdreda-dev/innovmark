@@ -77,13 +77,13 @@ const cardConfigs: CardVisualConfig[] = [
     image: "/images/hero-showcase/social-media-showcase.png",
   },
   {
-    image: "/images/hero-showcase/Ads-analytics.png",
+    image: "/images/hero-showcase/ads-analytics.png",
   },
   {
     image: "/images/hero-showcase/Website.png",
   },
   {
-    image: "/images/hero-showcase/studio.png",
+    image: "/images/hero-showcase/studio.png", 
   },
 ];
 /* ─── Card component ────────────────────────────────── */
