@@ -20,7 +20,7 @@ const highlights = [
 ];
 
 const description =
-  "Saad Belkaadi accompagne INNOVMARK avec une solide expérience dans le travail avec des agences, la création de vidéos produits, le montage vidéo publicitaire et les campagnes payantes. Il comprend particulièrement bien les enjeux du commerce en ligne en Afrique et aide les marques à créer du contenu performant pour vendre mieux.";
+  "Une équipe créative qui accompagne les marques dans leur image, leur contenu et leur croissance digitale.";
 
 const arHighlights = [
   { label: "تجربة مع عدة وكالات", icon: Users },
@@ -31,7 +31,7 @@ const arHighlights = [
 ];
 
 const arDescription =
-  "كيعاون سعد بلقاضي INNOVMARK بتجربة قوية فالتعامل مع الوكالات، إنتاج فيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الحملات. عندو فهم قريب لتحديات البيع فالإنترنت فإفريقيا، وكيعاون المشاريع تصاوب مواد عملية وجذابة كتزيد فرص البيع.";
+  "فريق كرييتيف كيساعد الماركات فالصورة ديالها، المحتوى ديالها، والنمو الرقمي ديالها.";
 
 export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
   const isArabic = locale === "ar";
@@ -50,7 +50,7 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
 
       <div className="relative mx-auto max-w-7xl">
         <SectionLabel
-          kicker={isArabic ? "عضو أساسي" : "Membre clé"}
+          kicker={isArabic ? "فريقنا" : "Notre équipe"}
           title={isArabic ? "خبرة إبداعية خدامة على البيع." : "Une expertise créative pensée pour vendre."}
           subtitle={isArabic ? "INNOVMARK كتستند على خبرات ميدانية كتربط التصاور والفيديوهات والمنشورات بالبيع وبواقع السوق." : "INNOVMARK s'appuie aussi sur des profils terrain capables de relier contenu, performance et réalité des marchés."}
         />
@@ -73,7 +73,7 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
             <div className="rounded-2xl border border-white/10 bg-black/50 p-4 sm:p-5 md:p-7">
               <div className="flex flex-col items-start gap-5 sm:flex-row rtl-md-row">
                 <div className="relative grid h-20 w-20 shrink-0 place-items-center rounded-2xl border border-cyan-200/30 bg-gradient-to-br from-cyan-200/18 via-white/[0.06] to-emerald-200/14 text-2xl font-light tracking-[0.08em] text-white shadow-[0_0_48px_rgba(45,212,191,0.18)]">
-                  SB
+                  IM
                   <span
                     aria-hidden
                     className="absolute -right-1 -top-1 h-4 w-4 rounded-full border border-black bg-emerald-300 shadow-[0_0_20px_rgba(110,231,183,0.70)]"
@@ -86,10 +86,10 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
                     {isArabic ? "فريق INNOVMARK" : "Équipe INNOVMARK"}
                   </p>
                   <h2 className="mt-4 text-3xl font-light tracking-tight text-white md:text-5xl">
-                    Saad Belkaadi
+                    {isArabic ? "فريق كرييتيف مركز على النتائج" : "Une équipe créative orientée résultats"}
                   </h2>
                   <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-emerald-100/72 md:tracking-[0.22em]">
-                    {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "Spécialiste commerce en ligne & créations publicitaires"}
+                    {isArabic ? "استراتيجية رقمية · براندينغ · محتوى · إعلانات" : "Stratégie digitale · Branding · Contenu · Publicité"}
                   </p>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
                 href={localizedHref("/contact", locale)}
                 className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-cyan-100/20 bg-white px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:bg-emerald-100 sm:w-auto md:tracking-[0.18em]"
               >
-                {isArabic ? "خدم معنا" : "Travailler avec nous"} <ArrowRight className="h-4 w-4 rtl-arrow" />
+                {isArabic ? "هضر مع الفريق" : "Parler avec l'équipe"} <ArrowRight className="h-4 w-4 rtl-arrow" />
               </Link>
             </div>
 
@@ -153,26 +153,26 @@ export function SaadBelkaadiTeaser({ locale }: { locale?: Locale }) {
 
           <div className="relative flex min-w-0 flex-col gap-5 sm:flex-row rtl-md-row">
             <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl border border-cyan-200/30 bg-gradient-to-br from-cyan-200/18 to-emerald-200/14 text-lg font-light tracking-[0.08em] text-white shadow-[0_0_42px_rgba(45,212,191,0.16)]">
-              SB
+              IM
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.14em] text-blue-600 md:tracking-[0.32em]">
-                {isArabic ? "عضو أساسي" : "Membre clé"}
+                {isArabic ? "فريقنا" : "Notre équipe"}
               </p>
               <h2 className="mt-3 text-2xl font-light tracking-tight text-white md:text-3xl">
-                Saad Belkaadi
+                {isArabic ? "فريق كرييتيف مركز على النتائج" : "Une équipe créative orientée résultats"}
               </h2>
               <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-slate-600 md:tracking-[0.18em]">
-                {isArabic ? "متخصص فالبيع فالإنترنت والإعلانات الإبداعية" : "Spécialiste commerce en ligne & créations publicitaires"}
+                {isArabic ? "استراتيجية رقمية · براندينغ · محتوى · إعلانات" : "Stratégie digitale · Branding · Contenu · Publicité"}
               </p>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/64">
-                {isArabic ? "خبرة ففيديوهات المنتجات، المونتاج الإعلاني، ومحتوى الإعلانات اللي كيعاون مشاريع البيع فالإنترنت فإفريقيا تجيب نتائج أحسن." : "Une expertise en vidéos produits, montage publicitaire et contenus payants orientés conversion pour les marques de commerce en ligne en Afrique."}
+                {isArabic ? arDescription : description}
               </p>
             </div>
           </div>
 
           <div className="relative flex items-center gap-3 text-[10px] uppercase tracking-[0.12em] text-white/64 transition group-hover:text-white md:tracking-[0.24em] rtl-row">
-            {isArabic ? "تعرف على الفريق" : "Découvrir l'équipe"}
+            {isArabic ? "هضر مع الفريق" : "Parler avec l'équipe"}
             <span className="grid h-10 w-10 place-items-center rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 group-hover:scale-105 rtl-arrow">
               <ArrowRight className="h-4 w-4 opacity-100" />
             </span>

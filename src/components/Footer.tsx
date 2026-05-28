@@ -1,3 +1,5 @@
+import { isLocale, localizedHref, type Locale } from "@/lib/i18n";
+
 const WA_HREF =
   "https://wa.me/212771450503?text=Bonjour%20Innovmark%2C%20je%20souhaite%20am%C3%A9liorer%20ma%20pr%C3%A9sence%20digitale.";
 
@@ -17,8 +19,8 @@ const mobileSocialLinks = [
 /* ─── Desktop link columns ─────────────────────────── */
 const footerLinks = {
   Studio: [
-    { label: "À propos",    href: "/#why" },
-    { label: "Processus",   href: "/#process" },
+    { label: "À propos",    href: "/pourquoi-nous" },
+    { label: "Processus",   href: "/processus" },
     { label: "Réalisations",href: "/#work" },
   ],
   Services: [
@@ -36,20 +38,20 @@ const footerLinks = {
 
 const arFooterLinks = {
   "الاستوديو": [
-    { label: "علاش حنا",    href: "/ar#why" },
-    { label: "طريقة الخدمة", href: "/ar/processus" },
-    { label: "الأعمال",     href: "/ar#work" },
+    { label: "علاش حنا",    href: "/pourquoi-nous" },
+    { label: "طريقة الخدمة", href: "/processus" },
+    { label: "الأعمال",     href: "/#work" },
   ],
   "الخدمات": [
-    { label: "الفيديوهات",     href: "/ar/services/promotional-videos" },
-    { label: "المواقع",     href: "/ar/services/website-creation" },
-    { label: "براندينغ وهوية",  href: "/ar/services/branding" },
-    { label: "الإعلانات",   href: "/ar/services/paid-ads" },
+    { label: "الفيديوهات",     href: "/services/promotional-videos" },
+    { label: "المواقع",     href: "/services/website-creation" },
+    { label: "براندينغ وهوية",  href: "/services/branding" },
+    { label: "الإعلانات",   href: "/services/paid-ads" },
   ],
   "التواصل": [
     { label: "واتساب",                href: WA_HREF },
     { label: "contact@innovmark.ma",  href: "mailto:contact@innovmark.ma" },
-    { label: "صفحة التواصل",          href: "/ar/contact" },
+    { label: "صفحة التواصل",          href: "/contact" },
   ],
 };
 
@@ -60,16 +62,9 @@ function t(locale: string | undefined, fr: string, en: string, ar: string) {
   return fr;
 }
 
-function localHref(path: string, locale?: string) {
-  if (!locale) return path;
-  if (path.startsWith("http") || path.startsWith("mailto:") || path.startsWith("tel:") || path.startsWith("#")) return path;
-  if (path.startsWith(`/${locale}`)) return path;
-  if (path === "/") return `/${locale}`;
-  return `/${locale}${path}`;
-}
-
 /* ─── Component ─────────────────────────────────────── */
 export default function Footer({ locale }: { locale?: string }) {
+  const activeLocale: Locale | undefined = locale && isLocale(locale) ? locale : undefined;
   const isArabic = locale === "ar";
   const desktopLinks = isArabic ? arFooterLinks : footerLinks;
   const contactLinks = isArabic ? arFooterLinks["التواصل"] : footerLinks.Contact;
@@ -191,7 +186,7 @@ export default function Footer({ locale }: { locale?: string }) {
                   {cols.map((l) => (
                     <li key={l.label}>
                       <a
-                        href={localHref(l.href, locale)}
+                        href={localizedHref(l.href, activeLocale)}
                         className="inline-flex text-sm text-white/62 transition duration-200 hover:-translate-y-0.5 hover:text-cyan-100"
                       >
                         {l.label}
@@ -210,7 +205,7 @@ export default function Footer({ locale }: { locale?: string }) {
                 {contactLinks.map((l) => (
                   <li key={l.label}>
                     <a
-                      href={localHref(l.href, locale)}
+                      href={localizedHref(l.href, activeLocale)}
                       target={l.href.startsWith("http") ? "_blank" : undefined}
                       rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="inline-flex text-sm text-white/62 transition duration-200 hover:-translate-y-0.5 hover:text-cyan-100"
@@ -244,10 +239,10 @@ export default function Footer({ locale }: { locale?: string }) {
           <div className="mt-10 flex flex-col items-center justify-between gap-5 border-t border-white/10 pt-6 text-center md:flex-row md:text-left rtl-row">
             <span className="text-xs text-white/54">{copyright}</span>
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-              <a href="#" className="text-xs text-white/54 transition-colors hover:text-cyan-100">
+              <a href={localizedHref("/", activeLocale)} className="text-xs text-white/54 transition-colors hover:text-cyan-100">
                 {legalLabel}
               </a>
-              <a href="#" className="text-xs text-white/54 transition-colors hover:text-cyan-100">
+              <a href={localizedHref("/", activeLocale)} className="text-xs text-white/54 transition-colors hover:text-cyan-100">
                 {privacyLabel}
               </a>
             </div>
