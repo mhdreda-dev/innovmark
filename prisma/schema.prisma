@@ -19,6 +19,17 @@ enum MediaKind {
   DOCUMENT
 }
 
+enum FieldCRMStatus {
+  NEW
+  CONFIRMED
+  ON_THE_WAY
+  SHOOTING_DONE
+  EDITING
+  CLIENT_REVIEW
+  DELIVERED
+  CANCELLED
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -192,4 +203,30 @@ model MediaAsset {
 
   @@index([kind, isActive, createdAt])
   @@index([provider, publicId])
+}
+
+model FieldCRMClient {
+  id              String         @id @default(cuid())
+  clientName      String
+  phoneNumber     String
+  socialProfile   String?
+  businessName    String?
+  city            String
+  exactAddress    String         @db.Text
+  googleMapsLink  String?
+  serviceType     String
+  description     String         @db.Text
+  totalPrice      Decimal        @default(0) @db.Decimal(12, 2)
+  advancePayment  Decimal        @default(0) @db.Decimal(12, 2)
+  remainingAmount Decimal        @default(0) @db.Decimal(12, 2)
+  appointmentDate DateTime?
+  appointmentTime String?
+  status          FieldCRMStatus @default(NEW)
+  notes           String?        @db.Text
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([city])
+  @@index([status])
+  @@index([appointmentDate, appointmentTime])
 }

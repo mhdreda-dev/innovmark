@@ -8,8 +8,8 @@ export async function getAdminSession() {
   return null;
 }
 
-export async function requireAdmin() {
+export async function requireAdmin(callbackUrl = "/admin/content/home") {
   const session = await getAdminSession();
-  if (!session) redirect("/admin/login?callbackUrl=/admin/content/home");
+  if (!session) redirect(`/admin/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
   return session;
 }
