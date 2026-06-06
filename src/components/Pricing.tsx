@@ -160,9 +160,9 @@ export default function Pricing({ locale }: { locale?: Locale }) {
   const displayedPacks = isArabic ? arPacks : packs;
 
   return (
-    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-28 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:px-10" dir={isArabic ? "rtl" : undefined}>
+    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-14 pt-12 sm:px-6 sm:pb-16 sm:pt-14 md:pb-24 md:pt-24 lg:px-10" dir={isArabic ? "rtl" : undefined}>
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto mb-10 flex max-w-3xl flex-col items-center text-center md:mb-14">
+        <div className="mx-auto mb-7 flex max-w-3xl flex-col items-center text-center md:mb-14">
           <SectionLabel
             kicker={isArabic ? "باقاتنا" : "Nos Packs"}
             title={
@@ -179,7 +179,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 md:gap-5 xl:grid-cols-4">
           {displayedPacks.map((pack, index) => {
             const Icon = pack.icon;
             const cardClass = pack.popular
@@ -202,7 +202,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
               <article
                 key={pack.name}
                 dir={isArabic ? "rtl" : "ltr"}
-                className={`reveal-on-scroll relative flex h-full min-h-[700px] min-w-0 flex-col rounded-lg border p-5 transition duration-500 hover:-translate-y-1 hover:shadow-[0_28px_84px_rgba(15,23,42,0.14)] md:p-6 xl:p-5 ${cardClass}`}
+                className={`reveal-on-scroll relative flex h-full min-w-0 flex-col rounded-lg border p-4 transition duration-500 hover:-translate-y-1 hover:shadow-[0_28px_84px_rgba(15,23,42,0.14)] sm:p-5 md:p-6 xl:min-h-[700px] xl:p-5 ${cardClass}`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
                 <div className="flex min-h-12 items-center justify-between gap-3">
@@ -260,10 +260,10 @@ export default function Pricing({ locale }: { locale?: Locale }) {
                       </span>
                     )}
                   </div>
-                  <p className={`mt-5 min-h-[120px] text-sm leading-6 ${mutedTextClass}`}>{pack.description}</p>
+                  <p className={`mt-5 text-sm leading-6 xl:min-h-[120px] ${mutedTextClass}`}>{pack.description}</p>
                 </div>
 
-                <ul className="mt-7 flex-1 space-y-3.5">
+                <ul className="mt-5 space-y-3 xl:mt-7 xl:flex-1 xl:space-y-3.5">
                   {pack.features.map((feature) => (
                     <li key={feature} className={`flex items-start gap-3 text-sm leading-6 ${pack.popular ? "text-blue-50/88" : "text-slate-700"}`}>
                       <span className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ring-1 ${checkClass}`}>
@@ -278,7 +278,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
                   href={whatsappHref(pack)}
                   target="_blank"
                   rel="noreferrer"
-                  className={`mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-[0_18px_42px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_52px_rgba(37,99,235,0.28)] ${buttonClass}`}
+                  className={`mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-[0_18px_42px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_52px_rgba(37,99,235,0.28)] xl:mt-8 ${buttonClass}`}
                 >
                   <MessageCircle aria-hidden="true" className="h-4 w-4 shrink-0" />
                   <span>{isArabic ? "📲 احجز عبر WhatsApp" : "Réserver sur WhatsApp"}</span>
@@ -289,7 +289,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
           })}
         </div>
 
-        <div className="reveal-on-scroll mx-auto mt-8 flex max-w-4xl flex-col items-center justify-center gap-3 text-sm font-semibold text-slate-700 sm:flex-row sm:flex-wrap">
+        <div className="reveal-on-scroll mx-auto mt-6 flex max-w-4xl flex-col items-center justify-center gap-3 text-sm font-semibold text-slate-700 sm:flex-row sm:flex-wrap md:mt-8">
           {(isArabic
             ? ["✓ رد سريع", "✓ مواكبة شخصية", "✓ تسليم احترافي"]
             : ["✓ Réponse rapide", "✓ Accompagnement personnalisé", "✓ Livraison professionnelle"]
