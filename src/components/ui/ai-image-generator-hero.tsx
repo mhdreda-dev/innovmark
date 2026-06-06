@@ -1,6 +1,4 @@
-"use client"
-
-import { useState, useEffect, useCallback, PointerEvent as ReactPointerEvent } from "react"
+import Image from "next/image"
 
 // ─── WhatsApp CTA ────────────────────────────────────────────────────────────
 const WHATSAPP_URL =
@@ -31,8 +29,6 @@ interface Props {
   ctaHref?: string
   secondaryCtaText?: string
   secondaryCtaHref?: string
-  /** Optional callback for analytics — CTA always navigates to WhatsApp. */
-  onCtaClick?: () => void
   images: CarouselImage[]
   features?: CarouselFeature[]
   trustSignals?: readonly string[]
@@ -55,6 +51,10 @@ const PARTICLES = [
   { l: "28%", t: "30%", d: "16s", e: "3.9s" },
 ] as const
 
+function isVercelBlobImage(src: string) {
+  return src.includes(".public.blob.vercel-storage.com") || src.includes("blob.vercel-storage.com")
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 export function ImageCarouselHero({
   title,
@@ -64,7 +64,6 @@ export function ImageCarouselHero({
   ctaHref = WHATSAPP_URL,
   secondaryCtaText = "Nous contacter",
   secondaryCtaHref = "/contact",
-  onCtaClick,
   images,
   trustSignals = [],
   heroVideoUrl,
@@ -84,30 +83,6 @@ export function ImageCarouselHero({
     ? Array.from({ length: Math.max(8, safeImages.length) }, (_, index) => safeImages[index % safeImages.length])
     : []
   const marqueeSets = marqueeSource.length ? [marqueeSource, marqueeSource] : []
-  const [mounted, setMounted]         = useState(false)
-  const [isMobile, setIsMobile]       = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)")
-    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches)
-    setIsMobile(mq.matches)
-    const t = setTimeout(() => setMounted(true), 60)
-    mq.addEventListener("change", onChange)
-    return () => {
-      clearTimeout(t)
-      mq.removeEventListener("change", onChange)
-    }
-  }, [])
-
-  // Mouse-reactive glow — updates CSS custom properties directly (no re-render)
-  const handlePointerMove = useCallback((e: ReactPointerEvent<HTMLElement>) => {
-    const el = e.currentTarget
-    const rect = el.getBoundingClientRect()
-    const x = (((e.clientX - rect.left) / rect.width) * 100).toFixed(1)
-    const y = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1)
-    el.style.setProperty("--mx", `${x}%`)
-    el.style.setProperty("--my", `${y}%`)
-  }, [])
 
   return (
     <>
@@ -115,7 +90,6 @@ export function ImageCarouselHero({
 
       <section
         className={`ihc-section${heroVideoUrl ? " ihc-has-video" : ""}`}
-        onPointerMove={handlePointerMove}
       >
         {/* ── Background layers ── */}
         <div className="ihc-bg" aria-hidden>
@@ -167,7 +141,7 @@ export function ImageCarouselHero({
 
           {/* Badge */}
           <div
-            className={`ihc-badge${mounted ? " ihc-in" : ""}`}
+            className="ihc-badge ihc-in"
             style={{ animationDelay: "0.10s" }}
           >
             <span className="ihc-pulse" />
@@ -176,7 +150,7 @@ export function ImageCarouselHero({
 
           {/* Title */}
           <h1
-            className={`ihc-title${mounted ? " ihc-in" : ""}`}
+            className="ihc-title ihc-in"
             style={{ animationDelay: "0.28s" }}
           >
             {title}
@@ -184,7 +158,7 @@ export function ImageCarouselHero({
 
           {/* Description */}
           <p
-            className={`ihc-desc${mounted ? " ihc-in" : ""}`}
+            className="ihc-desc ihc-in"
             style={{ animationDelay: "0.46s" }}
           >
             {description}
@@ -192,7 +166,7 @@ export function ImageCarouselHero({
 
           {/* CTA row — WhatsApp (primary) + Contact (secondary) */}
           <div
-            className={`ihc-cta-wrap${mounted ? " ihc-in" : ""}`}
+            className="ihc-cta-wrap ihc-in"
             style={{ animationDelay: "0.60s" }}
           >
             <a
@@ -200,7 +174,6 @@ export function ImageCarouselHero({
               target="_blank"
               rel="noopener noreferrer"
               className="ihc-cta"
-              onClick={onCtaClick}
             >
               <svg className="ihc-cta-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.5-.4-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.8-1.3-1.3-2.9-1.3-4.4 0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.6 8.4-8.2 8.4z" />
@@ -220,7 +193,7 @@ export function ImageCarouselHero({
 
           {trustSignals.length > 0 && (
             <ul
-              className={`ihc-trust${mounted ? " ihc-in" : ""}`}
+              className="ihc-trust ihc-in"
               style={{ animationDelay: "0.72s" }}
               aria-label="Garanties Innovmark"
             >
@@ -238,31 +211,40 @@ export function ImageCarouselHero({
         {/* ── Bottom image marquee ── */}
         {!heroVideoUrl && marqueeSets.length > 0 && (
           <div
-            className={`ihc-stage${mounted ? " ihc-in" : ""}`}
+            className="ihc-stage ihc-in"
             style={{ animationDelay: "0.78s" }}
           >
             <span className="ihc-rail-glow" aria-hidden />
             <div className="ihc-track" aria-label="Hero media gallery">
               {marqueeSets.map((set, setIndex) => (
                 <div className="ihc-loop" key={setIndex} aria-hidden={setIndex === 1}>
-                  {set.map(({ id, imageUrl, alt, rotation }, index) => (
-                    <figure
-                      key={`${id}-${setIndex}-${index}`}
-                      className="ihc-card"
-                      aria-label={alt}
-                      style={{ "--card-rotation": `${rotation ?? 0}deg` } as React.CSSProperties}
-                    >
-                      <img
-                        src={imageUrl}
-                        alt={alt}
-                        className="ihc-card-img"
-                        draggable={false}
-                        loading={setIndex === 0 && index < (isMobile ? 3 : 6) ? "eager" : "lazy"}
-                        decoding="async"
-                      />
-                      <span className="ihc-card-gradient" aria-hidden />
-                    </figure>
-                  ))}
+                  {set.map(({ id, imageUrl, alt, rotation }, index) => {
+                    const shouldPreload = setIndex === 0 && index === 0;
+                    const shouldBypassOptimizer = isVercelBlobImage(imageUrl);
+
+                    return (
+                      <figure
+                        key={`${id}-${setIndex}-${index}`}
+                        className="ihc-card"
+                        aria-label={alt}
+                        style={{ "--card-rotation": `${rotation ?? 0}deg` } as React.CSSProperties}
+                      >
+                        <Image
+                          src={imageUrl}
+                          alt={alt}
+                          fill
+                          sizes="(max-width: 767px) 128px, (max-width: 1024px) 205px, 176px"
+                          className="ihc-card-img"
+                          draggable={false}
+                          decoding="async"
+                          quality={70}
+                          unoptimized={shouldBypassOptimizer}
+                          {...(shouldPreload ? { preload: true } : { loading: "lazy" as const })}
+                        />
+                        <span className="ihc-card-gradient" aria-hidden />
+                      </figure>
+                    )
+                  })}
                 </div>
               ))}
             </div>
@@ -516,11 +498,11 @@ const css = `
 /* ── Entrance animations ── */
 .ihc-badge, .ihc-title, .ihc-desc,
 .ihc-stage, .ihc-dots, .ihc-cta-wrap, .ihc-trust, .ihc-features {
-  opacity: 0;
-  transform: translateY(22px);
+  opacity: 1;
+  transform: none;
 }
 .ihc-in {
-  animation: ihc-rise 0.85s cubic-bezier(0.22, 0.82, 0.22, 1) forwards;
+  animation: none;
 }
 @keyframes ihc-rise {
   to { opacity: 1; transform: translateY(0); }
@@ -724,12 +706,12 @@ const css = `
   display: inline-flex;
   align-items: center;
   gap: 11px;
-  height: 58px;
-  padding: 0 26px 0 22px;
+  height: 62px;
+  padding: 0 30px 0 25px;
   border-radius: 999px;
   background: linear-gradient(135deg, #25d366 0%, #128c5e 100%);
   color: #fff;
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 600;
   letter-spacing: 0.015em;
   text-decoration: none;
@@ -751,13 +733,13 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 58px;
-  padding: 0 26px;
+  height: 62px;
+  padding: 0 30px;
   border-radius: 999px;
   border: 1px solid rgba(79,140,255,0.24);
   background: rgba(255,255,255,0.62);
   color: #0f172a;
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 600;
   letter-spacing: 0.015em;
   text-decoration: none;
@@ -930,8 +912,8 @@ const css = `
   }
   .ihc-card { height: 9.8rem; border-radius: 1.25rem; }
   .ihc-cta-wrap { flex-direction: column; gap: 12px; }
-  .ihc-cta           { height: 52px; padding: 0 18px; font-size: 13.5px; width: 100%; max-width: 21rem; justify-content: center; }
-  .ihc-cta-secondary { height: 52px; font-size: 13.5px; width: 100%; max-width: 21rem; }
+  .ihc-cta           { height: 56px; padding: 0 20px; font-size: 14px; width: 100%; max-width: 21.5rem; justify-content: center; }
+  .ihc-cta-secondary { height: 56px; font-size: 14px; width: 100%; max-width: 21.5rem; }
   .ihc-trust {
     max-width: 21rem;
     gap: 8px;

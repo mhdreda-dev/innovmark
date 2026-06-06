@@ -1,21 +1,13 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-
 const WHATSAPP_NUMBER = "212771450503";
 const WHATSAPP_MESSAGE = "Bonjour Innovmark, je souhaite améliorer ma présence digitale.";
 const AR_WHATSAPP_MESSAGE = "السلام عليكم Innovmark، بغيت نحسن الحضور ديالي فالإنترنت.";
 
-function getWhatsAppMessage(pathname: string | null) {
-  return pathname?.startsWith("/ar") ? AR_WHATSAPP_MESSAGE : WHATSAPP_MESSAGE;
+function getWhatsAppMessage(locale?: string) {
+  return locale === "ar" ? AR_WHATSAPP_MESSAGE : WHATSAPP_MESSAGE;
 }
 
-export default function FloatingWhatsAppButton() {
-  const pathname = usePathname();
-
-  if (pathname?.startsWith("/admin")) return null;
-
-  const message = encodeURIComponent(getWhatsAppMessage(pathname));
+export default function FloatingWhatsAppButton({ locale }: { locale?: string }) {
+  const message = encodeURIComponent(getWhatsAppMessage(locale));
 
   return (
     <a

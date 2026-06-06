@@ -2,21 +2,25 @@ import Nav from "@/components/Nav";
 import CreativeFormats from "@/components/CreativeFormats";
 import BrandMarquee from "@/components/BrandMarquee";
 import StatsBand from "@/components/StatsBand";
-import { SaadBelkaadiTeaser } from "@/components/SaadBelkaadi";
-import CapabilitiesPreview from "@/components/CapabilitiesPreview";
-import Partners from "@/components/Partners";
-import Testimonials from "@/components/Testimonials";
-import Pricing from "@/components/Pricing";
-import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { ImageCarouselHero } from "@/components/ui/ai-image-generator-hero";
 import { dictionaries, isLocale, localizedHref } from "@/lib/i18n";
 import { getPublishedHomeContent } from "@/lib/cms/content";
 import { getFallbackHomeContent } from "@/lib/cms/fallbacks";
 import { buildPageMetadata, localBusinessSchema, localizedSeo, seoKeywords } from "@/lib/seo";
+import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
+
+const SaadBelkaadiTeaser = dynamic(() =>
+  import("@/components/SaadBelkaadi").then((mod) => mod.SaadBelkaadiTeaser),
+);
+const CapabilitiesPreview = dynamic(() => import("@/components/CapabilitiesPreview"));
+const Partners = dynamic(() => import("@/components/Partners"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const Pricing = dynamic(() => import("@/components/Pricing"));
+const CTA = dynamic(() => import("@/components/CTA"));
 
 type Props = {
   params: Promise<{ locale: string }>;

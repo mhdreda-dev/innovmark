@@ -98,11 +98,11 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
 
               <div className="relative flex h-full flex-1 flex-col">
                 <div className="flex items-start justify-between gap-4 rtl-row">
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-white/52 md:tracking-[0.28em]">
-                    <span className={`h-1.5 w-1.5 rounded-full ${step.dot}`} />
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-white/64 md:tracking-[0.28em]">
+                    <span className={`h-2.5 w-2.5 rounded-full ${step.dot} shadow-[0_0_18px_rgba(125,211,252,0.45)]`} />
                     {isArabic ? "مرحلة" : "Étape"}
                   </div>
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/12 bg-white/[0.055] font-mono text-[11px] tracking-[0.12em] text-white/72 shadow-[0_12px_30px_rgba(15,23,42,0.16)] backdrop-blur-xl transition duration-300 group-hover:scale-105 group-hover:border-cyan-100/24 group-hover:text-white">
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-blue-200/25 bg-blue-500/15 font-mono text-base font-semibold tracking-[0.08em] text-white shadow-[0_16px_38px_rgba(79,140,255,0.18)] backdrop-blur-xl transition duration-300 group-hover:scale-105 group-hover:border-cyan-100/35 md:h-16 md:w-16 md:text-lg">
                     {step.number}
                   </div>
                 </div>
@@ -117,7 +117,9 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
                 <ul className="mt-auto space-y-3 border-t border-blue-100/70 pt-6 md:pt-7">
                   {step.points.map((point) => (
                     <li key={point} className="flex items-center gap-3 text-sm leading-6 text-white/76 rtl-row">
-                      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${step.dot} shadow-[0_0_14px_rgba(125,211,252,0.38)]`} />
+                      <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/[0.06] text-[11px] text-white ring-1 ring-white/12 shadow-[0_8px_20px_rgba(15,23,42,0.14)]`}>
+                        ✓
+                      </span>
                       <span className="min-w-0">{point}</span>
                     </li>
                   ))}
@@ -126,7 +128,7 @@ export default function CapabilitiesPreview({ locale }: { locale?: Locale }) {
 
               <span
                 aria-hidden
-                className="pointer-events-none absolute end-6 top-6 font-mono text-[10px] tracking-widest text-white/22"
+                className="pointer-events-none absolute end-6 top-[5.25rem] font-mono text-[2.85rem] font-semibold leading-none tracking-tight text-white/[0.055]"
               >
                 0{i + 1}
               </span>

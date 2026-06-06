@@ -1,14 +1,10 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import SectionLabel from "./SectionLabel";
+import CreativeFormatsMobile from "./CreativeFormatsMobile";
 import { type Locale, localizedHref } from "@/lib/i18n";
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const FILTERS = ["Tous", "Branding", "Vidéo", "Réseaux sociaux", "Publicité", "Sites web"] as const;
-type PortfolioFilter = (typeof FILTERS)[number];
 
 /* ─── Localised copy ─────────────────────────────── */
 const copy = {
@@ -17,6 +13,7 @@ const copy = {
     title: "Nos réalisations récentes",
     subtitle: "Des projets pensés pour attirer, convaincre et convertir.",
     cta: "Démarrer un projet",
+    moreProjects: "Voir plus de projets",
     projectLink: "Voir le projet",
     formats: [
       { label: "Film de lancement pour marque locale", category: "Vidéo publicitaire", result: "+180% engagement", tag: "Spot · Reel · Teaser", filter: "Vidéo" },
@@ -33,6 +30,7 @@ const copy = {
     subtitle:
       "Formats designed to capture attention, build trust and convert — tailored to every channel and every brand ambition.",
     cta: "Start a project",
+    moreProjects: "View more projects",
     projectLink: "View project",
     formats: [
       { label: "Launch film for a local brand", category: "Advertising video", result: "+180% engagement", tag: "Spot · Reel · Teaser", filter: "Vidéo" },
@@ -49,6 +47,7 @@ const copy = {
     subtitle:
       "تصاميم وفيديوهات ومنشورات مصممة باش تشد الانتباه، تبني الثقة، وتجيب نتائج فالإنترنت.",
     cta: "بدا المشروع ديالك",
+    moreProjects: "شوف مشاريع أكثر",
     projectLink: "شوف المشروع",
     formats: [
       { label: "فيلم إطلاق لماركة محلية", category: "فيديو إعلاني", result: "+180% تفاعل", tag: "سبوت · ريل · تيزر", filter: "Vidéo" },
@@ -68,22 +67,22 @@ interface CardVisualConfig {
 
 const cardConfigs: CardVisualConfig[] = [
   {
-    image: "/images/hero-showcase/u.png",
+    image: "/images/hero-showcase/u.avif",
   },
   {
-    image: "/images/hero-showcase/c.png",
+    image: "/images/hero-showcase/c.avif",
   },
   {
-    image: "/images/hero-showcase/social-media-showcase.png",
+    image: "/images/hero-showcase/social-media-showcase.avif",
   },
   {
-    image: "/images/hero-showcase/ads-analytics.png",
+    image: "/images/hero-showcase/ads-analytics.avif",
   },
   {
-    image: "/images/hero-showcase/Website.png",
+    image: "/images/hero-showcase/Website.avif",
   },
   {
-    image: "/images/hero-showcase/studio.png", 
+    image: "/images/hero-showcase/studio.avif",
   },
 ];
 /* ─── Card component ────────────────────────────────── */
@@ -100,22 +99,21 @@ interface CardProps {
 
 function PortfolioCard({ label, category, result, tag, config, index, projectLink, href }: CardProps) {
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.72, delay: index * 0.07, ease: EASE }}
+    <article
       className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_14px_42px_-30px_rgba(15,23,42,0.42)] transition duration-300 md:shadow-[0_18px_54px_-36px_rgba(15,23,42,0.55)] md:hover:-translate-y-1 md:hover:border-slate-300 md:hover:shadow-[0_24px_70px_-38px_rgba(15,23,42,0.68)]"
+      style={{ transitionDelay: `${index * 45}ms` }}
     >
-      <div className="aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-[4/3]">
-        <img
+      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-[4/3]">
+        <Image
           src={config.image}
           alt={`${category} - ${label}`}
+          fill
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
           className="h-full w-full object-cover transition duration-700 md:group-hover:scale-[1.06]"
           draggable={false}
-          loading={index < 3 ? "eager" : "lazy"}
+          loading="lazy"
           decoding="async"
+          quality={70}
         />
       </div>
 
@@ -142,7 +140,7 @@ function PortfolioCard({ label, category, result, tag, config, index, projectLin
           </Link>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -152,10 +150,6 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
   const lang      = (locale ?? "fr") as keyof typeof copy;
   const t         = copy[lang] ?? copy.fr;
   const [featuredFormat, ...remainingFormats] = t.formats.map((fmt, originalIndex) => ({ fmt, originalIndex }));
-  const [activeFilter, setActiveFilter] = useState<PortfolioFilter>("Tous");
-  const visibleMobileFormats = remainingFormats.filter(
-    ({ fmt }) => activeFilter === "Tous" || fmt.filter === activeFilter,
-  );
   const projectHref = localizedHref("/contact", locale);
 
   return (
@@ -187,21 +181,20 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
         </div>
 
         {featuredFormat && (
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.78, ease: EASE }}
+          <article
             className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_18px_56px_-38px_rgba(15,23,42,0.55)] transition duration-300 md:shadow-[0_28px_90px_-52px_rgba(15,23,42,0.72)] md:hover:-translate-y-1 md:hover:border-slate-300 md:hover:shadow-[0_34px_110px_-54px_rgba(15,23,42,0.82)] lg:grid lg:grid-cols-[1.35fr_0.85fr]"
           >
-            <div className="aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-auto md:min-h-[420px] lg:min-h-[520px]">
-              <img
+            <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-auto md:min-h-[420px] lg:min-h-[520px]">
+              <Image
                 src={cardConfigs[featuredFormat.originalIndex]!.image}
                 alt={`${featuredFormat.fmt.category} - ${featuredFormat.fmt.label}`}
+                fill
+                sizes="(max-width: 1023px) 100vw, 60vw"
                 className="h-full w-full object-cover transition duration-700 md:group-hover:scale-[1.05]"
                 draggable={false}
-                loading="eager"
+                loading="lazy"
                 decoding="async"
+                quality={70}
               />
             </div>
             <div className="flex min-w-0 flex-col justify-start p-5 md:p-8 lg:p-10">
@@ -229,49 +222,19 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
                 <span aria-hidden className="rtl-arrow">→</span>
               </Link>
             </div>
-          </motion.article>
+          </article>
         )}
 
-        <div className="-mx-4 mt-6 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
-          <div className="flex w-max min-w-full items-center gap-2">
-            {FILTERS.map((filter) => {
-              const isActive = activeFilter === filter;
-              return (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`min-h-10 shrink-0 rounded-full border px-3.5 text-[11px] font-medium tracking-[0.04em] transition duration-300 ${
-                    isActive
-                      ? "border-blue-300 bg-blue-600 text-white shadow-[0_12px_28px_rgba(37,99,235,0.22)]"
-                      : "border-slate-200 bg-white text-slate-600 shadow-[0_10px_24px_-20px_rgba(15,23,42,0.45)]"
-                  }`}
-                  aria-pressed={isActive}
-                >
-                  {filter === "Tous" && lang === "en" ? "All" : filter}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <CreativeFormatsMobile
+          formats={remainingFormats}
+          cardConfigs={cardConfigs}
+          filters={[...FILTERS]}
+          lang={lang}
+          projectLink={t.projectLink}
+          projectHref={projectHref}
+        />
 
-        <motion.div layout className="mt-5 grid grid-cols-1 items-stretch gap-5 md:hidden">
-          {visibleMobileFormats.map(({ fmt, originalIndex }, i) => (
-            <PortfolioCard
-              key={fmt.label}
-              label={fmt.label}
-              category={fmt.category}
-              result={fmt.result}
-              tag={fmt.tag}
-              config={cardConfigs[originalIndex]!}
-              index={i + 1}
-              projectLink={t.projectLink}
-              href={projectHref}
-            />
-          ))}
-        </motion.div>
-
-        <motion.div layout className="mt-6 hidden grid-cols-1 items-stretch gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 hidden grid-cols-1 items-stretch gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
           {remainingFormats.map(({ fmt, originalIndex }, i) => (
             <PortfolioCard
               key={fmt.label}
@@ -285,10 +248,20 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
               href={projectHref}
             />
           ))}
-        </motion.div>
+        </div>
+
+        <div className="reveal-on-scroll mt-8 flex justify-center md:mt-10">
+          <Link
+            href={projectHref}
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-blue-200/80 bg-white px-6 py-3 text-center text-sm font-semibold text-slate-900 shadow-[0_16px_36px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700 hover:shadow-[0_20px_46px_rgba(79,140,255,0.14)]"
+          >
+            {t.moreProjects}
+            <span aria-hidden className="rtl-arrow">→</span>
+          </Link>
+        </div>
 
         {/* Bottom note */}
-        <p className="reveal-on-scroll mt-7 text-center text-xs text-slate-500 md:mt-8">
+        <p className="reveal-on-scroll mt-5 text-center text-xs text-slate-500 md:mt-6">
           {isArabic
             ? "كل حاجة كنصمموها على حساب المشروع ديالك — ماشي قوالب واجدة."
             : lang === "en"

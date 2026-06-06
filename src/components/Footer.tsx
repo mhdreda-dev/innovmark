@@ -86,9 +86,12 @@ export default function Footer({ locale }: { locale?: string }) {
   const legalLabel   = t(locale, "Mentions légales", "Legal",        "معلومات قانونية");
   const privacyLabel = t(locale, "Confidentialité",  "Privacy",      "الخصوصية");
   const locationLabel = t(locale, "Sidi Kacem • Maroc", "Sidi Kacem • Morocco", "سيدي قاسم • المغرب");
+  const addressLabel = t(locale, "Basé à Sidi Kacem", "Based in Sidi Kacem", "مقرنا ف سيدي قاسم");
+  const servicesLabel = t(locale, "Services principaux", "Main services", "الخدمات الرئيسية");
   const contactTitle = t(locale, "Contact direct", "Direct contact", "تواصل مباشر");
   const socialTitle = t(locale, "Réseaux", "Social", "الشبكات");
   const waLabel = t(locale, "WhatsApp — Réponse rapide", "WhatsApp — Fast reply", "واتساب");
+  const serviceChips = locale === "ar" ? ["فيديوهات", "مواقع", "براندينغ"] : locale === "en" ? ["Videos", "Websites", "Branding"] : ["Vidéos", "Sites web", "Branding"];
 
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#05070b] text-white shadow-[0_-24px_90px_rgba(0,0,0,0.35)]">
@@ -112,7 +115,7 @@ export default function Footer({ locale }: { locale?: string }) {
           </div>
 
           <p className="mx-auto mt-5 max-w-[18rem] text-sm leading-6 text-white/74">
-            Studio créatif spécialisé en branding, contenu digital et croissance.
+            {tagline}
           </p>
 
           <a
@@ -143,7 +146,14 @@ export default function Footer({ locale }: { locale?: string }) {
           </div>
 
           <div className="mt-7 border-t border-white/10 pt-5">
-            <p className="text-xs text-white/58">Sidi Kacem • Maroc</p>
+            <p className="text-xs text-white/64">{addressLabel}</p>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {serviceChips.map((service) => (
+                <span key={service} className="rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-[11px] text-white/64">
+                  {service}
+                </span>
+              ))}
+            </div>
             <p className="mt-2 text-xs text-white/46">© Innovmark Studio</p>
           </div>
         </div>
@@ -162,6 +172,16 @@ export default function Footer({ locale }: { locale?: string }) {
               <p className="mx-auto max-w-sm text-center text-[15px] leading-7 text-white/76 md:mx-0 md:text-left">
                 {tagline}
               </p>
+              <div className="mt-5">
+                <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/54">{servicesLabel}</div>
+                <div className="mt-3 flex flex-wrap items-center justify-center gap-2 md:justify-start rtl-row">
+                  {serviceChips.map((service) => (
+                    <span key={service} className="rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-xs text-white/68">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </div>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start rtl-row">
                 <span className="w-full rounded-full border border-white/10 bg-white/[0.055] px-4 py-2 text-center text-xs font-medium tracking-[0.12em] text-white/72 uppercase sm:w-auto sm:tracking-[0.18em]">
                   {locationLabel}

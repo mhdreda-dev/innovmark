@@ -15,7 +15,7 @@ export interface HeroImage {
 export const heroImages: HeroImage[] = [
   {
     id: "product-shoot",
-    src: "/images/hero-showcase/product-shoot.png",
+    src: "/images/hero-showcase/product-shoot.avif",
     alt: "Création de contenu produit par INNOVMARK à Sidi Kacem",
     rotation: -3,
   },
@@ -33,7 +33,7 @@ export const heroImages: HeroImage[] = [
   },
   {
     id: "social-media-showcase",
-    src: "/images/hero-showcase/social-media-showcase.png",
+    src: "/images/hero-showcase/social-media-showcase.avif",
     alt: "Création de contenu Instagram au Maroc pour marque locale",
     rotation: 3,
   },

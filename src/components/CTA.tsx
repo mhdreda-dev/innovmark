@@ -48,7 +48,7 @@ export default function CTA({ locale }: { locale?: string }) {
         </div>
 
         <h2 className="cinematic-text mb-5 text-3xl font-light leading-[1.12] tracking-tight text-slate-950 sm:text-4xl md:mb-6 md:text-6xl md:leading-[1.08]">
-          {isArabic ? "واجد تطور صورة المشروع ديالك؟" : "Prêt à développer votre image ?"}
+          {isArabic ? "واجد تجيب زبناء أكثر؟" : "Prêt à attirer plus de clients ?"}
         </h2>
 
         <p className="cinematic-text mx-auto mb-7 max-w-xl text-sm leading-6 text-slate-600 md:mb-10 md:text-lg md:leading-8">

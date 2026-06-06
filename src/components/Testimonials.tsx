@@ -106,11 +106,11 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
         <>
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-40 bg-gradient-to-r from-white via-white/92 to-transparent md:block"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-20 bg-gradient-to-r from-white via-white/88 to-transparent md:block lg:w-28"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-40 bg-gradient-to-l from-white via-white/92 to-transparent md:block"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-20 bg-gradient-to-l from-white via-white/88 to-transparent md:block lg:w-28"
           />
         </>
       )}
@@ -154,13 +154,13 @@ export default function Testimonials({ locale, items: cmsItems }: { locale?: str
         ))}
       </div>
 
-      <div className="mt-10 hidden md:block">
-        <div className={isArabic ? "mx-auto grid max-w-7xl items-stretch gap-4 px-4 sm:px-6 md:grid-cols-2 md:gap-5 lg:px-10 xl:grid-cols-3" : "flex w-max animate-marquee-slow items-stretch gap-4 px-4 sm:px-6 md:gap-5 lg:px-10"}>
+      <div className="mx-auto mt-10 hidden max-w-7xl overflow-hidden px-4 sm:px-6 md:block lg:px-10">
+        <div className={isArabic ? "grid items-stretch gap-4 md:grid-cols-2 md:gap-5 xl:grid-cols-3" : "flex w-max animate-marquee-slow items-stretch gap-4 md:gap-5"}>
           {(isArabic ? items : loop).map((item, index) => (
             <figure
               key={`${item.name}-${index}`}
               className={`group flex min-h-[270px] min-w-0 flex-col rounded-[1.45rem] border border-blue-100/80 bg-white/92 p-4 shadow-[0_16px_42px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.90)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-blue-300/55 hover:bg-white/96 hover:shadow-[0_24px_58px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.08)] md:min-h-[292px] md:p-6 ${
-                isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[330px] shrink-0 sm:w-[310px] md:w-[370px] md:max-w-none"
+                isArabic ? "h-full w-full text-right" : "h-auto w-[82vw] max-w-[330px] shrink-0 sm:w-[310px] md:w-[350px] md:max-w-none lg:w-[365px]"
               }`}
             >
               <div className={`mb-4 flex items-center justify-between ${isArabic ? "flex-row-reverse" : ""}`}>

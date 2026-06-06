@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import LocaleHtmlAttrs from "@/components/LocaleHtmlAttrs";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import { isLocale, locales } from "@/lib/i18n";
 
 type Props = {
@@ -79,6 +80,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       `}</style>
 
       {children}
+      <FloatingWhatsAppButton locale={locale} />
     </div>
   );
 }

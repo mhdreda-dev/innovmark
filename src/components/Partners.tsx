@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { CmsPartner } from "@/lib/cms/types";
 import type { Locale } from "@/lib/i18n";
 
@@ -18,6 +19,10 @@ const labels: Record<Locale, { eyebrow: string; title: string; description: stri
     description: "اختيار من الماركات والمشاريع اللي وثقو فخدمتنا.",
   },
 };
+
+function isVercelBlobImage(src: string) {
+  return src.includes(".public.blob.vercel-storage.com") || src.includes("blob.vercel-storage.com");
+}
 
 export default function Partners({ locale, items }: { locale: Locale; items: CmsPartner[] }) {
   const partners = items.filter((item) => item.isActive && item.logoUrl && item.websiteUrl);
@@ -68,13 +73,17 @@ export default function Partners({ locale, items }: { locale: Locale; items: Cms
                   aria-label={partner.description ? `${partner.name}: ${partner.description}` : partner.name}
                   aria-hidden={groupIndex === 1}
                   tabIndex={groupIndex === 1 ? -1 : undefined}
-                  className="group grid h-20 w-36 shrink-0 place-items-center rounded-[1.1rem] border border-white/70 bg-white/78 px-4 py-4 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.12)] sm:h-32 sm:w-60 sm:rounded-[1.35rem] sm:px-7"
+                  className="group relative grid h-24 w-40 shrink-0 place-items-center rounded-[1.1rem] border border-white/70 bg-white/78 px-4 py-4 shadow-[0_14px_38px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-blue-200/80 hover:bg-white/92 hover:shadow-[0_22px_48px_rgba(15,23,42,0.12),0_0_34px_rgba(79,140,255,0.12)] sm:h-36 sm:w-64 sm:rounded-[1.35rem] sm:px-8"
                 >
-                  <img
+                  <Image
                     src={partner.logoUrl}
                     alt={partner.description ? `${partner.name} partenaire Innovmark - ${partner.description}` : `${partner.name} partenaire Innovmark`}
-                    className="max-h-12 w-auto max-w-[92%] object-contain opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:max-h-16"
+                    fill
+                    sizes="(max-width: 640px) 160px, 256px"
+                    className="object-contain p-4 opacity-95 contrast-125 saturate-125 drop-shadow-[0_8px_18px_rgba(15,23,42,0.12)] transition duration-300 group-hover:scale-[1.06] group-hover:opacity-100 sm:p-7"
                     loading="lazy"
+                    quality={70}
+                    unoptimized={isVercelBlobImage(partner.logoUrl)}
                   />
                   <span className="sr-only">{partner.name}</span>
                 </a>

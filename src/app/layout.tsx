@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Cairo, Geist, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import { ogImageUrl, seoKeywords, siteUrl } from "@/lib/seo";
 
 const geist = Geist({
@@ -16,6 +15,7 @@ const manrope = Manrope({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   display: "swap",
+  preload: false,
 });
 
 const jetbrains = JetBrains_Mono({
@@ -23,6 +23,7 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
   display: "swap",
+  preload: false,
 });
 
 const cairo = Cairo({
@@ -65,7 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full bg-transparent text-slate-950 selection:bg-blue-200/60">
         {children}
-        <FloatingWhatsAppButton />
         <RevealOnScroll />
       </body>
     </html>
