@@ -81,14 +81,14 @@ export function SaadBelkaadiSection({ locale }: { locale?: Locale }) {
                 </div>
 
                 <div>
-                  <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-cyan-100/70 md:tracking-[0.32em] rtl-row">
+                  <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-blue-500 md:tracking-[0.32em] rtl-row">
                     <BadgeCheck className="h-9 w-9 rounded-full border border-[#4F8CFF]/15 bg-[#4F8CFF]/[0.08] p-2.5 text-[#4F8CFF] opacity-100 shadow-[0_8px_24px_rgba(79,140,255,0.08)] transition duration-300 hover:scale-105" strokeWidth={1.8} />
                     {isArabic ? "فريق INNOVMARK" : "Équipe INNOVMARK"}
                   </p>
                   <h2 className="mt-4 text-3xl font-light tracking-tight text-white md:text-5xl">
                     {isArabic ? "فريق كرييتيف مركز على النتائج" : "Une équipe créative orientée résultats"}
                   </h2>
-                  <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-emerald-100/72 md:tracking-[0.22em]">
+                  <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-[#60A5FA] md:tracking-[0.22em]">
                     {isArabic ? "استراتيجية رقمية · براندينغ · محتوى · إعلانات" : "Stratégie digitale · Branding · Contenu · Publicité"}
                   </p>
                 </div>
