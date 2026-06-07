@@ -21,6 +21,7 @@ type Pack = {
   note?: string;
   entryNote?: string;
   secondaryBadge?: string;
+  ctaText?: string;
   description: string;
   features: string[];
   icon: LucideIcon;
@@ -105,9 +106,10 @@ const arPacks: Pack[] = [
     name: "باك الانطلاقة",
     whatsappName: "Pack Découverte",
     price: "250 DH",
-    entryNote: "مثالي لتجربة خدماتنا",
-    description: "صيغة باش تجرب محتوى احترافي بسرعة قبل ما تطور حضورك الرقمي.",
-    features: ["فيديو مصمم باش يشد الانتباه", "تصوير فالمكان باش تبين النشاط ديالك", "مونتاج واضح وجاهز للنشر", "فورما مناسب للسوشيال ميديا", "تسليم سريع باش تبدا مباشرة"],
+    entryNote: "مثالي باش تجرب خدماتنا",
+    description: "بدا بأول محتوى احترافي وخلي الزبناء يتعرفو على الخدمة ديالك.",
+    features: ["فيديو احترافي كيشد الانتباه", "تصوير فالمحل ولا فبلاصة الخدمة", "مونتاج جاهز للنشر", "مناسب لإنستغرام وتيك توك وفايسبوك", "تسليم سريع"],
+    ctaText: "🚀 بدا المشروع ديالك دابا",
     icon: Clapperboard,
   },
   {
@@ -117,9 +119,10 @@ const arPacks: Pack[] = [
     oldPrice: "750 DH",
     discount: "-33%",
     saving: "وفّر 250 DH",
-    note: "اختيار اغلب عملائنا",
-    description: "احسن توازن بين الثمن والظهور باش تجيب طلبات اكثر بلا استثمار كبير.",
-    features: ["3 فيديوهات مصممة باش تجيب زبناء اكثر", "تصوير كامل باش تبين العرض ديالك", "مونتاج احترافي مركز على التحويل", "فورما جاهز ل Instagram و Facebook و TikTok", "تسليم HD لصورة اكثر ثقة", "نصائح للنشر باش تزيد الاثر"],
+    note: "اختيار أغلب الزبناء",
+    description: "خلي النشاط ديالك يبان أكثر ويوصل لناس أكثر.",
+    features: ["3 فيديوهات احترافية", "تصوير كامل للخدمة أو المنتوج", "مونتاج احترافي كيحفز التفاعل", "فورمات جاهزة للسوشيال ميديا", "جودة HD", "نصائح للنشر وتحسين الوصول"],
+    ctaText: "📈 بغيت نزيد فالزبناء ديالي",
     icon: Eye,
     popular: true,
   },
@@ -130,9 +133,10 @@ const arPacks: Pack[] = [
     oldPrice: "2500 DH",
     discount: "-40%",
     saving: "وفّر 1001 DH",
-    secondaryBadge: "🏆 افضل قيمة مقابل السعر",
-    description: "باش تحول الظهور ديالك لحضور رقمي كيقنع وكيجيب التواصل.",
-    features: ["3 فيديوهات مصممة باش تبني الثقة", "موقع احترافي كيحول الزوار لطلبات", "ربط WhatsApp باش تستقبل طلبات اكثر", "فورم ديال التواصل لجمع العملاء المحتملين", "تحسين للموبايل باش تحول من الهاتف"],
+    secondaryBadge: "🏆 أفضل قيمة مقابل الثمن",
+    description: "الحل المناسب باش تولي عندك صورة احترافية وتستقبل طلبات أكثر.",
+    features: ["3 فيديوهات لبناء الثقة", "موقع إلكتروني احترافي", "ربط مباشر مع WhatsApp", "فورم لاستقبال الطلبات", "متوافق مع الهاتف والحاسوب"],
+    ctaText: "💬 طلب استشارة مجانية",
     icon: Globe2,
   },
   {
@@ -142,9 +146,10 @@ const arPacks: Pack[] = [
     oldPrice: "5000 DH",
     discount: "-40%",
     saving: "وفّر 2001 DH",
-    secondaryBadge: "👑 حل متكامل",
-    description: "باش تبني صورة بريميوم ونظام رقمي كامل كيحول الزوار لطلبات.",
-    features: ["6 فيديوهات مصممة باش تقوي السلطة ديالك", "موقع كامل موجه للتحويل", "SEO اساسي باش تبان اكثر ف Google", "ربط Google Maps باش تطمئن الزبناء المحليين", "WhatsApp Business لتواصل اكثر احترافية", "مواكبة شخصية باش تتقدم بسرعة"],
+    secondaryBadge: "👑 الحل الكامل",
+    description: "للشركات والمشاريع اللي باغين يكبرو بسرعة ويقويو الحضور الرقمي ديالهم.",
+    features: ["6 فيديوهات احترافية", "موقع إلكتروني متكامل", "تحسين الظهور فـ Google", "ربط Google Maps", "إعداد WhatsApp Business", "مواكبة واستشارة شخصية"],
+    ctaText: "🚀 بدا المشروع ديالك دابا",
     icon: Crown,
   },
 ];
@@ -219,7 +224,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
                 <div className="mt-5">
                   {pack.popular && (
                     <span className="mb-3 inline-flex max-w-full items-center rounded-lg bg-blue-500/18 px-3 py-1.5 text-xs font-semibold text-blue-50 ring-1 ring-blue-300/20">
-                      ⭐ Le Plus Choisi
+                      {isArabic ? "⭐ الأكثر طلباً" : "⭐ Le Plus Choisi"}
                     </span>
                   )}
                   <h3 className={`text-2xl font-semibold leading-tight ${titleClass}`}>{pack.name}</h3>
@@ -281,7 +286,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
                   className={`mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-[0_18px_42px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_52px_rgba(37,99,235,0.28)] xl:mt-8 ${buttonClass}`}
                 >
                   <MessageCircle aria-hidden="true" className="h-4 w-4 shrink-0" />
-                  <span>{isArabic ? "📲 احجز عبر WhatsApp" : "Réserver sur WhatsApp"}</span>
+                  <span>{isArabic ? pack.ctaText : "Réserver sur WhatsApp"}</span>
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0" />
                 </a>
               </article>
