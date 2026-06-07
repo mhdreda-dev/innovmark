@@ -182,7 +182,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
 
         {featuredFormat && (
           <article
-            className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_18px_56px_-38px_rgba(15,23,42,0.55)] transition duration-300 md:shadow-[0_28px_90px_-52px_rgba(15,23,42,0.72)] md:hover:-translate-y-1 md:hover:border-slate-300 md:hover:shadow-[0_34px_110px_-54px_rgba(15,23,42,0.82)] lg:grid lg:grid-cols-[1.35fr_0.85fr]"
+            className="group hidden overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_18px_56px_-38px_rgba(15,23,42,0.55)] transition duration-300 md:block md:shadow-[0_28px_90px_-52px_rgba(15,23,42,0.72)] md:hover:-translate-y-1 md:hover:border-slate-300 md:hover:shadow-[0_34px_110px_-54px_rgba(15,23,42,0.82)] lg:grid lg:grid-cols-[1.35fr_0.85fr]"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 md:aspect-auto md:min-h-[420px] lg:min-h-[520px]">
               <Image
@@ -226,10 +226,11 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
         )}
 
         <CreativeFormatsMobile
-          formats={remainingFormats}
+          formats={t.formats.map((fmt, originalIndex) => ({ fmt, originalIndex }))}
           cardConfigs={cardConfigs}
           filters={[...FILTERS]}
           lang={lang}
+          moreProjectsLabel={t.moreProjects}
           projectLink={t.projectLink}
           projectHref={projectHref}
         />
@@ -250,7 +251,7 @@ export default function CreativeFormats({ locale }: { locale?: Locale }) {
           ))}
         </div>
 
-        <div className="reveal-on-scroll mt-8 flex justify-center md:mt-10">
+        <div className="reveal-on-scroll mt-8 hidden justify-center md:mt-10 md:flex">
           <Link
             href={projectHref}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-blue-200/80 bg-white px-6 py-3 text-center text-sm font-semibold text-slate-900 shadow-[0_16px_36px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700 hover:shadow-[0_20px_46px_rgba(79,140,255,0.14)]"

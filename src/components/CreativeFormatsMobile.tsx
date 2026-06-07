@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 type PortfolioFilter = "Tous" | "Branding" | "Vidéo" | "Réseaux sociaux" | "Publicité" | "Sites web";
+const INITIAL_MOBILE_COUNT = 1;
 
 type FormatItem = {
   label: string;
@@ -93,6 +94,7 @@ export default function CreativeFormatsMobile({
   cardConfigs,
   filters,
   lang,
+  moreProjectsLabel,
   projectLink,
   projectHref,
 }: {
@@ -100,13 +102,24 @@ export default function CreativeFormatsMobile({
   cardConfigs: CardVisualConfig[];
   filters: PortfolioFilter[];
   lang: string;
+  moreProjectsLabel: string;
   projectLink: string;
   projectHref: string;
 }) {
   const [activeFilter, setActiveFilter] = useState<PortfolioFilter>("Tous");
-  const visibleFormats = formats.filter(
+  const [showMore, setShowMore] = useState(false);
+  const filteredFormats = formats.filter(
     ({ fmt }) => activeFilter === "Tous" || fmt.filter === activeFilter,
   );
+  const visibleFormats = activeFilter === "Tous" && !showMore
+    ? filteredFormats.slice(0, INITIAL_MOBILE_COUNT)
+    : filteredFormats;
+  const canShowMore = activeFilter === "Tous" && visibleFormats.length < filteredFormats.length;
+  const filterLabel = (filter: PortfolioFilter) => {
+    if (filter === "Tous" && lang === "en") return "All";
+    if (filter === "Sites web") return "Site web";
+    return filter;
+  };
 
   return (
     <>
@@ -118,7 +131,10 @@ export default function CreativeFormatsMobile({
               <button
                 key={filter}
                 type="button"
-                onClick={() => setActiveFilter(filter)}
+                onClick={() => {
+                  setActiveFilter(filter);
+                  setShowMore(false);
+                }}
                 className={`min-h-10 shrink-0 rounded-full border px-3.5 text-[11px] font-medium tracking-[0.04em] transition duration-300 ${
                   isActive
                     ? "border-blue-300 bg-blue-600 text-white shadow-[0_12px_28px_rgba(37,99,235,0.22)]"
@@ -126,7 +142,7 @@ export default function CreativeFormatsMobile({
                 }`}
                 aria-pressed={isActive}
               >
-                {filter === "Tous" && lang === "en" ? "All" : filter}
+                {filterLabel(filter)}
               </button>
             );
           })}
@@ -148,6 +164,19 @@ export default function CreativeFormatsMobile({
           />
         ))}
       </div>
+
+      {canShowMore && (
+        <div className="mt-6 flex justify-center md:hidden">
+          <button
+            type="button"
+            onClick={() => setShowMore(true)}
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-blue-200/80 bg-white px-6 py-3 text-center text-sm font-semibold text-slate-900 shadow-[0_16px_36px_rgba(15,23,42,0.08)] transition duration-300 active:scale-[0.98]"
+          >
+            {moreProjectsLabel}
+            <span aria-hidden className="rtl-arrow">→</span>
+          </button>
+        </div>
+      )}
     </>
   );
 }

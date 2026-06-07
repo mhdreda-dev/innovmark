@@ -160,7 +160,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
   const displayedPacks = isArabic ? arPacks : packs;
 
   return (
-    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-14 pt-12 sm:px-6 sm:pb-16 sm:pt-14 md:pb-24 md:pt-24 lg:px-10" dir={isArabic ? "rtl" : undefined}>
+    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-8 pt-12 sm:px-6 sm:pb-10 sm:pt-14 md:pb-20 md:pt-24 lg:px-10" dir={isArabic ? "rtl" : undefined}>
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-7 flex max-w-3xl flex-col items-center text-center md:mb-14">
           <SectionLabel
@@ -289,15 +289,10 @@ export default function Pricing({ locale }: { locale?: Locale }) {
           })}
         </div>
 
-        <div className="reveal-on-scroll mx-auto mt-6 flex max-w-4xl flex-col items-center justify-center gap-3 text-sm font-semibold text-slate-700 sm:flex-row sm:flex-wrap md:mt-8">
-          {(isArabic
-            ? ["✓ رد سريع", "✓ مواكبة شخصية", "✓ تسليم احترافي"]
-            : ["✓ Réponse rapide", "✓ Accompagnement personnalisé", "✓ Livraison professionnelle"]
-          ).map((item) => (
-            <span key={item} className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
-              {item}
-            </span>
-          ))}
+        <div className="reveal-on-scroll mx-auto mt-4 flex max-w-4xl items-center justify-center text-sm font-semibold text-slate-700 md:mt-6">
+          <span className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
+            {isArabic ? "✓ مواكبة شخصية" : "✓ Accompagnement personnalisé"}
+          </span>
         </div>
       </div>
     </section>
