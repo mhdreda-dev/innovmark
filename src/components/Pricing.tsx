@@ -188,7 +188,7 @@ export default function Pricing({ locale }: { locale?: Locale }) {
           {displayedPacks.map((pack, index) => {
             const Icon = pack.icon;
             const cardClass = pack.popular
-              ? "border-blue-950 bg-[#061a44] shadow-[0_32px_100px_rgba(6,26,68,0.30)] xl:-translate-y-6 xl:scale-[1.035]"
+              ? "border-blue-950 bg-[#061a44] shadow-[0_32px_100px_rgba(6,26,68,0.30)]"
               : "border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]";
             const mutedTextClass = pack.popular ? "text-blue-100/78" : "text-slate-600";
             const titleClass = pack.popular ? "text-[#fff]" : "text-slate-950";
@@ -207,98 +207,99 @@ export default function Pricing({ locale }: { locale?: Locale }) {
               <article
                 key={pack.name}
                 dir={isArabic ? "rtl" : "ltr"}
-                className={`reveal-on-scroll relative flex h-full min-w-0 flex-col rounded-lg border p-4 transition duration-500 hover:-translate-y-1 hover:shadow-[0_28px_84px_rgba(15,23,42,0.14)] sm:p-5 md:p-6 xl:min-h-[700px] xl:p-5 ${cardClass}`}
+                className={`reveal-on-scroll relative flex h-full min-w-0 flex-col rounded-lg border p-4 transition duration-500 hover:shadow-[0_28px_84px_rgba(15,23,42,0.14)] sm:p-5 md:p-6 xl:min-h-[760px] xl:p-5 ${cardClass}`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
-                <div className="flex min-h-12 items-center justify-between gap-3">
-                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border ${iconShellClass}`}>
-                    <Icon aria-hidden="true" className="h-5 w-5" />
-                  </div>
-                  {pack.discount && (
-                    <span className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-[#fff] shadow-[0_12px_28px_rgba(37,99,235,0.24)]">
-                      {pack.discount}
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-5">
-                  {pack.popular && (
-                    <span className="mb-3 inline-flex max-w-full items-center rounded-lg bg-blue-500/18 px-3 py-1.5 text-xs font-semibold text-blue-50 ring-1 ring-blue-300/20">
-                      {isArabic ? "⭐ الأكثر طلباً" : "⭐ Le Plus Choisi"}
-                    </span>
-                  )}
-                  <h3 className={`text-2xl font-semibold leading-tight ${titleClass}`}>{pack.name}</h3>
-                  {pack.note && (
-                    <p className="mt-2 rounded-lg bg-blue-500/16 px-3 py-2 text-xs font-semibold text-blue-50 ring-1 ring-blue-300/18">
-                      {pack.note}
-                    </p>
-                  )}
-                  {pack.secondaryBadge && (
-                    <p className={`mt-2 rounded-lg px-3 py-2 text-xs font-semibold ${
-                      pack.popular
-                        ? "bg-blue-500/16 text-blue-50 ring-1 ring-blue-300/18"
-                        : "bg-blue-50 text-blue-700 ring-1 ring-blue-100"
-                    }`}>
-                      {pack.secondaryBadge}
-                    </p>
-                  )}
-                  <div className="mt-5 min-w-0">
-                    {pack.oldPrice && (
-                      <span className={`block text-sm font-semibold leading-none line-through decoration-2 ${oldPriceClass}`}>
-                        {pack.oldPrice}
-                      </span>
-                    )}
-                    <div className="mt-2 flex min-w-0 items-end gap-2">
-                      <strong className={`text-[3.35rem] font-semibold leading-[0.95] tracking-normal ${priceClass} sm:text-6xl md:text-[4rem]`}>
-                        {pack.price.replace(" DH", "")}
-                      </strong>
-                      <span className={`pb-1 text-base font-semibold ${mutedTextClass}`}>DH</span>
+                <div className="flex flex-1 flex-col">
+                  <div className="flex min-h-12 items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border ${iconShellClass}`}>
+                        <Icon aria-hidden="true" className="h-5 w-5" />
+                      </div>
+                      {pack.popular && (
+                        <span className="inline-flex min-w-0 max-w-full items-center rounded-lg bg-blue-500/18 px-3 py-1.5 text-xs font-semibold text-blue-50 ring-1 ring-blue-300/20">
+                          {isArabic ? "⭐ الأكثر طلباً" : "⭐ Le Plus Choisi"}
+                        </span>
+                      )}
                     </div>
-                    {pack.saving && (
-                      <span className={`mt-3 block text-sm font-semibold leading-5 ${savingClass}`}>
-                        {pack.saving}
-                      </span>
-                    )}
-                    {pack.entryNote && (
-                      <span className={`mt-3 block text-sm font-semibold leading-5 ${savingClass}`}>
-                        {pack.entryNote}
+                    {pack.discount && (
+                      <span className="shrink-0 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-[#fff] shadow-[0_12px_28px_rgba(37,99,235,0.24)]">
+                        {pack.discount}
                       </span>
                     )}
                   </div>
-                  <p className={`mt-5 text-sm leading-6 xl:min-h-[120px] ${mutedTextClass}`}>{pack.description}</p>
+
+                  <div className="mt-5">
+                    <h3 className={`text-2xl font-semibold leading-tight ${titleClass}`}>{pack.name}</h3>
+                    {pack.note && (
+                      <p className="mt-2 rounded-lg bg-blue-500/16 px-3 py-2 text-xs font-semibold text-blue-50 ring-1 ring-blue-300/18">
+                        {pack.note}
+                      </p>
+                    )}
+                    {pack.secondaryBadge && (
+                      <p className={`mt-2 rounded-lg px-3 py-2 text-xs font-semibold ${
+                        pack.popular
+                          ? "bg-blue-500/16 text-blue-50 ring-1 ring-blue-300/18"
+                          : "bg-blue-50 text-blue-700 ring-1 ring-blue-100"
+                      }`}>
+                        {pack.secondaryBadge}
+                      </p>
+                    )}
+                    <div className="mt-5 min-w-0">
+                      {pack.oldPrice && (
+                        <span className={`block text-sm font-semibold leading-none line-through decoration-2 ${oldPriceClass}`}>
+                          {pack.oldPrice}
+                        </span>
+                      )}
+                      <div className="mt-2 flex min-w-0 items-end gap-2">
+                        <strong className={`text-[3.35rem] font-semibold leading-[0.95] tracking-normal ${priceClass} sm:text-6xl md:text-[4rem]`}>
+                          {pack.price.replace(" DH", "")}
+                        </strong>
+                        <span className={`pb-1 text-base font-semibold ${mutedTextClass}`}>DH</span>
+                      </div>
+                      {pack.saving && (
+                        <span className={`mt-3 block text-sm font-semibold leading-5 ${savingClass}`}>
+                          {pack.saving}
+                        </span>
+                      )}
+                      {pack.entryNote && (
+                        <span className={`mt-3 block text-sm font-semibold leading-5 ${savingClass}`}>
+                          {pack.entryNote}
+                        </span>
+                      )}
+                    </div>
+                    <p className={`mt-5 text-sm leading-6 ${mutedTextClass}`}>{pack.description}</p>
+                  </div>
+
+                  <ul className="mt-5 space-y-3 xl:space-y-3.5">
+                    {pack.features.map((feature) => (
+                      <li key={feature} className={`flex items-start gap-3 text-sm leading-6 ${pack.popular ? "text-blue-50/88" : "text-slate-700"}`}>
+                        <span className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ring-1 ${checkClass}`}>
+                          <Check aria-hidden="true" className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="min-w-0">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <ul className="mt-5 space-y-3 xl:mt-7 xl:flex-1 xl:space-y-3.5">
-                  {pack.features.map((feature) => (
-                    <li key={feature} className={`flex items-start gap-3 text-sm leading-6 ${pack.popular ? "text-blue-50/88" : "text-slate-700"}`}>
-                      <span className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ring-1 ${checkClass}`}>
-                        <Check aria-hidden="true" className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="min-w-0">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href={whatsappHref(pack)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-[0_18px_42px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_52px_rgba(37,99,235,0.28)] xl:mt-8 ${buttonClass}`}
-                >
-                  <MessageCircle aria-hidden="true" className="h-4 w-4 shrink-0" />
-                  <span>{isArabic ? pack.ctaText : "Réserver sur WhatsApp"}</span>
-                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0" />
-                </a>
+                <div className="mt-auto pt-6">
+                  <a
+                    href={whatsappHref(pack)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-[0_18px_42px_rgba(37,99,235,0.22)] transition duration-300 hover:shadow-[0_22px_52px_rgba(37,99,235,0.28)] ${buttonClass}`}
+                  >
+                    <MessageCircle aria-hidden="true" className="h-4 w-4 shrink-0" />
+                    <span>{isArabic ? pack.ctaText : "Réserver sur WhatsApp"}</span>
+                    <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  </a>
+                </div>
               </article>
             );
           })}
         </div>
 
-        <div className="reveal-on-scroll mx-auto mt-4 flex max-w-4xl items-center justify-center text-sm font-semibold text-slate-700 md:mt-6">
-          <span className="rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm">
-            {isArabic ? "✓ مواكبة شخصية" : "✓ Accompagnement personnalisé"}
-          </span>
-        </div>
       </div>
     </section>
   );
