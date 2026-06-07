@@ -165,9 +165,9 @@ export default function Pricing({ locale }: { locale?: Locale }) {
   const displayedPacks = isArabic ? arPacks : packs;
 
   return (
-    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-8 pt-12 sm:px-6 sm:pb-10 sm:pt-14 md:pb-20 md:pt-24 lg:px-10" dir={isArabic ? "rtl" : undefined}>
+    <section className="relative overflow-hidden bg-[#f7f8fb] px-4 pb-8 pt-10 sm:px-6 sm:pb-10 sm:pt-12 md:pb-20 md:pt-14 lg:px-10" dir={isArabic ? "rtl" : undefined}>
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto mb-7 flex max-w-3xl flex-col items-center text-center md:mb-14">
+        <div className="pricing-heading mx-auto mb-4 flex max-w-3xl flex-col items-center text-center md:mb-7 [&>.reveal-on-scroll]:gap-2 md:[&>.reveal-on-scroll]:gap-3">
           <SectionLabel
             kicker={isArabic ? "باقاتنا" : "Nos Packs"}
             title={
